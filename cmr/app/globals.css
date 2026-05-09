@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+:root {
+  /* Brand palette */
+  --color-green:   #0F2F2B;
+  --color-ivory:   #F6F4EE;
+  --color-gold:    #B89A5D;
+  --color-gray:    #D9D9D9;
+  --color-charcoal:#1A1A1A;
+
+  /* Fonts — references the variables from next/font */
+  --font-display: var(--font-display);
+  --font-body:    var(--font-body);
+
+  /*
+   * ── TYPE SCALE ───────────────────────────────────────────────────────────
+   * Matches Asset Homes hierarchy + user requirements:
+   *   Paragraphs  → 20px
+   *   Nav / UI    → 16px
+   *   Hero h1     → clamp(36px, 6vw, 72px)
+   *   Section h2  → clamp(28px, 3.5vw, 42px)
+   *   Card h3     → 22px
+   *   Badges/meta → 13px
+   *   Tiny labels → 11px
+   * ─────────────────────────────────────────────────────────────────────── */
+
+  /* Spacing system */
+  --section-x-sm: 1.25rem;
+  --section-x-md: 3rem;
+  --section-x-lg: 5rem;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: auto;
+  overflow-x: hidden;
+  font-size: 16px; /* Canonical base — Tailwind rem tokens reference this */
+}
+
+body {
+  background-color: #fff;
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Typography — display fonts on headings only ────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-gold);
+  color: #fff;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #fff; }
+::-webkit-scrollbar-thumb { background: var(--color-green); border-radius: 2px; }
+
+/* ─── Layout utilities ───────────────────────────────────────────────────── */
+@layer utilities {
+  /* Full-width section padding — no max-width constraint */
+  .page-container,
+  .px-section {
+    width: 100%;
+    padding-left:  var(--section-x-sm);
+    padding-right: var(--section-x-sm);
+  }
+  @media (min-width: 768px) {
+    .page-container, .px-section {
+      padding-left:  var(--section-x-md);
+      padding-right: var(--section-x-md);
+    }
+  }
+  @media (min-width: 1280px) {
+    .page-container, .px-section {
+      padding-left:  var(--section-x-lg);
+      padding-right: var(--section-x-lg);
+    }
+  }
+
+  /* Gold underline link */
+  .link-gold { position: relative; }
+  .link-gold::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--color-gold);
+    transition: width 0.3s ease;
+  }
+  .link-gold:hover::after { width: 100%; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-label span {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-family: var(--font-body);
+  }
+}

@@ -70,7 +70,7 @@ export default function CMRStory() {
             </p>
             <p>
               It is on an average of 100 villas over the past 2 years and 2 per month.
-              Unbelievable! Isn't it?
+              Unbelievable! Isn&apos;t it?
             </p>
             <p>
               If you feel so, visit us and talk to our 600+ happy families. Each one of them will
@@ -81,7 +81,7 @@ export default function CMRStory() {
             </p>
             <p>
               Yes, our customers speak for us and bring us more and more of their family and
-              friends. That's what made us the largest and most reputed villa promoter in Kerala.
+              friends. That&apos;s what made us the largest and most reputed villa promoter in Kerala.
             </p>
           </div>
 

@@ -62,9 +62,6 @@ export default function Hero() {
     return () => clearTimeout(timer)
   }, [current])
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length)
-  const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-
   return (
     <section className="relative w-full h-[90vh] md:h-screen min-h-[600px] overflow-hidden bg-brand-charcoal pt-[102px] group">
       

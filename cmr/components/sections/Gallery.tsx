@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
 type Category = 'ALL' | 'EXTERIOR' | 'INTERIOR' | 'AMENITIES'
@@ -77,7 +77,7 @@ export default function Gallery() {
         {/* Masonry Grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
           <AnimatePresence>
-            {filtered.map((item, i) => (
+            {filtered.map((item) => (
               <motion.div
                 key={item.id}
                 layout

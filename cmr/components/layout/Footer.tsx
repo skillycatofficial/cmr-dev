@@ -1,4 +1,8 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const projectLinks = [
   { label: 'CMR Paradise',      href: '/projects/cmr-paradise' },
@@ -83,16 +87,75 @@ const socials = [
   },
 ]
 
+const FooterSection = ({ title, links, isOpen, onToggle }: { title: string, links: { label: string, href: string }[], isOpen: boolean, onToggle: () => void }) => (
+  <div className="border-b border-brand-ivory/10 lg:border-none">
+    <button 
+      onClick={onToggle}
+      className="w-full flex items-center justify-between py-5 lg:py-0 lg:mb-5 group"
+    >
+      <span className="font-body text-brand-gold text-label tracking-[0.3em] uppercase lg:cursor-default">
+        {title}
+      </span>
+      <span className="lg:hidden text-brand-gold/40">
+        <motion.svg 
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          className="w-4 h-4" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </motion.svg>
+      </span>
+    </button>
+    
+    <AnimatePresence initial={false}>
+      {(isOpen || (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
+        <motion.div
+          initial="collapsed"
+          animate="expanded"
+          exit="collapsed"
+          variants={{
+            expanded: { opacity: 1, height: 'auto', marginBottom: 20 },
+            collapsed: { opacity: 0, height: 0, marginBottom: 0 }
+          }}
+          transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+          className="overflow-hidden lg:!h-auto lg:!opacity-100 lg:!mb-0"
+        >
+          <ul className="space-y-2.5 pb-5 lg:pb-0">
+            {links.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+)
+
 export default function Footer() {
+  const [openSection, setOpenSection] = useState<string | null>(null)
+
+  const toggleSection = (id: string) => {
+    setOpenSection(openSection === id ? null : id)
+  }
+
   return (
     <footer className="bg-brand-green text-brand-ivory">
 
       {/* ── Main footer grid ──────────────────────────────── */}
       <div className="px-section py-14 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-0 lg:gap-8">
 
           {/* Brand column */}
-          <div>
+          <div className="mb-12 lg:mb-0 border-b border-brand-ivory/10 lg:border-none pb-10 lg:pb-0">
             {/* Logo */}
             <div className="flex items-center gap-3 mb-5">
               <div className="bg-brand-ivory px-3 py-2">
@@ -151,94 +214,51 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Projects */}
-          <div>
-            <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-5">
-              Our Projects
-            </div>
-            <ul className="space-y-2.5">
-              {projectLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterSection 
+            title="Our Projects" 
+            links={projectLinks} 
+            isOpen={openSection === 'projects'} 
+            onToggle={() => toggleSection('projects')} 
+          />
 
-          {/* Company */}
-          <div>
-            <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-5">
-              Company
-            </div>
-            <ul className="space-y-2.5">
-              {companyLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterSection 
+            title="Company" 
+            links={companyLinks} 
+            isOpen={openSection === 'company'} 
+            onToggle={() => toggleSection('company')} 
+          />
 
-          {/* Resources */}
-          <div>
-            <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-5">
-              Resources
-            </div>
-            <ul className="space-y-2.5">
-              {resourceLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterSection 
+            title="Resources" 
+            links={resourceLinks} 
+            isOpen={openSection === 'resources'} 
+            onToggle={() => toggleSection('resources')} 
+          />
 
           {/* Quick Links + Newsletter */}
-          <div>
-            <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-5">
-              Quick Links
-            </div>
-            <ul className="space-y-2.5 mb-8">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="pt-8 lg:pt-0">
+            <FooterSection 
+              title="Quick Links" 
+              links={quickLinks} 
+              isOpen={openSection === 'quick'} 
+              onToggle={() => toggleSection('quick')} 
+            />
 
             {/* Newsletter */}
-            <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-3">
-              Newsletter
-            </div>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="bg-brand-ivory/5 border border-brand-ivory/15 text-brand-ivory text-ui px-3 py-2.5 flex-1 outline-none focus:border-brand-gold/40 transition-colors placeholder:text-brand-ivory/20 font-body min-w-0"
-              />
-              <button className="bg-brand-gold text-brand-charcoal text-ui font-bold px-3 py-2.5 hover:bg-brand-ivory transition-colors duration-300 flex-shrink-0">
-                →
-              </button>
+            <div className="mt-8 lg:mt-8">
+              <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-3">
+                Newsletter
+              </div>
+              <div className="flex">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="bg-brand-ivory/5 border border-brand-ivory/15 text-brand-ivory text-ui px-3 py-2.5 flex-1 outline-none focus:border-brand-gold/40 transition-colors placeholder:text-brand-ivory/20 font-body min-w-0"
+                />
+                <button className="bg-brand-gold text-brand-charcoal text-ui font-bold px-3 py-2.5 hover:bg-brand-ivory transition-colors duration-300 flex-shrink-0">
+                  →
+                </button>
+              </div>
             </div>
           </div>
 

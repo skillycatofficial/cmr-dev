@@ -41,7 +41,17 @@ export default async function ProjectDetailPage(
 ) {
   const { slug } = await params
 
-  let project: any = null
+  let project: {
+    name: string;
+    location: string;
+    status: string;
+    price?: string;
+    overview?: string;
+    heroImage?: string;
+    gallery?: string[];
+    amenities?: { icon: string; label: string }[];
+    badge?: { num: string; label: string };
+  } | null = null
   try {
     project = await getProjectBySlug(slug)
   } catch {

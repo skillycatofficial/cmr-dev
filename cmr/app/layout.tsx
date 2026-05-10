@@ -1,9 +1,6 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, DM_Sans } from 'next/font/google'
 import './globals.css'
-import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -63,11 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${plusJakartaSans.variable} ${dmSans.variable} antialiased`}>
-        <SmoothScrollProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScrollProvider>
+        {children}
       </body>
     </html>
   )

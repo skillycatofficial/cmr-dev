@@ -4,54 +4,26 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
-// Helper for letter animation
-const letterVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] } 
-  }
+export type HeroSlide = {
+  image: string
+  eyebrow?: string
+  title?: string
+  cta?: string
+  ctaHref?: string
 }
 
-const AnimatedText = ({ text, className }: { text: string, className?: string }) => {
-  const words = text.split(' ')
-  return (
-    <motion.span className={className}>
-      {words.map((word, i) => (
-        <motion.span key={i} className="inline-block whitespace-nowrap">
-          {word.split('').map((char, j) => (
-            <motion.span key={j} variants={letterVariants} className="inline-block">
-              {char}
-            </motion.span>
-          ))}
-          {i < words.length - 1 && <motion.span className="inline-block">&nbsp;</motion.span>}
-        </motion.span>
-      ))}
-    </motion.span>
-  )
-}
-
-const slides = [
-  {
-    id: 1,
-    image: '/images/slide/cmrslide1.webp',
-  },
-  {
-    id: 2,
-    image: '/images/slide/cmrslide3.webp',
-  },
-  {
-    id: 3,
-    image: '/images/slide/cmrslide4.webp',
-  },
-  {
-    id: 4,
-    image: '/images/slide/cmrslide5.webp',
-  }
+// Static fallback slides (used when Sanity is not connected)
+const FALLBACK_SLIDES: HeroSlide[] = [
+  { image: '/images/slide/cmrslide1.webp' },
+  { image: '/images/slide/cmrslide3.webp' },
+  { image: '/images/slide/cmrslide4.webp' },
+  { image: '/images/slide/cmrslide5.webp' },
 ]
 
-export default function Hero() {
+export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] }) {
+  const slides =
+    sanitySlides && sanitySlides.length > 0 ? sanitySlides : FALLBACK_SLIDES
+
   const [current, setCurrent] = useState(0)
 
   // Autoplay
@@ -60,11 +32,11 @@ export default function Hero() {
       setCurrent((prev) => (prev + 1) % slides.length)
     }, 6000)
     return () => clearTimeout(timer)
-  }, [current])
+  }, [current, slides.length])
 
   return (
     <section className="relative w-full h-[90vh] md:h-screen min-h-[600px] overflow-hidden bg-brand-charcoal pt-[102px] group">
-      
+
       <AnimatePresence mode="popLayout">
         <motion.div
           key={current}
@@ -74,12 +46,12 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
           className="absolute inset-0"
         >
-          <Image 
-            src={slides[current].image} 
-            alt="CMR Luxury Villa" 
-            fill 
-            className="object-cover" 
-            priority 
+          <Image
+            src={slides[current].image}
+            alt="CMR Luxury Villa"
+            fill
+            className="object-cover"
+            priority
           />
           {/* Dark Overlays for readability */}
           <div className="absolute inset-0 bg-brand-green/30" />
@@ -92,41 +64,41 @@ export default function Hero() {
         CMR Developers — Leading Luxury Villa Builder in Kerala, India
       </h1>
 
-      {/* Main Content (Temporarily hidden per user request) */}
-      {false && (
-        <div className="relative z-10 h-full flex flex-col justify-end pb-32 px-section pointer-events-none">
+      {/* Slide text — only shown when Sanity data has content */}
+      <AnimatePresence mode="wait">
+        {(slides[current].eyebrow || slides[current].title) && (
           <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 1 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.02, delayChildren: 0.2 }
-              }
-            }}
-            className="pointer-events-auto w-full px-section"
+            key={`text-${current}`}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
+            className="absolute bottom-24 left-0 right-0 z-10 px-section"
           >
-            {/* Eyebrow */}
-            <motion.h2 className="font-body font-normal text-brand-ivory text-xl md:text-3xl mb-1 tracking-wide">
-              <AnimatedText text="We are celebrating" />
-            </motion.h2>
-
-            {/* Main Heading */}
-            <motion.h1 
-              className="font-body font-medium text-brand-ivory leading-[1.05] tracking-tight"
-              style={{ fontSize: 'clamp(40px, 5.5vw, 80px)' }}
-            >
-              <AnimatedText text="handling over" />{' '}
-              <AnimatedText text="600+" className="text-brand-gold font-semibold" />{' '}
-              <AnimatedText text="villas" /><br className="hidden md:block" />
-              <AnimatedText text="in a short span of" />{' '}
-              <AnimatedText text="14" className="text-brand-gold font-semibold" />{' '}
-              <AnimatedText text="years" />
-            </motion.h1>
+            {slides[current].eyebrow && (
+              <p className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-3">
+                {slides[current].eyebrow}
+              </p>
+            )}
+            {slides[current].title && (
+              <h2
+                className="font-display font-bold text-brand-ivory leading-none mb-6"
+                style={{ fontSize: 'clamp(34px, 5.5vw, 72px)', letterSpacing: '-0.025em' }}
+              >
+                {slides[current].title}
+              </h2>
+            )}
+            {slides[current].cta && slides[current].ctaHref && (
+              <a
+                href={slides[current].ctaHref}
+                className="inline-block px-8 py-3.5 bg-brand-gold text-brand-charcoal font-body text-label font-bold tracking-[0.2em] uppercase hover:bg-brand-ivory transition-colors duration-300"
+              >
+                {slides[current].cta}
+              </a>
+            )}
           </motion.div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* Progress Indicator with Timer Function */}
       <div className="absolute bottom-10 right-8 md:right-16 z-20 flex items-center gap-4 pointer-events-none">
@@ -134,12 +106,12 @@ export default function Hero() {
           {String(current + 1).padStart(2, '0')}
         </span>
         <div className="w-24 md:w-32 h-[2px] bg-brand-ivory/20 relative overflow-hidden">
-          <motion.div 
+          <motion.div
             key={current}
             className="absolute top-0 left-0 h-full bg-brand-gold"
             initial={{ width: '0%' }}
             animate={{ width: '100%' }}
-            transition={{ duration: 6, ease: "linear" }}
+            transition={{ duration: 6, ease: 'linear' }}
           />
         </div>
         <span className="font-body text-brand-ivory text-sm font-medium tracking-widest">

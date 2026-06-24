@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
@@ -12,7 +12,6 @@ export type HeroSlide = {
   ctaHref?: string
 }
 
-// Static fallback slides (used when Sanity is not connected)
 const FALLBACK_SLIDES: HeroSlide[] = [
   { image: '/images/slide/cmrslide1.webp' },
   { image: '/images/slide/cmrslide3.webp' },
@@ -25,14 +24,21 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
     sanitySlides && sanitySlides.length > 0 ? sanitySlides : FALLBACK_SLIDES
 
   const [current, setCurrent] = useState(0)
+  const isFirstRender = useRef(true)
 
   // Autoplay
   useEffect(() => {
     const timer = setTimeout(() => {
+      isFirstRender.current = false
       setCurrent((prev) => (prev + 1) % slides.length)
     }, 6000)
     return () => clearTimeout(timer)
   }, [current, slides.length])
+
+  // Skip enter animation on first paint to avoid LCP delay
+  const enterAnimation = isFirstRender.current
+    ? { opacity: 1, scale: 1 }
+    : { opacity: 0, scale: 1.05 }
 
   return (
     <section className="relative w-full h-[90vh] md:h-screen min-h-[600px] overflow-hidden bg-brand-charcoal pt-[102px] group">
@@ -40,7 +46,7 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
       <AnimatePresence mode="popLayout">
         <motion.div
           key={current}
-          initial={{ opacity: 0, scale: 1.05 }}
+          initial={enterAnimation}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1 }}
           transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
@@ -52,6 +58,7 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
             fill
             className="object-cover"
             priority
+            fetchPriority="high"
           />
           {/* Dark Overlays for readability */}
           <div className="absolute inset-0 bg-brand-green/30" />

@@ -11,60 +11,25 @@ export const metadata: Metadata = {
   },
 }
 
-const FALLBACK_ARTICLES = [
-  {
-    id: 'fallback-1',
-    slug: 'villa-construction-cost-kerala-2025',
-    title: 'Villa Construction Cost in Kerala 2025 — Complete Breakdown',
-    excerpt: 'Planning to build a villa in Kerala? This comprehensive 2025 guide breaks down construction costs by finishing levels, structure, and materials. Learn what it actually costs to build your dream home.',
-    date: 'June 24, 2026',
-    readTime: '6 min read',
-    category: 'Construction Cost',
-    image: '/images/extracted/cmr-villa-exterior.jpg',
-    author: 'CMR Editorial Team'
-  },
-  {
-    id: 'fallback-2',
-    slug: 'nri-guide-buy-villa-kannur-2025',
-    title: 'How NRIs Can Buy a Villa in Kannur — Step-by-Step Guide (2025)',
-    excerpt: 'A complete legal, financial, and practical guide for NRI buyers planning to purchase a villa in Kannur, Kerala. Covers FEMA regulations, NRE accounts, power of attorney, and K-RERA safety.',
-    date: 'June 20, 2026',
-    readTime: '8 min read',
-    category: 'NRI Investment',
-    image: '/images/extracted/cmr-interior-living.jpg',
-    author: 'CMR NRI Desk'
-  },
-  {
-    id: 'fallback-3',
-    slug: 'k-rera-registration-kerala-home-buyers',
-    title: 'K-RERA Registration: What Kerala Home Buyers Must Know',
-    excerpt: 'Understand the legal protections offered by the Kerala Real Estate Regulatory Authority. Learn how to verify RERA numbers, track project timelines, and protect your investment.',
-    date: 'Coming Soon',
-    readTime: '4 min read',
-    category: 'Legal & RERA',
-    image: '/images/extracted/cmr-lifecycle-villa.jpg',
-    author: 'Legal Cell'
-  },
-  {
-    id: 'fallback-4',
-    slug: 'vastu-shastra-villa-design-kerala',
-    title: 'Vastu Shastra for Villa Design in Kerala — CMR’s Approach',
-    excerpt: 'Discover how Vastu Shastra principles are integrated into modern villa layouts. Explore the ideal directions for rooms, energy flow, and ventilation in your new home.',
-    date: 'Coming Soon',
-    readTime: '5 min read',
-    category: 'Vastu Shastra',
-    image: '/images/extracted/cmr-grid-small-3.jpg',
-    author: 'Architectural Team'
-  }
-]
+type Article = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string
+  date: string
+  readTime?: string
+  category?: string
+  image?: string
+  author?: string
+}
 
 export default async function BlogIndexPage() {
-  let articles: typeof FALLBACK_ARTICLES = []
+  let articles: Article[] = []
   try {
     const data = await getAllPosts()
-    articles = data?.length ? data : FALLBACK_ARTICLES
+    if (data?.length) articles = data
   } catch {
-    articles = FALLBACK_ARTICLES
+    // WordPress not reachable — show empty state
   }
 
   const featuredArticle = articles[0]
@@ -105,7 +70,7 @@ export default async function BlogIndexPage() {
               {/* Image side */}
               <div className="relative min-h-[300px] lg:min-h-full bg-brand-green/10">
                 {featuredArticle.image ? (
-                  <Image 
+                  <Image
                     src={featuredArticle.image}
                     alt={featuredArticle.title}
                     fill
@@ -117,25 +82,29 @@ export default async function BlogIndexPage() {
                   </div>
                 )}
               </div>
-              
+
               {/* Text side */}
               <div className="p-8 md:p-12 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 font-body text-[11px] font-semibold tracking-wider text-brand-green uppercase">
-                    <span>{featuredArticle.category}</span>
-                    <span className="w-1 h-1 bg-brand-gray/40 rounded-full" />
-                    <span>{featuredArticle.readTime}</span>
+                    {featuredArticle.category && <span>{featuredArticle.category}</span>}
+                    {featuredArticle.category && featuredArticle.readTime && (
+                      <span className="w-1 h-1 bg-brand-gray/40 rounded-full" />
+                    )}
+                    {featuredArticle.readTime && <span>{featuredArticle.readTime}</span>}
                   </div>
-                  
+
                   <h2 className="font-display font-bold text-brand-charcoal text-2xl md:text-3xl leading-tight hover:text-brand-green transition-colors">
                     <Link href={`/blog/${featuredArticle.slug}`}>
                       {featuredArticle.title}
                     </Link>
                   </h2>
-                  
-                  <p className="font-body text-brand-charcoal/70 text-sm leading-relaxed font-light">
-                    {featuredArticle.excerpt}
-                  </p>
+
+                  {featuredArticle.excerpt && (
+                    <p className="font-body text-brand-charcoal/70 text-sm leading-relaxed font-light">
+                      {featuredArticle.excerpt}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex items-center justify-between pt-6 border-t border-brand-gray/10">
@@ -148,8 +117,8 @@ export default async function BlogIndexPage() {
                       <div className="font-body text-brand-charcoal/40 text-[10px]">{featuredArticle.date}</div>
                     </div>
                   </div>
-                  
-                  <Link 
+
+                  <Link
                     href={`/blog/${featuredArticle.slug}`}
                     className="font-body text-xs font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
                   >
@@ -171,89 +140,80 @@ export default async function BlogIndexPage() {
 
           {remainingArticles.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {remainingArticles.map((article) => {
-                const isComingSoon = article.date === 'Coming Soon'
-                return (
-                  <article 
-                    key={article.id || article.slug}
-                    className="bg-[#fcfbf9] border border-brand-gray/20 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between transition-transform duration-300 hover:translate-y-[-2px]"
-                  >
-                    <div>
-                      {/* Image */}
-                      <div className="relative h-48 w-full bg-brand-green/5">
-                        {article.image ? (
-                          <Image 
-                            src={article.image}
-                            alt={article.title}
-                            fill
-                            className="object-cover"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 bg-brand-green/10 flex items-center justify-center font-display text-brand-green/50 font-bold">
-                            CMR
-                          </div>
-                        )}
+              {remainingArticles.map((article) => (
+                <article
+                  key={article.id ?? article.slug}
+                  className="bg-[#fcfbf9] border border-brand-gray/20 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between transition-transform duration-300 hover:translate-y-[-2px]"
+                >
+                  <div>
+                    {/* Image */}
+                    <div className="relative h-48 w-full bg-brand-green/5">
+                      {article.image ? (
+                        <Image
+                          src={article.image}
+                          alt={article.title}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-brand-green/10 flex items-center justify-center font-display text-brand-green/50 font-bold">
+                          CMR
+                        </div>
+                      )}
+                      {article.category && (
                         <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-2.5 py-0.5 rounded-full font-body text-[9px] font-bold tracking-wider text-brand-green uppercase shadow-sm">
                           {article.category}
                         </div>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 space-y-3">
+                      <div className="flex items-center gap-2 font-body text-[10px] text-brand-charcoal/40">
+                        <span>{article.date}</span>
+                        {article.readTime && <><span>•</span><span>{article.readTime}</span></>}
                       </div>
 
-                      {/* Content */}
-                      <div className="p-6 space-y-3">
-                        <div className="flex items-center gap-2 font-body text-[10px] text-brand-charcoal/40">
-                          <span>{article.date}</span>
-                          <span>•</span>
-                          <span>{article.readTime}</span>
-                        </div>
-                        
-                        <h3 className="font-display font-bold text-brand-charcoal text-lg leading-snug hover:text-brand-green transition-colors">
-                          {isComingSoon ? (
-                            <span className="cursor-default">{article.title}</span>
-                          ) : (
-                            <Link href={`/blog/${article.slug}`}>
-                              {article.title}
-                            </Link>
-                          )}
-                        </h3>
-                        
+                      <h3 className="font-display font-bold text-brand-charcoal text-lg leading-snug hover:text-brand-green transition-colors">
+                        <Link href={`/blog/${article.slug}`}>
+                          {article.title}
+                        </Link>
+                      </h3>
+
+                      {article.excerpt && (
                         <p className="font-body text-brand-charcoal/60 text-xs leading-relaxed font-light line-clamp-3">
                           {article.excerpt}
                         </p>
-                      </div>
-                    </div>
-
-                    {/* Footer */}
-                    <div className="p-6 pt-0 border-t border-brand-gray/10 flex items-center justify-between mt-4">
-                      <span className="font-body text-[10px] font-semibold text-brand-charcoal/50">
-                        {article.author}
-                      </span>
-
-                      {isComingSoon ? (
-                        <span className="font-body text-[9px] font-bold tracking-wider text-brand-gold/70 uppercase">
-                          Coming Soon
-                        </span>
-                      ) : (
-                        <Link 
-                          href={`/blog/${article.slug}`}
-                          className="font-body text-[11px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
-                        >
-                          Read Post →
-                        </Link>
                       )}
                     </div>
-                  </article>
-                )
-              })}
+                  </div>
+
+                  {/* Footer */}
+                  <div className="p-6 pt-0 border-t border-brand-gray/10 flex items-center justify-between mt-4">
+                    <span className="font-body text-[10px] font-semibold text-brand-charcoal/50">
+                      {article.author}
+                    </span>
+                    <Link
+                      href={`/blog/${article.slug}`}
+                      className="font-body text-[11px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
+                    >
+                      Read Post →
+                    </Link>
+                  </div>
+                </article>
+              ))}
             </div>
-          ) : (
-            <div className="text-center py-12 border border-dashed border-brand-gray/30 rounded-2xl">
-              <span className="font-body text-sm text-brand-charcoal/40 font-light">No other articles available yet.</span>
+          ) : articles.length === 0 ? (
+            <div className="text-center py-20 border border-dashed border-brand-gray/30 rounded-2xl">
+              <p className="font-body text-sm text-brand-charcoal/40 font-light">
+                No articles published yet. Check back soon.
+              </p>
             </div>
-          )}
+          ) : null}
         </div>
       </section>
 
-      {/* ── Sticky CTA / Newsletter ─────────────────────── */}
+      {/* ── Newsletter CTA ───────────────────────────────── */}
       <section className="bg-brand-green text-brand-ivory py-16 text-center">
         <div className="px-section max-w-xl mx-auto space-y-6">
           <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.3em] uppercase block">
@@ -266,9 +226,9 @@ export default async function BlogIndexPage() {
             Subscribe to our monthly newsletter and get honest cost updates, construction trends, and K-RERA regulatory updates directly in your inbox.
           </p>
           <div className="flex max-w-md mx-auto border border-brand-ivory/20 rounded-lg overflow-hidden">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
+            <input
+              type="email"
+              placeholder="Your email address"
               className="bg-white/5 text-brand-ivory text-xs px-4 py-3.5 flex-1 outline-none font-body"
             />
             <button className="bg-brand-gold text-brand-charcoal px-6 text-xs font-bold tracking-widest uppercase hover:bg-brand-ivory transition-colors">

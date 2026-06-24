@@ -144,10 +144,11 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
           >
             {/* BHK Dropdown */}
             <div className="relative">
-              <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/40 font-semibold mb-1">
+              <label htmlFor="filter-bhk" className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/40 font-semibold mb-1">
                 Property Type
               </label>
               <select
+                id="filter-bhk"
                 value={bhkFilter}
                 onChange={(e) => setBhkFilter(e.target.value)}
                 className="w-full font-body text-sm text-brand-charcoal py-2 border-b border-brand-gray/60 bg-transparent focus:outline-none focus:border-brand-green appearance-none cursor-pointer pr-8"
@@ -167,10 +168,11 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
 
             {/* Location Dropdown */}
             <div className="relative">
-              <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/40 font-semibold mb-1">
+              <label htmlFor="filter-location" className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/40 font-semibold mb-1">
                 Location
               </label>
               <select
+                id="filter-location"
                 value={locationFilter}
                 onChange={(e) => setLocationFilter(e.target.value)}
                 className="w-full font-body text-sm text-brand-charcoal py-2 border-b border-brand-gray/60 bg-transparent focus:outline-none focus:border-brand-green appearance-none cursor-pointer pr-8"
@@ -190,10 +192,11 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
 
             {/* Status Dropdown */}
             <div className="relative">
-              <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/40 font-semibold mb-1">
+              <label htmlFor="filter-status" className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/40 font-semibold mb-1">
                 Project Status
               </label>
               <select
+                id="filter-status"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full font-body text-sm text-brand-charcoal py-2 border-b border-brand-gray/60 bg-transparent focus:outline-none focus:border-brand-green appearance-none cursor-pointer pr-8"

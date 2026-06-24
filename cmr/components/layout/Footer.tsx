@@ -27,7 +27,6 @@ const companyLinks = [
 
 const resourceLinks = [
   { label: 'Testimonials',      href: '/testimonials' },
-  { label: 'Privacy Policy',    href: '/privacy-policy' },
   { label: 'Careers',           href: '/careers' },
   { label: 'Contact Us',        href: '/contact-us' },
 ]

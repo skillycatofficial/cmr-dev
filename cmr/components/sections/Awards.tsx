@@ -4,13 +4,25 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const awards = [
+const FALLBACK_AWARDS = [
   { id: 1, img: '/images/extracted/cmr-awards-1.jpg', name: 'Excellence Award' },
   { id: 2, img: '/images/extracted/cmr-awards-2.jpg', name: 'Green Leaf Certificate' },
   { id: 3, img: '/images/extracted/cmr-awards-3.jpg', name: 'Trust Builder Award' },
 ]
 
-export default function Awards() {
+interface Award {
+  id: number
+  img: string
+  name: string
+}
+
+interface AwardsProps {
+  initialAwards?: Award[]
+}
+
+export default function Awards({ initialAwards }: AwardsProps) {
+  const awards = initialAwards && initialAwards.length > 0 ? initialAwards : FALLBACK_AWARDS
+
   return (
     <section className="bg-[#f4f4f4] py-20 md:py-32">
       <div className="px-section">

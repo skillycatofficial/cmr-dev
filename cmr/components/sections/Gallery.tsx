@@ -13,7 +13,8 @@ const categories: { key: Category; label: string }[] = [
   { key: 'AMENITIES', label: 'AMENITIES' },
 ]
 
-const galleryItems = [
+// Static fallback gallery items (used when WordPress data is not available)
+const FALLBACK_ITEMS = [
   { id: 1,  cat: 'INTERIOR',  src: '/images/extracted/cmr-interior-living.jpg',    code: 'CMR/KT523', aspect: 'aspect-[3/4]',   title: 'Luxury Living Room Interior Design Kerala' },
   { id: 2,  cat: 'INTERIOR',  src: '/images/extracted/cmr-interior-dining.jpg',    code: 'CMR/KT522', aspect: 'aspect-[4/3]',   title: 'Modern Dining Space in Luxury Villa Kerala' },
   { id: 3,  cat: 'INTERIOR',  src: '/images/extracted/cmr-interior-bedroom.jpg',   code: 'CMR/KT519', aspect: 'aspect-square',  title: 'Premium Master Bedroom Design Kannur' },
@@ -27,7 +28,21 @@ const galleryItems = [
   { id: 11, cat: 'INTERIOR',  src: '/images/extracted/cmr-grid-small-3.jpg',       code: 'CMR/BD519', aspect: 'aspect-[16/9]',  title: 'Luxury Villa Staircase and Hallway Design' },
 ]
 
-export default function Gallery() {
+interface GalleryItem {
+  id: number
+  cat: string
+  src: string
+  code: string
+  aspect: string
+  title: string
+}
+
+interface GalleryProps {
+  initialItems?: GalleryItem[]
+}
+
+export default function Gallery({ initialItems }: GalleryProps) {
+  const galleryItems = initialItems && initialItems.length > 0 ? initialItems : FALLBACK_ITEMS
   const [active, setActive] = useState<Category>('ALL')
 
   const filtered = active === 'ALL' ? galleryItems : galleryItems.filter((g) => g.cat === active)

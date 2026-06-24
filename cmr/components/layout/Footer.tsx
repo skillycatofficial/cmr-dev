@@ -5,38 +5,39 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const projectLinks = [
+  { label: 'Alvina Harmony',    href: '/projects/alvina-harmony' },
+  { label: 'Aiza Harmony',      href: '/projects/aiza-harmony' },
+  { label: 'Aina Harmony',      href: '/projects/aina-harmony' },
+  { label: 'Anna Harmony',      href: '/projects/anna-harmony' },
+  { label: 'Aiza Silver Hills', href: '/projects/aiza-silver-hills' },
+  { label: 'Aiza Golden Hills', href: '/projects/aiza-golden-hills' },
   { label: 'CMR Paradise',      href: '/projects/cmr-paradise' },
   { label: 'Aina Paradise',     href: '/projects/aina-paradise' },
   { label: 'Anna Paradise',     href: '/projects/anna-paradise' },
   { label: 'Aiza Paradise',     href: '/projects/aiza-paradise' },
-  { label: 'Aina Garden',       href: '/projects/aina-garden' },
-  { label: 'Aiza Garden',       href: '/projects/aiza-garden' },
-  { label: 'Anna Garden',       href: '/projects/anna-garden' },
-  { label: 'Alvina Garden',     href: '/projects/alvina-garden' },
-  { label: 'Aiza Diamond Hills', href: '/projects/aiza-diamond-hills' },
-  { label: 'Alvina Harmony',    href: '/projects/alvina-harmony' },
 ]
 
 const companyLinks = [
-  { label: 'About Us',        href: '/about' },
-  { label: 'Projects',        href: '/projects' },
-  { label: 'Video',           href: '/video' },
-  { label: 'Gallery',         href: '/gallery' },
-  { label: 'Blog',            href: '/blog' },
+  { label: 'About Us',          href: '/about-us' },
+  { label: 'Projects',          href: '/projects' },
+  { label: 'Villa Construction',href: '/villa-construction-kerala' },
+  { label: 'NRI Investment',    href: '/nri-investment-kerala' },
+  { label: 'Blog',              href: '/blog' },
 ]
 
 const resourceLinks = [
-  { label: 'Home Loans',      href: '/homeLoans' },
-  { label: 'Privacy Policy',   href: '/privacy-policy' },
-  { label: 'Contact Us',      href: '/contact' },
+  { label: 'Testimonials',      href: '/testimonials' },
+  { label: 'Privacy Policy',    href: '/privacy-policy' },
+  { label: 'Careers',           href: '/careers' },
+  { label: 'Contact Us',        href: '/contact-us' },
 ]
 
 const quickLinks = [
-  { label: 'Home',            href: '/' },
-  { label: 'About Us',        href: '/about' },
-  { label: 'Projects',        href: '/projects' },
-  { label: 'Video',           href: '/video' },
-  { label: 'Home Loans',      href: '/homeLoans' },
+  { label: 'Home',              href: '/' },
+  { label: 'About Us',          href: '/about-us' },
+  { label: 'Projects',          href: '/projects' },
+  { label: 'Villa Construction',href: '/villa-construction-kerala' },
+  { label: 'NRI Investment',    href: '/nri-investment-kerala' },
 ]
 
 const socials = [

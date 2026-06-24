@@ -231,7 +231,7 @@ export default async function ProjectsPage() {
                   
                   <div className="pt-6 border-t border-brand-gray/20">
                     <Link
-                      href="/contact"
+                      href="/contact-us"
                       className="group inline-flex items-center gap-2 text-brand-green hover:text-brand-gold font-body text-[12px] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
                     >
                       <span>Schedule a Free Site Visit</span>

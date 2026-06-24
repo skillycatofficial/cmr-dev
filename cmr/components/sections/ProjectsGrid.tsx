@@ -221,7 +221,7 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
           transition={{ duration: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link href="/contact" className="w-full sm:w-auto text-center bg-[#0F2F2B] text-white font-body text-[11px] font-semibold tracking-[0.2em] uppercase px-12 py-4 hover:bg-brand-gold transition-colors">
+          <Link href="/contact-us" className="w-full sm:w-auto text-center bg-[#0F2F2B] text-white font-body text-[11px] font-semibold tracking-[0.2em] uppercase px-12 py-4 hover:bg-brand-gold transition-colors">
             Enquire Now
           </Link>
           <Link href="/projects" className="w-full sm:w-auto text-center border border-brand-charcoal/20 text-brand-charcoal font-body text-[11px] font-semibold tracking-[0.2em] uppercase px-12 py-4 hover:border-[#0F2F2B] transition-colors">

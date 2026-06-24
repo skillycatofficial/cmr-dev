@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { getAllProjects, getAllPosts } from '@/lib/wordpress'
 
+export const dynamic = 'force-dynamic'
+
 const BASE = 'https://www.cmrdevelopers.com'
 
 const STATIC_ROUTES: MetadataRoute.Sitemap = [

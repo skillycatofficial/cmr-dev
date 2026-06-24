@@ -166,13 +166,13 @@ export default function Footer() {
                 <div className="font-display font-bold text-brand-ivory text-ui-sm leading-tight tracking-tight">
                   DEVELOPERS
                 </div>
-                <div className="font-body text-brand-ivory/40 text-micro tracking-[0.2em] uppercase">
+                <div className="font-body text-brand-ivory/70 text-micro tracking-[0.2em] uppercase">
                   Pvt. Ltd.
                 </div>
               </div>
             </div>
 
-            <p className="font-body text-brand-ivory/45 text-body leading-relaxed max-w-[260px] mb-6">
+            <p className="font-body text-brand-ivory/70 text-body leading-relaxed max-w-[260px] mb-6">
               Union Complex, Near S.N Park, Kannur - 670001, Kerala
             </p>
 
@@ -269,11 +269,11 @@ export default function Footer() {
       {/* ── Bottom bar ────────────────────────────────────── */}
       <div className="border-t border-brand-ivory/10">
         <div className="px-section py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
-          <p className="font-body text-brand-ivory/25 text-label">
+          <p className="font-body text-brand-ivory/60 text-label">
             © 2026 CMR Developers Pvt. Ltd. All Rights Reserved.
           </p>
-          <p className="font-body text-brand-ivory/25 text-label">
-            Made With Love From <a href="https://skillycat.com" target="_blank" rel="noopener noreferrer" className="text-brand-gold/60 hover:text-brand-gold transition-colors">Skillycat Technologies LLP</a>
+          <p className="font-body text-brand-ivory/60 text-label">
+            Made With Love From <a href="https://skillycat.com" target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:text-brand-ivory transition-colors">Skillycat Technologies LLP</a>
           </p>
         </div>
       </div>

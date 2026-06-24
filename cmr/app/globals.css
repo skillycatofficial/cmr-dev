@@ -35,7 +35,7 @@
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   overflow-x: hidden;
   font-size: 16px; /* Canonical base — Tailwind rem tokens reference this */
 }
@@ -116,4 +116,185 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-gold);
     font-family: var(--font-body);
   }
+}
+
+/* ─── Blog Content Styling (.blog-prose) ─────────────────── */
+.blog-prose {
+  font-family: var(--font-body);
+  font-size: 1.125rem; /* 18px body text for premium readability */
+  line-height: 1.85;
+  color: #2D3748; /* Soft readable charcoal */
+}
+
+/* Paragraph spacing */
+.blog-prose p {
+  margin-bottom: 1.75rem;
+  font-weight: 300;
+}
+
+/* First paragraph style */
+.blog-prose > p:first-of-type {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--color-green);
+  font-weight: 400;
+}
+
+/* Headings styling */
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4 {
+  font-family: var(--font-display);
+  color: var(--color-green);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.blog-prose h2 {
+  font-size: 1.875rem; /* 30px */
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+/* Side bar accent for H2 */
+.blog-prose h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  bottom: 0.2em;
+  width: 4px;
+  background-color: var(--color-gold);
+  border-radius: 2px;
+}
+
+.blog-prose h3 {
+  font-size: 1.5rem; /* 24px */
+}
+
+.blog-prose h4 {
+  font-size: 1.25rem; /* 20px */
+}
+
+/* Bold/Strong styling */
+.blog-prose strong,
+.blog-prose b {
+  font-weight: 700;
+  color: var(--color-green); /* Highlights key points in brand green */
+}
+
+/* Lists styling */
+.blog-prose ul,
+.blog-prose ol {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+}
+
+.blog-prose ul {
+  list-style-type: none; /* Custom gold bullets */
+}
+
+.blog-prose ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 300;
+}
+
+.blog-prose ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-size: 1.5rem;
+  line-height: 1;
+  top: -0.05em;
+}
+
+.blog-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.blog-prose ol li {
+  margin-bottom: 0.75rem;
+  padding-left: 0.25rem;
+  font-weight: 300;
+}
+
+.blog-prose ol li::marker {
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+/* Blockquotes & Callouts */
+.blog-prose blockquote,
+.blog-prose .wp-block-quote {
+  background-color: #F8F6F0; /* Cream background */
+  border-left: 4px solid var(--color-gold);
+  padding: 1.75rem 2rem;
+  margin: 2.5rem 0;
+  border-radius: 0 1rem 1rem 0;
+  font-style: italic;
+  color: #4A5568;
+}
+
+.blog-prose blockquote p,
+.blog-prose .wp-block-quote p {
+  margin-bottom: 0;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Images & Figures styling (This makes images POP) */
+.blog-prose figure,
+.blog-prose .wp-block-image {
+  margin: 3rem 0;
+  display: block;
+}
+
+.blog-prose img,
+.blog-prose figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem; /* 24px rounded corners */
+  box-shadow: 0 20px 40px -15px rgba(15, 47, 43, 0.15); /* Soft premium shadow with a hint of brand green */
+  border: 1px solid rgba(15, 47, 43, 0.05); /* Very soft green border */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-prose img:hover,
+.blog-prose figure img:hover {
+  transform: translateY(-4px); /* Hover lift */
+  box-shadow: 0 30px 60px -20px rgba(15, 47, 43, 0.25); /* Lifted shadow */
+}
+
+/* Image Captions */
+.blog-prose figcaption,
+.blog-prose .wp-element-caption {
+  font-size: 0.875rem;
+  color: #718096;
+  text-align: center;
+  margin-top: 1rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Links inside content */
+.blog-prose a {
+  color: var(--color-green);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-gold);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-prose a:hover {
+  color: var(--color-gold);
+  border-bottom-color: var(--color-green);
 }

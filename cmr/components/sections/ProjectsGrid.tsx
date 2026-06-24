@@ -125,8 +125,9 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
             </div>
           </div>
           <div className="flex-1 w-full">
-            <label className="block font-body text-[10px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Location</label>
+            <label htmlFor="home-filter-location" className="block font-body text-[10px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Location</label>
             <select
+              id="home-filter-location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className="w-full font-body text-sm text-brand-charcoal bg-transparent border-b border-brand-charcoal/20 pb-2 outline-none cursor-pointer appearance-none"
@@ -137,8 +138,9 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
             </select>
           </div>
           <div className="flex-1 w-full">
-            <label className="block font-body text-[10px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Status</label>
+            <label htmlFor="home-filter-status" className="block font-body text-[10px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Status</label>
             <select
+              id="home-filter-status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
               className="w-full font-body text-sm text-brand-charcoal bg-transparent border-b border-brand-charcoal/20 pb-2 outline-none cursor-pointer appearance-none"

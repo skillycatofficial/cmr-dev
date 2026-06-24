@@ -141,8 +141,18 @@ export default async function Home() {
     // Components will use fallback static data
   }
 
+  // First hero image — prefer WordPress slide, fall back to static
+  const firstHeroImage = heroSlides?.[0]?.image ?? '/images/slide/cmrslide1.webp'
+
   return (
     <>
+      {/* Preload the LCP hero image so it's discoverable before JS runs */}
+      <link
+        rel="preload"
+        as="image"
+        href={firstHeroImage}
+        fetchPriority="high"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

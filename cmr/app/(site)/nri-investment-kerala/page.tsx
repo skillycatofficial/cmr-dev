@@ -180,8 +180,8 @@ export default function NriInvestmentPage() {
 
             <div className="space-y-4">
               {faqs.map((faq, i) => (
-                <details 
-                  key={i} 
+                <details
+                  key={i}
                   className="group bg-[#fcfbf9] border border-brand-gray/30 rounded-2xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer list-none text-left"
                 >
                   <summary className="flex items-center justify-between font-display font-bold text-brand-charcoal text-md md:text-lg select-none">
@@ -209,7 +209,7 @@ export default function NriInvestmentPage() {
           </h3>
           <Link
             href="/contact-us"
-            className="inline-block px-12 py-4.5 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
           >
             Enquire Now &rarr;
           </Link>

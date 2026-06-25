@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const projectLinks = [
@@ -157,19 +158,15 @@ export default function Footer() {
           {/* Brand column */}
           <div className="mb-12 lg:mb-0 border-b border-brand-ivory/10 lg:border-none pb-10 lg:pb-0">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="bg-brand-ivory px-3 py-2">
-                <span className="font-display font-bold text-brand-green text-subheading leading-none">CMR</span>
-              </div>
-              <div>
-                <div className="font-display font-bold text-brand-ivory text-ui-sm leading-tight tracking-tight">
-                  DEVELOPERS
-                </div>
-                <div className="font-body text-brand-ivory/70 text-micro tracking-[0.2em] uppercase">
-                  Pvt. Ltd.
-                </div>
-              </div>
-            </div>
+            <Link href="/" className="inline-block mb-5">
+              <Image
+                src="/images/cmr-logo.png"
+                alt="CMR Developers"
+                width={120}
+                height={120}
+                className="object-contain"
+              />
+            </Link>
 
             <p className="font-body text-brand-ivory/70 text-body leading-relaxed max-w-[260px] mb-6">
               Union Complex, Near S.N Park, Kannur - 670001, Kerala

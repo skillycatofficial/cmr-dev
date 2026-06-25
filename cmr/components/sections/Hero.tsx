@@ -5,7 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
 export type HeroSlide = {
+  /** Desktop (landscape / 16:9) image */
   image: string
+  /** Mobile (portrait / 9:16) image — falls back to `image` when not provided */
+  mobileImage?: string
   eyebrow?: string
   title?: string
   cta?: string
@@ -13,10 +16,10 @@ export type HeroSlide = {
 }
 
 const FALLBACK_SLIDES: HeroSlide[] = [
-  { image: '/images/slide/cmrslide1.webp' },
-  { image: '/images/slide/cmrslide3.webp' },
-  { image: '/images/slide/cmrslide4.webp' },
-  { image: '/images/slide/cmrslide5.webp' },
+  { image: '/images/slide/cmrslide1.webp', mobileImage: '/images/slide/cmrslide3.webp' },
+  { image: '/images/slide/cmrslide3.webp', mobileImage: '/images/slide/cmrslide4.webp' },
+  { image: '/images/slide/cmrslide4.webp', mobileImage: '/images/slide/cmrslide5.webp' },
+  { image: '/images/slide/cmrslide5.webp', mobileImage: '/images/slide/cmrslide1.webp' },
 ]
 
 export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] }) {
@@ -52,11 +55,21 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
           transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
           className="absolute inset-0"
         >
+          {/* Desktop image (landscape / 16:9) — hidden on mobile */}
           <Image
             src={slides[current].image}
             alt="CMR Luxury Villa"
             fill
-            className="object-cover"
+            className="object-cover hidden md:block"
+            priority
+            fetchPriority="high"
+          />
+          {/* Mobile image (portrait / 9:16) — shown on mobile, falls back to desktop image */}
+          <Image
+            src={slides[current].mobileImage ?? slides[current].image}
+            alt="CMR Luxury Villa"
+            fill
+            className="object-cover block md:hidden"
             priority
             fetchPriority="high"
           />

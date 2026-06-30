@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllProjects, getProjectBySlug } from '@/lib/wordpress'
 import GalleryLightbox from './GalleryLightbox'
+import HeroCarousel from './HeroCarousel'
 
 // Generate static params for all projects
 export async function generateStaticParams() {
@@ -62,6 +63,8 @@ export default async function ProjectDetailPage(
     price?: string;
     overview?: string;
     heroImage?: string;
+    /** Multiple hero images for the carousel — falls back to [heroImage] */
+    heroImages?: string[];
     gallery?: string[];
     amenities?: { icon: string; label: string }[];
     badge?: { num: string; label: string };
@@ -75,6 +78,8 @@ export default async function ProjectDetailPage(
     latitude?: string;
     longitude?: string;
     address?: string;
+    /** Short description of the area / neighbourhood for the location section */
+    areaDescription?: string;
     landmarks?: { landmark: string; distance: string }[];
     constructionProgress?: string;
     paymentPlan?: { stage: string; amount: string }[];
@@ -203,19 +208,25 @@ export default async function ProjectDetailPage(
         />
       )}
 
-      {/* ── Cinematic Hero ──────────────────────────────── */}
+      {/* ── Cinematic Hero Carousel ──────────────────────── */}
       <section className="relative h-[70vh] min-h-[480px] bg-[#0F2F2B] flex items-end">
-        {project.heroImage && (
-          <Image
-            src={project.heroImage}
-            alt={`${project.name} - Luxury Villa Project by CMR Developers Kerala`}
-            fill
-            priority
-            className="object-cover"
-          />
-        )}
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        {/* Carousel — uses heroImages[] or falls back to single heroImage */}
+        {(() => {
+          const heroImgs = (
+            project.heroImages && project.heroImages.length > 0
+              ? project.heroImages
+              : project.heroImage
+              ? [project.heroImage]
+              : []
+          )
+          return heroImgs.length > 0 ? (
+            <HeroCarousel
+              images={heroImgs}
+              projectName={project.name}
+              location={project.location}
+            />
+          ) : null
+        })()}
 
         {/* Hero text */}
         <div className="relative z-10 px-section pb-12 w-full">
@@ -398,6 +409,18 @@ export default async function ProjectDetailPage(
                     >
                       Download Plan
                     </a>
+                    {/* WhatsApp lead trigger — high-conversion CTA */}
+                    <a
+                      href={`https://wa.me/919446475555?text=${encodeURIComponent(`Hi, I'd like to receive the floor plan for ${project.name} in ${project.location}. Please share the details.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 md:flex-none text-center px-6 py-3.5 bg-[#25D366] hover:bg-[#1da851] text-white font-body text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                      </svg>
+                      Get on WhatsApp
+                    </a>
                   </div>
                 </div>
               ) : (
@@ -464,30 +487,43 @@ export default async function ProjectDetailPage(
       )}
 
       {/* ── Amenities ───────────────────────────────────── */}
-      {amenities.length > 0 && (
-        <section id="amenities" className="bg-white py-16 md:py-20 border-t border-brand-gray/30 scroll-mt-[130px]">
-          <div className="px-section">
-            <p className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-3">Features</p>
-            <h2
-              className="font-display font-bold text-brand-charcoal mb-10"
-              style={{ fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.015em' }}
-            >
-              Amenities
-            </h2>
+      {(() => {
+        const defaultAmenities: { icon: string; label: string }[] = [
+          { icon: '🏘️', label: 'Gated Community' },
+          { icon: '🧱', label: 'Compound Wall' },
+          { icon: '🚰', label: 'Underground Drainage' },
+          { icon: '🌿', label: 'Landscaped Garden' },
+          { icon: '🏛️', label: 'Vastu Design' },
+          { icon: '🛡️', label: '24/7 Security' },
+          { icon: '🛣️', label: 'Paved Internal Roads' },
+          { icon: '💧', label: 'Municipal Water Supply' },
+        ]
+        const displayAmenities = amenities.length > 0 ? amenities : defaultAmenities
+        return (
+          <section id="amenities" className="bg-white py-16 md:py-20 border-t border-brand-gray/30 scroll-mt-[130px]">
+            <div className="px-section">
+              <p className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-3">Features</p>
+              <h2
+                className="font-display font-bold text-brand-charcoal mb-10"
+                style={{ fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.015em' }}
+              >
+                Amenities &amp; Features
+              </h2>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {amenities.map((a, i) => (
-                <div key={i} className="flex items-center gap-3 p-4 border border-brand-gray/40 hover:border-brand-green transition-colors duration-200">
-                  {a.icon && (
-                    <span className="text-brand-gold text-heading flex-shrink-0">{a.icon}</span>
-                  )}
-                  <span className="font-body text-brand-charcoal/70 text-ui">{a.label}</span>
-                </div>
-              ))}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {displayAmenities.map((a, i) => (
+                  <div key={i} className="flex items-center gap-3 p-4 border border-brand-gray/40 hover:border-brand-green transition-colors duration-200">
+                    {a.icon && (
+                      <span className="text-brand-gold text-heading flex-shrink-0">{a.icon}</span>
+                    )}
+                    <span className="font-body text-brand-charcoal/70 text-ui">{a.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )
+      })()}
 
       {/* ── Location ────────────────────────────────────── */}
       <section id="location" className="bg-white py-16 md:py-20 border-t border-brand-gray/30 scroll-mt-[130px]">
@@ -519,10 +555,13 @@ export default async function ProjectDetailPage(
               )}
             </div>
 
-            {/* Landmarks Table */}
+            {/* Landmarks Table + Area Description */}
             <div>
+              {/* Area description — from CMS or smart default */}
               <p className="font-body text-brand-charcoal/60 text-body leading-relaxed mb-6">
-                {project.name} is ideally positioned to offer serene privacy alongside excellent connectivity. Key landmarks are within short driving distance, making it convenient for daily needs, schools, and airport travel.
+                {project.areaDescription ??
+                  `${project.name} is ideally positioned in ${project.location} to offer serene privacy alongside excellent connectivity. Surrounded by lush greenery and well-developed infrastructure, this location ensures easy access to essential services, premier schools, healthcare facilities, and transport links — making it a prime destination for luxury villa living in Kerala.`
+                }
               </p>
               {landmarks.length > 0 ? (
                 <div className="border border-brand-gray/40">
@@ -534,7 +573,7 @@ export default async function ProjectDetailPage(
                   ))}
                 </div>
               ) : (
-                <div className="font-body text-brand-charcoal/40 text-label py-4">No landmarks provided.</div>
+                <div className="font-body text-brand-charcoal/40 text-label py-4">Detailed landmark distances available on request.</div>
               )}
             </div>
           </div>
@@ -665,9 +704,26 @@ export default async function ProjectDetailPage(
                 ))
               ) : (
                 [
-                  { q: `Is ${project.name} RERA registered?`, a: `Yes, ${project.name} carries a valid K-RERA registration. All legal approvals and clearances are fully documented and available for buyer verification.` },
-                  { q: 'Can NRI buyers purchase a villa here?', a: 'Absolutely. We offer complete remote purchase support for NRI buyers, including virtual walkthroughs, POA guidance, and NRE/FCNR account payment assistance.' },
-                  { q: 'What are the main amenities provided?', a: 'The project features premium amenities such as a swimming pool, clubhouse, landscaped gardens, paved internal roads, 24/7 security, and compound wall enclosure.' }
+                  {
+                    q: `Is ${project.name} RERA registered?`,
+                    a: `Yes, ${project.name} is registered under K-RERA (Kerala Real Estate Regulatory Authority). Our RERA registration number is ${project.reraNumber ?? 'available on request'}. All legal approvals, land titles, and building clearances are fully documented and available for buyer inspection at any stage.`
+                  },
+                  {
+                    q: 'Can NRI buyers purchase a villa here?',
+                    a: 'Absolutely. CMR Developers offers complete remote purchase support for NRI buyers — including virtual site walkthroughs via video call, Power of Attorney (POA) guidance, NRE/FCNR account payment assistance, and dedicated relationship managers who coordinate every legal and financial step on your behalf.'
+                  },
+                  {
+                    q: `What is the expected possession date for ${project.name}?`,
+                    a: `${project.possessionDate ? `The expected possession date for ${project.name} is ${project.possessionDate}.` : 'Possession timelines are shared during the booking process and are tied directly to construction milestones.'} We maintain full transparency in our construction schedule and provide monthly progress updates to all registered buyers.`
+                  },
+                  {
+                    q: 'What are the main amenities and features provided?',
+                    a: `${project.name} is a fully gated community featuring a robust compound wall for privacy and security. Key amenities include landscaped gardens, underground drainage, Vastu-compliant villa design, paved internal roads, 24/7 gated security, and reliable municipal water supply. Additional clubhouse or pool facilities may vary by project phase.`
+                  },
+                  {
+                    q: 'Are there NRI-friendly home loan and payment plan options?',
+                    a: 'Yes. The project is pre-approved by leading banks including SBI, HDFC Bank, and Axis Bank, enabling smooth and fast loan sanctioning for both resident and NRI buyers. Our stage-wise payment plan is linked to construction milestones, protecting your investment at every step. Our finance team can guide you through the complete process.'
+                  }
                 ].map((faq, idx) => (
                   <details key={idx} className="group border border-brand-gray/40 p-5 cursor-pointer transition-all duration-300 open:border-brand-green bg-white rounded-md shadow-sm">
                     <summary className="flex items-center justify-between list-none font-display font-bold text-brand-charcoal text-base outline-none font-body">

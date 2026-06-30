@@ -88,75 +88,36 @@ const socials = [
   },
 ]
 
-const FooterSection = ({ title, links, isOpen, onToggle }: { title: string, links: { label: string, href: string }[], isOpen: boolean, onToggle: () => void }) => (
-  <div className="border-b border-brand-ivory/10 lg:border-none">
-    <button 
-      onClick={onToggle}
-      className="w-full flex items-center justify-between py-5 lg:py-0 lg:mb-5 group"
-    >
-      <span className="font-body text-brand-gold text-label tracking-[0.3em] uppercase lg:cursor-default">
-        {title}
-      </span>
-      <span className="lg:hidden text-brand-gold/40">
-        <motion.svg 
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          className="w-4 h-4" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </motion.svg>
-      </span>
-    </button>
-    
-    <AnimatePresence initial={false}>
-      {(isOpen || (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
-        <motion.div
-          initial="collapsed"
-          animate="expanded"
-          exit="collapsed"
-          variants={{
-            expanded: { opacity: 1, height: 'auto', marginBottom: 20 },
-            collapsed: { opacity: 0, height: 0, marginBottom: 0 }
-          }}
-          transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
-          className="overflow-hidden lg:!h-auto lg:!opacity-100 lg:!mb-0"
-        >
-          <ul className="space-y-2.5 pb-5 lg:pb-0">
-            {links.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
-    </AnimatePresence>
+const FooterSection = ({ title, links }: { title: string, links: { label: string, href: string }[] }) => (
+  <div>
+    <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-5">
+      {title}
+    </div>
+    <ul className="space-y-2.5">
+      {links.map((link) => (
+        <li key={link.label}>
+          <Link
+            href={link.href}
+            className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
   </div>
 )
 
 export default function Footer() {
-  const [openSection, setOpenSection] = useState<string | null>(null)
-
-  const toggleSection = (id: string) => {
-    setOpenSection(openSection === id ? null : id)
-  }
-
   return (
     <footer className="bg-brand-green text-brand-ivory">
 
       {/* ── Main footer grid ──────────────────────────────── */}
       <div className="px-section py-14 md:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-0 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-x-4 gap-y-10 lg:gap-8">
 
           {/* Brand column */}
-          <div className="mb-12 lg:mb-0 border-b border-brand-ivory/10 lg:border-none pb-10 lg:pb-0">
+          <div className="col-span-2 md:col-span-4 lg:col-span-1 border-b border-brand-ivory/10 lg:border-none pb-10 lg:pb-0">
             {/* Logo */}
             <Link href="/" className="inline-block mb-5">
               <Image
@@ -211,49 +172,36 @@ export default function Footer() {
             </div>
           </div>
 
-          <FooterSection 
-            title="Our Projects" 
-            links={projectLinks} 
-            isOpen={openSection === 'projects'} 
-            onToggle={() => toggleSection('projects')} 
-          />
+          <div className="col-span-1">
+            <FooterSection title="Our Projects" links={projectLinks} />
+          </div>
 
-          <FooterSection 
-            title="Company" 
-            links={companyLinks} 
-            isOpen={openSection === 'company'} 
-            onToggle={() => toggleSection('company')} 
-          />
+          <div className="col-span-1">
+            <FooterSection title="Company" links={companyLinks} />
+          </div>
 
-          <FooterSection 
-            title="Resources" 
-            links={resourceLinks} 
-            isOpen={openSection === 'resources'} 
-            onToggle={() => toggleSection('resources')} 
-          />
+          <div className="col-span-1">
+            <FooterSection title="Resources" links={resourceLinks} />
+          </div>
 
-          {/* Quick Links + Newsletter */}
-          <div className="pt-8 lg:pt-0">
-            <FooterSection 
-              title="Quick Links" 
-              links={quickLinks} 
-              isOpen={openSection === 'quick'} 
-              onToggle={() => toggleSection('quick')} 
-            />
+          <div className="col-span-1 lg:col-span-1">
+            <FooterSection title="Quick Links" links={quickLinks} />
 
             {/* Newsletter */}
-            <div className="mt-8 lg:mt-8">
+            <div className="mt-8">
               <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-3">
                 Newsletter
               </div>
               <div className="flex">
                 <input
                   type="email"
-                  placeholder="Your email"
-                  className="bg-brand-ivory/5 border border-brand-ivory/15 text-brand-ivory text-ui px-3 py-2.5 flex-1 outline-none focus:border-brand-gold/40 transition-colors placeholder:text-brand-ivory/20 font-body min-w-0"
+                  placeholder="Your Email"
+                  className="w-full bg-transparent border-b border-brand-ivory/30 pb-2 text-sm text-brand-ivory placeholder:text-brand-ivory/30 focus:outline-none focus:border-brand-gold transition-colors"
                 />
-                <button className="bg-brand-gold text-brand-charcoal text-ui font-bold px-3 py-2.5 hover:bg-brand-ivory transition-colors duration-300 flex-shrink-0">
-                  →
+                <button aria-label="Subscribe" className="border-b border-brand-ivory/30 pb-2 px-2 hover:text-brand-gold transition-colors">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </button>
               </div>
             </div>

@@ -1,348 +1,693 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { getAllProjects } from '@/lib/wordpress'
 
-const FALLBACK_PROJECTS = [
-  { name: 'Alvina Harmony', slug: 'alvina-harmony', location: 'Kadachira, Kannur', status: 'On Going' },
-  { name: 'Aiza Harmony', slug: 'aiza-harmony', location: 'Mulanthuruthy, Ernakulam', status: 'On Going' },
-  { name: 'Aina Harmony', slug: 'aina-harmony', location: 'Angamaly, Ernakulam', status: 'On Going' },
-  { name: 'Anna Harmony', slug: 'anna-harmony', location: 'Chala, Kannur', status: 'On Going' },
+// ─── Types ───────────────────────────────────────────────────────────────────
+interface Project {
+  name: string
+  slug: string
+  location?: string     // legacy display string
+  district?: string     // e.g. "Kannur"
+  sub_location?: string // e.g. "Karuvanchal"
+  status?: string
+}
+interface SubLocation { name: string; projects: Project[] }
+interface District     { name: string; subLocations: SubLocation[] }
+
+// ─── Fallback data ────────────────────────────────────────────────────────────
+const FALLBACK_PROJECTS: Project[] = [
+  { name: 'Alvina Harmony',    slug: 'alvina-harmony',    district: 'Kannur',    sub_location: 'Kadachira',      status: 'On Going' },
+  { name: 'Anna Harmony',      slug: 'anna-harmony',      district: 'Kannur',    sub_location: 'Chala',          status: 'On Going' },
+  { name: 'Aiza Silver Hills', slug: 'aiza-silver-hills', district: 'Kannur',    sub_location: 'Vayattuparamba', status: 'On Going' },
+  { name: 'Alvina Haven',      slug: 'alvina-haven',      district: 'Kannur',    sub_location: 'Taliparamba',    status: 'On Going' },
+  { name: 'Aiza Harmony',      slug: 'aiza-harmony',      district: 'Ernakulam', sub_location: 'Mulanthuruthy',  status: 'On Going' },
+  { name: 'Aina Harmony',      slug: 'aina-harmony',      district: 'Ernakulam', sub_location: 'Angamaly',       status: 'On Going' },
+  { name: 'Aina Paradise',     slug: 'aina-paradise',     district: 'Kottayam',  sub_location: 'Changanassery',  status: 'On Going' },
 ]
 
+// ─── Legacy location parser (fallback for old WP data) ───────────────────────
+const KNOWN_DISTRICTS = new Set([
+  'Kannur','Ernakulam','Kottayam','Kozhikode','Thrissur',
+  'Malappuram','Palakkad','Wayanad','Kasaragod','Alappuzha',
+  'Pathanamthitta','Kollam','Thiruvananthapuram','Idukki',
+])
+const LEGACY_SUB_TO_DISTRICT: Record<string, string> = {
+  'Karuvanchal': 'Kannur', 'Taliparamba': 'Kannur', 'Iritty': 'Kannur',
+  'Payyanur': 'Kannur', 'Angamaly': 'Ernakulam', 'Mulanthuruthy': 'Ernakulam',
+  'Perumbavoor': 'Ernakulam', 'Changanassery': 'Kottayam', 'Kanjirappally': 'Kottayam',
+}
+function legacyParseLocation(location = ''): { subLocation: string; district: string } {
+  const parts = location.split(',').map(s => s.trim()).filter(Boolean)
+  if (!parts.length) return { subLocation: '', district: 'Other' }
+  if (parts.length === 1) {
+    const only = parts[0]
+    return KNOWN_DISTRICTS.has(only)
+      ? { subLocation: '', district: only }
+      : { subLocation: only, district: LEGACY_SUB_TO_DISTRICT[only] ?? 'Other' }
+  }
+  const last = parts[parts.length - 1]
+  const rest = parts.slice(0, -1).join(', ')
+  if (KNOWN_DISTRICTS.has(last)) return { subLocation: rest, district: last }
+  const mapped = LEGACY_SUB_TO_DISTRICT[last]
+  return mapped ? { subLocation: rest, district: mapped } : { subLocation: rest, district: last }
+}
+
+// ─── Grouping ─────────────────────────────────────────────────────────────────
+function groupProjectsByDistrict(projects: Project[]): District[] {
+  const districtMap = new Map<string, Map<string, Project[]>>()
+  for (const p of projects) {
+    let district: string, subLocation: string
+    if (p.district?.trim()) {
+      district    = p.district.trim()
+      subLocation = p.sub_location?.trim() || district
+    } else {
+      const parsed = legacyParseLocation(p.location)
+      district    = parsed.district
+      subLocation = parsed.subLocation || parsed.district
+    }
+    if (!districtMap.has(district)) districtMap.set(district, new Map())
+    const slMap = districtMap.get(district)!
+    if (!slMap.has(subLocation)) slMap.set(subLocation, [])
+    slMap.get(subLocation)!.push(p)
+  }
+  const ORDER = ['Kannur', 'Ernakulam', 'Kottayam', 'Kozhikode', 'Thrissur']
+  const entries = Array.from(districtMap.entries())
+  entries.sort(([a], [b]) => {
+    const ai = ORDER.indexOf(a), bi = ORDER.indexOf(b)
+    if (ai !== -1 && bi !== -1) return ai - bi
+    if (ai !== -1) return -1
+    if (bi !== -1) return 1
+    return a.localeCompare(b)
+  })
+  return entries.map(([dist, slMap]) => ({
+    name: dist,
+    subLocations: Array.from(slMap.entries()).map(([name, projs]) => ({ name, projects: projs })),
+  }))
+}
+
+// ─── Nav links ────────────────────────────────────────────────────────────────
 const navLinks = [
   { label: 'Home',               href: '/' },
   { label: 'About Us',           href: '/about-us' },
-  {
-    label: 'Projects',           href: '/projects',
-    children: [] as { label: string; href: string }[],
-  },
+  { label: 'Projects',           href: '/projects', hasProjects: true },
   { label: 'Villa Construction', href: '/villa-construction-kerala' },
-  { label: 'NRI Investment',    href: '/nri-investment-kerala' },
-  { label: 'Testimonials',      href: '/testimonials' },
-  { label: 'Blog',              href: '/blog' },
-  { label: 'Careers',           href: '/careers' },
-  { label: 'Contact Us',        href: '/contact-us' },
+  { label: 'NRI Investment',     href: '/nri-investment-kerala' },
+  { label: 'Testimonials',       href: '/testimonials' },
+  { label: 'Blog',               href: '/blog' },
+  { label: 'Careers',            href: '/careers' },
+  { label: 'Contact Us',         href: '/contact-us' },
 ]
 
+// ─── Chevron icon ─────────────────────────────────────────────────────────────
+function ChevronRight({ className = '' }: { className?: string }) {
+  return (
+    <svg className={`w-3 h-3 flex-shrink-0 ${className}`} viewBox="0 0 12 12" fill="none">
+      <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+function ChevronDown({ className = '' }: { className?: string }) {
+  return (
+    <svg className={`w-3 h-3 flex-shrink-0 ${className}`} viewBox="0 0 12 12" fill="none">
+      <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+// ─── Desktop: Luxury Mega Menu ───────────────────────────────────────────────
+function ProjectsMenu({ districts, scrolled }: { districts: District[], scrolled: boolean }) {
+  const [activeDistrict,    setActiveDistrict]    = useState<string | null>(null)
+  const [activeSubLocation, setActiveSubLocation] = useState<string | null>(null)
+
+  const districtTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const subLocationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const activeDistrictData    = districts.find(d  => d.name  === activeDistrict)
+  const activeSubLocationData = activeDistrictData?.subLocations.find(sl => sl.name === activeSubLocation)
+
+  const handleDistrictEnter = (name: string) => {
+    if (districtTimeoutRef.current) clearTimeout(districtTimeoutRef.current)
+    if (subLocationTimeoutRef.current) clearTimeout(subLocationTimeoutRef.current)
+    districtTimeoutRef.current = setTimeout(() => {
+      setActiveDistrict(name)
+      setActiveSubLocation(null)
+    }, 100) // 100ms delay filters out accidental diagonal hover swipes!
+  }
+
+  const handleSubLocationEnter = (name: string) => {
+    if (subLocationTimeoutRef.current) clearTimeout(subLocationTimeoutRef.current)
+    subLocationTimeoutRef.current = setTimeout(() => {
+      setActiveSubLocation(name)
+    }, 100)
+  }
+
+  // Clear timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (districtTimeoutRef.current) clearTimeout(districtTimeoutRef.current)
+      if (subLocationTimeoutRef.current) clearTimeout(subLocationTimeoutRef.current)
+    }
+  }, [])
+
+  const hasSubLocations = activeDistrictData && activeDistrictData.subLocations.length > 0
+  const hasProjects = activeSubLocationData && activeSubLocationData.projects.length > 0
+
+  // Dynamic Theme Classes based on scrolled state
+  const bgClass = scrolled ? 'bg-white' : 'bg-[#0F2F2B]'
+  const borderClass = scrolled ? 'border-gray-200/80' : 'border-white/10'
+  const headerTextClass = scrolled ? 'text-brand-charcoal/40' : 'text-brand-gold/70'
+  const innerDividerClass = scrolled ? 'border-l border-gray-200/80' : 'border-l border-white/10'
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 12 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
+      className="absolute top-full left-0 z-50 pt-[34px] flex"
+    >
+      <div 
+        className={`${bgClass} border ${borderClass} shadow-xl flex rounded-b-lg overflow-hidden transition-colors duration-200`}
+      >
+        {/* Level 1 – Districts */}
+        <div className="w-[200px] py-2 flex-shrink-0">
+          <div className={`px-4 pb-1.5 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
+            Districts
+          </div>
+          {districts.map((d) => (
+            <div
+              key={d.name}
+              onMouseEnter={() => handleDistrictEnter(d.name)}
+              className={`group flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors duration-150 text-[12px] font-semibold tracking-wider uppercase ${
+                activeDistrict === d.name
+                  ? scrolled ? 'bg-brand-green/5 text-brand-green' : 'bg-white/[0.03] text-brand-gold'
+                  : scrolled ? 'text-brand-charcoal/70 hover:text-brand-green hover:bg-brand-green/[0.02]' : 'text-white/70 hover:text-white hover:bg-white/[0.01]'
+              }`}
+            >
+              <span>{d.name}</span>
+              {d.subLocations.length > 0 && (
+                <ChevronRight className={`w-2.5 h-2.5 opacity-60 transition-transform duration-200 ${
+                  activeDistrict === d.name 
+                    ? scrolled ? 'translate-x-1 text-brand-green' : 'translate-x-1 text-brand-gold' 
+                    : 'group-hover:translate-x-0.5'
+                }`} />
+              )}
+            </div>
+          ))}
+          <div className={`border-t mt-1 pt-1.5 transition-colors duration-200 ${scrolled ? 'border-gray-100' : 'border-white/10'}`}>
+            <Link
+              href="/projects"
+              className={`flex items-center gap-1 px-4 py-2 text-[11px] font-bold tracking-widest uppercase transition-colors duration-150 ${
+                scrolled 
+                  ? 'text-brand-gold hover:text-brand-green' 
+                  : 'text-brand-gold hover:text-white'
+              }`}
+            >
+              <span>All Projects</span>
+              <ChevronRight className="w-2.5 h-2.5" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Level 2 – Sub-locations */}
+        {hasSubLocations && (
+          <div className={`w-[200px] py-2 flex-shrink-0 transition-colors duration-200 ${innerDividerClass}`}>
+            <motion.div
+              key={activeDistrictData.name}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.15 }}
+            >
+              <div className={`px-4 pb-1.5 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
+                Locations
+              </div>
+              {activeDistrictData.subLocations.map((sl) => (
+                <div
+                  key={sl.name}
+                  onMouseEnter={() => handleSubLocationEnter(sl.name)}
+                  className={`group flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors duration-150 text-[12px] font-semibold tracking-wider uppercase ${
+                    activeSubLocation === sl.name
+                      ? scrolled ? 'bg-brand-green/5 text-brand-green' : 'bg-white/[0.03] text-brand-gold'
+                      : scrolled ? 'text-brand-charcoal/70 hover:text-brand-green hover:bg-brand-green/[0.02]' : 'text-white/70 hover:text-white hover:bg-white/[0.01]'
+                  }`}
+                >
+                  <span>{sl.name}</span>
+                  {sl.projects.length > 0 && (
+                    <ChevronRight className={`w-2.5 h-2.5 opacity-60 transition-transform duration-200 ${
+                      activeSubLocation === sl.name 
+                        ? scrolled ? 'translate-x-1 text-brand-green' : 'translate-x-1 text-brand-gold' 
+                        : 'group-hover:translate-x-0.5'
+                    }`} />
+                  )}
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        )}
+
+        {/* Level 3 – Projects */}
+        {hasProjects && (
+          <div className={`w-[240px] py-2 flex-shrink-0 transition-colors duration-200 ${innerDividerClass}`}>
+            <motion.div
+              key={activeSubLocationData.name}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.15 }}
+            >
+              <div className={`px-4 pb-1.5 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
+                Developments
+              </div>
+              {activeSubLocationData.projects.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/projects/${p.slug}`}
+                  className={`group/item flex items-center justify-between px-4 py-2.5 text-[13px] transition-colors duration-150 ${
+                    scrolled 
+                      ? 'text-brand-charcoal/80 hover:text-brand-gold' 
+                      : 'text-white/80 hover:text-brand-gold'
+                  }`}
+                >
+                  <span className="font-display font-medium group-hover/item:translate-x-1 transition-transform duration-200 truncate pr-2">
+                    {p.name}
+                  </span>
+                  {p.status && (
+                    <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold tracking-wider uppercase whitespace-nowrap flex-shrink-0 ${
+                      p.status === 'On Going'
+                        ? scrolled 
+                          ? 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
+                          : 'bg-brand-gold/15 text-brand-gold border border-brand-gold/20'
+                        : scrolled 
+                          ? 'bg-black/5 text-brand-charcoal/50'
+                          : 'bg-white/10 text-white/50'
+                    }`}>
+                      {p.status === 'On Going' ? 'Ongoing' : p.status}
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </motion.div>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  )
+}
+
+// ─── Mobile: accordion row for Projects ──────────────────────────────────────
+function MobileProjectsAccordion({
+  districts,
+  onClose,
+}: {
+  districts: District[]
+  onClose: () => void
+}) {
+  const [openDistrict,    setOpenDistrict]    = useState<string | null>(null)
+  const [openSubLocation, setOpenSubLocation] = useState<string | null>(null)
+
+  const toggleDistrict = (name: string) => {
+    setOpenDistrict(prev => (prev === name ? null : name))
+    setOpenSubLocation(null)
+  }
+  const toggleSubLocation = (name: string) => {
+    setOpenSubLocation(prev => (prev === name ? null : name))
+  }
+
+  return (
+    <div className="pl-2 pb-2 space-y-1">
+      {districts.map((d) => (
+        <div key={d.name} className="overflow-hidden rounded-lg border border-white/5 bg-white/[0.01]">
+          {/* District row */}
+          <button
+            onClick={() => toggleDistrict(d.name)}
+            className={`w-full flex items-center justify-between px-4 py-3 text-left font-display text-[12px] font-bold tracking-[0.15em] uppercase transition-colors ${
+              openDistrict === d.name ? 'text-brand-gold bg-white/[0.03]' : 'text-brand-ivory/90 hover:text-brand-gold'
+            }`}
+          >
+            <span>{d.name}</span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 transition-transform duration-200 ${openDistrict === d.name ? 'rotate-180 text-brand-gold' : 'text-brand-ivory/40'}`}
+            />
+          </button>
+
+          <AnimatePresence>
+            {openDistrict === d.name && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.22 }}
+                className="bg-black/10"
+              >
+                <div className="px-4 py-2 space-y-1">
+                  {d.subLocations.map((sl) => (
+                    <div key={sl.name} className="border-b border-white/5 last:border-0 pb-1 last:pb-0">
+                      {/* Sub-location row */}
+                      <button
+                        onClick={() => toggleSubLocation(sl.name)}
+                        className={`w-full flex items-center justify-between py-2 text-left text-[11px] tracking-wider uppercase font-semibold transition-colors ${
+                          openSubLocation === sl.name ? 'text-white' : 'text-brand-ivory/60 hover:text-white'
+                        }`}
+                      >
+                        <span>{sl.name}</span>
+                        <ChevronDown
+                          className={`w-3 h-3 transition-transform duration-200 ${openSubLocation === sl.name ? 'rotate-180 text-white' : 'text-brand-ivory/30'}`}
+                        />
+                      </button>
+
+                      <AnimatePresence>
+                        {openSubLocation === sl.name && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.18 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pl-3 py-1.5 space-y-2">
+                              {sl.projects.map((p) => (
+                                <Link
+                                  key={p.slug}
+                                  href={`/projects/${p.slug}`}
+                                  onClick={onClose}
+                                  className="flex items-center justify-between py-1 text-[13px] text-brand-ivory/80 hover:text-brand-gold transition-colors active:translate-x-0.5 duration-150"
+                                >
+                                  <span>{p.name}</span>
+                                  {p.status && (
+                                    <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold tracking-wider uppercase whitespace-nowrap ${
+                                      p.status === 'On Going'
+                                        ? 'bg-brand-gold/15 text-brand-gold border border-brand-gold/20'
+                                        : 'bg-white/10 text-white/50'
+                                    }`}>
+                                      {p.status}
+                                    </span>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ))}
+
+      {/* View All */}
+      <Link
+        href="/projects"
+        onClick={onClose}
+        className="block pt-3 pb-1 text-[12px] font-bold text-brand-gold hover:text-white transition-colors tracking-widest uppercase pl-4"
+      >
+        → View All Projects
+      </Link>
+    </div>
+  )
+}
+
+// ─── Main Navbar ──────────────────────────────────────────────────────────────
 export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false)
   const [menuOpen,  setMenuOpen]  = useState(false)
   const [activeDD,  setActiveDD]  = useState<string | null>(null)
-  const [projects, setProjects] = useState<{ name: string; slug: string; location?: string; status?: string }[]>(FALLBACK_PROJECTS)
+  const [districts, setDistricts] = useState<District[]>(() => groupProjectsByDistrict(FALLBACK_PROJECTS))
+  const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false)
+  const ddTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  // Scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  // Fetch projects from WordPress
   useEffect(() => {
     let active = true
-    getAllProjects().then((data) => {
-      if (active && data && data.length > 0) {
-        const mapped = data.map((p: Record<string, string>) => ({
-          name: p.name,
-          slug: p.slug,
-          location: p.location,
-          status: p.status
-        }))
-        setProjects(mapped)
-      }
-    }).catch(err => {
-      console.error('Error fetching projects in Navbar:', err)
-    })
+    getAllProjects()
+      .then((data) => {
+        if (active && data?.length > 0) {
+          const mapped: Project[] = data.map((p: Record<string, string>) => ({
+            name:         p.name,
+            slug:         p.slug,
+            location:     p.location,
+            district:     p.district,
+            sub_location: p.sub_location,
+            status:       p.status,
+          }))
+          setDistricts(groupProjectsByDistrict(mapped))
+        }
+      })
+      .catch((err) => console.error('Navbar: project fetch failed', err))
     return () => { active = false }
   }, [])
 
-  const kannurProjects = projects.filter(p => {
-    const loc = (p.location || '').toLowerCase()
-    return !loc.includes('ernakulam') && !loc.includes('kottayam')
-  })
+  // Desktop hover with flicker-prevention delay
+  const handleMouseEnter = (label: string) => {
+    if (ddTimeout.current) clearTimeout(ddTimeout.current)
+    setActiveDD(label)
+  }
+  const handleMouseLeave = () => {
+    ddTimeout.current = setTimeout(() => setActiveDD(null), 120)
+  }
 
-  const half = Math.ceil(kannurProjects.length / 2)
-  const kannurCol1 = kannurProjects.slice(0, half)
-  const kannurCol2 = kannurProjects.slice(half)
-
-  const ernakulamProjects = projects.filter(p => (p.location || '').toLowerCase().includes('ernakulam'))
-  const kottayamProjects = projects.filter(p => (p.location || '').toLowerCase().includes('kottayam'))
-
-  const renderedLinks = navLinks.map(link => {
-    if (link.label === 'Projects') {
-      const childrenList = projects.map(p => ({
-        label: p.name,
-        href: `/projects/${p.slug}`
-      }))
-      childrenList.push({
-        label: 'View All Projects',
-        href: '/projects'
-      })
-      return {
-        ...link,
-        children: childrenList
-      }
-    }
-    return link
-  })
+  const closeMenu = () => {
+    setMenuOpen(false)
+    setMobileProjectsOpen(false)
+  }
 
   return (
     <>
+      {/* ── Header ──────────────────────────────────────────────────────── */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-white shadow-md py-0' : 'bg-transparent py-2'
+          scrolled 
+            ? 'bg-white shadow-md' 
+            : 'bg-gradient-to-b from-black/75 via-black/35 to-transparent'
         }`}
       >
-        <div className="px-section h-[102px] flex items-center justify-between gap-6">
+        <div className="px-4 sm:px-6 lg:px-8 h-16 md:h-20 xl:h-[102px] flex items-center justify-between gap-4">
 
-          {/* ── Logo ──────────────────────────────────────── */}
-          <Link href="/" className="flex-shrink-0 relative w-[100px] md:w-[130px] h-[100px] md:h-[130px] self-start shadow-2xl -top-2 -ml-2">
-            <Image 
-              src="/images/cmr-logo.png" 
-              alt="CMR Developers" 
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex-shrink-0 relative w-[72px] h-[72px] md:w-[90px] md:h-[90px] xl:w-[120px] xl:h-[120px] self-start -mt-1 xl:-top-2"
+          >
+            <Image
+              src="/images/cmr-logo.png"
+              alt="CMR Developers"
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </Link>
 
-          {/* ── Desktop Nav ──────────────────────────────── */}
-          <nav className="hidden xl:flex items-center gap-1">
-            {renderedLinks.map((link) => (
+          {/* Desktop Nav */}
+          <nav className="hidden xl:flex items-center gap-0.5 flex-1 justify-end">
+            {navLinks.map((link) => (
               <div
                 key={link.label}
-                className={link.label === 'Projects' ? '' : 'relative'}
-                onMouseEnter={() => link.children && link.children.length > 0 && setActiveDD(link.label)}
-                onMouseLeave={() => setActiveDD(null)}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(link.label)}
+                onMouseLeave={handleMouseLeave}
               >
                 <Link
                   href={link.href}
-                  className={`flex items-center gap-1 px-3 py-2.5 font-body text-[15px] font-normal transition-colors duration-200 ${
-                    scrolled 
-                      ? 'text-brand-charcoal/80 hover:text-brand-green' 
+                  className={`flex items-center gap-1 px-3 py-2.5 font-body text-[14px] font-normal whitespace-nowrap transition-colors duration-200 ${
+                    scrolled
+                      ? 'text-brand-charcoal/80 hover:text-brand-green'
                       : 'text-white/90 hover:text-white'
                   }`}
                 >
                   {link.label}
-                  {link.children && link.children.length > 0 && (
-                    <svg className="w-3 h-3 opacity-60" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                    </svg>
+                  {link.hasProjects && (
+                    <ChevronDown className="opacity-60" />
                   )}
                 </Link>
 
-                {/* Dropdowns & Mega Menu */}
                 <AnimatePresence>
-                  {link.children && link.children.length > 0 && activeDD === link.label && (
-                    link.label === 'Projects' ? (
-                      /* Full-Width Mega Menu for Projects */
-                      <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 15 }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
-                        className="absolute top-full left-0 right-0 w-full bg-white shadow-2xl border-t border-b border-gray-100 py-10 z-50 text-left"
-                      >
-                        <div className="max-w-[1280px] mx-auto px-6 md:px-8 grid grid-cols-4 gap-10">
-                          {/* Column 1: Kannur Part 1 */}
-                          <div>
-                            <h4 className="font-display font-bold text-brand-green text-[12px] tracking-wider uppercase mb-4 pb-2 border-b border-gray-100">
-                              Kannur Projects
-                            </h4>
-                            <div className="space-y-2.5">
-                              {kannurCol1.map((p) => (
-                                <Link
-                                  key={p.slug}
-                                  href={`/projects/${p.slug}`}
-                                  className="block text-[13.5px] font-body text-brand-charcoal/70 hover:text-brand-green hover:translate-x-1 transition-all duration-150"
-                                >
-                                  {p.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Column 2: Kannur Part 2 (Continuation) */}
-                          <div>
-                            <h4 className="font-display font-bold text-transparent text-[12px] tracking-wider uppercase mb-4 pb-2 border-b border-transparent select-none">
-                              Kannur Projects (Cont.)
-                            </h4>
-                            <div className="space-y-2.5">
-                              {kannurCol2.map((p) => (
-                                <Link
-                                  key={p.slug}
-                                  href={`/projects/${p.slug}`}
-                                  className="block text-[13.5px] font-body text-brand-charcoal/70 hover:text-brand-green hover:translate-x-1 transition-all duration-150"
-                                >
-                                  {p.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Column 3: Ernakulam & Kottayam */}
-                          <div>
-                            {/* Ernakulam */}
-                            <div className="mb-6">
-                              <h4 className="font-display font-bold text-brand-gold text-[12px] tracking-wider uppercase mb-4 pb-2 border-b border-gray-100">
-                                Ernakulam
-                              </h4>
-                              <div className="space-y-2.5">
-                                {ernakulamProjects.map((p) => (
-                                  <Link
-                                    key={p.slug}
-                                    href={`/projects/${p.slug}`}
-                                    className="block text-[13.5px] font-body text-brand-charcoal/70 hover:text-brand-green hover:translate-x-1 transition-all duration-150"
-                                  >
-                                    {p.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Kottayam */}
-                            <div>
-                              <h4 className="font-display font-bold text-brand-gold text-[12px] tracking-wider uppercase mb-4 pb-2 border-b border-gray-100">
-                                Kottayam
-                              </h4>
-                              <div className="space-y-2.5">
-                                {kottayamProjects.map((p) => (
-                                  <Link
-                                    key={p.slug}
-                                    href={`/projects/${p.slug}`}
-                                    className="block text-[13.5px] font-body text-brand-charcoal/70 hover:text-brand-green hover:translate-x-1 transition-all duration-150"
-                                  >
-                                    {p.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Column 4: Brand Showcase & Call-to-Action */}
-                          <div className="bg-brand-green/5 rounded-2xl p-6 border border-brand-green/10 flex flex-col justify-between h-full min-h-[220px]">
-                            <div>
-                              <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.2em] uppercase mb-2 block">
-                                CMR Developers
-                              </span>
-                              <h5 className="font-display font-bold text-[#0F2F2B] text-[16px] leading-snug mb-3">
-                                600+ Luxury Villas Delivered in Kerala
-                              </h5>
-                              <p className="font-body text-brand-charcoal/70 text-[12px] leading-relaxed font-light">
-                                Discover our signature premium gated villa communities. Designed with Vastu compliance, world-class amenities, and 100% K-RERA transparency.
-                              </p>
-                            </div>
-                            <div className="mt-4">
-                              <Link
-                                href="/projects"
-                                className="group flex items-center justify-between px-4 py-2.5 bg-[#0F2F2B] hover:bg-[#B89A5D] text-white rounded-lg text-[11px] font-semibold tracking-wider uppercase transition-colors duration-300"
-                              >
-                                <span>Explore All</span>
-                                <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ) : (
-                      /* Standard Dropdown for other links */
-                      <motion.div
-                        initial={{ opacity: 0, y: 4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 4 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full left-0 min-w-[220px] bg-white shadow-lg border border-gray-100 py-2 z-50 rounded-lg overflow-hidden"
-                      >
-                        {link.children.map((child, idx) => {
-                          const isLast = idx === link.children!.length - 1;
-                          return (
-                            <Link
-                              key={child.label}
-                              href={child.href}
-                              className={`block px-5 py-2.5 font-body text-[14px] transition-colors duration-150 ${
-                                isLast 
-                                  ? 'text-brand-green font-semibold border-t border-gray-100 mt-1 pt-3 hover:text-brand-gold hover:bg-brand-green/5' 
-                                  : 'text-brand-charcoal/70 hover:text-brand-green hover:bg-brand-green/5'
-                              }`}
-                            >
-                              {child.label}
-                            </Link>
-                          );
-                        })}
-                      </motion.div>
-                    )
+                  {link.hasProjects && activeDD === link.label && (
+                    <ProjectsMenu districts={districts} scrolled={scrolled} />
                   )}
                 </AnimatePresence>
               </div>
             ))}
           </nav>
 
-          {/* ── Right Actions ─────────────────────────────── */}
-          <div className="flex items-center gap-3 flex-shrink-0">
-            {/* Search icon */}
+          {/* Right actions */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Search — desktop only */}
             <button
               aria-label="Search"
               className={`hidden xl:flex w-9 h-9 items-center justify-center transition-colors ${
-                scrolled ? 'text-brand-charcoal/60 hover:text-brand-green' : 'text-white/90 hover:text-white'
+                scrolled
+                  ? 'text-brand-charcoal/60 hover:text-brand-green'
+                  : 'text-white/90 hover:text-white'
               }`}
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
               </svg>
             </button>
 
-            {/* Mobile hamburger */}
+            {/* Hamburger — mobile/tablet */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="xl:hidden flex flex-col gap-[5px] p-2"
+              className="xl:hidden flex flex-col gap-[5px] p-2 -mr-1"
               aria-label="Toggle menu"
+              aria-expanded={menuOpen}
             >
-              <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} className={`block w-6 h-px ${scrolled || menuOpen ? 'bg-brand-charcoal' : 'bg-white'}`} />
-              <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} className={`block w-6 h-px ${scrolled || menuOpen ? 'bg-brand-charcoal' : 'bg-white'}`} />
-              <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} className={`block w-6 h-px ${scrolled || menuOpen ? 'bg-brand-charcoal' : 'bg-white'}`} />
+              <motion.span
+                animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className={`block w-6 h-[2px] rounded-full ${scrolled || menuOpen ? 'bg-brand-charcoal' : 'bg-white'}`}
+              />
+              <motion.span
+                animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+                className={`block w-6 h-[2px] rounded-full ${scrolled || menuOpen ? 'bg-brand-charcoal' : 'bg-white'}`}
+              />
+              <motion.span
+                animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className={`block w-6 h-[2px] rounded-full ${scrolled || menuOpen ? 'bg-brand-charcoal' : 'bg-white'}`}
+              />
             </button>
           </div>
         </div>
       </header>
 
-      {/* ── Mobile Menu ────────────────────────────────────── */}
+      {/* ── Mobile / Tablet Drawer ────────────────────────────────────────── */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-0 z-40 bg-brand-green flex flex-col pt-24 pb-10 px-8 xl:hidden overflow-y-auto"
-          >
-            <nav className="flex-1 space-y-0">
-              {renderedLinks.map((link, i) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.04 * i }}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-40 bg-black/40 xl:hidden"
+              onClick={closeMenu}
+            />
+
+            {/* Drawer panel — slides in from right */}
+            <motion.aside
+              key="drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-[#1a2e2b] flex flex-col xl:hidden"
+            >
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 flex-shrink-0">
+                <Link href="/" onClick={closeMenu}>
+                  <span className="text-brand-gold font-display font-bold text-lg tracking-wide">CMR Developers</span>
+                </Link>
+                <button
+                  onClick={closeMenu}
+                  aria-label="Close menu"
+                  className="w-9 h-9 flex items-center justify-center text-white/70 hover:text-white transition-colors rounded-full hover:bg-white/10"
                 >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block py-4 border-b border-brand-ivory/10 font-display font-semibold text-heading text-brand-ivory hover:text-brand-gold transition-colors"
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Scrollable nav links */}
+              <nav className="flex-1 overflow-y-auto px-5 py-4 space-y-0">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.04 * i, duration: 0.25 }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
+                    {link.hasProjects ? (
+                      <>
+                        {/* Projects accordion trigger */}
+                        <button
+                          onClick={() => setMobileProjectsOpen(!mobileProjectsOpen)}
+                          className="w-full flex items-center justify-between py-4 border-b border-white/10 text-left font-display font-semibold text-[17px] text-brand-ivory hover:text-brand-gold transition-colors"
+                        >
+                          <span>{link.label}</span>
+                          <ChevronDown
+                            className={`transition-transform duration-250 ${mobileProjectsOpen ? 'rotate-180' : ''}`}
+                          />
+                        </button>
+
+                        <AnimatePresence>
+                          {mobileProjectsOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.25 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pt-1 pb-3">
+                                <MobileProjectsAccordion
+                                  districts={districts}
+                                  onClose={closeMenu}
+                                />
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={closeMenu}
+                        className="block py-4 border-b border-white/10 font-display font-semibold text-[17px] text-brand-ivory hover:text-brand-gold transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
+              </nav>
+
+              {/* Drawer footer */}
+              <div className="px-5 py-4 border-t border-white/10 flex-shrink-0 space-y-2">
+                <a
+                  href="tel:+919206838383"
+                  className="flex items-center gap-2 text-brand-ivory/70 text-sm hover:text-brand-gold transition-colors"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.38 1.18 2 2 0 012.37 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.34a16 16 0 006.29 6.29l1.41-1.41a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.51v1.41z" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  +91 9206 838 383
+                </a>
+                <a
+                  href="mailto:admin@cmrdevelopers.com"
+                  className="flex items-center gap-2 text-brand-ivory/70 text-sm hover:text-brand-gold transition-colors"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" strokeLinecap="round" strokeLinejoin="round"/>
+                    <polyline points="22,6 12,13 2,6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  admin@cmrdevelopers.com
+                </a>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
     </>

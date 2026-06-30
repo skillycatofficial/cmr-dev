@@ -69,7 +69,7 @@ export default function AboutUsPage() {
       <section className="bg-[#fcfbf9] py-16 md:py-24">
         <div className="px-section max-w-5xl mx-auto">
           <div className="space-y-16">
-            
+
             {/* Our Story — How It All Began */}
             <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start">
               <div>

@@ -102,9 +102,10 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
           viewport={{ once: true, margin: '-100px' }}
           className="mb-12"
         >
-          <h2 className="font-display font-medium text-brand-charcoal text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-tight flex items-start gap-4">
-            <span>THE ONLY TREE OF<br/>TRUST IN THE LAND OF<br/>ASSETS</span>
-            <svg className="w-8 h-8 md:w-12 md:h-12 text-[#B89A5D] mt-2 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <h2 className="font-display font-medium text-brand-charcoal text-4xl md:text-5xl lg:text-[64px] uppercase tracking-tight leading-[1.2] md:leading-tight flex flex-wrap md:flex-nowrap items-center md:items-start gap-3 md:gap-4">
+            <span className="md:hidden">THE ONLY TREE OF TRUST IN THE LAND OF ASSETS</span>
+            <span className="hidden md:block">THE ONLY TREE OF<br/>TRUST IN THE LAND OF<br/>ASSETS</span>
+            <svg className="w-8 h-8 md:w-12 md:h-12 text-[#B89A5D] md:mt-2 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z" />
             </svg>
           </h2>

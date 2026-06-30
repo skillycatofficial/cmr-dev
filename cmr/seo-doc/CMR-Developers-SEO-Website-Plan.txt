@@ -1,0 +1,895 @@
+--- PAGE 1 ---
+SEO WEBSITE STRATEGY DOCUMENT · 2025
+CMR Developers
+Kerala
+Complete SEO Website Plan
+A page-by-page SEO content architecture for cmrdevelopers.com
+Built around Kerala villa construction, NRI buyer journeys,
+and 600+ completed projects across Kannur & Ernakulam.
+Includes WordPress-specific implementation guide.
+COMPANY
+CMR Developers, Taliparamba, Kannur
+DISTRICTS
+Kannur · Ernakulam
+TOTAL PAGES
+12 Core Pages + WordPress Implementation Guide
+PLATFORM
+WordPress (Full Plugin Stack & Config Included)
+CONFIDENTIAL — CMR DEVELOPERS DIGITAL MARKETING TEAM
+
+
+--- PAGE 2 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 2
+NAVIGATION
+Table of Contents
+01
+Site Architecture & URL Structure
+3
+02
+Home Page
+4
+03
+About Us
+4
+04
+Projects Hub
+5
+05
+Project Pages — Alvina, Aiza, Aina Harmony
+5
+06
+Villa Construction Services Page
+7
+07
+NRI Investment Page
+7
+08
+Testimonials Page
+8
+09
+Blog Strategy & Post Topics
+8
+10
+Contact Us Page
+9
+11
+Careers Page (New)
+9
+12
+Technical SEO Checklist
+10
+13
+Schema Markup Reference
+11
+14
+WordPress Implementation Guide
+12
+15
+3-Month Execution Roadmap
+14
+
+
+--- PAGE 3 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 3
+ARCHITECTURE
+Site Structure & URL Plan
+Flat hierarchy — every page reachable within 3 clicks from the homepage. Slug structure mirrors primary
+keyword targets for maximum crawlability.
+cmrdevelopers.com/
+/ (Home)
+/about-us
+/projects
+SEO Hub — Category Page
+/projects/alvina-harmony-kannur
+/projects/aiza-harmony-kannur
+/projects/aina-harmony-kannur
+/villa-construction-kerala
+Services SEO Page
+/nri-investment-kerala
+High-Intent Page
+/testimonials
+/blog
+Content SEO Engine
+/blog/[post-slug]
+/contact-us
+/careers
+NEW — Recommended Addition
+/sitemap.xml
+/privacy-policy
+
+
+--- PAGE 4 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 4
+PAGES 01–03
+Core Pages — Home, About & Projects Hub
+PAGE 01 / HOME
+Homepage — Primary Conversion Gateway
+cmrdevelopers.com/
+TITLE TAG
+CMR Developers Kerala | Luxury Villa Construction in
+Kannur & Ernakulam Since 2012
+META DESCRIPTION
+Build your dream villa in Kerala with CMR Developers —
+600+ completed luxury villas across Kannur and
+Ernakulam. Trusted by NRI families since 2012. Explore
+projects & book a site visit.
+H1
+Kerala's Most Trusted Villa Builders — 600+ Homes
+Delivered Across Kannur & Ernakulam
+PRIMARY KEYWORDS
+villa builders kerala / luxury villa kannur / CMR Developers
+SECONDARY KEYWORDS
+NRI villa investment kerala / villa construction kerala
+→ Hero Section: Stat headline "600+ Villas Built | 12+
+ Years | Kannur & Ernakulam" + CTA "Schedule a Free
+Site Visit" + WhatsApp float button
+→ Trust Bar: K-RERA registered badge, Year
+ established, Districts served, Villas delivered — above
+the fold
+→ Featured Projects: 3 cards — Alvina, Aiza, Aina
+ Harmony with price anchor (Rs.50L–Rs.80L), location
+pin, CTA to project page
+→ Why CMR: 4 differentiators — Vastu-compliant design,
+ K-RERA, NRI-friendly process, In-house construction
+team
+→ NRI Section: "Living Abroad? Build Home in Kerala" —
+ Gulf, UK, USA messaging with
+POA/remote-management note
+→ Testimonials Strip: 3 rotating testimonials with buyer
+ city (Dubai, Sharjah, Riyadh)
+→ Blog Teasers: 2 recent posts for crawlability and dwell
+ time
+→ Sticky CTA: "Talk to a Villa Expert" — WhatsApp +
+ Call floating bar
+PAGE 02 / ABOUT
+About Us
+/about-us
+TITLE TAG
+About CMR Developers Kerala | Villa Builders Since 2012
+— Taliparamba, Kannur
+META DESCRIPTION
+CMR Developers was founded in Taliparamba, Kannur in
+2012. We have built 600+ luxury villas across Kerala for
+families and NRI investors who trust quality and timely
+delivery.
+H1
+Building Kerala's Most Trusted Homes Since 2012
+KEYWORDS
+best villa builders kannur / CMR Developers taliparamba /
+trusted real estate kerala
+SCHEMA
+Organization · AboutPage · BreadcrumbList
+→ Origin Story: Founded Taliparamba 2012,
+ community-first ethos — humanises the brand
+→ Milestones Timeline: 2012 founding → 100 villas →
+ Ernakulam expansion → 600+ villas (great for E-E-A-T)
+→ Leadership / Team: Founder photo + bio — human
+ signals boost Google E-E-A-T score
+→ By The Numbers Infographic: 600+ villas / 2 districts /
+ 12+ years / 5–6 completions per month
+→ K-RERA Certifications: Registration numbers
+ prominently displayed — legal + trust signal
+→ Mission & Vision: "Kerala families deserve world-class
+ homes; NRI diaspora deserves transparent investment"
+→ CTA: "See Our Projects" + "Talk to Our Team"
+ 
+
+--- PAGE 5 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 5
+PAGE 03 / PROJECTS HUB
+All Projects — SEO Category Page
+/projects
+TITLE TAG
+Villa Projects in Kerala | CMR Developers — Kannur &
+Ernakulam
+META DESCRIPTION
+Browse CMR Developers' luxury villa projects in Kannur
+and Ernakulam — Alvina Harmony, Aiza Harmony, Aina
+Harmony. Prices from Rs.50L. K-RERA registered. Book a
+site visit today.
+H1
+Luxury Villas in Kerala — Ongoing & Completed Projects
+by CMR Developers
+KEYWORDS
+villas in kannur / villa projects ernakulam / gated
+community kerala / buy villa kerala NRI
+SCHEMA
+ItemList · BreadcrumbList
+→ Filter Bar: Filter by District (Kannur/Ernakulam), Status
+ (Ongoing/Completed/Sold Out), Price Range —
+improves UX and creates internal link clusters
+→ Project Grid Cards: Each card: name, Google Maps
+ pin, price band, BHK options, RERA number, CTA to
+detail page
+→ Status Labels: "Ongoing" / "Ready to Move" / "Sold
+ Out" — clear buyer signals
+→ Intro Paragraph: 150-word keyword-rich text about
+ CMR project philosophy in Kerala
+→ Bottom Text Block: 200-word SEO copy targeting
+ "villa builders in Kannur" and "gated villa communities
+Kerala"
+
+
+--- PAGE 6 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 6
+PAGES 04–06
+Individual Project Pages — Alvina, Aiza & Aina Harmony
+YOUR RECOMMENDATION: Location Details on Every Project Page
+❖ Embedded Google Map iframe with the exact project site pinned
+❖ Distance table: Kannur International Airport, nearest hospital, school, NH bypass, city centre
+❖ Neighbourhood overview paragraph (100–150 words) — area name, growth outlook, local infrastructure
+❖ Schema: RealEstateListing + LocalBusiness with geo coordinates (latitude/longitude)
+❖ Internal link: "View other CMR projects near Kannur" linking back to /projects?district=kannur
+❖ Meta description must always include the exact location, e.g. "Alvina Harmony Villas in Chakkarakal, Kannur"
+❖ ALT text on every project photo: "Alvina Harmony luxury villa interior Chakkarakal Kannur Kerala"
+PAGE 04 / PROJECT
+Alvina Harmony Villas
+/projects/alvina-harmony-kannur
+TITLE TAG
+Alvina Harmony Villas in Kannur | CMR Developers —
+Rs.50L onwards | K-RERA
+META DESCRIPTION
+Alvina Harmony by CMR Developers — luxury villas in
+Kannur starting Rs.50 Lakhs. Vastu-compliant, K-RERA
+registered. 10 mins from Kannur International Airport. Book
+a free site visit.
+H1
+Alvina Harmony — Luxury Villas in Kannur Starting at
+Rs.50 Lakhs
+KEYWORDS
+Alvina Harmony Kannur / villas in Kannur for sale / 50 lakh
+villa kerala / NRI villa kannur
+SCHEMA
+RealEstateListing · LocalBusiness · FAQPage ·
+BreadcrumbList
+→ Hero Carousel: Actual renders/site photos with
+ location-keyword ALT text
+→ Key Specs Table: Total units, BHK options, plot size,
+ built-up area, price range, RERA number, possession
+date
+→ Floor Plan Downloads: PDF download with WhatsApp
+ lead trigger (high-conversion tool)
+→ Amenities Grid: Gated community, compound wall,
+ underground drainage, landscaped garden, Vastu design
+→ Location Block (Mandatory — see above): Google
+ Map embed + distance table + area description
+→ Construction Progress: Monthly % update — builds
+ trust and gives Google fresh content signals
+→ Payment Plan: Stage-wise schedule + NRI-friendly
+ bank loan partners (SBI, HDFC, Axis)
+→ FAQ Section: 5 Q&As; — "Is Alvina Harmony RERA
+ registered?", "Can NRIs buy here?", "What is possession
+date?"
+PAGE 05 / PROJECT
+Aiza Harmony Villas
+/projects/aiza-harmony-kannur
+
+
+--- PAGE 7 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 7
+TITLE TAG
+Aiza Harmony Villas Kannur | CMR Developers — Gated
+Community Villas Kerala
+META DESCRIPTION
+Aiza Harmony — CMR Developers' premium gated villa
+community in Kannur. Vastu-compliant, K-RERA certified,
+close to NH-66. Prices from Rs.55L. Ideal for NRI buyers
+from Gulf countries.
+H1
+Aiza Harmony — Premium Gated Villa Community in
+Kannur
+CONTENT ANGLE
+Lead with Gulf NRI buyer messaging — "Your home in
+Kerala, built while you're in Dubai." Remote purchase
+process flow.
+KEYWORDS
+Aiza Harmony Kannur / gated villa community kannur / NRI
+gated community kerala
+→ NRI Remote Buy Section: Step-by-step infographic —
+ Virtual tour → Select unit → NRE payment → POA →
+RERA agreement → Handover
+→ Virtual Tour CTA: "Book a Video Walkthrough" —
+ removes barrier for Gulf buyers who cannot visit in
+person
+→ Location Block: Unique from Alvina — different
+ distance markers, area description, landmarks
+→ Loan Partners: Empanelled banks for NRI home loans
+ — SBI NRI, HDFC NRI, Axis Bank — adds credibility
+→ Gulf Country Flags: UAE / Saudi Arabia / Qatar /
+ Kuwait icons near NRI CTA — visual targeting
+→ Comparison Table: Aiza vs Alvina vs Aina side by side
+ — helps internal linking and reduces buyer confusion
+PAGE 06 / PROJECT
+Aina Harmony Villas
+/projects/aina-harmony-kannur
+TITLE TAG
+Aina Harmony Luxury Villas | CMR Developers Kannur —
+Book Now
+META DESCRIPTION
+Aina Harmony villas by CMR Developers — beautifully
+designed Vastu-compliant homes in Kannur with modern
+amenities and K-RERA registration. Starting Rs.55L.
+Enquire now.
+H1
+Aina Harmony — Vastu-Perfect Family Villas in Kannur
+CONTENT ANGLE
+Vastu-compliant family homes — targets buyers who
+specifically search for Vastu compliance. A rare
+differentiator among competitors.
+KEYWORDS
+Aina Harmony Kannur / vastu villa kannur / vastu compliant
+home kerala / luxury home kerala
+→ Vastu Section: Vastu compliance certificate /
+ explanation — rare differentiator, captures niche
+high-intent keyword
+→ Interior Finish Walkthrough: Tile choices, paint
+ palette, kitchen countertop — pre-qualifies buyers,
+reduces sales friction
+→ Location Block: Include nearest temple
+ (Vastu-relevant), school, hospital, city market distance
+→ All 3 Projects Comparison: Alvina vs Aiza vs Aina
+ table — boosts internal linking across project pages
+→ FAQ Section: "What is Vastu compliance?", "Which
+ direction does Aina Harmony face?", "Is there a temple
+nearby?"
+
+
+--- PAGE 8 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 8
+PAGES 07–08
+Services & NRI Investment Pages
+PAGE 07 / SERVICES
+Villa Construction Services
+/villa-construction-kerala
+TITLE TAG
+Villa Construction in Kerala | CMR Developers — Custom
+& Gated Community Villas
+META DESCRIPTION
+CMR Developers offers end-to-end villa construction in
+Kerala — custom design, Vastu compliance, K-RERA
+registration, and turnkey delivery across Kannur and
+Ernakulam. Get a free estimate.
+H1
+Custom Villa Construction in Kerala — Design to Delivery
+KEYWORDS
+villa construction kerala / custom villa builder kannur /
+turnkey villa kerala / house construction kannur
+SCHEMA
+Service · LocalBusiness · FAQPage
+→ Process Flow (6 Steps): Land Assessment → Design
+ & Vastu → Permit & RERA → Construction → Quality
+Check → Handover — visual infographic
+→ Service Cards: Gated Community Villas / Custom Plot
+ Villas / Villa Interiors / Renovation — each with CTA
+→ In-House Team Advantage: "No sub-contractors. Our
+ team builds your villa." — key trust differentiator vs.
+competitors
+→ Cost Estimator CTA: "Get a Free Villa Build Cost
+ Estimate" — lead form, extremely high intent
+→ Project Gallery: 12-image gallery from completed
+ projects, ALT tags with location keywords
+→ FAQ: "How long does construction take?", "Cost per sq
+ ft in Kerala?", "Do you build outside Kannur?"
+PAGE 08 / NRI
+NRI Investment Page — HIGH PRIORITY
+/nri-investment-kerala
+TITLE TAG
+NRI Villa Investment in Kerala | CMR Developers — Gulf,
+UK & USA NRI Buyers
+META DESCRIPTION
+Invest in a luxury villa in Kerala from anywhere in the
+world. CMR Developers specialises in NRI home
+purchases — transparent process, K-RERA, POA support,
+NRI home loan tie-ups.
+H1
+NRI? Build Your Kerala Home from Anywhere in the World
+KEYWORDS
+NRI villa investment kerala / buy villa kerala from dubai /
+NRI home loan kannur / NRI real estate kerala 2025
+SCHEMA
+Service · FAQPage · LocalBusiness
+→ Emotional Hook: "You've built a life abroad. Now build
+ a home in Kerala." — speaks to the remittance cycle and
+homecoming aspiration
+→ NRI Buy Process (7 Steps): Virtual tour → Select unit
+ → NRE/FCNR payment → POA → RERA agreement →
+Construction updates → Handover
+→ Geo-Specific Blocks: Gulf NRI / UK NRI / USA NRI —
+ time zone-friendly support hours mentioned
+→ Kannur Airport Uplift: "30 min from Kannur
+ International Airport — your annual visits just got easier"
+→ Legal & Tax FAQs: FEMA compliance, NRI home loan
+ limits, tax on rental income — captures long-tail
+searches + builds trust
+→ WhatsApp NRI Desk CTA: "Chat with our NRI Desk —
+ available 9AM–9PM IST" — removes the biggest contact
+barrier
+
+
+--- PAGE 9 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 9
+PAGES 09–10
+Testimonials & Blog
+PAGE 09 / SOCIAL PROOF
+Testimonials & Reviews
+/testimonials
+TITLE TAG
+CMR Developers Reviews | What Our Kerala Villa Buyers
+Say
+META DESCRIPTION
+Real testimonials from CMR Developers villa buyers
+across Kannur and Ernakulam — including NRI families
+from UAE, UK, and USA who trusted CMR with their dream
+Kerala home.
+H1
+Hear From 600+ Happy CMR Developers Homeowners
+SCHEMA
+Review · AggregateRating — enables star ratings in
+Google SERP
+NOTE
+Unique review text (not copy-pasted from Google) is fresh
+content Google indexes — write original versions of each
+testimonial
+→ Minimum 15 reviews: buyer name, city
+ (Dubai/Sharjah/Kannur), project, date, star rating,
+100–150 word text
+→ Video Testimonials: YouTube embeds preferred —
+ boosts dwell time, a key Google ranking signal
+→ Filter: By Project / Buyer Location (Local/NRI) / Year —
+ scannable for mobile visitors
+→ Google Reviews Widget: Live embed of Google
+ Business Profile reviews — dynamic social proof
+→ CTA: "Join our happy homeowners — Book a free site
+ visit"
+Blog — Content SEO Engine
+#
+Post Title (SEO Optimised)
+Target Keyword
+Intent
+Priority
+01
+Villa Construction Cost in Kerala 2025 — Complete Breakdown
+villa construction cost kerala
+Research
+HIGH
+02
+How NRIs Can Buy a Villa in Kannur — Step-by-Step Guide (2025)
+NRI buy villa kannur
+Decision
+HIGH
+03
+K-RERA Registration: What Kerala Home Buyers Must Know
+RERA kerala home buyers
+Research
+HIGH
+04
+Vastu Shastra for Villa Design in Kerala — CMR's Approach
+vastu villa kerala
+Awareness
+MED
+05
+Kannur Real Estate 2025 — Why Airport Proximity Adds Value
+kannur real estate 2025
+Research
+HIGH
+06
+Gated Villa vs Independent House in Kerala — Which is Better?
+gated villa kerala
+Comparison
+MED
+07
+NRI Home Loan in Kerala — Banks, Limits & FEMA Rules (2025)
+NRI home loan kerala
+Decision
+HIGH
+08
+Top 5 Locations to Buy a Villa in Kannur in 2025
+best locations villa kannur
+Research
+MED
+09
+How CMR Developers Delivers 5–6 Villas Per Month
+villa builder process kerala
+Trust
+LOW
+10
+Kerala Property Market Forecast: NRI Investment Trends 2025–27
+kerala property forecast NRI
+Research
+MED
+Blog Rules: Min 1,200 words per post (1,800–2,500 for competitive keywords). Every post must internally link to the most relevant
+project page AND the NRI page. Add author bio with designation for E-E-A-T. Publish 2 posts per month minimum. Add FAQ schema to
+every blog post.
+
+
+--- PAGE 10 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 10
+PAGES 11–12
+Contact & Careers (New Addition)
+PAGE 11 / CONTACT
+Contact Us — Lead Conversion Page
+/contact-us
+TITLE TAG
+Contact CMR Developers | Villa Enquiry — Kannur,
+Ernakulam & NRI
+META DESCRIPTION
+Contact CMR Developers for villa enquiries in Kannur and
+Ernakulam. Call, WhatsApp, or visit our office in
+Taliparamba. NRI buyers — reach our dedicated desk
+today.
+H1
+Talk to CMR Developers — We're Here to Help You Find
+Your Perfect Villa
+SCHEMA
+LocalBusiness with NAP (Name, Address, Phone),
+opening hours, geo coordinates — critical for Google Maps
+ranking
+LOCAL SEO
+This page anchors your Google Business Profile. NAP
+must be 100% consistent with GBP listing.
+→ Dual Form: "Book a Site Visit" (local buyers) + "NRI
+ Enquiry Form" (country code dropdown, WhatsApp
+opt-in)
+→ Click-to-Call & WhatsApp: Prominent buttons above
+ the fold — mobile-first priority
+→ Google Maps Embed: Taliparamba HQ + any sales
+ office locations
+→ Business Hours: Clearly stated with "NRI Desk:
+ Available 9AM–9PM IST" callout
+→ Response Promise: "We reply within 2 hours" — sets
+ expectation, reduces bounce rate
+→ Social Proof Near Form: "4.8 star rated by 200+
+ happy villa owners" — reduces form abandonment
+PAGE 12 / CAREERS (NEW)
+Careers at CMR Developers
+/careers
+TITLE TAG
+Careers at CMR Developers | Join Kerala's Leading Villa
+Builder
+META DESCRIPTION
+Join CMR Developers — Kerala's trusted villa construction
+company since 2012. Explore career opportunities in
+construction, sales, design, and operations across Kannur
+and Ernakulam.
+H1
+Build Your Career Where We Build Homes — Join CMR
+Developers
+KEYWORDS
+real estate jobs kannur / construction jobs kerala / CMR
+Developers careers / sales jobs taliparamba
+SCHEMA
+JobPosting for each role — enables Google for Jobs
+listings, free recruiting traffic
+→ Why This Page Boosts SEO: Ranks for "real estate
+ jobs Kannur", signals company scale to prospective
+buyers who research before purchasing
+→ Culture Section: "Life at CMR" — team photos,
+ values, growth story
+→ Open Positions: Site Engineer / Sales Executive /
+ Design Consultant / Customer Relations — collapsible
+cards with JobPosting schema
+→ Application Flow: Name, phone, role, resume upload
+ — or direct WhatsApp option for simpler mobile
+experience
+→ Employee Testimonials: 1–2 short quotes from
+ existing team members — humanises the brand
+→ Internal Links: Careers → About Us → Projects —
+ creates topical authority cluster
+
+
+--- PAGE 11 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 11
+TECHNICAL
+Technical SEO Checklist
+● Fix Canonical Tags
+Every page must have a self-referencing canonical. Fix all broken canonicals from the site audit
+immediately. <link rel="canonical"
+href="https://cmrdevelopers.com/projects/alvina-harmony-kannur/" />
+● Image Optimisation
+Convert all images to WebP. Add descriptive ALT text with location keywords. Compress to under
+150KB per image. Example ALT: "Alvina Harmony luxury villa interior Chakkarakal Kannur Kerala"
+● Mobile-First Speed
+Target Core Web Vitals: LCP under 2.5s, CLS under 0.1, INP under 200ms. Most Kerala villa
+buyers research on mobile. Target PageSpeed 85+.
+● Schema Markup
+Implement JSON-LD structured data on all key pages. Priority: LocalBusiness, RealEstateListing,
+Review, FAQPage, JobPosting.
+● XML Sitemap
+Generate and submit sitemap.xml to Google Search Console. Include all project pages, blog posts,
+and the new Careers page.
+● HTTPS + RERA
+Numbers
+Enforce HTTPS site-wide with 301 redirect from HTTP. Display K-RERA registration numbers in
+the footer on every page — legal requirement and trust signal.
+● Google Business
+Profile
+Fully optimise GBP for "CMR Developers Taliparamba" and any project sales offices. Weekly posts
++ photo updates on GBP feed Maps rankings.
+● Internal Linking
+Every project page links to: Home, Projects Hub, NRI Page, Contact. Every blog post links to 2
+project pages. Careers links to About. Minimum 3 internal links per page.
+● Analytics & Tracking
+GA4 + Google Search Console. Track: form submissions, WhatsApp clicks, phone taps, project
+page scroll depth as conversion events via GTM.
+
+
+--- PAGE 12 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 12
+SCHEMA
+Schema Markup Reference by Page
+Page
+Schema Types
+SERP Benefit
+Home
+Organization · WebSite · LocalBusiness
+Sitelinks search box, Knowledge Panel
+All Project Pages
+RealEstateListing · LocalBusiness · BreadcrumbList
+Property rich snippets, Maps integration
+Project Pages FAQ
+FAQPage
+FAQ accordion in SERP — doubles result height
+Testimonials
+Review · AggregateRating
+Star ratings shown in search results
+Blog Posts
+Article · FAQPage · BreadcrumbList
+Article rich results, Top Stories carousel
+Careers
+JobPosting
+Google for Jobs listings — free job traffic
+Contact
+LocalBusiness · ContactPage
+Local Pack ranking, Maps pin placement
+Services
+Service · LocalBusiness
+Service rich results, local search
+
+
+--- PAGE 13 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 13
+WORDPRESS
+WordPress Implementation Guide
+Since cmrdevelopers.com is being built on WordPress, the following plugin stack and configuration
+recommendations are essential. Each recommendation directly impacts SEO performance and maps to
+specific pages in this plan.
+1. SEO Plugin — Rank Math Pro (Recommended over Yoast)
+Install Rank Math Pro — it supports RealEstate schema natively, unlike Yoast's free tier
+Set up Schema type for each page: Home → WebSite + Organization, Project pages → RealEstateListing, Blog → Article, Careers →
+JobPosting
+Enable Rank Math's "Local SEO" module — auto-generates LocalBusiness schema with NAP and geo coordinates
+Connect Rank Math to Google Search Console from Day 1 — gives keyword position data directly in WP dashboard
+Configure the title tag templates: %title% | CMR Developers Kerala — applied site-wide automatically
+Enable XML Sitemap in Rank Math and submit the sitemap URL to GSC immediately after launch
+2. Page Builder — Elementor Pro (Or Bricks Builder)
+Use Elementor Pro for project pages — its dynamic content fields make updating RERA numbers, prices and specs easy without
+developer help
+Create a "Project Page Template" in Elementor — apply it to Alvina, Aiza and Aina. Consistent structure also helps Google
+understand your content pattern
+Use Elementor's "Loop Grid" widget for the /projects hub page — dynamically pulls from Custom Post Types
+Set up a "Villa Project" Custom Post Type (CPT) using CPT UI plugin — each project as a CPT post. This makes adding future
+projects easy and SEO-friendly
+Build the Google Maps embed as an Elementor widget using the Maps widget — no API key required for basic embeds
+3. Speed & Core Web Vitals — Critical for SEO
+WP Rocket (paid) or LiteSpeed Cache (free if on LiteSpeed server) — enable page caching, CSS/JS minification, lazy image loading
+Smush Pro or ShortPixel — auto-compress and convert all uploaded images to WebP format. Essential for project page photo
+galleries
+Cloudflare (free tier) — adds CDN layer. Dramatically improves load speed for NRI visitors accessing from Gulf/UK/USA
+Disable unused WordPress plugins — each plugin adds HTTP requests. Audit and deactivate anything not in active use
+Use a lightweight theme: GeneratePress or Kadence — avoid bloated themes like Divi or Avada for better Core Web Vitals scores
+Set up object caching via Redis if your hosting supports it — benefits the /projects hub page with many dynamic queries
+4. Lead Capture & CRM Integration
+
+
+--- PAGE 14 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 14
+WPForms Pro or Gravity Forms — build the "Book a Site Visit" form and the "NRI Enquiry Form" as separate forms with separate
+notification emails
+Every form submission must fire a GA4 conversion event and Meta Pixel "Lead" event via Google Tag Manager. This is essential for
+ad campaign attribution
+WP WhatsApp Chat plugin — adds the floating WhatsApp button. Configure it to pre-fill the message with the page name (e.g., "Hi,
+I'm enquiring about Alvina Harmony")
+Integrate forms with a CRM: Zoho CRM Free or HubSpot Free both have WordPress plugins. Every lead captured on the website
+must go into a CRM — not just email
+Add a "Download Floor Plan" gated download on each project page using WPForms — captures name + WhatsApp before PDF
+download
+5. Content & Blog Management
+Use Rank Math's Content AI for blog posts — it shows your keyword density, related keywords (NLP terms) and competitor word
+count in real-time while writing
+Install Table of Contents Plus plugin — auto-generates TOC on blog posts above 1,200 words. Google often shows TOC jump links
+in search results (Sitelinks)
+Enable comment moderation on blog posts — genuine comments are fresh content signals for Google. Disable spam with Akismet
+Schedule posts using WordPress native scheduling — maintain the 2 posts/month cadence consistently. Consistency signals to
+Google that the site is active
+6. Security & Technical Hygiene
+Wordfence or Sucuri Security — real estate websites are targeted by spam form submissions. Protect all contact forms
+Force HTTPS site-wide via .htaccess 301 redirect. Verify in GSC that Google is indexing the HTTPS version only
+UpdraftPlus — automated daily backups to Google Drive. One bad plugin update should not kill the site before a campaign launch
+Disable WordPress XML-RPC if not used — common attack vector. Add to functions.php: add_filter('xmlrpc_enabled',
+'__return_false')
+Set wp-config.php to define('DISALLOW_FILE_EDIT', true) — prevents theme/plugin editing from the WP admin dashboard
+7. Project Pages — WordPress Custom Post Type Setup
+Register a "villa_project" Custom Post Type with: title, featured image, custom fields (price, RERA number, units, BHK, location,
+Google Maps URL, possession date)
+Use Advanced Custom Fields (ACF) Free to manage all project-specific data fields — no hardcoding required
+Each project page URL must follow the pattern /projects/[project-name]-[location] — configure this as the CPT permalink structure
+Add a "Project Status" taxonomy: Ongoing / Ready to Move / Sold Out — enables the filter bar on /projects hub page
+Location fields in ACF: latitude, longitude (used by Rank Math Local SEO schema), address, nearest landmarks — these power the
+location block on every project page
+8. Careers Page — WordPress Setup
+
+
+--- PAGE 15 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 15
+Register a "job_opening" Custom Post Type — each job as a CPT post with fields: title, department, location, salary range,
+responsibilities, requirements
+Rank Math will auto-generate JobPosting schema from these CPT posts — configure the schema mapping in Rank Math → Schema
+settings
+Use WPForms to build the job application form. Add a file upload field for CV/resume. Max file size 5MB, accept PDF only
+Set up email notification: HR email receives application, applicant receives auto-reply confirmation — professional experience for
+candidates
+Link /careers in the main navigation AND in the footer — both for SEO crawlability and for organic job seekers who visit the site
+
+
+--- PAGE 16 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 16
+ROADMAP
+3-Month Execution Sequence
+Build in order of revenue impact. Ad campaigns and leads depend on technical foundations being correct
+before traffic arrives. Do not launch Meta Ads until Month 1 checklist is complete.
+Month 1 — Foundation
+Fix all technical issues: broken canonicals, image ALTs, HTTPS redirect, page speed
+Publish: Home, About, Contact pages with full schema markup
+Publish: All 3 project pages (Alvina, Aiza, Aina) with location blocks + embedded maps
+Submit XML sitemap to Google Search Console
+Fully optimise Google Business Profile — photos, categories, service areas
+Install GA4 + Meta Pixel via Google Tag Manager. Test all conversion events.
+WordPress: Install and configure Rank Math Pro, WP Rocket, CPT UI, ACF
+Month 2 — Traffic Pages
+Publish: NRI Investment page (highest intent — prioritise this)
+Publish: Villa Construction Services page
+Publish: Careers page with at least 3 open job roles and JobPosting schema
+Blog Post 1: "Villa Construction Cost in Kerala 2025 — Complete Breakdown"
+Blog Post 2: "How NRIs Can Buy a Villa in Kannur — Step-by-Step Guide"
+Build 10 local citations: Justdial, Sulekha, 99acres, MagicBricks, Housing.com
+Set up WhatsApp Business API integration with lead form on all project pages
+Month 3 — Authority Building
+Publish: Testimonials page with Review + AggregateRating schema
+Blog Post 3: "K-RERA Registration: What Kerala Home Buyers Must Know"
+Blog Post 4: "Kannur Real Estate 2025 — Kannur Airport Proximity Advantage"
+Begin link-building: Kerala property portals, Kannur local news sites, NRI community blogs
+Set up monthly Google Search Console keyword position tracking report
+Review: Which project page is getting most organic traffic? Double down on that keyword cluster.
+
+
+--- PAGE 17 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 17
+First full SEO performance review — compare GSC impressions, clicks, avg. position vs. Day 0 baseline
+
+
+--- PAGE 18 ---
+CMR DEVELOPERS KERALA
+SEO WEBSITE PLAN 2025
+CONFIDENTIAL — DIGITAL MARKETING TEAM
+Page 18
+SUMMARY
+Quick Reference — All Pages at a Glance
+#
+Page
+URL Slug
+Primary Keyword Target
+Priority
+01
+Home
+/
+villa builders kerala
+HIGH
+02
+About Us
+/about-us
+best villa builders kannur
+HIGH
+03
+Projects Hub
+/projects
+villas in kannur
+HIGH
+04
+Alvina Harmony
+/projects/alvina-harmony...
+Alvina Harmony Kannur
+HIGH
+05
+Aiza Harmony
+/projects/aiza-harmony...
+gated villa community kannur
+HIGH
+06
+Aina Harmony
+/projects/aina-harmony...
+vastu villa kannur
+HIGH
+07
+Services
+/villa-construction-kerala
+villa construction kerala
+HIGH
+08
+NRI Investment
+/nri-investment-kerala
+NRI villa investment kerala
+HIGH
+09
+Testimonials
+/testimonials
+CMR Developers reviews
+MED
+10
+Blog
+/blog
+10 posts — see list above
+MED
+11
+Contact
+/contact-us
+contact villa builders kannur
+HIGH
+12
+Careers (NEW)
+/careers
+real estate jobs kannur
+MED
+This document covers 12 core website pages, a 10-post blog strategy, a full WordPress plugin stack, technical SEO checklist, schema
+markup reference, and a 3-month phased execution plan. All SEO metadata, keywords, and content recommendations are specific to
+CMR Developers' market position in Kerala's villa construction segment with a focus on NRI buyer acquisition.
+ CMR DEVELOPERS KERALA · SEO WEBSITE PLAN 2025 · DIGITAL MARKETING TEAM · CONFIDENTIAL
+
+

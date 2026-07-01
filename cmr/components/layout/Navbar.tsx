@@ -126,8 +126,8 @@ function ChevronDown({ className = '' }: { className?: string }) {
 
 // ─── Desktop: Luxury Mega Menu ───────────────────────────────────────────────
 function ProjectsMenu({ districts, scrolled }: { districts: District[], scrolled: boolean }) {
-  const [activeDistrict,    setActiveDistrict]    = useState<string | null>(null)
-  const [activeSubLocation, setActiveSubLocation] = useState<string | null>(null)
+  const [activeDistrict,    setActiveDistrict]    = useState<string | null>(districts[0]?.name || null)
+  const [activeSubLocation, setActiveSubLocation] = useState<string | null>(districts[0]?.subLocations[0]?.name || null)
 
   const districtTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const subLocationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -135,12 +135,27 @@ function ProjectsMenu({ districts, scrolled }: { districts: District[], scrolled
   const activeDistrictData    = districts.find(d  => d.name  === activeDistrict)
   const activeSubLocationData = activeDistrictData?.subLocations.find(sl => sl.name === activeSubLocation)
 
+  // Ensure defaults if data loads late or changes
+  useEffect(() => {
+    if (!activeDistrict && districts.length > 0) {
+      setActiveDistrict(districts[0].name)
+      if (districts[0].subLocations.length > 0) {
+        setActiveSubLocation(districts[0].subLocations[0].name)
+      }
+    }
+  }, [districts, activeDistrict])
+
   const handleDistrictEnter = (name: string) => {
     if (districtTimeoutRef.current) clearTimeout(districtTimeoutRef.current)
     if (subLocationTimeoutRef.current) clearTimeout(subLocationTimeoutRef.current)
     districtTimeoutRef.current = setTimeout(() => {
       setActiveDistrict(name)
-      setActiveSubLocation(null)
+      const districtData = districts.find(d => d.name === name)
+      if (districtData && districtData.subLocations.length > 0) {
+        setActiveSubLocation(districtData.subLocations[0].name)
+      } else {
+        setActiveSubLocation(null)
+      }
     }, 100) // 100ms delay filters out accidental diagonal hover swipes!
   }
 
@@ -162,142 +177,128 @@ function ProjectsMenu({ districts, scrolled }: { districts: District[], scrolled
   const hasSubLocations = activeDistrictData && activeDistrictData.subLocations.length > 0
   const hasProjects = activeSubLocationData && activeSubLocationData.projects.length > 0
 
-  // Dynamic Theme Classes based on scrolled state
-  const bgClass = scrolled ? 'bg-white' : 'bg-[#0F2F2B]'
-  const borderClass = scrolled ? 'border-gray-200/80' : 'border-white/10'
-  const headerTextClass = scrolled ? 'text-brand-charcoal/40' : 'text-brand-gold/70'
-  const innerDividerClass = scrolled ? 'border-l border-gray-200/80' : 'border-l border-white/10'
+  // Dynamic Theme Classes (Forced to White Background)
+  const bgClass = 'bg-white'
+  const borderClass = 'border-gray-200/80'
+  const headerTextClass = 'text-brand-charcoal/40'
+  const innerDividerClass = 'border-l border-gray-200/80'
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 12, x: "-50%" }}
+      animate={{ opacity: 1, y: 0, x: "-50%" }}
+      exit={{ opacity: 0, y: 12, x: "-50%" }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
-      className="absolute top-full left-0 z-50 pt-[34px] flex"
+      className="fixed top-[102px] left-1/2 z-50 flex pt-2"
     >
       <div 
-        className={`${bgClass} border ${borderClass} shadow-xl flex rounded-b-lg overflow-hidden transition-colors duration-200`}
+        className={`${bgClass} border ${borderClass} shadow-2xl flex rounded-xl overflow-hidden transition-colors duration-200`}
       >
         {/* Level 1 – Districts */}
-        <div className="w-[200px] py-2 flex-shrink-0">
-          <div className={`px-4 pb-1.5 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
+        <div className="w-[260px] py-3 flex-shrink-0">
+          <div className={`px-5 pb-2 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
             Districts
           </div>
           {districts.map((d) => (
             <div
               key={d.name}
               onMouseEnter={() => handleDistrictEnter(d.name)}
-              className={`group flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors duration-150 text-[12px] font-semibold tracking-wider uppercase ${
+              className={`group flex items-center justify-between px-5 py-3 cursor-pointer transition-colors duration-150 text-[13px] font-bold tracking-wider uppercase ${
                 activeDistrict === d.name
-                  ? scrolled ? 'bg-brand-green/5 text-brand-green' : 'bg-white/[0.03] text-brand-gold'
-                  : scrolled ? 'text-brand-charcoal/70 hover:text-brand-green hover:bg-brand-green/[0.02]' : 'text-white/70 hover:text-white hover:bg-white/[0.01]'
+                  ? 'bg-brand-green/5 text-brand-green'
+                  : 'text-brand-charcoal/70 hover:text-brand-green hover:bg-brand-green/[0.02]'
               }`}
             >
               <span>{d.name}</span>
               {d.subLocations.length > 0 && (
-                <ChevronRight className={`w-2.5 h-2.5 opacity-60 transition-transform duration-200 ${
+                <ChevronRight className={`w-3 h-3 opacity-60 transition-transform duration-200 ${
                   activeDistrict === d.name 
-                    ? scrolled ? 'translate-x-1 text-brand-green' : 'translate-x-1 text-brand-gold' 
+                    ? 'translate-x-1 text-brand-green'
                     : 'group-hover:translate-x-0.5'
                 }`} />
               )}
             </div>
           ))}
-          <div className={`border-t mt-1 pt-1.5 transition-colors duration-200 ${scrolled ? 'border-gray-100' : 'border-white/10'}`}>
+          <div className={`border-t mt-2 pt-2 transition-colors duration-200 border-gray-100`}>
             <Link
               href="/projects"
-              className={`flex items-center gap-1 px-4 py-2 text-[11px] font-bold tracking-widest uppercase transition-colors duration-150 ${
-                scrolled 
-                  ? 'text-brand-gold hover:text-brand-green' 
-                  : 'text-brand-gold hover:text-white'
-              }`}
+              className={`flex items-center gap-1.5 px-5 py-3 text-[12px] font-bold tracking-widest uppercase transition-colors duration-150 text-brand-gold hover:text-brand-green`}
             >
               <span>All Projects</span>
-              <ChevronRight className="w-2.5 h-2.5" />
+              <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
         </div>
 
-        {/* Level 2 – Sub-locations */}
-        {hasSubLocations && (
-          <div className={`w-[200px] py-2 flex-shrink-0 transition-colors duration-200 ${innerDividerClass}`}>
+        {/* Right Side: Locations and Projects */}
+        <div className={`w-[740px] flex flex-col py-3 transition-colors duration-200 ${innerDividerClass}`}>
+          {activeDistrictData && (
             <motion.div
               key={activeDistrictData.name}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.15 }}
+              className="flex flex-col h-full"
             >
-              <div className={`px-4 pb-1.5 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
-                Locations
+              {/* Top: Locations (Pill Tabs) */}
+              <div className="px-8 pt-3 pb-6">
+                 <div className={`pb-3 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
+                   Locations
+                 </div>
+                 <div className="flex gap-6 overflow-x-auto pb-3 border-b border-gray-200 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
+                    {activeDistrictData.subLocations.map(sl => (
+                       <button
+                         key={sl.name}
+                         onMouseEnter={() => handleSubLocationEnter(sl.name)}
+                         className={`flex-shrink-0 px-1 py-2 text-[12px] font-bold tracking-wider uppercase transition-all duration-200 border-b-2 ${
+                            activeSubLocation === sl.name 
+                              ? 'border-brand-green text-brand-green'
+                              : 'border-transparent text-brand-charcoal/50 hover:text-brand-charcoal hover:border-gray-300'
+                         }`}
+                       >
+                         {sl.name}
+                       </button>
+                    ))}
+                 </div>
               </div>
-              {activeDistrictData.subLocations.map((sl) => (
-                <div
-                  key={sl.name}
-                  onMouseEnter={() => handleSubLocationEnter(sl.name)}
-                  className={`group flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors duration-150 text-[12px] font-semibold tracking-wider uppercase ${
-                    activeSubLocation === sl.name
-                      ? scrolled ? 'bg-brand-green/5 text-brand-green' : 'bg-white/[0.03] text-brand-gold'
-                      : scrolled ? 'text-brand-charcoal/70 hover:text-brand-green hover:bg-brand-green/[0.02]' : 'text-white/70 hover:text-white hover:bg-white/[0.01]'
-                  }`}
-                >
-                  <span>{sl.name}</span>
-                  {sl.projects.length > 0 && (
-                    <ChevronRight className={`w-2.5 h-2.5 opacity-60 transition-transform duration-200 ${
-                      activeSubLocation === sl.name 
-                        ? scrolled ? 'translate-x-1 text-brand-green' : 'translate-x-1 text-brand-gold' 
-                        : 'group-hover:translate-x-0.5'
-                    }`} />
-                  )}
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        )}
 
-        {/* Level 3 – Projects */}
-        {hasProjects && (
-          <div className={`w-[240px] py-2 flex-shrink-0 transition-colors duration-200 ${innerDividerClass}`}>
-            <motion.div
-              key={activeSubLocationData.name}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.15 }}
-            >
-              <div className={`px-4 pb-1.5 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
-                Developments
+              {/* Bottom: Projects Grid */}
+              <div className={`px-8 pb-5 flex-1 border-t border-gray-100/50 pt-6`}>
+                 <div className={`pb-5 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
+                   {activeSubLocation ? `Developments in ${activeSubLocation}` : 'Developments'}
+                 </div>
+                 {activeSubLocationData?.projects && activeSubLocationData.projects.length > 0 ? (
+                   <div className="grid grid-cols-2 gap-4">
+                      {activeSubLocationData.projects.map(p => (
+                         <Link
+                           key={p.slug}
+                           href={`/projects/${p.slug}`}
+                           className={`group/item flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-200 bg-gray-50 hover:bg-white hover:shadow-md border border-transparent hover:border-gray-200`}
+                         >
+                           <span className={`font-display text-[14px] font-semibold truncate pr-2 transition-colors duration-200 text-brand-charcoal group-hover/item:text-brand-green`}>
+                             {p.name}
+                           </span>
+                           {p.status && (
+                             <span className={`text-[9px] px-2 py-1 rounded font-bold tracking-wider uppercase whitespace-nowrap flex-shrink-0 ${
+                               p.status === 'On Going'
+                                 ? 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
+                                 : 'bg-black/5 text-brand-charcoal/50'
+                             }`}>
+                               {p.status === 'On Going' ? 'Ongoing' : p.status}
+                             </span>
+                           )}
+                         </Link>
+                      ))}
+                   </div>
+                 ) : (
+                   <div className={`text-[13px] italic text-gray-400`}>
+                     No developments currently listed in this location.
+                   </div>
+                 )}
               </div>
-              {activeSubLocationData.projects.map((p) => (
-                <Link
-                  key={p.slug}
-                  href={`/projects/${p.slug}`}
-                  className={`group/item flex items-center justify-between px-4 py-2.5 text-[13px] transition-colors duration-150 ${
-                    scrolled 
-                      ? 'text-brand-charcoal/80 hover:text-brand-gold' 
-                      : 'text-white/80 hover:text-brand-gold'
-                  }`}
-                >
-                  <span className="font-display font-medium group-hover/item:translate-x-1 transition-transform duration-200 truncate pr-2">
-                    {p.name}
-                  </span>
-                  {p.status && (
-                    <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold tracking-wider uppercase whitespace-nowrap flex-shrink-0 ${
-                      p.status === 'On Going'
-                        ? scrolled 
-                          ? 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
-                          : 'bg-brand-gold/15 text-brand-gold border border-brand-gold/20'
-                        : scrolled 
-                          ? 'bg-black/5 text-brand-charcoal/50'
-                          : 'bg-white/10 text-white/50'
-                    }`}>
-                      {p.status === 'On Going' ? 'Ongoing' : p.status}
-                    </span>
-                  )}
-                </Link>
-              ))}
             </motion.div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </motion.div>
   )

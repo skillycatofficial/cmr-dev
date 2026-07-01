@@ -189,13 +189,9 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
                       <span className="font-body text-[8px] text-brand-charcoal/60 leading-tight block mt-1 whitespace-pre-line">{p.badge.label}</span>
                     </div>
                   )}
-                  {p.price && (
-                    <div className="absolute bottom-0 left-0 bg-white/90 backdrop-blur-md p-3 text-center min-w-[60px]">
-                      <span className="font-body text-[10px] text-brand-charcoal font-bold block whitespace-pre-line">{p.price}</span>
-                    </div>
-                  )}
+
                   {p.status && (
-                    <div className="absolute bottom-0 right-0 bg-[#0F2F2B] text-white px-3 py-1 font-body text-[8px] tracking-[0.2em] uppercase">
+                    <div className="absolute bottom-0 left-0 bg-[#0F2F2B] text-white px-3 py-1 font-body text-[8px] tracking-[0.2em] uppercase">
                       {p.status}
                     </div>
                   )}

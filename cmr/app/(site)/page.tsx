@@ -141,8 +141,9 @@ export default async function Home() {
     // Components will use fallback static data
   }
 
-  // First hero image — prefer WordPress slide, fall back to static
-  const firstHeroImage = heroSlides?.[0]?.image ?? '/images/slide/cmrslide1.webp'
+  // First hero image — prefer WordPress slide with valid image, fall back to static
+  const validSlides = heroSlides?.filter((slide: { image?: string }) => slide && slide.image && slide.image.trim() !== '')
+  const firstHeroImage = validSlides?.[0]?.image || '/images/slide/cmrslide1.webp'
 
   return (
     <>

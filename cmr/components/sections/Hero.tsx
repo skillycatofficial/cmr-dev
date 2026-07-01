@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, PanInfo } from 'framer-motion'
 import Image from 'next/image'
+import { decodeHtml } from '@/lib/utils'
 
 export type HeroSlide = {
   /** Desktop (landscape / 16:9) image */
@@ -23,8 +24,11 @@ const FALLBACK_SLIDES: HeroSlide[] = [
 ]
 
 export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] }) {
+  const filteredSlides = sanitySlides?.filter(
+    (slide) => slide && slide.image && slide.image.trim() !== ''
+  )
   const slides =
-    sanitySlides && sanitySlides.length > 0 ? sanitySlides : FALLBACK_SLIDES
+    filteredSlides && filteredSlides.length > 0 ? filteredSlides : FALLBACK_SLIDES
 
   const [current, setCurrent] = useState(0)
   const isFirstRender = useRef(true)
@@ -43,8 +47,22 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
     ? { opacity: 1, scale: 1 }
     : { opacity: 0, scale: 1.05 }
 
+  const handleDragEnd = (event: unknown, info: PanInfo) => {
+    if (slides.length <= 1) return
+    const threshold = 50
+    if (info.offset.x < -threshold) {
+      isFirstRender.current = false
+      setCurrent((prev) => (prev + 1) % slides.length)
+    } else if (info.offset.x > threshold) {
+      isFirstRender.current = false
+      setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
+    }
+  }
+
+  const hasContent = !!(slides[current].title?.trim() || slides[current].eyebrow?.trim() || slides[current].cta?.trim())
+
   return (
-    <section className="relative w-full h-[90vh] md:h-screen min-h-[600px] overflow-hidden bg-brand-charcoal pt-[102px] group">
+    <section className="relative w-full aspect-[3/4] md:aspect-[16/9] overflow-hidden bg-brand-charcoal pt-[102px] group">
 
       <AnimatePresence mode="popLayout">
         <motion.div
@@ -53,29 +71,43 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1 }}
           transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
-          className="absolute inset-0"
+          className="absolute inset-0 cursor-grab active:cursor-grabbing touch-pan-y"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={handleDragEnd}
         >
-          {/* Desktop image (landscape / 16:9) — hidden on mobile */}
+          {/* Desktop image (16:9) — hidden on mobile */}
           <Image
             src={slides[current].image}
             alt="CMR Luxury Villa"
             fill
-            className="object-cover hidden md:block"
+            className="object-cover hidden md:block pointer-events-none select-none"
             priority
             fetchPriority="high"
+            draggable={false}
           />
-          {/* Mobile image (portrait / 9:16) — shown on mobile, falls back to desktop image */}
+          {/* Mobile image (3:4) — shown on mobile, falls back to desktop image */}
           <Image
-            src={slides[current].mobileImage ?? slides[current].image}
+            src={
+              (slides[current].mobileImage && slides[current].mobileImage.trim() !== '')
+                ? slides[current].mobileImage
+                : slides[current].image
+            }
             alt="CMR Luxury Villa"
             fill
-            className="object-cover block md:hidden"
+            className="object-cover block md:hidden pointer-events-none select-none"
             priority
             fetchPriority="high"
+            draggable={false}
           />
-          {/* Dark Overlays for readability */}
-          <div className="absolute inset-0 bg-brand-green/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
+          {/* Dark Overlays for readability — only if slide has text content */}
+          {hasContent && (
+            <>
+              <div className="absolute inset-0 bg-brand-green/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
+            </>
+          )}
         </motion.div>
       </AnimatePresence>
 
@@ -97,7 +129,7 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
           >
             {slides[current].eyebrow && (
               <p className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-3">
-                {slides[current].eyebrow}
+                {decodeHtml(slides[current].eyebrow)}
               </p>
             )}
             {slides[current].title && (
@@ -105,7 +137,7 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
                 className="font-display font-bold text-brand-ivory leading-none mb-6"
                 style={{ fontSize: 'clamp(34px, 5.5vw, 72px)', letterSpacing: '-0.025em' }}
               >
-                {slides[current].title}
+                {decodeHtml(slides[current].title)}
               </h2>
             )}
             {slides[current].cta && slides[current].ctaHref && (
@@ -113,7 +145,7 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
                 href={slides[current].ctaHref}
                 className="inline-block px-8 py-3.5 bg-brand-gold text-brand-charcoal font-body text-label font-bold tracking-[0.2em] uppercase hover:bg-brand-ivory transition-colors duration-300"
               >
-                {slides[current].cta}
+                {decodeHtml(slides[current].cta)}
               </a>
             )}
           </motion.div>

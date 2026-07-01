@@ -195,8 +195,8 @@ function ProjectsMenu({ districts, scrolled }: { districts: District[], scrolled
         className={`${bgClass} border ${borderClass} shadow-2xl flex rounded-xl overflow-hidden transition-colors duration-200`}
       >
         {/* Level 1 – Districts */}
-        <div className="w-[260px] py-3 flex-shrink-0">
-          <div className={`px-5 pb-2 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
+        <div className="w-[280px] py-4 flex-shrink-0">
+          <div className={`px-6 pb-2 text-[9px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${headerTextClass}`}>
             Districts
           </div>
           {districts.map((d) => (
@@ -231,7 +231,7 @@ function ProjectsMenu({ districts, scrolled }: { districts: District[], scrolled
         </div>
 
         {/* Right Side: Locations and Projects */}
-        <div className={`w-[740px] flex flex-col py-3 transition-colors duration-200 ${innerDividerClass}`}>
+        <div className={`w-[920px] flex flex-col py-4 transition-colors duration-200 ${innerDividerClass}`}>
           {activeDistrictData && (
             <motion.div
               key={activeDistrictData.name}

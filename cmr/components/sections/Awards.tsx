@@ -2,26 +2,27 @@
 
 import { motion } from 'framer-motion'
 
-import Image from 'next/image'
-
 const AWARDS_LIST = [
-  { 
-    id: 1, 
-    title: 'Excellence in Modern Architecture Award', 
-    tags: ['ArchitectureAward', 'Honor', 'GlobalExcellence'],
-    img: '/images/extracted/cmr-awards-1.jpg'
+  {
+    id: 1,
+    badgeLine1: 'ULTIMATE',
+    badgeLine2: 'WINNER',
+    title: 'Excellence in Modern Architecture Award',
+    tags: ['ArchitectureAward', 'Honor', 'GlobalExcellence']
   },
-  { 
-    id: 2, 
-    title: 'Best Construction Quality Achievement Award', 
-    tags: ['ArchitectureAward', 'Honor', 'GlobalExcellence'],
-    img: '/images/extracted/cmr-awards-2.jpg'
+  {
+    id: 2,
+    badgeLine1: 'HYPER',
+    badgeLine2: 'BEST',
+    title: 'Best Construction Quality Achievement Award',
+    tags: ['ArchitectureAward', 'Honor', 'GlobalExcellence']
   },
-  { 
-    id: 3, 
-    title: 'Premier Construction Performance Award', 
-    tags: ['ArchitectureAward', 'Honor', 'GlobalExcellence'],
-    img: '/images/extracted/cmr-awards-3.jpg'
+  {
+    id: 3,
+    badgeLine1: 'ULTRA',
+    badgeLine2: 'PREMIER',
+    title: 'Premier Construction Performance Award',
+    tags: ['ArchitectureAward', 'Honor', 'GlobalExcellence']
   },
 ]
 
@@ -37,94 +38,103 @@ interface AwardsProps {
   initialAwards?: Award[]
 }
 
+import Image from 'next/image'
+
 export default function Awards({ initialAwards }: AwardsProps) {
-  // If we want to use WordPress dynamic awards in the future, we can map over `initialAwards`
-  // For now, using the hardcoded AWARDS_LIST which matches the new design and tags
   const displayAwards = AWARDS_LIST
 
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden bg-[#0A0A0A]">
-      {/* Dotted Pattern Background */}
-      <div 
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #F6F4EE 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
-          backgroundPosition: 'center center'
-        }}
-      />
+    <section className="relative pt-20 pb-16 md:pt-28 md:pb-28 overflow-hidden bg-[#0A0A0A]">
+      <div className="px-section relative z-10 max-w-[1400px] mx-auto">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16 lg:gap-24">
 
-      {/* Subtle brand glow decoration */}
-      <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-brand-gold/10 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 mix-blend-overlay" />
-      </div>
-
-      <div className="px-section relative z-10">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
-          
           {/* Left Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full lg:w-4/12 flex flex-col items-center text-center lg:items-start lg:text-left"
+            className="w-full lg:w-[45%] flex flex-col relative"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-2 h-2 bg-brand-gold"></div>
-              <span className="font-body text-brand-ivory text-label uppercase tracking-widest3">Award</span>
-            </div>
-            
-            <h2 className="font-display font-medium text-brand-ivory text-4xl md:text-5xl lg:text-[48px] tracking-tight leading-[1.15] mb-12 lg:mb-16 max-w-lg">
-              Awards that reflect our passion for perfection
-            </h2>
-            
-            <div className="relative mt-8 lg:ml-8">
-              <div className="absolute -left-10 top-1/2 -translate-y-1/2 w-3 h-3 bg-brand-gold rounded-full blur-[2px] hidden lg:block" />
-              <div className="font-display text-brand-ivory text-8xl md:text-[110px] font-bold leading-none mb-3">
-                25<span className="text-brand-ivory/80">+</span>
+            {/* Top Title Section */}
+            <div className="mb-10 lg:mb-16">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-1.5 h-1.5 bg-[#FFD700]"></div>
+                <span className="font-body text-white text-[11px] font-bold uppercase tracking-[0.2em]">Award</span>
               </div>
-              <p className="font-body text-brand-ivory/80 text-body font-medium max-w-[260px] leading-snug mx-auto lg:mx-0">
-                Award-Winning Designs That Inspire and Endure.
-              </p>
+              <h2 className="font-display font-bold text-white text-4xl md:text-[46px] tracking-tight leading-[1.2] max-w-md">
+                Awards that reflect our passion for perfection
+              </h2>
+            </div>
+
+            {/* Bottom 25+ Section with Dotted Cluster Background */}
+            <div className="relative flex flex-col text-left py-4 w-full max-w-md">
+              {/* Dotted World Map Background */}
+              <div
+                className="absolute inset-0 pointer-events-none opacity-20 scale-[1.3] md:scale-150 -translate-y-4 md:translate-x-12"
+                style={{
+                  backgroundImage: 'radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)',
+                  backgroundSize: '10px 10px',
+                  backgroundPosition: 'center center',
+                  WebkitMaskImage: 'url("https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg")',
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskPosition: 'center',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskImage: 'url("https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg")',
+                  maskSize: 'contain',
+                  maskPosition: 'center',
+                  maskRepeat: 'no-repeat'
+                }}
+              />
+
+              <div className="relative z-10 flex flex-col items-start lg:pl-6">
+                <div className="font-display text-white text-7xl md:text-[90px] font-bold leading-none mb-4">
+                  25+
+                </div>
+                <p className="font-body text-white font-medium text-[15px] leading-snug max-w-[240px]">
+                  Award-Winning Designs That Inspire and Endure.
+                </p>
+              </div>
             </div>
           </motion.div>
 
           {/* Right Award Cards */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full lg:w-8/12 flex flex-col gap-4 lg:pl-12"
+            className="w-full lg:w-[55%] flex flex-col gap-5 lg:pt-8"
           >
-            {AWARDS_LIST.map((award, i) => (
-              <motion.div 
+            {displayAwards.map((award, i) => (
+              <motion.div
                 key={award.id}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex flex-col sm:flex-row items-center sm:items-start gap-5 bg-brand-ivory/[0.04] border border-brand-ivory/10 rounded-2xl md:rounded-3xl p-3 sm:pr-8 transition-colors hover:bg-brand-ivory/[0.08]"
+                className="flex items-center gap-5 md:gap-8 bg-[#1f1f1f] rounded-full p-2 pr-6 md:pr-10 w-full transition-all hover:bg-[#252525]"
               >
-                {/* Round Award Image */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-brand-ivory flex items-center justify-center flex-shrink-0 shadow-lg relative overflow-hidden border border-brand-gold/30">
-                  <Image 
-                    src={award.img} 
-                    alt={award.title} 
-                    fill 
-                    className="object-cover"
-                  />
+                {/* Award SVG Image */}
+                <div className="w-[85px] h-[85px] md:w-[110px] md:h-[110px] rounded-full bg-[#FFD700] flex items-center justify-center flex-shrink-0 shadow-lg shadow-black/20 p-3 md:p-2">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src="/images/icon-award-item-1-silver.svg"
+                      alt={award.title || 'Award Badge'}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-                
+
                 {/* Award Details */}
-                <div className="flex-1 flex flex-col justify-center h-full text-center sm:text-left py-2 sm:py-4 w-full">
-                  <h3 className="font-body font-bold text-brand-ivory text-[18px] md:text-heading mb-3 sm:mb-4 leading-snug">
+                <div className="flex-1 py-3 overflow-hidden">
+                  <h3 className="font-body font-bold text-white text-[15px] md:text-[18px] mb-3 leading-snug truncate">
                     {award.title}
                   </h3>
-                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     {award.tags.map(tag => (
-                      <span 
-                        key={tag} 
-                        className="font-body text-brand-ivory/60 border border-brand-ivory/15 rounded-full px-4 py-1.5 text-micro md:text-[12px] tracking-wide"
+                      <span
+                        key={tag}
+                        className="font-body text-white/70 border border-white/10 rounded-full px-4 py-1.5 text-[10px] md:text-[11px] tracking-wide whitespace-nowrap"
                       >
                         {tag}
                       </span>

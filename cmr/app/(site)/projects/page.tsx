@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { getAllProjects } from '@/lib/wordpress'
+import { decodeHtml } from '@/lib/utils'
 import ProjectsGrid from './ProjectsGrid'
 
 export const metadata: Metadata = {
@@ -93,9 +94,18 @@ export default async function ProjectsPage() {
 
   try {
     const data = await getAllProjects()
-    projects = data?.length ? data : FALLBACK_PROJECTS
+    const rawProjects = data?.length ? data : FALLBACK_PROJECTS
+    projects = rawProjects.map((p: typeof FALLBACK_PROJECTS[0] & { reraNumber?: string; bhk?: string }) => ({
+      ...p,
+      name: decodeHtml(p.name),
+      location: decodeHtml(p.location),
+    }))
   } catch {
-    projects = FALLBACK_PROJECTS
+    projects = FALLBACK_PROJECTS.map((p: typeof FALLBACK_PROJECTS[0] & { reraNumber?: string; bhk?: string }) => ({
+      ...p,
+      name: decodeHtml(p.name),
+      location: decodeHtml(p.location),
+    }))
   }
 
   // Schema generation

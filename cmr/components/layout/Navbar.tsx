@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { getAllProjects } from '@/lib/wordpress'
+import { decodeHtml } from '@/lib/utils'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Project {
@@ -60,6 +61,11 @@ function legacyParseLocation(location = ''): { subLocation: string; district: st
 function groupProjectsByDistrict(projects: Project[]): District[] {
   const districtMap = new Map<string, Map<string, Project[]>>()
   for (const p of projects) {
+    p.name = decodeHtml(p.name)
+    if (p.location) p.location = decodeHtml(p.location)
+    if (p.district) p.district = decodeHtml(p.district)
+    if (p.sub_location) p.sub_location = decodeHtml(p.sub_location)
+
     let district: string, subLocation: string
     if (p.district?.trim()) {
       district    = p.district.trim()

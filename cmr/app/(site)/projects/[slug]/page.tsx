@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllProjects, getProjectBySlug } from '@/lib/wordpress'
+import { decodeHtml } from '@/lib/utils'
 import GalleryLightbox from './GalleryLightbox'
 import HeroCarousel from './HeroCarousel'
 
@@ -24,15 +25,17 @@ export async function generateMetadata(
     const project = await getProjectBySlug(slug)
     if (!project) return { title: 'Project Not Found' }
 
+    const decodedName = decodeHtml(project.name);
+    const decodedLocation = decodeHtml(project.location);
     const startingPrice = project.price ? ` — ${project.price}` : '';
-    const defaultTitle = `${project.name} Villas in ${project.location} | CMR Developers${startingPrice} | K-RERA`;
+    const defaultTitle = `${decodedName} Villas in ${decodedLocation} | CMR Developers${startingPrice} | K-RERA`;
     const defaultDesc = project.overview
-      ? `${project.name} in ${project.location} by CMR Developers. ${project.overview.substring(0, 150)}...`
-      : `Explore ${project.name} — a premium, Vastu-compliant luxury villa project in ${project.location} by CMR Developers. K-RERA registered with world-class amenities.`;
+      ? `${decodedName} in ${decodedLocation} by CMR Developers. ${decodeHtml(project.overview).substring(0, 150)}...`
+      : `Explore ${decodedName} — a premium, Vastu-compliant luxury villa project in ${decodedLocation} by CMR Developers. K-RERA registered with world-class amenities.`;
 
     return {
-      title: project.seo?.title || defaultTitle,
-      description: project.seo?.description || defaultDesc,
+      title: project.seo?.title ? decodeHtml(project.seo.title) : defaultTitle,
+      description: project.seo?.description ? decodeHtml(project.seo.description) : defaultDesc,
       alternates: {
         canonical: project.seo?.canonical || `https://www.cmrdevelopers.com/projects/${project.slug}`,
       }
@@ -65,6 +68,8 @@ export default async function ProjectDetailPage(
     heroImage?: string;
     /** Multiple hero images for the carousel — falls back to [heroImage] */
     heroImages?: string[];
+    heroMobileImage?: string;
+    heroMobileImages?: string[];
     gallery?: string[];
     amenities?: { icon: string; label: string }[];
     badge?: { num: string; label: string };
@@ -96,6 +101,13 @@ export default async function ProjectDetailPage(
 
   try {
     project = await getProjectBySlug(slug)
+    if (project) {
+      project.name = decodeHtml(project.name)
+      project.location = decodeHtml(project.location)
+      if (project.overview) project.overview = decodeHtml(project.overview)
+      if (project.address) project.address = decodeHtml(project.address)
+      if (project.areaDescription) project.areaDescription = decodeHtml(project.areaDescription)
+    }
   } catch {
     // WordPress not connected yet — fall through to notFound
   }
@@ -209,7 +221,7 @@ export default async function ProjectDetailPage(
       )}
 
       {/* ── Cinematic Hero Carousel ──────────────────────── */}
-      <section className="relative h-[70vh] min-h-[480px] bg-[#0F2F2B] flex items-end">
+      <section className="relative aspect-[3/4] sm:aspect-[4/3] md:aspect-[16/9] bg-[#0F2F2B] flex items-end">
         {/* Carousel — uses heroImages[] or falls back to single heroImage */}
         {(() => {
           const heroImgs = (
@@ -219,9 +231,17 @@ export default async function ProjectDetailPage(
                 ? [project.heroImage]
                 : []
           )
+          const heroMobileImgs = (
+            project.heroMobileImages && project.heroMobileImages.length > 0
+              ? project.heroMobileImages
+              : project.heroMobileImage
+                ? [project.heroMobileImage]
+                : []
+          )
           return heroImgs.length > 0 ? (
             <HeroCarousel
-              images={heroImgs}
+              desktopImages={heroImgs}
+              mobileImages={heroMobileImgs}
               projectName={project.name}
               location={project.location}
             />
@@ -229,7 +249,7 @@ export default async function ProjectDetailPage(
         })()}
 
         {/* Hero text */}
-        <div className="relative z-10 px-section pb-12 w-full">
+        <div className="relative z-10 px-section pb-8 md:pb-12 w-full">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 font-body text-brand-ivory/50 text-label mb-4">
             <Link href="/" className="hover:text-brand-ivory transition-colors">Home</Link>

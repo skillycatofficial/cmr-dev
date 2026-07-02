@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import ContactForm from './ContactForm'
+import { getPageMetadata } from '@/lib/wordpress'
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: 'Contact CMR Developers | Book a Site Visit or Speak to Our NRI Desk',
   description: 'Get in touch with CMR Developers — call, WhatsApp or visit our Kannur office. Book a free villa site visit or speak to our NRI desk. We respond to all online enquiries within 2 hours.',
   alternates: {
@@ -29,6 +30,10 @@ export const metadata: Metadata = {
     description: 'Call, WhatsApp or submit a form. NRI desk available 9 AM–9 PM IST, 7 days a week.',
     images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata('contact-us', defaultMetadata)
 }
 
 const contactSchema = {

@@ -1,14 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllPosts } from '@/lib/wordpress'
+import { getAllPosts, getPageMetadata } from '@/lib/wordpress'
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: 'Villa Construction & Real Estate Blog Kerala | CMR Developers',
   description: 'Stay updated with the latest trends, costs, and guidelines on villa construction, NRI real estate investment, and Vastu compliance in Kerala from CMR Developers.',
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/blog',
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata('blog', defaultMetadata)
 }
 
 type Article = {

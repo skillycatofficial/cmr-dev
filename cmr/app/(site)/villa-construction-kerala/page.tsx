@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getPageMetadata } from '@/lib/wordpress'
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: 'Villa Construction in Kerala | CMR Developers — Custom & Gated Community Villas Kannur Ernakulam',
   description: 'CMR Developers offers end-to-end villa construction in Kerala — architect-designed, Vastu-compliant, and turnkey delivered. Serving Kannur, Ernakulam and Kottayam since 2012. No sub-contractors. On-time delivery guaranteed.',
   alternates: {
@@ -29,6 +30,10 @@ export const metadata: Metadata = {
     description: 'Architect-designed, Vastu-compliant villa construction in Kerala. 600+ villas. No sub-contractors. On-time delivery.',
     images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata('villa-construction-kerala', defaultMetadata)
 }
 
 

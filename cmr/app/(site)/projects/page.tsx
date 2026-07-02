@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { getAllProjects } from '@/lib/wordpress'
+import { getAllProjects, getPageMetadata } from '@/lib/wordpress'
 import { decodeHtml } from '@/lib/utils'
 import ProjectsGrid from './ProjectsGrid'
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: 'Villa Projects in Kerala | CMR Developers — Kannur & Ernakulam',
   description: "Browse CMR Developers' luxury villa projects in Kannur and Ernakulam — Alvina Harmony, Aiza Harmony, Aina Harmony. Prices from ₹48 Lakhs onwards. Bank-approved, Vastu-compliant. Book a free site visit today.",
   alternates: {
@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     description: "Luxury villa projects in Kannur and Ernakulam by CMR Developers. Bank-approved, Vastu-compliant. Book a free site visit.",
     images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata('projects', defaultMetadata)
 }
 
 // Fallback static data if WordPress is not yet populated

@@ -79,6 +79,15 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  async rewrites() {
+    const wordpressUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://test.local'
+    return [
+      {
+        source: '/wp-content/:path*',
+        destination: `${wordpressUrl.replace(/\/$/, '')}/wp-content/:path*`,
+      },
+    ]
+  },
 }
 
 export default nextConfig

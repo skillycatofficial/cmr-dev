@@ -7,11 +7,77 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/about-us',
   },
+  openGraph: {
+    title: 'About CMR Developers | Villa Builders Since 2012 — Kannur Kerala',
+    description: 'Founded in Taliparamba in 2012, CMR Developers has delivered 600+ luxury villas across Kerala. Trusted by local families and NRI homebuyers for quality, transparency and on-time delivery.',
+    url: 'https://www.cmrdevelopers.com/about-us',
+    siteName: 'CMR Developers',
+    images: [
+      {
+        url: 'https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CMR Developers — Building Kerala\'s Most Trusted Homes Since 2012',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About CMR Developers | Villa Builders Since 2012',
+    description: 'Founded in Taliparamba, Kannur in 2012. 600+ villas delivered across Kerala. Trusted by NRI families for quality & on-time delivery.',
+    images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
+  },
+}
+
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'AboutPage',
+      '@id': 'https://www.cmrdevelopers.com/about-us',
+      'name': 'About CMR Developers',
+      'description': 'CMR Developers was founded in Taliparamba, Kannur in 2012. In 14 years we have delivered 600+ luxury villas across Kerala.',
+      'url': 'https://www.cmrdevelopers.com/about-us',
+      'publisher': {
+        '@id': 'https://www.cmrdevelopers.com/#organization'
+      }
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.cmrdevelopers.com/#organization',
+      'name': 'CMR Developers',
+      'url': 'https://www.cmrdevelopers.com',
+      'logo': 'https://www.cmrdevelopers.com/logo.png',
+      'foundingDate': '2012',
+      'foundingLocation': 'Taliparamba, Kannur, Kerala, India',
+      'contactPoint': {
+        '@type': 'ContactPoint',
+        'telephone': '+91-9206838383',
+        'contactType': 'sales',
+        'email': 'admin@cmrdevelopers.com',
+        'areaServed': 'IN',
+        'availableLanguage': ['en', 'ml']
+      },
+      'sameAs': [
+        'https://www.facebook.com/cmrdeveloperspvtltd',
+        'https://www.instagram.com/cmrvillaproject/',
+        'https://www.youtube.com/channel/UCEfYEItWDu0KTEsLblmnAyA',
+        'https://www.linkedin.com/company/cmrdevelopers'
+      ]
+    }
+  ]
 }
 
 export default function AboutUsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       {/* ── Page Hero ───────────────────────────────────── */}
       <section className="relative bg-[#0F2F2B] pt-36 pb-20 md:pb-24 overflow-hidden border-b border-brand-gray/10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
@@ -55,11 +121,11 @@ export default function AboutUsPage() {
             </div>
             <div className="text-center p-2 border-r border-brand-gray/20 last:border-0">
               <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">100%</div>
-              <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">K-RERA Registered</div>
+              <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Bank Approved</div>
             </div>
             <div className="text-center p-2 last:border-0">
-              <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">0</div>
-              <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Projects Delayed</div>
+              <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">200+</div>
+              <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Happy Families</div>
             </div>
           </div>
         </div>

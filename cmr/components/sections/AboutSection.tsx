@@ -46,7 +46,7 @@ export default function AboutSection() {
 
             {/* CTA */}
             <div className="mt-auto pt-8">
-              <Link href="/about" className="inline-flex items-center gap-4 font-body text-[#333333] text-[15px] font-semibold tracking-wide hover:text-brand-green transition-colors duration-200 group">
+              <Link href="/about-us" className="inline-flex items-center gap-4 font-body text-[#333333] text-[15px] font-semibold tracking-wide hover:text-brand-green transition-colors duration-200 group">
                 Know More About CMR 
                 <span className="text-xl leading-none -mt-1 group-hover:translate-x-1 transition-transform">{'>'}</span>
               </Link>

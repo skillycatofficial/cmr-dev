@@ -6,13 +6,13 @@ import { getHeroSlides, getAllProjects, getGalleryItems, getAwards } from '@/lib
 
 export const metadata: Metadata = {
   title: 'CMR Developers Kerala | Luxury Villa Builders in Kannur & Ernakulam — Since 2012',
-  description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, K-RERA registered. Trusted by NRI families since 2012. Explore projects & book a site visit.',
+  description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, bank-approved. Trusted by NRI families since 2012. Explore projects & book a site visit.',
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/',
   },
   openGraph: {
     title: 'CMR Developers Kerala | Luxury Villa Builders in Kannur & Ernakulam — Since 2012',
-    description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, K-RERA registered. Trusted by NRI families since 2012.',
+    description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, bank-approved. Trusted by NRI families since 2012.',
     url: 'https://www.cmrdevelopers.com/',
     siteName: 'CMR Developers',
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'CMR Developers Kerala | Luxury Villa Builders in Kannur & Ernakulam — Since 2012',
-    description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, K-RERA registered.',
+    description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, bank-approved.',
     images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
   },
 }

@@ -7,6 +7,75 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/testimonials',
   },
+  openGraph: {
+    title: 'CMR Developers Reviews | What Our 600+ Villa Owners Say',
+    description: 'Real testimonials from CMR Developers homeowners across Kerala and the Gulf. Discover why 600+ families trust CMR for quality, transparency, and on-time delivery.',
+    url: 'https://www.cmrdevelopers.com/testimonials',
+    siteName: 'CMR Developers',
+    images: [
+      {
+        url: 'https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CMR Developers — Reviews & Testimonials',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CMR Developers Reviews | Kerala Villa Buyer Testimonials',
+    description: '600+ happy CMR homeowners. Read real testimonials from local and NRI villa buyers in Kerala.',
+    images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
+  },
+}
+
+
+const testimonialsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://www.cmrdevelopers.com/#organization',
+  'name': 'CMR Developers',
+  'aggregateRating': {
+    '@type': 'AggregateRating',
+    'ratingValue': '4.9',
+    'reviewCount': '600',
+    'bestRating': '5',
+    'worstRating': '1'
+  },
+  'review': [
+    {
+      '@type': 'Review',
+      'author': { '@type': 'Person', 'name': 'Renjith Krishnan' },
+      'reviewBody': 'CMR truly sets a standard that other builders in Kannur are still trying to match. Construction quality, on-time delivery, the way they handled every query — exceptional.',
+      'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+    },
+    {
+      '@type': 'Review',
+      'author': { '@type': 'Person', 'name': 'Abdul Latheef K.V.' },
+      'reviewBody': 'I was in Sharjah when I bought my CMR villa. Every stage was documented. Every payment was receipted. The villa was exactly as promised. CMR\'s NRI process is something every builder in Kerala should learn from.',
+      'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+    },
+    {
+      '@type': 'Review',
+      'author': { '@type': 'Person', 'name': 'Dr Priya Nambiar' },
+      'reviewBody': 'No sub-contractors, no confusion, no delays. My villa was ready exactly on the promised date. I have already referred four colleagues, all now CMR homeowners.',
+      'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+    },
+    {
+      '@type': 'Review',
+      'author': { '@type': 'Person', 'name': 'Binu Thomas' },
+      'reviewBody': 'The best decision I ever made was trusting CMR. Price, quality, transparency — none of the five builders I compared could match them.',
+      'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+    },
+    {
+      '@type': 'Review',
+      'author': { '@type': 'Person', 'name': 'Sreejith P.K.' },
+      'reviewBody': 'CMR gave us a home my children are proud to grow up in. The greenery, the community, the play area — everything a family home should be at a genuinely fair price.',
+      'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+    }
+  ]
 }
 
 export default function TestimonialsPage() {
@@ -45,6 +114,10 @@ export default function TestimonialsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(testimonialsSchema) }}
+      />
       {/* ── Page Hero ───────────────────────────────────── */}
       <section className="relative bg-[#0F2F2B] pt-36 pb-20 md:pb-24 overflow-hidden border-b border-brand-gray/10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />

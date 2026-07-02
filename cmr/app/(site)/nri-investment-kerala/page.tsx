@@ -7,6 +7,71 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/nri-investment-kerala',
   },
+  openGraph: {
+    title: 'NRI Villa Investment in Kerala | CMR Developers',
+    description: 'Buy a luxury villa in Kerala from Dubai, UK or USA. CMR Developers offers virtual site tours, POA assistance, and stage-wise payments for NRI buyers. 40%+ of our buyers are NRIs.',
+    url: 'https://www.cmrdevelopers.com/nri-investment-kerala',
+    siteName: 'CMR Developers',
+    images: [
+      {
+        url: 'https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CMR Developers — NRI Villa Investment in Kerala',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NRI Villa Investment in Kerala | CMR Developers',
+    description: 'Build your Kerala home from Dubai, UK or USA. Virtual tours, POA support, stage-wise payments. 40%+ NRI buyers.',
+    images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
+  },
+}
+
+
+const nriSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.cmrdevelopers.com' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'NRI Investment Kerala', 'item': 'https://www.cmrdevelopers.com/nri-investment-kerala' }
+      ]
+    },
+    {
+      '@type': 'FAQPage',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': 'Can NRIs own property in Kerala?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Yes. Resident Indians living abroad (NRIs and PIOs) are fully eligible to purchase residential property in India, including Kerala, under FEMA regulations. CMR\'s legal team will guide you through all compliance requirements.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'Can I get a home loan as an NRI buyer?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Yes. All major banks including SBI, HDFC, Axis Bank, Federal Bank and South Indian Bank offer NRI home loans for CMR projects. Loan amounts up to 80% of property value are available subject to eligibility.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'Do I need to visit Kerala to complete the purchase?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Not necessarily. With a valid Power of Attorney executed from your country of residence, the entire purchase can be completed by your authorised representative in Kerala. CMR has facilitated numerous 100% remote purchases.'
+          }
+        }
+      ]
+    }
+  ]
 }
 
 export default function NriInvestmentPage() {
@@ -29,7 +94,7 @@ export default function NriInvestmentPage() {
     {
       step: 'Step 4',
       title: 'Legal Documentation & POA',
-      desc: 'Our legal team guides you through the sale agreement, K-RERA documentation and — if required — helps you execute a Power of Attorney from your country of residence.',
+      desc: 'Our legal team guides you through the sale agreement, statutory documentation and — if required — helps you execute a Power of Attorney from your country of residence.',
     },
     {
       step: 'Step 5',
@@ -65,6 +130,10 @@ export default function NriInvestmentPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(nriSchema) }}
+      />
       {/* ── Page Hero ───────────────────────────────────── */}
       <section className="relative bg-[#0F2F2B] pt-36 pb-20 md:pb-24 overflow-hidden border-b border-brand-gray/10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />

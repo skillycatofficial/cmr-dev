@@ -3,10 +3,63 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Villa Construction in Kerala | CMR Developers — Custom & Gated Community Villas Kannur Ernakulam',
-  description: 'CMR Developers offers end-to-end villa construction in Kerala — architect-designed, Vastu-compliant, K-RERA registered, and turnkey delivered. Serving Kannur, Ernakulam and Kottayam since 2012.',
+  description: 'CMR Developers offers end-to-end villa construction in Kerala — architect-designed, Vastu-compliant, and turnkey delivered. Serving Kannur, Ernakulam and Kottayam since 2012. No sub-contractors. On-time delivery guaranteed.',
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/villa-construction-kerala',
   },
+  openGraph: {
+    title: 'Villa Construction in Kerala | CMR Developers',
+    description: 'End-to-end villa construction in Kerala by CMR Developers. Architect-designed, Vastu-compliant, turnkey delivery. 600+ villas delivered since 2012 with zero sub-contracting.',
+    url: 'https://www.cmrdevelopers.com/villa-construction-kerala',
+    siteName: 'CMR Developers',
+    images: [
+      {
+        url: 'https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CMR Developers — Villa Construction in Kerala',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Villa Construction in Kerala | CMR Developers',
+    description: 'Architect-designed, Vastu-compliant villa construction in Kerala. 600+ villas. No sub-contractors. On-time delivery.',
+    images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
+  },
+}
+
+
+const villaConstructionSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.cmrdevelopers.com' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Villa Construction Kerala', 'item': 'https://www.cmrdevelopers.com/villa-construction-kerala' }
+      ]
+    },
+    {
+      '@type': 'Service',
+      'name': 'Villa Construction Kerala',
+      'serviceType': 'Residential Villa Construction',
+      'provider': {
+        '@type': 'Organization',
+        '@id': 'https://www.cmrdevelopers.com/#organization',
+        'name': 'CMR Developers'
+      },
+      'areaServed': [
+        { '@type': 'City', 'name': 'Kannur' },
+        { '@type': 'City', 'name': 'Ernakulam' },
+        { '@type': 'City', 'name': 'Kottayam' }
+      ],
+      'description': 'End-to-end villa construction in Kerala — architect-designed, Vastu-compliant, turnkey delivery with no sub-contracting.',
+      'url': 'https://www.cmrdevelopers.com/villa-construction-kerala'
+    }
+  ]
 }
 
 export default function ServicesPage() {
@@ -23,8 +76,8 @@ export default function ServicesPage() {
     },
     {
       num: '03',
-      title: 'Regulatory Approvals & K-RERA',
-      desc: 'CMR handles all permit applications, municipality or panchayat sanctions, and K-RERA registration for applicable projects. You receive certified approval copies at every stage.',
+      title: 'Regulatory & Statutory Approvals',
+      desc: 'CMR handles all permit applications, municipality or panchayat sanctions, and statutory registrations for applicable projects. You receive certified approval copies at every stage.',
     },
     {
       num: '04',
@@ -45,6 +98,10 @@ export default function ServicesPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(villaConstructionSchema) }}
+      />
       {/* ── Page Hero ───────────────────────────────────── */}
       <section className="relative bg-[#0F2F2B] pt-36 pb-20 md:pb-24 overflow-hidden border-b border-brand-gray/10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />

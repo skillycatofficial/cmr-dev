@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://test.local';
 
 export async function fetchAPI(endpoint: string) {
@@ -84,3 +86,62 @@ export async function getAwards() {
     return [];
   }
 }
+
+export interface PageSeo {
+  title?: string
+  description?: string
+  keywords?: string
+  canonical?: string
+}
+
+export interface WordPressPage {
+  id: number
+  title: string
+  slug: string
+  seo: PageSeo
+}
+
+export async function getPageBySlug(slug: string): Promise<WordPressPage | null> {
+  try {
+    return await fetchAPI(`/wp-json/cmr/v1/pages/${slug}`);
+  } catch (error) {
+    console.error(`Error fetching page ${slug} from WordPress:`, error);
+    return null;
+  }
+}
+
+export async function getPageMetadata(slug: string, defaults: Metadata): Promise<Metadata> {
+  const page = await getPageBySlug(slug);
+  if (!page || !page.seo) return defaults;
+
+  const { title, description, canonical, keywords } = page.seo;
+  const merged: Metadata = { ...defaults };
+
+  if (title && title.trim()) {
+    merged.title = title;
+    if (merged.openGraph) merged.openGraph.title = title;
+    if (merged.twitter) merged.twitter.title = title;
+  }
+
+  if (description && description.trim()) {
+    merged.description = description;
+    if (merged.openGraph) merged.openGraph.description = description;
+    if (merged.twitter) merged.twitter.description = description;
+  }
+
+  if (canonical && canonical.trim()) {
+    merged.alternates = {
+      ...defaults.alternates,
+      canonical,
+    };
+    if (merged.openGraph) merged.openGraph.url = canonical;
+  }
+
+  if (keywords && keywords.trim()) {
+    merged.keywords = keywords.split(',').map(k => k.trim());
+  }
+
+  return merged;
+}
+
+

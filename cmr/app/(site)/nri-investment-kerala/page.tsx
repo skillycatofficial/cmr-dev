@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getPageMetadata } from '@/lib/wordpress'
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: 'NRI Villa Investment in Kerala | CMR Developers — Buy from Dubai, UK or USA',
   description: 'Invest in a luxury villa in Kerala from anywhere in the world. CMR Developers has helped hundreds of NRI families from the Gulf, UK and USA buy their dream Kerala home with complete transparency and zero hassle.',
   alternates: {
@@ -29,6 +30,10 @@ export const metadata: Metadata = {
     description: 'Build your Kerala home from Dubai, UK or USA. Virtual tours, POA support, stage-wise payments. 40%+ NRI buyers.',
     images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata('nri-investment-kerala', defaultMetadata)
 }
 
 

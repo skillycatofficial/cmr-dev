@@ -1,14 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getCareers } from '@/lib/wordpress'
+import { getCareers, getPageMetadata } from '@/lib/wordpress'
 import CareersClient from './CareersClient'
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: "Careers at CMR Developers | Join Kerala's Leading Villa Builder — Kannur",
   description: "Join CMR Developers — Kerala's most trusted villa construction company since 2012. Explore career opportunities in construction, sales, design and operations across Kannur and Ernakulam.",
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/careers',
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata('careers', defaultMetadata)
 }
 
 export default async function CareersPage() {

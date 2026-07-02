@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Hero         from '@/components/sections/Hero'
 import AboutSection from '@/components/sections/AboutSection'
-import { getHeroSlides, getAllProjects, getGalleryItems, getAwards } from '@/lib/wordpress'
+import { getHeroSlides, getAllProjects, getGalleryItems, getAwards, getPageMetadata } from '@/lib/wordpress'
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: 'CMR Developers Kerala | Luxury Villa Builders in Kannur & Ernakulam — Since 2012',
   description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, bank-approved. Trusted by NRI families since 2012. Explore projects & book a site visit.',
   alternates: {
@@ -32,6 +32,10 @@ export const metadata: Metadata = {
     description: 'Build your dream villa in Kerala with CMR Developers — 600+ luxury villas delivered across Kannur, Ernakulam & Kottayam. Vastu-compliant, bank-approved.',
     images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata('home', defaultMetadata)
 }
 
 // Lazy load below-the-fold components

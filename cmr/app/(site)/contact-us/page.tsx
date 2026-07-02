@@ -1,31 +1,64 @@
-'use client'
+import type { Metadata } from 'next'
+import ContactForm from './ContactForm'
 
-import { useState } from 'react'
+export const metadata: Metadata = {
+  title: 'Contact CMR Developers | Book a Site Visit or Speak to Our NRI Desk',
+  description: 'Get in touch with CMR Developers — call, WhatsApp or visit our Kannur office. Book a free villa site visit or speak to our NRI desk. We respond to all online enquiries within 2 hours.',
+  alternates: {
+    canonical: 'https://www.cmrdevelopers.com/contact-us',
+  },
+  openGraph: {
+    title: 'Contact CMR Developers | Book a Free Site Visit',
+    description: 'Contact CMR Developers for villa enquiries in Kerala. Call, WhatsApp or submit an online form. NRI desk available 9 AM–9 PM IST, 7 days a week.',
+    url: 'https://www.cmrdevelopers.com/contact-us',
+    siteName: 'CMR Developers',
+    images: [
+      {
+        url: 'https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Contact CMR Developers — Kerala Villa Builders',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact CMR Developers | Book a Free Site Visit',
+    description: 'Call, WhatsApp or submit a form. NRI desk available 9 AM–9 PM IST, 7 days a week.',
+    images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
+  },
+}
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.cmrdevelopers.com' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Contact Us', 'item': 'https://www.cmrdevelopers.com/contact-us' }
+      ]
+    },
+    {
+      '@type': 'ContactPage',
+      'name': 'Contact CMR Developers',
+      'url': 'https://www.cmrdevelopers.com/contact-us',
+      'description': 'Contact CMR Developers for villa enquiries in Kerala. NRI desk available 9 AM–9 PM IST, 7 days a week.',
+      'publisher': { '@id': 'https://www.cmrdevelopers.com/#organization' }
+    }
+  ]
+}
 
 export default function ContactUsPage() {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    buyerType: 'Local', // Local or NRI
-  })
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    // Simulate API request
-    setTimeout(() => {
-      setLoading(false)
-      setSubmitted(true)
-      setFormState({ name: '', email: '', phone: '', message: '', buyerType: 'Local' })
-    }, 1200)
-  }
-
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
+
       {/* ── Page Hero ───────────────────────────────────── */}
       <section className="relative bg-[#0F2F2B] pt-36 pb-20 md:pb-24 overflow-hidden border-b border-brand-gray/10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
@@ -116,139 +149,12 @@ export default function ContactUsPage() {
               </div>
             </div>
 
-            {/* Right Column: Contact Form */}
+            {/* Right Column: Contact Form (Client Component) */}
             <div className="bg-[#fcfbf9] p-8 md:p-10 border border-brand-gray/30 rounded-2xl w-full text-left shadow-sm">
               <h3 className="font-display font-bold text-brand-charcoal text-xl mb-6 border-b border-brand-gray/30 pb-4">
                 Book a Free Site Visit or Speak to Our NRI Desk
               </h3>
-
-              {submitted ? (
-                <div className="py-10 text-center space-y-4">
-                  <div className="w-16 h-16 bg-brand-green/10 text-brand-green border border-brand-green/20 rounded-full flex items-center justify-center mx-auto text-2xl">
-                    ✓
-                  </div>
-                  <h4 className="font-display font-bold text-brand-charcoal text-lg">Message Sent</h4>
-                  <p className="font-body text-sm text-brand-charcoal/50 max-w-xs mx-auto leading-relaxed">
-                    Thank you for contacting CMR Developers. A representative will contact you within the next 2 hours.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-4 text-xs font-bold text-brand-green hover:text-brand-gold uppercase tracking-wider transition-colors"
-                  >
-                    Send another message
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {/* Name */}
-                  <div>
-                    <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/50 font-bold mb-2">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      placeholder="e.g. Renjith Krishnan"
-                      className="w-full font-body text-sm text-brand-charcoal py-3 px-4 bg-white border border-brand-gray/40 rounded-lg focus:outline-none focus:border-brand-green transition-colors"
-                    />
-                  </div>
-
-                  {/* Email & Phone grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/50 font-bold mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formState.email}
-                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                        placeholder="name@example.com"
-                        className="w-full font-body text-sm text-brand-charcoal py-3 px-4 bg-white border border-brand-gray/40 rounded-lg focus:outline-none focus:border-brand-green transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/50 font-bold mb-2">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        required
-                        value={formState.phone}
-                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                        placeholder="e.g. +91 9206 838 383"
-                        className="w-full font-body text-sm text-brand-charcoal py-3 px-4 bg-white border border-brand-gray/40 rounded-lg focus:outline-none focus:border-brand-green transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Buyer Type Radio Buttons */}
-                  <div>
-                    <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/50 font-bold mb-2">
-                      Buyer Status
-                    </label>
-                    <div className="flex gap-6">
-                      <label className="flex items-center gap-2 font-body text-sm text-brand-charcoal cursor-pointer select-none">
-                        <input
-                          type="radio"
-                          name="buyerType"
-                          checked={formState.buyerType === 'Local'}
-                          onChange={() => setFormState({ ...formState, buyerType: 'Local' })}
-                          className="w-4 h-4 text-brand-green accent-brand-green"
-                        />
-                        Local / Resident Indian
-                      </label>
-                      <label className="flex items-center gap-2 font-body text-sm text-brand-charcoal cursor-pointer select-none">
-                        <input
-                          type="radio"
-                          name="buyerType"
-                          checked={formState.buyerType === 'NRI'}
-                          onChange={() => setFormState({ ...formState, buyerType: 'NRI' })}
-                          className="w-4 h-4 text-brand-green accent-brand-green"
-                        />
-                        Non-Resident Indian (NRI)
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label className="block font-body text-[11px] uppercase tracking-widest text-brand-charcoal/50 font-bold mb-2">
-                      Message / Requirement
-                    </label>
-                    <textarea
-                      rows={4}
-                      required
-                      value={formState.message}
-                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      placeholder="Tell us which project or region you are interested in..."
-                      className="w-full font-body text-sm text-brand-charcoal py-3 px-4 bg-white border border-brand-gray/40 rounded-lg focus:outline-none focus:border-brand-green transition-colors"
-                    ></textarea>
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-4 bg-brand-green hover:bg-brand-gold disabled:bg-brand-gray text-brand-ivory font-body text-label font-bold tracking-wider uppercase rounded-lg transition-colors duration-300 cursor-pointer text-center flex items-center justify-center gap-2 text-[12px]"
-                  >
-                    {loading ? (
-                      <>
-                        <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Sending Request...
-                      </>
-                    ) : (
-                      'Book Site Visit'
-                    )}
-                  </button>
-                </form>
-              )}
+              <ContactForm />
             </div>
           </div>
         </div>

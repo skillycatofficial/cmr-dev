@@ -29,10 +29,10 @@ export async function generateMetadata(
     const decodedName = decodeHtml(project.name);
     const decodedLocation = decodeHtml(project.location);
     const startingPrice = project.price ? ` — ${project.price}` : '';
-    const defaultTitle = `${decodedName} Villas in ${decodedLocation} | CMR Developers${startingPrice} | K-RERA`;
+    const defaultTitle = `${decodedName} Villas in ${decodedLocation} | CMR Developers${startingPrice}`;
     const defaultDesc = project.overview
       ? `${decodedName} in ${decodedLocation} by CMR Developers. ${decodeHtml(project.overview).substring(0, 150)}...`
-      : `Explore ${decodedName} — a premium, Vastu-compliant luxury villa project in ${decodedLocation} by CMR Developers. K-RERA registered with world-class amenities.`;
+      : `Explore ${decodedName} — a premium, Vastu-compliant luxury villa project in ${decodedLocation} by CMR Developers. Bank-approved with world-class amenities.`;
 
     return {
       title: project.seo?.title ? decodeHtml(project.seo.title) : defaultTitle,
@@ -338,7 +338,7 @@ export default async function ProjectDetailPage(
               {/* Key Specs Grid */}
               <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-brand-gray/40 pt-10">
                 {[
-                  { label: 'RERA Number', value: project.reraNumber ?? 'K-RERA Registered' },
+                  { label: 'RERA Status', value: project.reraNumber ?? 'Applied — Contact Us' },
                   { label: 'Total Units', value: project.units ?? '—' },
                   { label: 'BHK Options', value: project.bhk ?? '—' },
                   { label: 'Plot Size', value: project.plotSize ?? '—' },
@@ -626,8 +626,8 @@ export default async function ProjectDetailPage(
               ) : (
                 [
                   {
-                    q: `Is ${project.name} RERA registered?`,
-                    a: `Yes, ${project.name} is registered under K-RERA (Kerala Real Estate Regulatory Authority). Our RERA registration number is ${project.reraNumber ?? 'available on request'}. All legal approvals, land titles, and building clearances are fully documented and available for buyer inspection at any stage.`
+                    q: `What is the RERA status of ${project.name}?`,
+                    a: `CMR Developers is committed to full regulatory compliance. For the current RERA registration status of ${project.name}, please contact our team directly at +91 9206 838 383 or admin@cmrdevelopers.com. We will share all legal approvals, land titles, and clearances at any stage of your enquiry.`
                   },
                   {
                     q: 'Can NRI buyers purchase a villa here?',

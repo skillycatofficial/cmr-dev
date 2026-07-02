@@ -7,13 +7,36 @@ import ProjectsGrid from './ProjectsGrid'
 
 export const metadata: Metadata = {
   title: 'Villa Projects in Kerala | CMR Developers — Kannur & Ernakulam',
-  description: "Browse CMR Developers' luxury villa projects in Kannur and Ernakulam — Alvina Harmony, Aiza Harmony, Aina Harmony. Prices from Rs.50L. K-RERA registered. Book a site visit today.",
+  description: "Browse CMR Developers' luxury villa projects in Kannur and Ernakulam — Alvina Harmony, Aiza Harmony, Aina Harmony. Prices from ₹48 Lakhs onwards. Bank-approved, Vastu-compliant. Book a free site visit today.",
   alternates: {
     canonical: 'https://www.cmrdevelopers.com/projects',
+  },
+  openGraph: {
+    title: 'Villa Projects in Kerala | CMR Developers — Kannur & Ernakulam',
+    description: "Browse CMR Developers' luxury villa projects across Kerala — gated communities with modern amenities, honest pricing, and on-time delivery since 2012.",
+    url: 'https://www.cmrdevelopers.com/projects',
+    siteName: 'CMR Developers',
+    images: [
+      {
+        url: 'https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CMR Developers Villa Projects in Kerala',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Villa Projects in Kerala | CMR Developers',
+    description: "Luxury villa projects in Kannur and Ernakulam by CMR Developers. Bank-approved, Vastu-compliant. Book a free site visit.",
+    images: ['https://www.cmrdevelopers.com/images/extracted/cmr-villa-exterior.jpg'],
   },
 }
 
 // Fallback static data if WordPress is not yet populated
+// NOTE: reraNumber is intentionally omitted — display only confirmed registration numbers from WordPress CMS
 const FALLBACK_PROJECTS = [
   { 
     _id: '1', 
@@ -24,7 +47,6 @@ const FALLBACK_PROJECTS = [
     price: '₹55 Lakhs Onwards', 
     heroImage: '/images/extracted/cmr-villa-exterior.jpg',  
     badge: { num: '34', label: 'Premium Villas' }, 
-    reraNumber: 'K-RERA/PRJ/KAN/024/2024', 
     bhk: '3 & 4 BHK' 
   },
   { 
@@ -36,7 +58,6 @@ const FALLBACK_PROJECTS = [
     price: '₹65 Lakhs Onwards', 
     heroImage: '/images/extracted/cmr-interior-living.jpg',  
     badge: { num: '24', label: 'Luxury Villas' }, 
-    reraNumber: 'K-RERA/PRJ/EKM/089/2024', 
     bhk: '3 BHK' 
   },
   { 
@@ -48,7 +69,6 @@ const FALLBACK_PROJECTS = [
     price: '₹58 Lakhs Onwards', 
     heroImage: '/images/extracted/cmr-lifecycle-villa.jpg',  
     badge: { num: '28', label: 'Modern Villas' }, 
-    reraNumber: 'K-RERA/PRJ/EKM/112/2024', 
     bhk: '3 BHK' 
   },
   { 
@@ -60,7 +80,6 @@ const FALLBACK_PROJECTS = [
     price: '₹48 Lakhs Onwards', 
     heroImage: '/images/extracted/cmr-grid-small-3.jpg',     
     badge: { num: '20', label: 'Premium Villas' }, 
-    reraNumber: 'K-RERA/PRJ/KAN/154/2025', 
     bhk: '3 BHK' 
   },
   { 
@@ -72,7 +91,6 @@ const FALLBACK_PROJECTS = [
     price: '₹75 Lakhs Onwards', 
     heroImage: '/images/extracted/cmr-grid-small-4.jpg',     
     badge: { num: '15', label: 'Luxury Villas' }, 
-    reraNumber: 'K-RERA/PRJ/EKM/178/2025', 
     bhk: '3 & 4 BHK' 
   },
   { 
@@ -84,7 +102,6 @@ const FALLBACK_PROJECTS = [
     price: '₹70 Lakhs Onwards', 
     heroImage: '/images/extracted/cmr-grid-small-5.jpg',     
     badge: { num: '22', label: 'Completed Villas' }, 
-    reraNumber: 'K-RERA/PRJ/EKM/045/2023', 
     bhk: '3 & 4 BHK' 
   },
 ]
@@ -177,7 +194,7 @@ export default async function ProjectsPage() {
                 Luxury Villa Projects Across Kerala — Explore Our Portfolio
               </h1>
               <p className="font-body text-brand-ivory/70 text-body leading-relaxed font-light max-w-3xl">
-                At CMR Developers, every project we build carries the same promise: Vastu-compliant design, honest pricing, K-RERA registration, and timely delivery. Since 2012, we have developed 17+ villa communities across three districts of Kerala — Kannur, Ernakulam and Kottayam — with 600+ families already living in CMR homes. Our ongoing projects bring our signature gated community experience to new locations, with modern amenities including swimming pools, club houses, landscaped gardens, and 24/7 security. Browse our active projects below or explore our completed portfolio to understand the CMR standard of quality.
+                At CMR Developers, every project we build carries the same promise: Vastu-compliant design, honest pricing, bank-approved financing, and timely delivery. Since 2012, we have developed 17+ villa communities across three districts of Kerala — Kannur, Ernakulam and Kottayam — with 600+ families already living in CMR homes. Our ongoing projects bring our signature gated community experience to new locations, with modern amenities including swimming pools, club houses, landscaped gardens, and 24/7 security. Browse our active projects below or explore our completed portfolio to understand the CMR standard of quality.
               </p>
             </div>
 
@@ -197,7 +214,7 @@ export default async function ProjectsPage() {
               </div>
               <div className="text-center p-4">
                 <div className="font-display font-bold text-brand-gold text-3xl md:text-4xl mb-1.5">100%</div>
-                <div className="font-body text-[10px] uppercase tracking-widest text-brand-ivory/60 font-semibold">K-RERA Registered</div>
+                <div className="font-body text-[10px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Bank Approved</div>
               </div>
             </div>
           </div>
@@ -231,7 +248,7 @@ export default async function ProjectsPage() {
                     CMR Developers has established itself as the most trusted villa builder in Kannur district — and is rapidly building the same reputation in Ernakulam and Kottayam. Our villa projects are built in carefully selected locations: close enough to town centres for daily convenience, yet far enough to offer the greenery, quiet and community feel that a real home deserves.
                   </p>
                   <p>
-                    Every project is developed with all regulatory approvals in place — including K-RERA registration for all active projects and municipality or panchayat sanctions as applicable. All major nationalised and private banks have approved our projects for home loan sanctioning, including SBI, HDFC, Axis Bank, Federal Bank, and South Indian Bank.
+                    Every project is developed with all regulatory approvals in place — including municipality and panchayat sanctions as applicable. All major nationalised and private banks have approved our projects for home loan sanctioning, including SBI, HDFC, Axis Bank, Federal Bank, and South Indian Bank.
                   </p>
                 </div>
                 <div className="space-y-8 flex flex-col justify-between h-full">

@@ -223,7 +223,7 @@ export default async function BlogIndexPage() {
             Get Kerala Real Estate Updates
           </h3>
           <p className="font-body text-brand-ivory/60 text-sm font-light max-w-md mx-auto leading-relaxed">
-            Subscribe to our monthly newsletter and get honest cost updates, construction trends, and K-RERA regulatory updates directly in your inbox.
+            Subscribe to our monthly newsletter and get honest cost updates, construction trends, and Kerala real estate regulatory updates directly in your inbox.
           </p>
           <div className="flex max-w-md mx-auto border border-brand-ivory/20 rounded-lg overflow-hidden">
             <input

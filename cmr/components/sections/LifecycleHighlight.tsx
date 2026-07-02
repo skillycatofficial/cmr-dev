@@ -30,14 +30,14 @@ export default function LifecycleHighlight() {
           transition={{ delay: 0.2 }}
           className="font-body text-[#4a4a4a] text-[15px] md:text-[16px] leading-[1.8] max-w-5xl"
         >
-          Live in luxury doesn&apos;t mean live in concrete jungle. At CMR Paradise, living comes naturally. All projects of CMR are built amidst greenery without compromising the comforts and facilities of town living. Established in the year 2012, CMR has completed 600+ luxury villas in Kerala. Another few projects are nearing completion which will be handed over by end of 2026.
+          Living in luxury doesn&apos;t mean living in a concrete jungle. At CMR, every project is built amidst greenery without compromising the comforts and facilities of town living. Established in 2012, CMR has completed 600+ luxury villas across Kerala. Several projects are nearing completion and will be handed over by end of 2026.
         </motion.p>
       </div>
 
       {/* Seamless Grid Section (Full Width Edge to Edge) */}
       <div className="w-full flex flex-col">
         
-        {/* Row 1 */}
+        {/* Row 1 — Alvina Harmony */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,13 +47,13 @@ export default function LifecycleHighlight() {
         >
           {/* Text Left */}
           <div className="flex flex-col justify-center px-8 py-16 md:py-24 lg:px-20 xl:px-32 bg-white">
-            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">FLAGSHIP HIGHLIGHT</p>
-            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">The Quartz Enclave</h3>
+            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">FLAGSHIP PROJECT · KADACHIRA, KANNUR</p>
+            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">Alvina Harmony</h3>
             <p className="font-body text-[#666666] text-[14px] md:text-[15px] leading-relaxed mb-10 max-w-md">
-              A sanctuary of light and glass, the Quartz Enclave redefined waterfront luxury. Featuring private docking bays and a 360-degree glass lobby that floats above the tide.
+              A gated community of architect-designed luxury villas in Kadachira, Kannur — featuring Vastu-compliant layouts, landscaped gardens, and a children&apos;s play area. Starting from ₹55 Lakhs.
             </p>
-            <Link href="/projects/quartz-enclave" className="inline-flex items-center gap-3 font-body text-[11px] font-bold tracking-[0.15em] uppercase text-[#2d2d2d] hover:text-[#cba258] transition-colors group">
-              DEEP DIVE INTO DESIGN 
+            <Link href="/projects/alvina-harmony" className="inline-flex items-center gap-3 font-body text-[11px] font-bold tracking-[0.15em] uppercase text-[#2d2d2d] hover:text-[#cba258] transition-colors group">
+              EXPLORE ALVINA HARMONY 
               <span className="text-lg leading-none -mt-0.5 group-hover:translate-x-1 transition-transform">&rarr;</span>
             </Link>
           </div>
@@ -61,7 +61,7 @@ export default function LifecycleHighlight() {
           <div className="relative aspect-square lg:aspect-auto lg:h-[600px] w-full">
             <Image 
               src="/images/slide/cmrslide4.webp" 
-              alt="Luxury Waterfront Villa - The Quartz Enclave by CMR Developers" 
+              alt="Alvina Harmony luxury villa exterior — Kadachira, Kannur by CMR Developers" 
               fill 
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover" 
@@ -69,7 +69,7 @@ export default function LifecycleHighlight() {
           </div>
         </motion.div>
 
-        {/* Row 2 */}
+        {/* Row 2 — Aiza Harmony */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ export default function LifecycleHighlight() {
           <div className="relative aspect-square lg:aspect-auto lg:h-[600px] w-full order-2 lg:order-1">
             <Image 
               src="/images/extracted/cmr-villa-exterior.jpg" 
-              alt="Sustainable Living - The Canopy Lofts Architecture Kerala" 
+              alt="Aiza Harmony luxury gated community villa exterior — Kannur by CMR Developers" 
               fill 
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover" 
@@ -89,47 +89,15 @@ export default function LifecycleHighlight() {
           </div>
           {/* Text Right */}
           <div className="flex flex-col justify-center px-8 py-16 md:py-24 lg:px-20 xl:px-32 bg-white order-1 lg:order-2">
-            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">SUSTAINABLE LIVING</p>
-            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">The Canopy Lofts</h3>
+            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">GATED COMMUNITY · KANNUR</p>
+            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">Aiza Harmony</h3>
             <p className="font-body text-[#666666] text-[14px] md:text-[15px] leading-relaxed mb-10 max-w-md">
-              Merging high-density urban living with forest serenity. The Canopy Lofts feature individual balcony gardens that create a vertical ecosystem for rare urban wildlife.
+              Thoughtfully planned villas surrounded by greenery in Kannur, combining the serenity of nature with premium construction quality CMR is known for. No sub-contractors. On-time delivery.
             </p>
-            <Link href="/projects/canopy-lofts" className="inline-flex items-center gap-3 font-body text-[11px] font-bold tracking-[0.15em] uppercase text-[#2d2d2d] hover:text-[#cba258] transition-colors group">
-              VIEW ECO-METRICS 
+            <Link href="/projects/aiza-harmony" className="inline-flex items-center gap-3 font-body text-[11px] font-bold tracking-[0.15em] uppercase text-[#2d2d2d] hover:text-[#cba258] transition-colors group">
+              EXPLORE AIZA HARMONY 
               <span className="text-lg leading-none -mt-0.5 group-hover:translate-x-1 transition-transform">&rarr;</span>
             </Link>
-          </div>
-        </motion.div>
-
-        {/* Row 3 */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="grid lg:grid-cols-2"
-        >
-          {/* Text Left */}
-          <div className="flex flex-col justify-center px-8 py-16 md:py-24 lg:px-20 xl:px-32 bg-white">
-            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">SUSTAINABLE LIVING</p>
-            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">The Canopy Lofts</h3>
-            <p className="font-body text-[#666666] text-[14px] md:text-[15px] leading-relaxed mb-10 max-w-md">
-              Merging high-density urban living with forest serenity. The Canopy Lofts feature individual balcony gardens that create a vertical ecosystem for rare urban wildlife.
-            </p>
-            <Link href="/projects/canopy-lofts-2" className="inline-flex items-center gap-3 font-body text-[11px] font-bold tracking-[0.15em] uppercase text-[#2d2d2d] hover:text-[#cba258] transition-colors group">
-              VIEW ECO-METRICS 
-              <span className="text-lg leading-none -mt-0.5 group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </Link>
-          </div>
-          {/* Image Right */}
-          <div className="relative aspect-square lg:aspect-auto lg:h-[600px] w-full">
-            <Image 
-              src="/images/extracted/cmr-grid-small-3.jpg" 
-              alt="Premium Gated Community Villa Exterior by CMR Developers" 
-              fill 
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover" 
-            />
           </div>
         </motion.div>
 

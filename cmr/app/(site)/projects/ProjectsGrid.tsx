@@ -341,7 +341,7 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
 
                     {project.reraNumber && (
                       <p className="font-body text-[11px] text-brand-charcoal/50 mb-4">
-                        K-RERA: {project.reraNumber}
+                        RERA: {project.reraNumber}
                       </p>
                     )}
 

@@ -14,7 +14,7 @@ interface Project {
   price?: string;
   heroImage?: string;
   badge?: { num: string; label: string };
-  reraNumber?: string;
+  otherAmenities?: string;
   bhk?: string;
 }
 
@@ -339,9 +339,9 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
                       )}
                     </div>
 
-                    {project.reraNumber && (
+                    {project.otherAmenities && (
                       <p className="font-body text-[11px] text-brand-charcoal/50 mb-4">
-                        RERA: {project.reraNumber}
+                        Amenities: {project.otherAmenities}
                       </p>
                     )}
 

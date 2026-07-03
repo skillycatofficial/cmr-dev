@@ -7,31 +7,35 @@ import Link from 'next/link'
 export default function LifecycleHighlight() {
   return (
     <section className="bg-white pt-10 pb-0 overflow-hidden">
-      
       {/* Header Section (Centered/Constrained) */}
       <div className="px-section mb-20 lg:mb-32">
+
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="font-body font-light text-[#2d2d2d] text-4xl md:text-5xl lg:text-[64px] leading-[1.1] mb-8 flex flex-wrap items-center gap-4 tracking-tight"
+          className="font-body font-light text-[#2d2d2d] text-4xl md:text-5xl lg:text-[56px] leading-[1.2] mb-8 tracking-tight max-w-3xl"
         >
-          <span>INDIA&apos;S FIRST</span>
-          <svg className="w-10 h-10 md:w-14 md:h-14 text-[#cba258]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-            <path strokeLinecap="square" strokeLinejoin="miter" d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
-          <span className="w-full">LIFECYCLE BUILDER</span>
+          Building Homes That Grow With Your Lifestyle
         </motion.h2>
         
-        <motion.p 
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ delay: 0.2 }}
-          className="font-body text-[#4a4a4a] text-[15px] md:text-[16px] leading-[1.8] max-w-5xl"
+          className="font-body text-[#4a4a4a] text-[15px] md:text-[16px] leading-[1.8] max-w-5xl space-y-4"
         >
-          Living in luxury doesn&apos;t mean living in a concrete jungle. At CMR, every project is built amidst greenery without compromising the comforts and facilities of town living. Established in 2012, CMR has completed 600+ luxury villas across Kerala. Several projects are nearing completion and will be handed over by end of 2026.
-        </motion.p>
+          <p>
+            At CMR Developers, we believe a home should evolve with your family and aspirations. Every villa community is carefully designed to offer the perfect balance of greenery, connectivity, privacy, and contemporary living.
+          </p>
+          <p>
+            With over a decade of experience in Kerala&apos;s residential real estate, we have successfully delivered 600+ luxury villas while maintaining exceptional construction quality, transparent processes, and timely delivery.
+          </p>
+          <p>
+            From first-time homeowners to NRIs seeking a secure investment, CMR creates homes built for generations.
+          </p>
+        </motion.div>
       </div>
 
       {/* Seamless Grid Section (Full Width Edge to Edge) */}

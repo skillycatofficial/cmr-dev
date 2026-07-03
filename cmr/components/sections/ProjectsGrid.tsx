@@ -15,7 +15,7 @@ interface Project {
   price?: string
   heroImage?: string
   badge?: { num: string; label: string }
-  reraNumber?: string
+  otherAmenities?: string
   bhk?: string
 }
 

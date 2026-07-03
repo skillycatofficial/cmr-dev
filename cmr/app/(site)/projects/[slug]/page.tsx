@@ -74,7 +74,7 @@ export default async function ProjectDetailPage(
     gallery?: string[];
     amenities?: { icon: string; label: string }[];
     badge?: { num: string; label: string };
-    reraNumber?: string;
+    otherAmenities?: string;
     units?: string;
     bhk?: string;
     plotSize?: string;
@@ -338,7 +338,7 @@ export default async function ProjectDetailPage(
               {/* Key Specs Grid */}
               <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-brand-gray/40 pt-10">
                 {[
-                  { label: 'RERA Status', value: project.reraNumber ?? 'Applied — Contact Us' },
+                  { label: 'Other Amenities', value: project.otherAmenities ?? '—' },
                   { label: 'Total Units', value: project.units ?? '—' },
                   { label: 'BHK Options', value: project.bhk ?? '—' },
                   { label: 'Plot Size', value: project.plotSize ?? '—' },

@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // Fallback static data if WordPress is not yet populated
-// NOTE: reraNumber is intentionally omitted — display only confirmed registration numbers from WordPress CMS
+// NOTE: otherAmenities is intentionally omitted — display only confirmed values from WordPress CMS
 const FALLBACK_PROJECTS = [
   { 
     _id: '1', 
@@ -111,18 +111,18 @@ const FALLBACK_PROJECTS = [
 ]
 
 export default async function ProjectsPage() {
-  let projects: (typeof FALLBACK_PROJECTS[0] & { reraNumber?: string; bhk?: string })[] = []
+  let projects: (typeof FALLBACK_PROJECTS[0] & { otherAmenities?: string; bhk?: string })[] = []
 
   try {
     const data = await getAllProjects()
     const rawProjects = data?.length ? data : FALLBACK_PROJECTS
-    projects = rawProjects.map((p: typeof FALLBACK_PROJECTS[0] & { reraNumber?: string; bhk?: string }) => ({
+    projects = rawProjects.map((p: typeof FALLBACK_PROJECTS[0] & { otherAmenities?: string; bhk?: string }) => ({
       ...p,
       name: decodeHtml(p.name),
       location: decodeHtml(p.location),
     }))
   } catch {
-    projects = FALLBACK_PROJECTS.map((p: typeof FALLBACK_PROJECTS[0] & { reraNumber?: string; bhk?: string }) => ({
+    projects = FALLBACK_PROJECTS.map((p: typeof FALLBACK_PROJECTS[0] & { otherAmenities?: string; bhk?: string }) => ({
       ...p,
       name: decodeHtml(p.name),
       location: decodeHtml(p.location),

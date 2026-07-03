@@ -491,7 +491,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex-shrink-0 relative w-[72px] h-[72px] md:w-[90px] md:h-[90px] xl:w-[120px] xl:h-[120px] self-start -mt-1 xl:-top-2"
+            className="flex-shrink-0 relative w-[82px] h-[82px] md:w-[90px] md:h-[90px] xl:w-[120px] xl:h-[120px] self-start -mt-1 xl:-top-2"
           >
             <Image
               src="/images/cmr-logo.png"

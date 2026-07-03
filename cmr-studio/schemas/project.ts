@@ -23,8 +23,7 @@ export const project = defineType({
         defineField({ name: 'label', title: 'Label',  type: 'string' }),
       ],
     }),
-    defineField({ name: 'isRERA',   title: 'RERA Registered', type: 'boolean', initialValue: true }),
-    defineField({ name: 'reraNumber', title: 'RERA Number', type: 'string' }),
+    defineField({ name: 'otherAmenities', title: 'Other Amenities', type: 'string' }),
     defineField({ name: 'overview', title: 'Overview', type: 'text', rows: 4 }),
     defineField({
       name: 'amenities', title: 'Amenities', type: 'array',

@@ -51,15 +51,11 @@ export default function LifecycleHighlight() {
         >
           {/* Text Left */}
           <div className="flex flex-col justify-center px-8 py-16 md:py-24 lg:px-20 xl:px-32 bg-white">
-            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">FLAGSHIP PROJECT · KADACHIRA, KANNUR</p>
-            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">Alvina Harmony</h3>
+            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">BRAND POSITIONING</p>
+            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">More Than a Villa. A Community Designed for Life.</h3>
             <p className="font-body text-[#666666] text-[14px] md:text-[15px] leading-relaxed mb-10 max-w-md">
-              A gated community of architect-designed luxury villas in Kadachira, Kannur — featuring Vastu-compliant layouts, landscaped gardens, and a children&apos;s play area. Starting from ₹55 Lakhs.
+              Every CMR project is thoughtfully planned to create neighbourhoods where families can enjoy security, comfort, and meaningful connections. Spacious roads, landscaped surroundings, quality infrastructure, and premium amenities come together to offer an elevated lifestyle.
             </p>
-            <Link href="/projects/alvina-harmony" className="inline-flex items-center gap-3 font-body text-[11px] font-bold tracking-[0.15em] uppercase text-[#2d2d2d] hover:text-[#cba258] transition-colors group">
-              EXPLORE ALVINA HARMONY 
-              <span className="text-lg leading-none -mt-0.5 group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </Link>
           </div>
           {/* Image Right */}
           <div className="relative aspect-square lg:aspect-auto lg:h-[600px] w-full">
@@ -93,15 +89,11 @@ export default function LifecycleHighlight() {
           </div>
           {/* Text Right */}
           <div className="flex flex-col justify-center px-8 py-16 md:py-24 lg:px-20 xl:px-32 bg-white order-1 lg:order-2">
-            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">GATED COMMUNITY · KANNUR</p>
-            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">Aiza Harmony</h3>
+            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">INVESTMENT SECTION</p>
+            <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">Invest in Kerala&apos;s Fast-Growing Residential Market</h3>
             <p className="font-body text-[#666666] text-[14px] md:text-[15px] leading-relaxed mb-10 max-w-md">
-              Thoughtfully planned villas surrounded by greenery in Kannur, combining the serenity of nature with premium construction quality CMR is known for. No sub-contractors. On-time delivery.
+              Whether you&apos;re purchasing your first home, upgrading your lifestyle, or investing from abroad, CMR Developers offers villas in carefully selected locations with strong appreciation potential, excellent connectivity, and enduring construction quality.
             </p>
-            <Link href="/projects/aiza-harmony" className="inline-flex items-center gap-3 font-body text-[11px] font-bold tracking-[0.15em] uppercase text-[#2d2d2d] hover:text-[#cba258] transition-colors group">
-              EXPLORE AIZA HARMONY 
-              <span className="text-lg leading-none -mt-0.5 group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </Link>
           </div>
         </motion.div>
 

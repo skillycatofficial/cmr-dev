@@ -31,7 +31,7 @@ export async function generateMetadata(
     const startingPrice = project.price ? ` — ${project.price}` : '';
     const defaultTitle = `${decodedName} Villas in ${decodedLocation} | CMR Developers${startingPrice}`;
     const defaultDesc = project.overview
-      ? `${decodedName} in ${decodedLocation} by CMR Developers. ${decodeHtml(project.overview).substring(0, 150)}...`
+      ? `${decodedName} in ${decodedLocation} by CMR Developers. ${decodeHtml(project.overview).replace(/\s+/g, ' ').substring(0, 150)}...`
       : `Explore ${decodedName} — a premium, Vastu-compliant luxury villa project in ${decodedLocation} by CMR Developers. Bank-approved with world-class amenities.`;
 
     return {
@@ -152,7 +152,7 @@ export default async function ProjectDetailPage(
     '@context': 'https://schema.org',
     '@type': 'RealEstateListing',
     'name': project.name,
-    'description': project.overview || `${project.name} is a luxury villa project by CMR Developers.`,
+    'description': project.overview?.replace(/\s+/g, ' ') || `${project.name} is a luxury villa project by CMR Developers.`,
     'url': `https://www.cmrdevelopers.com/projects/${project.slug}`,
     'image': project.heroImage,
     'offers': {
@@ -331,9 +331,14 @@ export default async function ProjectDetailPage(
                 About {project.name}
               </h2>
               <div className="w-16 h-0.5 bg-brand-gold mb-8" />
-              <p className="font-body text-brand-charcoal/60 text-body leading-relaxed">
-                {project.overview ?? `${project.name} is a premium villa project by CMR Developers located in ${project.location}. Crafted with care and architectural precision, each villa is designed to deliver comfort, elegance, and a timeless living experience.`}
-              </p>
+              <div className="font-body text-brand-charcoal/60 text-body leading-relaxed space-y-5">
+                {(project.overview ?? `${project.name} is a premium villa project by CMR Developers located in ${project.location}. Crafted with care and architectural precision, each villa is designed to deliver comfort, elegance, and a timeless living experience.`)
+                  .split(/\n+/)
+                  .filter((para) => para.trim())
+                  .map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+              </div>
 
               {/* Key Specs Grid */}
               <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-brand-gray/40 pt-10">

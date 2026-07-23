@@ -62,7 +62,7 @@ export default function Hero({ slides: sanitySlides }: { slides?: HeroSlide[] })
   const hasContent = !!(slides[current].title?.trim() || slides[current].eyebrow?.trim() || slides[current].cta?.trim())
 
   return (
-    <section className="relative w-full aspect-[3/4] md:aspect-[16/9] overflow-hidden bg-brand-charcoal pt-[102px] group">
+    <section className="relative w-full aspect-[9/14] md:aspect-[16/9] overflow-hidden bg-brand-charcoal pt-[102px] group">
 
       <AnimatePresence mode="popLayout">
         <motion.div

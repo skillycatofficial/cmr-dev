@@ -72,7 +72,7 @@ export default function ServicesPage() {
     {
       num: '01',
       title: 'Site Assessment & Consultation',
-      desc: 'Our team visits and evaluates your plot for soil quality, orientation, Vastu alignment and connectivity. We discuss your budget, timeline and vision — no obligation, no sales pressure.',
+      desc: 'Our team evaluates the plots for orientation, Vastu alignment and connectivity before choosing our spaces for Villa projects.',
     },
     {
       num: '02',

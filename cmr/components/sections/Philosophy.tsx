@@ -1,7 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+
+const PHILOSOPHY_VIDEO_ID = 'hSQKfqAp97s'
 
 const pillars = [
   { 
@@ -25,6 +28,8 @@ const pillars = [
 ]
 
 export default function Philosophy() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false)
+
   return (
     <section className="bg-[#0f2a22] overflow-hidden relative">
       {/* Subtle Shadow Overlay (Simulating Luxury Lighting) */}
@@ -104,8 +109,13 @@ export default function Philosophy() {
           >
             {/* Offset Gold Frame */}
             <div className="absolute inset-0 border border-brand-gold/40 rounded-2xl translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6 transition-transform duration-700 group-hover:translate-x-3 group-hover:translate-y-3" />
-            
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl cursor-pointer border border-white/10">
+
+            <button
+              type="button"
+              onClick={() => setIsVideoOpen(true)}
+              aria-label="Play CMR Developers brand film"
+              className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl cursor-pointer border border-white/10 block text-left"
+            >
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10" />
               <Image
                 src="/images/extracted/cmr-philosophy-interior.jpg"
@@ -123,11 +133,54 @@ export default function Philosophy() {
                   </svg>
                 </div>
               </div>
-            </div>
+            </button>
           </motion.div>
 
         </div>
       </div>
+
+      {/* Video Lightbox */}
+      <AnimatePresence>
+        {isVideoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm px-4"
+            onClick={() => setIsVideoOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="relative w-full max-w-4xl aspect-video"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setIsVideoOpen(false)}
+                aria-label="Close video"
+                className="absolute -top-12 right-0 text-white/70 hover:text-brand-gold transition-colors duration-300"
+              >
+                <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <div className="relative w-full h-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${PHILOSOPHY_VIDEO_ID}?autoplay=1&rel=0`}
+                  title="CMR Developers Brand Film"
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

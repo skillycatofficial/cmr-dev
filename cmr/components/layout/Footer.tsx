@@ -21,7 +21,7 @@ const projectLinks = [
 const companyLinks = [
   { label: 'About Us',          href: '/about-us' },
   { label: 'Projects',          href: '/projects' },
-  { label: 'Villa Construction',href: '/villa-construction-kerala' },
+  { label: 'Villa Customisation',href: '/villa-construction-kerala' },
   { label: 'NRI Investment',    href: '/nri-investment-kerala' },
   { label: 'Blog',              href: '/blog' },
 ]
@@ -36,7 +36,7 @@ const quickLinks = [
   { label: 'Home',              href: '/' },
   { label: 'About Us',          href: '/about-us' },
   { label: 'Projects',          href: '/projects' },
-  { label: 'Villa Construction',href: '/villa-construction-kerala' },
+  { label: 'Villa Customisation',href: '/villa-construction-kerala' },
   { label: 'NRI Investment',    href: '/nri-investment-kerala' },
 ]
 

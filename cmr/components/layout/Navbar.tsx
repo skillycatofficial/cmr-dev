@@ -100,7 +100,7 @@ const navLinks = [
   { label: 'Home',               href: '/' },
   { label: 'About Us',           href: '/about-us' },
   { label: 'Projects',           href: '/projects', hasProjects: true },
-  { label: 'Villa Construction', href: '/villa-construction-kerala' },
+  { label: 'Villa Customisation', href: '/villa-construction-kerala' },
   { label: 'NRI Investment',     href: '/nri-investment-kerala' },
   { label: 'Testimonials',       href: '/testimonials' },
   { label: 'Blog',               href: '/blog' },

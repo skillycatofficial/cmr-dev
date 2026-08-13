@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import Hero         from '@/components/sections/Hero'
+import Hero from '@/components/sections/Hero'
 import AboutSection from '@/components/sections/AboutSection'
 import { getHeroSlides, getAllProjects, getGalleryItems, getAwards, getPageMetadata } from '@/lib/wordpress'
 
@@ -40,12 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // Lazy load below-the-fold components
 const LifecycleHighlight = dynamic(() => import('@/components/sections/LifecycleHighlight'))
-const Philosophy         = dynamic(() => import('@/components/sections/Philosophy'))
-const ProjectsGrid       = dynamic(() => import('@/components/sections/ProjectsGrid'))
+const Philosophy = dynamic(() => import('@/components/sections/Philosophy'))
+const ProjectsGrid = dynamic(() => import('@/components/sections/ProjectsGrid'))
 const CelebratingSection = dynamic(() => import('@/components/sections/CelebratingSection'))
-const Gallery            = dynamic(() => import('@/components/sections/Gallery'))
-const Awards             = dynamic(() => import('@/components/sections/Awards'))
-const FooterCTA          = dynamic(() => import('@/components/sections/FooterCTA'))
+const Gallery = dynamic(() => import('@/components/sections/Gallery'))
+const Awards = dynamic(() => import('@/components/sections/Awards'))
+const FooterCTA = dynamic(() => import('@/components/sections/FooterCTA'))
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -169,7 +169,7 @@ export default async function Home() {
       <ProjectsGrid initialProjects={projects} />
       <CelebratingSection />
       <Gallery initialItems={galleryItems} />
-      <Awards initialAwards={awardsData} />
+      {/* <Awards initialAwards={awardsData} /> */}
       <FooterCTA />
     </>
   )

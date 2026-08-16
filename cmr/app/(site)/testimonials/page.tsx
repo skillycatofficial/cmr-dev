@@ -161,13 +161,13 @@ export default function TestimonialsPage() {
         <div className="px-section">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {reviews.map((item, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-white border border-brand-gray/25 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full text-left"
               >
                 {/* Gold quotation marks */}
                 <span className="font-serif text-brand-gold/25 text-5xl leading-none select-none -mt-4 block mb-2">&ldquo;</span>
-                
+
                 {/* Quote Text */}
                 <p className="font-body text-brand-charcoal/80 text-[15px] leading-relaxed font-light mb-6 flex-grow italic">
                   {item.quote}
@@ -203,7 +203,7 @@ export default function TestimonialsPage() {
           </p>
           <Link
             href="/contact-us"
-            className="inline-block px-12 py-4.5 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-block px-10 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
           >
             Contact Our Team &rarr;
           </Link>

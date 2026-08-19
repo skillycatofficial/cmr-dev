@@ -7,6 +7,7 @@ import { decodeHtml } from '@/lib/utils'
 import GalleryLightbox from './GalleryLightbox'
 import HeroCarousel from './HeroCarousel'
 import LayoutSection from './LayoutSection'
+import EnquireForm from './EnquireForm'
 
 // Generate static params for all projects
 export async function generateStaticParams() {
@@ -682,37 +683,7 @@ export default async function ProjectDetailPage(
               Leave your details and our team will get back to you within 24 hours.
             </p>
 
-            <form className="space-y-4 text-left">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="bg-white/5 border border-white/15 text-brand-ivory font-body text-ui px-4 py-3.5 outline-none focus:border-brand-gold/50 transition-colors placeholder:text-white/25 w-full"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  className="bg-white/5 border border-white/15 text-brand-ivory font-body text-ui px-4 py-3.5 outline-none focus:border-brand-gold/50 transition-colors placeholder:text-white/25 w-full"
-                />
-              </div>
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="bg-white/5 border border-white/15 text-brand-ivory font-body text-ui px-4 py-3.5 outline-none focus:border-brand-gold/50 transition-colors placeholder:text-white/25 w-full"
-              />
-              <textarea
-                rows={4}
-                placeholder="Your message (optional)"
-                className="bg-white/5 border border-white/15 text-brand-ivory font-body text-ui px-4 py-3.5 outline-none focus:border-brand-gold/50 transition-colors placeholder:text-white/25 w-full resize-none"
-                defaultValue={`I'm interested in ${project.name}, ${project.location}.`}
-              />
-              <button
-                type="submit"
-                className="w-full py-4 bg-brand-gold text-brand-charcoal font-body text-label font-bold tracking-[0.2em] uppercase hover:bg-brand-ivory transition-colors duration-300"
-              >
-                Send Enquiry
-              </button>
-            </form>
+            <EnquireForm projectName={project.name} projectLocation={project.location} />
 
             <div className="mt-8 flex items-center justify-center gap-6">
               <a href="tel:+919206838383" className="flex items-center gap-2 font-body text-brand-ivory/40 text-ui hover:text-brand-gold transition-colors duration-200">

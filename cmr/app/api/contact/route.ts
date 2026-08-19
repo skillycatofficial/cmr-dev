@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { sendMail, renderBrandedEmail, renderAcknowledgementEmail, formatReplyTo } from '@/lib/mail'
 
 /**
  * POST /api/contact
@@ -63,51 +64,30 @@ async function sendViaWordPress(payload: ContactPayload): Promise<boolean> {
 }
 
 async function sendViaSMTP(payload: ContactPayload): Promise<boolean> {
-  const host = process.env.SMTP_HOST
-  const user = process.env.SMTP_USER
-  const pass = process.env.SMTP_PASS
-  const to   = process.env.CONTACT_EMAIL_TO || 'admin@cmrdevelopers.com'
-  if (!host || !user || !pass) return false
-
-  try {
-    // Dynamic import so nodemailer is only loaded when needed
-    const nodemailer = await import('nodemailer')
-    const transporter = nodemailer.default.createTransport({
-      host,
-      port: Number(process.env.SMTP_PORT || 587),
-      secure: process.env.SMTP_PORT === '465',
-      auth: { user, pass },
-    })
-
-    await transporter.sendMail({
-      from: `"CMR Developers Website" <${user}>`,
-      to,
-      replyTo: payload.email,
-      subject: `[CMR Enquiry] ${payload.buyerType} — ${payload.name}`,
-      text: [
-        `Name: ${payload.name}`,
-        `Email: ${payload.email}`,
-        `Phone: ${payload.phone}`,
-        `Buyer Type: ${payload.buyerType}`,
-        '',
-        `Message:\n${payload.message}`,
-      ].join('\n'),
-      html: `
-        <h2 style="color:#0F2F2B;">New Enquiry — CMR Developers</h2>
-        <table cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">
-          <tr><td><strong>Name</strong></td><td>${payload.name}</td></tr>
-          <tr><td><strong>Email</strong></td><td><a href="mailto:${payload.email}">${payload.email}</a></td></tr>
-          <tr><td><strong>Phone</strong></td><td>${payload.phone}</td></tr>
-          <tr><td><strong>Buyer Type</strong></td><td>${payload.buyerType}</td></tr>
-          <tr><td><strong>Message</strong></td><td style="white-space:pre-wrap;">${payload.message}</td></tr>
-        </table>
-      `,
-    })
-    return true
-  } catch (err) {
-    console.error('[CMR Contact] SMTP error:', err)
-    return false
-  }
+  return sendMail({
+    replyTo: formatReplyTo(payload.name, payload.email),
+    subject: `[CMR Enquiry] ${payload.buyerType} — ${payload.name}`,
+    text: [
+      `Name: ${payload.name}`,
+      `Email: ${payload.email}`,
+      `Phone: ${payload.phone}`,
+      `Buyer Type: ${payload.buyerType}`,
+      '',
+      `Message:\n${payload.message}`,
+    ].join('\n'),
+    html: renderBrandedEmail({
+      eyebrow: `${payload.buyerType} Buyer Enquiry`,
+      heading: payload.name,
+      rows: [
+        { label: 'Name', value: payload.name },
+        { label: 'Email', value: payload.email, href: `mailto:${payload.email}` },
+        { label: 'Phone', value: payload.phone, href: `tel:${payload.phone}` },
+        { label: 'Buyer Type', value: payload.buyerType },
+      ],
+      message: payload.message,
+      replyContact: { name: payload.name, email: payload.email },
+    }),
+  })
 }
 
 export async function POST(req: NextRequest) {
@@ -138,6 +118,16 @@ export async function POST(req: NextRequest) {
     console.warn('[CMR Contact] No delivery channel configured. Enquiry data:')
     console.warn(JSON.stringify(body, null, 2))
     // Still return 200 to the user — configure env vars for actual delivery
+  } else {
+    const acknowledged = await sendMail({
+      to: body.email,
+      subject: `We've Received Your Enquiry — CMR Developers`,
+      text: `Hi ${body.name},\n\nThank you for your enquiry. Our team will get back to you shortly.\n\n— CMR Developers`,
+      html: renderAcknowledgementEmail({ name: body.name, contextLine: 'your enquiry' }),
+    })
+    if (!acknowledged) {
+      console.warn(`[CMR Contact] Acknowledgement email to ${body.email} failed.`)
+    }
   }
 
   return NextResponse.json({ success: true })

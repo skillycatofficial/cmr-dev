@@ -1,7 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+
+const MAX_RESUME_BYTES = 5 * 1024 * 1024 // 5MB
+const ALLOWED_RESUME_TYPES = new Set([
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+])
 
 interface Job {
   id: string
@@ -56,10 +63,34 @@ export default function CareersClient({ initialJobs }: { initialJobs?: Job[] }) 
     phone: '',
     email: '',
     message: '',
-    resumeLink: ''
   })
+  const [resumeFile, setResumeFile] = useState<File | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null
+    if (!file) {
+      setResumeFile(null)
+      return
+    }
+    if (file.size > MAX_RESUME_BYTES) {
+      setError('CV file is too large. Please keep it under 5MB.')
+      e.target.value = ''
+      setResumeFile(null)
+      return
+    }
+    if (!ALLOWED_RESUME_TYPES.has(file.type)) {
+      setError('CV must be a PDF or Word document (.pdf, .doc, .docx).')
+      e.target.value = ''
+      setResumeFile(null)
+      return
+    }
+    setError(null)
+    setResumeFile(file)
+  }
 
   const toggleJob = (id: string) => {
     setExpandedJob(expandedJob === id ? null : id)
@@ -75,20 +106,49 @@ export default function CareersClient({ initialJobs }: { initialJobs?: Job[] }) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError(null)
+
+    if (!resumeFile) {
+      setError('Please attach your CV.')
+      return
+    }
+
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    try {
+      const payload = new FormData()
+      payload.append('position', selectedRole)
+      payload.append('name', formData.name)
+      payload.append('phone', formData.phone)
+      payload.append('email', formData.email)
+      payload.append('message', formData.message)
+      payload.append('resume', resumeFile)
 
-    setIsSubmitting(false)
-    setIsSuccess(true)
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-      message: '',
-      resumeLink: ''
-    })
+      const res = await fetch('/api/careers', {
+        method: 'POST',
+        body: payload,
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data?.error || 'Something went wrong. Please try again.')
+      }
+
+      setIsSuccess(true)
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        message: '',
+      })
+      setResumeFile(null)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+      setSelectedRole('')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Submission failed. Please try again or call us directly.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -300,18 +360,18 @@ export default function CareersClient({ initialJobs }: { initialJobs?: Job[] }) 
 
                 <div className="space-y-1">
                   <label className="block font-body text-[11px] font-bold text-brand-charcoal uppercase tracking-wider">
-                    Resume Link (Google Drive, Dropbox, etc.) *
+                    Upload CV *
                   </label>
                   <input
-                    type="url"
+                    ref={fileInputRef}
+                    type="file"
                     required
-                    value={formData.resumeLink}
-                    onChange={(e) => setFormData({ ...formData, resumeLink: e.target.value })}
-                    placeholder="e.g. https://drive.google.com/file/d/..."
-                    className="w-full bg-brand-ivory/10 border border-brand-gray/30 rounded-lg px-4 py-3 text-brand-charcoal text-sm outline-none focus:border-brand-green transition-colors font-body"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    onChange={handleResumeChange}
+                    className="w-full bg-brand-ivory/10 border border-brand-gray/30 rounded-lg px-4 py-3 text-brand-charcoal text-sm outline-none focus:border-brand-green transition-colors font-body file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-[11px] file:font-bold file:uppercase file:tracking-wider file:bg-brand-green file:text-brand-ivory hover:file:bg-brand-gold file:cursor-pointer cursor-pointer"
                   />
                   <span className="block text-[11px] text-brand-charcoal/40 font-light mt-1">
-                    Please upload your CV to Google Drive, Dropbox, or OneDrive, make sure link sharing is set to &quot;Anyone with the link can view&quot;, and paste the link here.
+                    {resumeFile ? `Selected: ${resumeFile.name}` : 'PDF or Word document, up to 5MB.'}
                   </span>
                 </div>
 
@@ -327,6 +387,12 @@ export default function CareersClient({ initialJobs }: { initialJobs?: Job[] }) 
                     className="w-full bg-brand-ivory/10 border border-brand-gray/30 rounded-lg px-4 py-3 text-brand-charcoal text-sm outline-none focus:border-brand-green transition-colors font-body resize-none"
                   />
                 </div>
+
+                {error && (
+                  <p className="text-sm text-red-600 font-body bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                    {error}
+                  </p>
+                )}
 
                 <button
                   type="submit"

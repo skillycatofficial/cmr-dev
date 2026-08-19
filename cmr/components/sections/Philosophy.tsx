@@ -9,8 +9,10 @@ const PHILOSOPHY_VIDEO_ID = 'hSQKfqAp97s'
 const pillars = [
   { 
     icon: (
-      <svg className="w-6 h-6 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 22h20L12 2zm0 6l4 10H8l4-10z" />
+      <svg className="w-6 h-6 text-brand-gold group-hover:text-white transition-colors duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7h20L12 2z" />
+        <path d="M4 7v11M8 7v11M12 7v11M16 7v11M20 7v11" />
+        <path d="M2 18h20M1 21h22" />
       </svg>
     ), 
     title: 'Architectural Integrity', 
@@ -18,8 +20,15 @@ const pillars = [
   },
   { 
     icon: (
-      <svg className="w-6 h-6 text-brand-gold" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.5.5c-4.6 0-8.9 2-11.9 5.5C2.6 9.6 1 13.9 1 18.5V23h4.5c4.6 0 8.9-1.6 11.9-4.5 3-2.9 5.1-6.8 5.6-11v-7h-5.5zM19 14.5c-1.9 2.2-4.7 3.5-7.5 3.5H4v-2.5c0-3.3 1.5-6.5 4.1-8.5 2.5-2 5.8-3 9.4-2.5 1.5.2 2.5 1.6 2.5 3v7z"/>
+      <svg className="w-6 h-6 text-brand-gold group-hover:text-white transition-colors duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 21A9 9 0 0 0 21 12C21 6 15 3 12 3C9 3 3 6 3 12A9 9 0 0 0 12 21Z" />
+        <path d="M12 21V3" />
+        <path d="M12 8C15 8 18 10 18 10" />
+        <path d="M12 12C16 12 19 14 19 14" />
+        <path d="M12 16C15 16 17 18 17 18" />
+        <path d="M12 8C9 8 6 10 6 10" />
+        <path d="M12 12C8 12 5 14 5 14" />
+        <path d="M12 16C9 16 7 18 7 18" />
       </svg>
     ), 
     title: 'Green Core',              
@@ -61,7 +70,7 @@ export default function Philosophy() {
               style={{ fontSize: 'clamp(42px, 5vw, 64px)' }}
             >
               Beyond Four Walls.<br />
-              <span className="italic font-serif text-brand-gold">A Narrative</span> for<br />
+              A Narrative for<br />
               Living.
             </h2>
 
@@ -80,17 +89,18 @@ export default function Philosophy() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.8, delay: 0.3 + i * 0.15, ease: "easeOut" }}
-                  className="group flex flex-col items-start gap-5 p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] hover:border-brand-gold/30 transition-all duration-500 relative overflow-hidden"
+                  className="group flex flex-col items-start gap-5 p-6 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:bg-white/[0.06] hover:border-brand-gold/40 hover:shadow-[0_8px_30px_rgba(184,154,93,0.12)] transition-all duration-500 relative overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="p-3 rounded-full bg-black/40 border border-white/5 group-hover:border-brand-gold/20 transition-colors duration-500 shadow-xl relative z-10">
+                  <div className="absolute top-0 left-0 right-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-brand-gold via-brand-gold/60 to-transparent transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="p-3.5 rounded-xl bg-black/40 border border-brand-gold/20 group-hover:border-brand-gold/50 group-hover:bg-brand-gold/15 transition-all duration-500 shadow-xl relative z-10">
                     {pillar.icon}
                   </div>
                   <div className="relative z-10">
-                    <div className="font-display font-medium text-white text-[16px] mb-2 tracking-wide">
+                    <div className="font-display font-medium text-white text-[17px] mb-2 tracking-wide group-hover:text-brand-gold transition-colors duration-300">
                       {pillar.title}
                     </div>
-                    <div className="font-body text-gray-400 text-[13px] leading-relaxed font-light">
+                    <div className="font-body text-gray-300/80 text-[14px] leading-relaxed font-light">
                       {pillar.desc}
                     </div>
                   </div>

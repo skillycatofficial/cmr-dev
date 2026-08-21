@@ -128,10 +128,7 @@ export default function AboutUsPage() {
               <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">100%</div>
               <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Bank Approved</div>
             </div>
-            <div className="text-center p-2 last:border-0">
-              <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">200+</div>
-              <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Happy Families</div>
-            </div>
+    
           </div>
         </div>
       </section>

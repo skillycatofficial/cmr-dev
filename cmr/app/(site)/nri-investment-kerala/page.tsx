@@ -55,7 +55,7 @@ const nriSchema = {
           'name': 'Can NRIs own property in Kerala?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Yes. Resident Indians living abroad (NRIs and PIOs) are fully eligible to purchase residential property in India, including Kerala, under FEMA regulations. CMR\'s legal team will guide you through all compliance requirements.'
+            'text': 'Yes. Non-Resident Indians (NRIs) and Persons of Indian Origin (PIOs) are fully eligible to purchase residential property in India, including Kerala, under FEMA regulations. CMR\'s legal team will guide you through all compliance requirements.'
           }
         },
         {
@@ -121,7 +121,7 @@ export default function NriInvestmentPage() {
   const faqs = [
     {
       q: 'Can NRIs own property in Kerala?',
-      a: 'Yes. Resident Indians living abroad (NRIs and PIOs) are fully eligible to purchase residential property in India, including Kerala, under FEMA regulations. CMR\'s legal team will guide you through all compliance requirements.',
+      a: 'Yes. Non-Resident Indians (NRIs) and Persons of Indian Origin (PIOs) are fully eligible to purchase residential property in India, including Kerala, under FEMA regulations. CMR\'s legal team will guide you through all compliance requirements.',
     },
     {
       q: 'Can I get a home loan as an NRI buyer?',

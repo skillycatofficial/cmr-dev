@@ -19,7 +19,7 @@ const FALLBACK_ITEMS = [
   { id: 2,  cat: 'INTERIOR',  src: '/images/extracted/cmr-interior-dining.jpg',    code: 'CMR/KT522', aspect: 'aspect-[4/3]',   title: 'Modern Dining Space in Luxury Villa Kerala' },
   { id: 3,  cat: 'INTERIOR',  src: '/images/extracted/cmr-interior-bedroom.jpg',   code: 'CMR/KT519', aspect: 'aspect-square',  title: 'Premium Master Bedroom Design Kannur' },
   { id: 4,  cat: 'EXTERIOR',  src: '/images/slide/cmrslide5.webp',    code: 'CMR/KT520', aspect: 'aspect-[16/9]',  title: 'Contemporary Luxury Villa Exterior Kerala' },
-  { id: 5,  cat: 'EXTERIOR',  src: '/images/extracted/cmr-villa-exterior.jpg',     code: 'CMR/KT518', aspect: 'aspect-[3/2]',   title: 'Traditional Vasthu Compliant Villa Exterior' },
+  { id: 5,  cat: 'EXTERIOR',  src: '/images/extracted/cmr-villa-exterior.jpg',     code: 'CMR/KT518', aspect: 'aspect-[3/2]',   title: 'Traditional Vastu-Compliant Villa Exterior' },
   { id: 6,  cat: 'EXTERIOR',  src: '/images/extracted/cmr-grid-small-6.jpg',       code: 'CMR/KT517', aspect: 'aspect-[4/3]',   title: 'Premium Villa Architecture Design Kannur' },
   { id: 7,  cat: 'AMENITIES', src: '/images/extracted/cmr-gallery-1.jpg',          code: 'CMR/KT511', aspect: 'aspect-[3/4]',   title: 'Luxury Amenities at CMR Paradise Kerala' },
   { id: 8,  cat: 'AMENITIES', src: '/images/extracted/cmr-gallery-2.jpg',          code: 'CMR/BD501', aspect: 'aspect-square',  title: 'Community Living Spaces CMR Developers' },

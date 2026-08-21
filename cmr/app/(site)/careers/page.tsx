@@ -55,7 +55,7 @@ export default async function CareersPage() {
                 Our Culture
               </span>
               <h2 className="font-display font-bold text-brand-charcoal text-2xl md:text-3xl leading-tight">
-                Grow With the Team That Built Kerala&apos;s Most Trusted Villa Brand
+                Built on Pride, Not Just Projects
               </h2>
             </div>
             <div className="font-body text-brand-charcoal/70 text-body leading-relaxed space-y-4 font-light">

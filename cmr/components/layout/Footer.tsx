@@ -6,16 +6,25 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const projectLinks = [
-  { label: 'Alvina Harmony',    href: '/projects/alvina-harmony' },
-  { label: 'Aiza Harmony',      href: '/projects/aiza-harmony' },
-  { label: 'Aina Harmony',      href: '/projects/aina-harmony' },
-  { label: 'Anna Harmony',      href: '/projects/anna-harmony' },
-  { label: 'Aiza Silver Hills', href: '/projects/aiza-silver-hills' },
-  { label: 'Aiza Golden Hills', href: '/projects/aiza-golden-hills' },
-  { label: 'CMR Paradise',      href: '/projects/cmr-paradise' },
-  { label: 'Aina Paradise',     href: '/projects/aina-paradise' },
-  { label: 'Anna Paradise',     href: '/projects/anna-paradise' },
-  { label: 'Aiza Paradise',     href: '/projects/aiza-paradise' },
+  { label: 'Alvina Harmony',        href: '/projects/alvina-harmony' },
+  { label: 'Aiza Harmony',          href: '/projects/aiza-harmony' },
+  { label: 'Aina Harmony',          href: '/projects/aina-harmony' },
+  { label: 'Anna Harmony',          href: '/projects/anna-harmony' },
+  { label: 'Anna Haven',            href: '/projects/anna-haven' },
+  { label: 'Alvina Haven',          href: '/projects/alvina-haven' },
+  { label: 'Aiza Silver Hills',     href: '/projects/aiza-silver-hills' },
+  { label: 'Aiza Golden Hills',     href: '/projects/aiza-golden-hills' },
+  { label: 'Aiza Diamond Hills',    href: '/projects/aiza-diamond-hills' },
+  { label: 'CMR Paradise',          href: '/projects/cmr-paradise' },
+  { label: 'CMR Prime Meadows',     href: '/projects/cmr-prime-meadows' },
+  { label: 'Aina Paradise',         href: '/projects/aina-paradise' },
+  { label: 'Anna Paradise',         href: '/projects/anna-paradise' },
+  { label: 'Aiza Paradise',         href: '/projects/aiza-paradise' },
+  { label: 'Aina Paradise (Kottayam)', href: '/projects/aina-paradise-kottayam' },
+  { label: 'Alvina Garden',         href: '/projects/alvina-gardens' },
+  { label: 'Anna Garden',           href: '/projects/anna-gardens' },
+  { label: 'Aiza Garden',           href: '/projects/aiza-gardens' },
+  { label: 'Aina Garden',           href: '/projects/aina-gardens' },
 ]
 
 const companyLinks = [

@@ -107,7 +107,7 @@ export default function AboutUsPage() {
       {/* ── Infographics / Stats ────────────────────────── */}
       <section className="bg-white py-12 border-b border-brand-gray/20">
         <div className="px-section">
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-6 md:gap-4 bg-brand-ivory/10 p-6 md:p-8 border border-brand-gray/30 rounded-2xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 bg-brand-ivory/10 p-6 md:p-8 border border-brand-gray/30 rounded-2xl">
             <div className="text-center p-2 border-r border-brand-gray/20 last:border-0">
               <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">600+</div>
               <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Villas Delivered</div>
@@ -117,10 +117,6 @@ export default function AboutUsPage() {
               <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Years in Business</div>
             </div>
             <div className="text-center p-2 border-r border-brand-gray/20 last:border-0">
-              <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">3</div>
-              <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Districts</div>
-            </div>
-            <div className="text-center p-2 border-r border-brand-gray/20 last:border-0">
               <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">6</div>
               <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Active Projects</div>
             </div>
@@ -128,7 +124,7 @@ export default function AboutUsPage() {
               <div className="font-display font-bold text-brand-green text-3xl md:text-4xl mb-1">100%</div>
               <div className="font-body text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Bank Approved</div>
             </div>
-    
+  
           </div>
         </div>
       </section>

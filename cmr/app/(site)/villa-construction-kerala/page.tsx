@@ -72,7 +72,7 @@ export default function ServicesPage() {
     {
       num: '01',
       title: 'Site Assessment & Consultation',
-      desc: 'Our team evaluates the plots for orientation, Vastu alignment and connectivity before choosing our spaces for Villa projects.',
+      desc: 'Our team evaluates each plot for orientation, Vastu alignment and connectivity before finalising it for a CMR villa project.',
     },
     {
       num: '02',

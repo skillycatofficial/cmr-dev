@@ -50,33 +50,44 @@ export default function CelebratingSection() {
 
             <div className="space-y-6 font-body text-[14px] text-brand-charcoal/80 leading-relaxed max-w-2xl">
               <p>
-                We are celebrating becoming the top builders in Kannur, Kerala.
-                Within a span of just 14 years, we have officially handed over
-                600+ villas, solidifying our position as the leading real estate
-                developer in Kannur, Kerala.
+                CMR Group has officially solidified its position as the premier
+                real estate developer in Kannur, Kerala. Over a remarkable
+                14-year journey, we have proudly handed over the keys to more
+                than 600 premium villas, cementing our reputation as the
+                region&apos;s most trusted name in home construction. Our growth
+                is accelerating at an unprecedented pace, highlighted by the
+                successful delivery of 100 luxury homes in the last two years
+                alone. This milestone represents an incredible operational
+                average of two villa handovers every single month, proving our
+                capacity to scale without ever compromising on engineering
+                excellence.
               </p>
               <p>
-                It is on an average of 100 villas over the past 2 years and 2
-                per month. Unbelievable! Isn&apos;t it?
+                Our unprecedented growth is built entirely on a foundation of
+                customer trust and word-of-mouth referrals. We invite
+                prospective homebuyers to visit our completed communities and
+                speak directly with our vibrant network of over 600 happy
+                families. Every homeowner will share their firsthand experience
+                of the signature pillars that define the CMR brand. These
+                pillars include our meticulous material selection, flawless
+                architectural workmanship, and the thoughtful space utilisation
+                embedded within our strictly Vastu-compliant designs. Combined
+                with our selection of scenic, high-appreciating site locations,
+                we ensure that every property delivers both a peaceful
+                lifestyle and a secure financial investment.
               </p>
               <p>
-                If you feel so, visit us and talk to our 600+ happy families.
-                Each one of them will talk to you lavishly about CMR quality,
-                selection of scenic site location, transparency in dealings,
-                perfection in workmanship, care in material selection,
-                thoughtful space utilisation, vasthu complied designs, timely
-                completion, 100% loan scheme, ensuring customer delight and what
-                not!
-              </p>
-              <p>
-                Yes, our customers speak for us and bring us more and more of
-                their family and friends. That&apos;s what made us the largest
-                and most reputed villa promoter in Kerala.
-              </p>
-              <p>
-                CMR remains the builder of choice for both NRIs and middle
-                income group of this area with 600+ happy families bearing
-                testimony to our promise and integrity.
+                Transparency and accessibility remain at the core of our
+                business philosophy. To make dream homeownership a reality, CMR
+                offers a seamless 100% home loan scheme alongside strict
+                adherence to project delivery timelines. This unwavering
+                commitment to client satisfaction has made us the undisputed
+                villa promoter of choice for both local middle-income families
+                and Non-Resident Indians seeking reliable property investments
+                back home. By consistently delivering on our promises, our
+                customers have become our greatest ambassadors, continually
+                introducing their friends and family to the growing CMR
+                community.
               </p>
             </div>
 

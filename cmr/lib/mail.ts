@@ -30,7 +30,6 @@ export async function sendMail(payload: MailInput): Promise<boolean> {
   if (!host || !user || !pass) return false
 
   try {
-    // @ts-expect-error nodemailer type declarations may not be installed
     const nodemailer = await import('nodemailer')
     const transporter = nodemailer.default.createTransport({
       host,

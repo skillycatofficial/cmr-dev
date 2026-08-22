@@ -608,16 +608,11 @@ export default function Navbar() {
   // Lock body scroll when mobile menu or megamenu is open
   useEffect(() => {
     if (menuOpen || activeDD === 'Projects') {
-      document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'
     } else {
-      document.documentElement.style.overflow = ''
       document.body.style.overflow = ''
     }
-    return () => {
-      document.documentElement.style.overflow = ''
-      document.body.style.overflow = ''
-    }
+    return () => { document.body.style.overflow = '' }
   }, [menuOpen, activeDD])
 
   // Fetch projects from WordPress

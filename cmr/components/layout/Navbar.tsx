@@ -600,6 +600,20 @@ export default function Navbar() {
   const [districts, setDistricts] = useState<District[]>(() => groupProjectsByDistrict(FALLBACK_PROJECTS))
   const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false)
   const ddTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const desktopNavRef = useRef<HTMLElement | null>(null)
+
+  // Close the mega menu on a tap/click outside the desktop nav (touch devices
+  // have no hover, so this is how they dismiss it without navigating away)
+  useEffect(() => {
+    if (!activeDD) return
+    const handlePointerDown = (e: PointerEvent) => {
+      if (desktopNavRef.current && !desktopNavRef.current.contains(e.target as Node)) {
+        setActiveDD(null)
+      }
+    }
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [activeDD])
 
   // Scroll
   useEffect(() => {
@@ -685,53 +699,49 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center gap-0.5 flex-1 justify-end">
-            {navLinks.map((link) => (
-              <div
-                key={link.label}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(link.label)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link
-                  href={link.href}
-                  onClick={(e) => {
-                    // On touch devices hover never fires, so the mega menu
-                    // would otherwise be unreachable: first tap opens it,
-                    // a second tap on an already-open menu navigates through.
-                    if (link.hasProjects && activeDD !== link.label) {
-                      e.preventDefault()
-                      setActiveDD(link.label)
-                    }
-                  }}
-                  className={`flex items-center gap-1 px-3 py-2.5 font-body text-[14px] font-normal whitespace-nowrap transition-colors duration-200 ${
-                    scrolled
-                      ? 'text-brand-charcoal/80 hover:text-brand-green'
-                      : 'text-white/90 hover:text-white'
-                  }`}
+          <nav ref={desktopNavRef} className="hidden xl:flex items-center gap-0.5 flex-1 justify-end">
+            {navLinks.map((link) => {
+              const ddOpen = activeDD === link.label
+              const linkClassName = `flex items-center gap-1 px-3 py-2.5 font-body text-[14px] font-normal whitespace-nowrap transition-colors duration-200 ${
+                scrolled
+                  ? 'text-brand-charcoal/80 hover:text-brand-green'
+                  : 'text-white/90 hover:text-white'
+              }`
+
+              return (
+                <div
+                  key={link.label}
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter(link.label)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  {link.label}
-                  {link.hasProjects && (
-                    <ChevronDown className="opacity-60" />
+                  {link.hasProjects ? (
+                    // Not a link — it only opens the mega menu (hover on desktop, tap on touch).
+                    // Navigation happens from inside the menu (project cards, "All Projects").
+                    <button
+                      type="button"
+                      aria-expanded={ddOpen}
+                      onClick={() => setActiveDD(ddOpen ? null : link.label)}
+                      className={linkClassName}
+                    >
+                      {link.label}
+                      <ChevronDown className="opacity-60" />
+                    </button>
+                  ) : (
+                    <Link href={link.href} className={linkClassName}>
+                      {link.label}
+                    </Link>
                   )}
-                </Link>
 
-                <AnimatePresence>
-                  {link.hasProjects && activeDD === link.label && (
-                    <ProjectsMenu districts={districts} scrolled={scrolled} />
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+                  <AnimatePresence>
+                    {link.hasProjects && ddOpen && (
+                      <ProjectsMenu districts={districts} scrolled={scrolled} />
+                    )}
+                  </AnimatePresence>
+                </div>
+              )
+            })}
           </nav>
-
-          {/* Tap-outside-to-close backdrop for the mega menu (touch devices) */}
-          {activeDD === 'Projects' && (
-            <div
-              className="fixed inset-0 z-40 xl:block hidden"
-              onClick={() => setActiveDD(null)}
-            />
-          )}
 
           {/* Right actions */}
           <div className="flex items-center gap-2 flex-shrink-0">

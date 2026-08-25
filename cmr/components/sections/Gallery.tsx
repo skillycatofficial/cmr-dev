@@ -39,9 +39,15 @@ interface GalleryItem {
 
 interface GalleryProps {
   initialItems?: GalleryItem[]
+  eyebrow?: string
+  title?: React.ReactNode
 }
 
-export default function Gallery({ initialItems }: GalleryProps) {
+export default function Gallery({
+  initialItems,
+  eyebrow = 'VISUAL ARCHIVE',
+  title = <>ARCHITECTURAL<br/>PERSPECTIVES</>,
+}: GalleryProps) {
   const galleryItems = initialItems && initialItems.length > 0 ? initialItems : FALLBACK_ITEMS
   const [active, setActive] = useState<Category>('ALL')
 
@@ -59,9 +65,9 @@ export default function Gallery({ initialItems }: GalleryProps) {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7 }}
           >
-            <p className="font-body text-brand-charcoal/50 text-[10px] tracking-[0.25em] uppercase mb-4">VISUAL ARCHIVE</p>
+            <p className="font-body text-brand-charcoal/50 text-[10px] tracking-[0.25em] uppercase mb-4">{eyebrow}</p>
             <h2 className="font-display font-medium text-brand-charcoal text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
-              ARCHITECTURAL<br/>PERSPECTIVES
+              {title}
             </h2>
           </motion.div>
 

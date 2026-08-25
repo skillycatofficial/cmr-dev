@@ -300,6 +300,7 @@ function ProjectsMenu({ districts }: { districts: District[]; scrolled: boolean 
                   <div
                     key={d.name}
                     onMouseEnter={() => handleDistrictEnter(d.name)}
+                    onClick={() => handleDistrictEnter(d.name)}
                     className={`group flex items-center justify-between px-5 py-3.5 rounded-xl cursor-pointer transition-colors duration-150 text-[13.5px] font-bold tracking-wider uppercase ${
                       isActive
                         ? 'bg-brand-green/5 text-brand-green font-black'
@@ -361,7 +362,9 @@ function ProjectsMenu({ districts }: { districts: District[]; scrolled: boolean 
                     return (
                       <button
                         key={sl.name}
+                        type="button"
                         onMouseEnter={() => handleSubLocationEnter(sl.name)}
+                        onClick={() => handleSubLocationEnter(sl.name)}
                         className={`flex-shrink-0 px-4 py-2 rounded-full text-[12px] font-bold tracking-wider uppercase transition-all duration-200 ${
                           isActiveSL
                             ? 'bg-brand-green text-white shadow-md'
@@ -692,6 +695,15 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
+                  onClick={(e) => {
+                    // On touch devices hover never fires, so the mega menu
+                    // would otherwise be unreachable: first tap opens it,
+                    // a second tap on an already-open menu navigates through.
+                    if (link.hasProjects && activeDD !== link.label) {
+                      e.preventDefault()
+                      setActiveDD(link.label)
+                    }
+                  }}
                   className={`flex items-center gap-1 px-3 py-2.5 font-body text-[14px] font-normal whitespace-nowrap transition-colors duration-200 ${
                     scrolled
                       ? 'text-brand-charcoal/80 hover:text-brand-green'
@@ -712,6 +724,14 @@ export default function Navbar() {
               </div>
             ))}
           </nav>
+
+          {/* Tap-outside-to-close backdrop for the mega menu (touch devices) */}
+          {activeDD === 'Projects' && (
+            <div
+              className="fixed inset-0 z-40 xl:block hidden"
+              onClick={() => setActiveDD(null)}
+            />
+          )}
 
           {/* Right actions */}
           <div className="flex items-center gap-2 flex-shrink-0">

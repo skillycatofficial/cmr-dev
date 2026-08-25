@@ -25,101 +25,7 @@ interface Project {
 interface SubLocation { name: string; projects: Project[] }
 interface District     { name: string; subLocations: SubLocation[] }
 
-// ─── Fallback data ────────────────────────────────────────────────────────────
-const FALLBACK_PROJECTS: Project[] = [
-  {
-    name: 'Alvina Harmony',
-    slug: 'alvina-harmony',
-    district: 'Kannur',
-    sub_location: 'Kadachira',
-    status: 'On Going',
-    price: '₹55 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-villa-exterior.jpg',
-    bhk: '3 & 4 BHK',
-    units: '34 Luxury Villas',
-    featured: true,
-  },
-  {
-    name: 'Anna Harmony',
-    slug: 'anna-harmony',
-    district: 'Kannur',
-    sub_location: 'Chala',
-    status: 'Just Launched',
-    price: '₹48 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-grid-small-3.jpg',
-    bhk: '3 BHK',
-    units: '20 Luxury Villas',
-  },
-  {
-    name: 'Aiza Silver Hills',
-    slug: 'aiza-silver-hills',
-    district: 'Kannur',
-    sub_location: 'Vayattuparamba',
-    status: 'On Going',
-    price: '₹75 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-grid-small-4.jpg',
-    bhk: '3 & 4 BHK',
-    units: '15 Premium Villas',
-  },
-  {
-    name: 'Alvina Haven',
-    slug: 'alvina-haven',
-    district: 'Kannur',
-    sub_location: 'Taliparamba',
-    status: 'On Going',
-    price: '₹52 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-projects-mid-1.jpg',
-    bhk: '3 BHK',
-    units: '24 Luxury Villas',
-  },
-  {
-    name: 'Aiza Harmony',
-    slug: 'aiza-harmony',
-    district: 'Ernakulam',
-    sub_location: 'Mulanthuruthy',
-    status: 'On Going',
-    price: '₹65 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-interior-living.jpg',
-    bhk: '3 BHK',
-    units: '24 Premium Villas',
-    featured: true,
-  },
-  {
-    name: 'Aina Harmony',
-    slug: 'aina-harmony',
-    district: 'Ernakulam',
-    sub_location: 'Angamaly',
-    status: 'On Going',
-    price: '₹58 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-lifecycle-villa.jpg',
-    bhk: '3 BHK',
-    units: '28 Luxury Villas',
-  },
-  {
-    name: 'Aiza Golden Hills',
-    slug: 'aiza-golden-hills',
-    district: 'Ernakulam',
-    sub_location: 'Mulanthuruthy',
-    status: 'Completed',
-    price: '₹70 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-grid-small-5.jpg',
-    bhk: '3 & 4 BHK',
-    units: '22 Luxury Villas',
-  },
-  {
-    name: 'Aina Paradise',
-    slug: 'aina-paradise',
-    district: 'Kottayam',
-    sub_location: 'Changanassery',
-    status: 'On Going',
-    price: '₹62 Lakhs Onwards',
-    heroImage: '/images/extracted/cmr-grid-small-6.jpg',
-    bhk: '3 & 4 BHK',
-    units: '18 Premium Villas',
-  },
-]
-
-// ─── Legacy location parser (fallback for old WP data) ───────────────────────
+// ─── Legacy location parser (normalizes older WP records without district/sub_location fields) ──
 const KNOWN_DISTRICTS = new Set([
   'Kannur','Ernakulam','Kottayam','Kozhikode','Thrissur',
   'Malappuram','Palakkad','Wayanad','Kasaragod','Alappuzha',
@@ -222,7 +128,7 @@ function MapPinIcon({ className = 'w-3.5 h-3.5 flex-shrink-0' }: { className?: s
 }
 
 // ─── Desktop: Luxury Mega Menu ───────────────────────────────────────────────
-function ProjectsMenu({ districts }: { districts: District[]; scrolled: boolean }) {
+function ProjectsMenu({ districts, loading }: { districts: District[]; scrolled: boolean; loading: boolean }) {
   const [activeDistrict,    setActiveDistrict]    = useState<string | null>(districts[0]?.name || null)
   const [activeSubLocation, setActiveSubLocation] = useState<string | null>(districts[0]?.subLocations[0]?.name || null)
 
@@ -283,9 +189,26 @@ function ProjectsMenu({ districts }: { districts: District[]; scrolled: boolean 
       transition={{ duration: 0.2, ease: 'easeOut' }}
       className="fixed top-[98px] left-1/2 z-50 flex pt-2"
     >
-      <div 
+      <div
         className="bg-white border-2 border-gray-200/80 border-t-4 border-t-brand-gold shadow-[0_30px_70px_-15px_rgba(0,0,0,0.22)] flex rounded-3xl overflow-hidden w-[1180px] max-w-[95vw] max-h-[calc(92vh-100px)] transition-all duration-200"
       >
+        {loading ? (
+          <div className="flex-1 flex flex-col items-center justify-center py-28 gap-3">
+            <div className="w-6 h-6 border-2 border-brand-gold/30 border-t-brand-gold rounded-full animate-spin" />
+            <p className="text-[13px] text-brand-charcoal/50 font-body">Loading projects…</p>
+          </div>
+        ) : districts.length === 0 ? (
+          <div className="flex-1 flex flex-col items-center justify-center py-28 gap-4">
+            <p className="text-[14px] text-brand-charcoal/50 font-body">Unable to load projects right now.</p>
+            <Link
+              href="/projects"
+              className="px-6 py-2.5 rounded-full text-[12px] font-bold tracking-widest uppercase bg-brand-green text-white hover:bg-brand-gold transition-colors"
+            >
+              View All Projects
+            </Link>
+          </div>
+        ) : (
+        <>
         {/* Level 1 – Districts Sidebar */}
         <div className="w-[260px] bg-gray-50/90 border-r-2 border-gray-200/70 py-6 flex flex-col justify-between flex-shrink-0 overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
           <div>
@@ -459,6 +382,8 @@ function ProjectsMenu({ districts }: { districts: District[]; scrolled: boolean 
             </motion.div>
           )}
         </div>
+        </>
+        )}
       </div>
     </motion.div>
   )
@@ -467,9 +392,11 @@ function ProjectsMenu({ districts }: { districts: District[]; scrolled: boolean 
 // ─── Mobile: accordion row for Projects ──────────────────────────────────────
 function MobileProjectsAccordion({
   districts,
+  loading,
   onClose,
 }: {
   districts: District[]
+  loading: boolean
   onClose: () => void
 }) {
   const [openDistrict,    setOpenDistrict]    = useState<string | null>(null)
@@ -481,6 +408,23 @@ function MobileProjectsAccordion({
   }
   const toggleSubLocation = (name: string) => {
     setOpenSubLocation(prev => (prev === name ? null : name))
+  }
+
+  if (loading) {
+    return (
+      <div className="pl-2 pb-2 py-4 flex items-center gap-2 text-brand-ivory/40 text-[12px]">
+        <div className="w-3.5 h-3.5 border-2 border-brand-gold/30 border-t-brand-gold rounded-full animate-spin" />
+        Loading projects…
+      </div>
+    )
+  }
+
+  if (districts.length === 0) {
+    return (
+      <div className="pl-2 pb-2 py-4 text-brand-ivory/40 text-[12px]">
+        Unable to load projects right now.
+      </div>
+    )
   }
 
   return (
@@ -555,6 +499,9 @@ function MobileProjectsAccordion({
                                   <div className="flex-1 min-w-0">
                                     <div className="text-[13px] font-bold text-white truncate">{p.name}</div>
                                     <div className="text-[10px] text-brand-gold font-semibold">{p.price || '₹55 Lakhs Onwards'}</div>
+                                    {p.units && (
+                                      <div className="text-[9px] text-brand-ivory/50 font-medium mt-0.5">{p.units}</div>
+                                    )}
                                   </div>
                                   {p.status && (
                                     <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold tracking-wider uppercase whitespace-nowrap flex-shrink-0 ${
@@ -597,7 +544,8 @@ export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false)
   const [menuOpen,  setMenuOpen]  = useState(false)
   const [activeDD,  setActiveDD]  = useState<string | null>(null)
-  const [districts, setDistricts] = useState<District[]>(() => groupProjectsByDistrict(FALLBACK_PROJECTS))
+  const [districts, setDistricts] = useState<District[]>([])
+  const [projectsLoading, setProjectsLoading] = useState(true)
   const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false)
   const ddTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
   const desktopNavRef = useRef<HTMLElement | null>(null)
@@ -632,12 +580,14 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen, activeDD])
 
-  // Fetch projects from WordPress
+  // Fetch projects from WordPress — the mega menu and mobile accordion are
+  // driven entirely by live data, no hardcoded project list
   useEffect(() => {
     let active = true
     getAllProjects()
       .then((data) => {
-        if (active && data?.length > 0) {
+        if (!active) return
+        if (data?.length > 0) {
           const mapped: Project[] = data.map((p: Record<string, string | number | boolean | { num?: string } | undefined>) => ({
             name:         String(p.name || ''),
             slug:         String(p.slug || ''),
@@ -648,13 +598,17 @@ export default function Navbar() {
             price:        p.price ? String(p.price) : p.starting_price ? String(p.starting_price) : 'Price on Request',
             heroImage:    p.heroImage ? String(p.heroImage) : p.featured_image ? String(p.featured_image) : p.image ? String(p.image) : '/images/extracted/cmr-villa-exterior.jpg',
             bhk:          p.bhk ? String(p.bhk) : p.configurations ? String(p.configurations) : '3 & 4 BHK',
-            units:        p.units ? String(p.units) : p.badge && typeof p.badge === 'object' && p.badge.num ? `${p.badge.num} Villas` : 'Luxury Villas',
+            units:        p.units ? String(p.units) : p.badge && typeof p.badge === 'object' && p.badge.num ? `${p.badge.num} Villas` : undefined,
             featured:     Boolean(p.featured),
           }))
           setDistricts(groupProjectsByDistrict(mapped))
         }
+        setProjectsLoading(false)
       })
-      .catch((err) => console.error('Navbar: project fetch failed', err))
+      .catch((err) => {
+        console.error('Navbar: project fetch failed', err)
+        if (active) setProjectsLoading(false)
+      })
     return () => { active = false }
   }, [])
 
@@ -735,7 +689,7 @@ export default function Navbar() {
 
                   <AnimatePresence>
                     {link.hasProjects && ddOpen && (
-                      <ProjectsMenu districts={districts} scrolled={scrolled} />
+                      <ProjectsMenu districts={districts} scrolled={scrolled} loading={projectsLoading} />
                     )}
                   </AnimatePresence>
                 </div>
@@ -860,6 +814,7 @@ export default function Navbar() {
                               <div className="pt-1 pb-3">
                                 <MobileProjectsAccordion
                                   districts={districts}
+                                  loading={projectsLoading}
                                   onClose={closeMenu}
                                 />
                               </div>

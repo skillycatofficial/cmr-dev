@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -118,33 +118,59 @@ const FooterSection = ({ title, links }: { title: string, links: { label: string
   </div>
 )
 
-export default function Footer() {
-  const [villaCounts, setVillaCounts] = useState<Record<string, string>>({})
+interface FooterProjectInfo {
+  villaCount?: string
+  location?: string
+}
 
-  // Fetch live villa counts from WordPress and match them to each project by slug
+// Sentinel group key for projects whose location hasn't resolved yet (or has none) —
+// rendered as a plain list with no location heading
+const UNGROUPED = '__ungrouped__'
+
+export default function Footer() {
+  const [projectInfo, setProjectInfo] = useState<Record<string, FooterProjectInfo>>({})
+
+  // Fetch live villa counts + location from WordPress and match them to each project by slug
   useEffect(() => {
     let active = true
     getAllProjects()
       .then((data) => {
         if (!active || !Array.isArray(data)) return
-        const counts: Record<string, string> = {}
+        const info: Record<string, FooterProjectInfo> = {}
         for (const p of data as Record<string, unknown>[]) {
           const slug = p.slug ? String(p.slug) : ''
+          if (!slug) continue
           const badge = p.badge as { num?: string } | undefined
-          const num = badge?.num ?? (p.units ? String(p.units) : undefined)
-          if (slug && num) counts[slug] = String(num)
+          const villaCount = badge?.num ?? (p.units ? String(p.units) : undefined)
+          const subLocation = p.sub_location ? String(p.sub_location) : ''
+          const rawLocation = p.location ? String(p.location) : ''
+          const location = subLocation || rawLocation.split(',')[0].trim()
+          info[slug] = { villaCount: villaCount ? String(villaCount) : undefined, location: location || undefined }
         }
-        setVillaCounts(counts)
+        setProjectInfo(info)
       })
       .catch((err) => console.error('Footer: project fetch failed', err))
     return () => { active = false }
   }, [])
 
-  const projectLinksWithCounts = projectLinks.map((link) => {
-    const slug = link.href.split('/').filter(Boolean).pop() || ''
-    const count = villaCounts[slug]
-    return count ? { ...link, label: `${link.label} (${count} Villas)` } : link
-  })
+  // Group project links under a location heading, using each project's live
+  // WordPress location — falls back to a single unlabeled group while loading
+  const projectsByLocation = useMemo(() => {
+    const groups: { location: string; projects: { label: string; href: string }[] }[] = []
+    const indexByLocation = new Map<string, number>()
+    for (const link of projectLinks) {
+      const slug = link.href.split('/').filter(Boolean).pop() || ''
+      const { villaCount, location } = projectInfo[slug] || {}
+      const label = villaCount ? `${link.label} (${villaCount} Villas)` : link.label
+      const groupKey = location || UNGROUPED
+      if (!indexByLocation.has(groupKey)) {
+        indexByLocation.set(groupKey, groups.length)
+        groups.push({ location: groupKey, projects: [] })
+      }
+      groups[indexByLocation.get(groupKey)!].projects.push({ label, href: link.href })
+    }
+    return groups
+  }, [projectInfo])
 
   return (
     <footer className="bg-brand-green text-brand-ivory">
@@ -212,7 +238,32 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1">
-            <FooterSection title="Our Projects" links={projectLinksWithCounts} />
+            <div className="font-body text-brand-gold text-label tracking-[0.3em] uppercase mb-5">
+              Our Projects
+            </div>
+            <div className="space-y-4">
+              {projectsByLocation.map((group) => (
+                <div key={group.location}>
+                  {group.location !== UNGROUPED && (
+                    <div className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.15em] uppercase border-b border-brand-ivory/15 pb-1.5 mb-2">
+                      {group.location}
+                    </div>
+                  )}
+                  <ul className="space-y-2">
+                    {group.projects.map((p) => (
+                      <li key={p.href}>
+                        <Link
+                          href={p.href}
+                          className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
+                        >
+                          {p.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="col-span-1">

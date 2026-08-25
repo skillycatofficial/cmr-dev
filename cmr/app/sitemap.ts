@@ -12,6 +12,7 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE}/blog`,                    priority: 0.8,  changeFrequency: 'weekly'  },
   { url: `${BASE}/testimonials`,            priority: 0.6,  changeFrequency: 'monthly' },
   { url: `${BASE}/gallery`,                 priority: 0.6,  changeFrequency: 'monthly' },
+  { url: `${BASE}/videos`,                  priority: 0.6,  changeFrequency: 'weekly'  },
   { url: `${BASE}/careers`,                 priority: 0.6,  changeFrequency: 'monthly' },
   { url: `${BASE}/contact-us`,              priority: 0.7,  changeFrequency: 'monthly' },
   { url: `${BASE}/nri-investment-kerala`,   priority: 0.8,  changeFrequency: 'monthly' },

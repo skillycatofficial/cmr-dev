@@ -99,6 +99,7 @@ const navLinks = [
   { label: 'NRI Investment',     href: '/nri-investment-kerala' },
   { label: 'Testimonials',       href: '/testimonials' },
   { label: 'Gallery',            href: '/gallery' },
+  { label: 'Videos',             href: '/videos' },
   { label: 'Blog',               href: '/blog' },
   { label: 'Careers',            href: '/careers' },
   { label: 'Contact Us',         href: '/contact-us' },

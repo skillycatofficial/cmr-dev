@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: '**.cmrdevelopers.com' },
       { protocol: 'https', hostname: 'www.figma.com' },
+      { protocol: 'https', hostname: 'i.ytimg.com' },
       // WordPress Production
       { protocol: 'https', hostname: 'backendcmr.skillycat.com' },
       // WordPress Local / Development

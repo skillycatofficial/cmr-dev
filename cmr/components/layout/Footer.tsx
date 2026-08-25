@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getAllProjects } from '@/lib/wordpress'
 
 const projectLinks = [
   { label: 'Alvina Harmony',        href: '/projects/alvina-harmony' },
@@ -104,7 +105,7 @@ const FooterSection = ({ title, links }: { title: string, links: { label: string
     </div>
     <ul className="space-y-2.5">
       {links.map((link) => (
-        <li key={link.label}>
+        <li key={link.href}>
           <Link
             href={link.href}
             className="font-body text-brand-ivory/50 hover:text-brand-ivory text-ui transition-colors duration-200"
@@ -118,6 +119,33 @@ const FooterSection = ({ title, links }: { title: string, links: { label: string
 )
 
 export default function Footer() {
+  const [villaCounts, setVillaCounts] = useState<Record<string, string>>({})
+
+  // Fetch live villa counts from WordPress and match them to each project by slug
+  useEffect(() => {
+    let active = true
+    getAllProjects()
+      .then((data) => {
+        if (!active || !Array.isArray(data)) return
+        const counts: Record<string, string> = {}
+        for (const p of data as Record<string, unknown>[]) {
+          const slug = p.slug ? String(p.slug) : ''
+          const badge = p.badge as { num?: string } | undefined
+          const num = badge?.num ?? (p.units ? String(p.units) : undefined)
+          if (slug && num) counts[slug] = String(num)
+        }
+        setVillaCounts(counts)
+      })
+      .catch((err) => console.error('Footer: project fetch failed', err))
+    return () => { active = false }
+  }, [])
+
+  const projectLinksWithCounts = projectLinks.map((link) => {
+    const slug = link.href.split('/').filter(Boolean).pop() || ''
+    const count = villaCounts[slug]
+    return count ? { ...link, label: `${link.label} (${count})` } : link
+  })
+
   return (
     <footer className="bg-brand-green text-brand-ivory">
 
@@ -184,7 +212,7 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1">
-            <FooterSection title="Our Projects" links={projectLinks} />
+            <FooterSection title="Our Projects" links={projectLinksWithCounts} />
           </div>
 
           <div className="col-span-1">

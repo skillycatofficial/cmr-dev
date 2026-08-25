@@ -37,6 +37,7 @@ const companyLinks = [
 ]
 
 const resourceLinks = [
+  { label: 'Gallery',           href: '/gallery' },
   { label: 'Testimonials',      href: '/testimonials' },
   { label: 'Careers',           href: '/careers' },
   { label: 'Contact Us',        href: '/contact-us' },

@@ -98,6 +98,7 @@ const navLinks = [
   { label: 'Villa Customisation', href: '/villa-construction-kerala' },
   { label: 'NRI Investment',     href: '/nri-investment-kerala' },
   { label: 'Testimonials',       href: '/testimonials' },
+  { label: 'Gallery',            href: '/gallery' },
   { label: 'Blog',               href: '/blog' },
   { label: 'Careers',            href: '/careers' },
   { label: 'Contact Us',         href: '/contact-us' },

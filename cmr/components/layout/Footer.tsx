@@ -143,7 +143,7 @@ export default function Footer() {
   const projectLinksWithCounts = projectLinks.map((link) => {
     const slug = link.href.split('/').filter(Boolean).pop() || ''
     const count = villaCounts[slug]
-    return count ? { ...link, label: `${link.label} (${count})` } : link
+    return count ? { ...link, label: `${link.label} (${count} Villas)` } : link
   })
 
   return (

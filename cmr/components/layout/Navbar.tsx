@@ -181,6 +181,11 @@ function ProjectsMenu({ districts, loading }: { districts: District[]; scrolled:
     return d.subLocations.reduce((acc, sl) => acc + sl.projects.length, 0)
   }
 
+  // Total villas across a set of projects (parsed from each project's "N Villas" unit label)
+  const getVillaCount = (projects: Project[]) => {
+    return projects.reduce((acc, p) => acc + (parseInt(p.units || '', 10) || 0), 0)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12, x: "-50%" }}
@@ -294,7 +299,7 @@ function ProjectsMenu({ districts, loading }: { districts: District[]; scrolled:
                             : 'bg-gray-100 text-brand-charcoal/70 hover:bg-gray-200 hover:text-brand-charcoal'
                         }`}
                       >
-                        {sl.name} ({sl.projects.length})
+                        {sl.name} ({getVillaCount(sl.projects)} Villas)
                       </button>
                     )
                   })}

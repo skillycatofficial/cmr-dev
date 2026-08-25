@@ -314,12 +314,12 @@ function ProjectsMenu({ districts, loading }: { districts: District[]; scrolled:
                 </div>
 
                 {activeSubLocationData?.projects && activeSubLocationData.projects.length > 0 ? (
-                  <div className="grid grid-cols-2 gap-5">
+                  <div className="grid grid-cols-2 gap-2">
                     {activeSubLocationData.projects.map(p => (
                       <Link
                         key={p.slug}
                         href={`/projects/${p.slug}`}
-                        className="group/item flex gap-4 p-4 rounded-2xl border-2 border-gray-200/80 bg-white hover:border-brand-gold hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                        className="group/item flex gap-4 p-2 rounded-2xl border-2 border-gray-200/80 bg-white hover:border-brand-gold hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                       >
                         {/* Image Thumbnail */}
                         <div className="relative w-[150px] h-[115px] rounded-xl overflow-hidden flex-shrink-0 bg-gray-200 shadow-inner">
@@ -348,21 +348,21 @@ function ProjectsMenu({ districts, loading }: { districts: District[]; scrolled:
                             <div className="font-display text-[17.5px] font-bold text-brand-charcoal group-hover/item:text-brand-green transition-colors truncate leading-tight">
                               {p.name}
                             </div>
+                            <div className="flex items-center gap-2 mt-2">
+                              <span className="text-[12.5px] font-bold px-3 py-1 rounded-md bg-brand-green/10 text-brand-green border border-brand-green/20">
+                                {p.bhk || '3 & 4 BHK'}
+                              </span>
+                              {p.units && (
+                                <span className="text-[12.5px] font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-md truncate">
+                                  {p.units}
+                                </span>
+                              )}
+                            </div>
                           </div>
 
                           <div className="mt-2">
                             <div className="text-[15px] font-extrabold text-brand-gold font-display">
                               {p.price || '₹55 Lakhs Onwards'}
-                            </div>
-                            <div className="flex items-center gap-2 mt-2">
-                              <span className="text-[10.5px] font-bold px-2.5 py-0.5 rounded-md bg-brand-green/10 text-brand-green border border-brand-green/20">
-                                {p.bhk || '3 & 4 BHK'}
-                              </span>
-                              {p.units && (
-                                <span className="text-[10.5px] font-semibold text-gray-600 bg-gray-100 px-2.5 py-0.5 rounded-md truncate">
-                                  {p.units}
-                                </span>
-                              )}
                             </div>
                           </div>
                         </div>

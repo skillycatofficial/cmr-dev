@@ -4,9 +4,26 @@ const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://test.loca
 
 export async function fetchAPI(endpoint: string) {
   const url = `${WORDPRESS_URL}${endpoint}`;
-  const res = await fetch(url, {
-    next: { revalidate: 60 }, // Cache for 60 seconds (revalidate)
-  });
+  // Without a timeout, a slow/unreachable backend hangs every caller forever
+  // (e.g. the navbar's mega menu stuck on "Loading projects…") instead of
+  // failing fast into each component's fallback UI.
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      next: { revalidate: 60 }, // Cache for 60 seconds (revalidate)
+      signal: controller.signal,
+    });
+  } catch (err) {
+    if (err instanceof Error && err.name === 'AbortError') {
+      throw new Error(`WordPress API request timed out: ${endpoint}`);
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
 
   if (!res.ok) {
     throw new Error(`WordPress API returned error status: ${res.status}`);

@@ -125,7 +125,7 @@ export default async function GalleryPage() {
                       {project.name}
                     </h2>
                     {(project.location || project.villaCount) && (
-                      <p className="font-body text-brand-charcoal/50 text-[13px] mt-1.5">
+                      <p className="font-body text-brand-charcoal/60 text-[15px] md:text-[16px] font-medium mt-2">
                         {project.location}
                         {project.location && project.villaCount && ' · '}
                         {project.villaCount && `${project.villaCount} Villas`}

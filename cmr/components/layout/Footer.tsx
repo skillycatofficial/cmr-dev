@@ -322,7 +322,7 @@ export default function Footer() {
             © 2026 CMR Developers Pvt. Ltd. All Rights Reserved.
           </p>
           <p className="font-body text-brand-ivory/60 text-label">
-            Made With Love From <a href="https://skillycat.com" target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:text-brand-ivory transition-colors">Skillycat Technologies LLP</a>
+            Made With Love From <a href="https://skillycat.com" target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:text-brand-ivory transition-colors">Skillycat Technologies</a>
           </p>
         </div>
       </div>

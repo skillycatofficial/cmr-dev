@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getAllProjects } from '@/lib/wordpress'
+import { resolveDistrict } from '@/lib/utils'
 
 const projectLinks = [
   { label: 'Alvina Harmony',        href: '/projects/alvina-harmony' },
@@ -122,17 +123,20 @@ const FooterSection = ({ title, links }: { title: string, links: { label: string
 
 interface FooterProjectInfo {
   villaCount?: string
-  location?: string
+  district?: string
 }
 
-// Sentinel group key for projects whose location hasn't resolved yet (or has none) —
-// rendered as a plain list with no location heading
+// Sentinel group key for projects whose district hasn't resolved yet (or has none) —
+// rendered as a plain list with no district heading
 const UNGROUPED = '__ungrouped__'
+
+// Keep districts in the same order as the navbar mega menu
+const DISTRICT_ORDER = ['Kannur', 'Ernakulam', 'Kottayam', 'Kozhikode', 'Thrissur']
 
 export default function Footer() {
   const [projectInfo, setProjectInfo] = useState<Record<string, FooterProjectInfo>>({})
 
-  // Fetch live villa counts + location from WordPress and match them to each project by slug
+  // Fetch live villa counts + district from WordPress and match them to each project by slug
   useEffect(() => {
     let active = true
     getAllProjects()
@@ -144,10 +148,12 @@ export default function Footer() {
           if (!slug) continue
           const badge = p.badge as { num?: string } | undefined
           const villaCount = badge?.num ?? (p.units ? String(p.units) : undefined)
-          const subLocation = p.sub_location ? String(p.sub_location) : ''
-          const rawLocation = p.location ? String(p.location) : ''
-          const location = subLocation || rawLocation.split(',')[0].trim()
-          info[slug] = { villaCount: villaCount ? String(villaCount) : undefined, location: location || undefined }
+          const district = resolveDistrict({
+            district: p.district ? String(p.district) : undefined,
+            sub_location: p.sub_location ? String(p.sub_location) : undefined,
+            location: p.location ? String(p.location) : undefined,
+          })
+          info[slug] = { villaCount: villaCount ? String(villaCount) : undefined, district: district || undefined }
         }
         setProjectInfo(info)
       })
@@ -155,22 +161,29 @@ export default function Footer() {
     return () => { active = false }
   }, [])
 
-  // Group project links under a location heading, using each project's live
-  // WordPress location — falls back to a single unlabeled group while loading
-  const projectsByLocation = useMemo(() => {
-    const groups: { location: string; projects: { label: string; href: string }[] }[] = []
-    const indexByLocation = new Map<string, number>()
+  // Group project links under a district heading, using each project's live
+  // WordPress district — falls back to a single unlabeled group while loading
+  const projectsByDistrict = useMemo(() => {
+    const groups: { district: string; projects: { label: string; href: string }[] }[] = []
+    const indexByDistrict = new Map<string, number>()
     for (const link of projectLinks) {
       const slug = link.href.split('/').filter(Boolean).pop() || ''
-      const { villaCount, location } = projectInfo[slug] || {}
+      const { villaCount, district } = projectInfo[slug] || {}
       const label = villaCount ? `${link.label} (${villaCount} Villas)` : link.label
-      const groupKey = location || UNGROUPED
-      if (!indexByLocation.has(groupKey)) {
-        indexByLocation.set(groupKey, groups.length)
-        groups.push({ location: groupKey, projects: [] })
+      const groupKey = district || UNGROUPED
+      if (!indexByDistrict.has(groupKey)) {
+        indexByDistrict.set(groupKey, groups.length)
+        groups.push({ district: groupKey, projects: [] })
       }
-      groups[indexByLocation.get(groupKey)!].projects.push({ label, href: link.href })
+      groups[indexByDistrict.get(groupKey)!].projects.push({ label, href: link.href })
     }
+    groups.sort((a, b) => {
+      const ai = DISTRICT_ORDER.indexOf(a.district), bi = DISTRICT_ORDER.indexOf(b.district)
+      if (ai !== -1 && bi !== -1) return ai - bi
+      if (ai !== -1) return -1
+      if (bi !== -1) return 1
+      return 0
+    })
     return groups
   }, [projectInfo])
 
@@ -244,11 +257,11 @@ export default function Footer() {
               Our Projects
             </div>
             <div className="space-y-4">
-              {projectsByLocation.map((group) => (
-                <div key={group.location}>
-                  {group.location !== UNGROUPED && (
+              {projectsByDistrict.map((group) => (
+                <div key={group.district}>
+                  {group.district !== UNGROUPED && (
                     <div className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.15em] uppercase border-b border-brand-ivory/15 pb-1.5 mb-2">
-                      {group.location}
+                      {group.district}
                     </div>
                   )}
                   <ul className="space-y-2">

@@ -719,19 +719,22 @@ export default function Navbar() {
 
         <div className="px-4 sm:px-6 lg:px-8 h-16 md:h-20 xl:h-[102px] flex items-center justify-between gap-4">
 
-          {/* Logo */}
+          {/* Logo — pinned to the very top of the header regardless of whether
+              the contact utility bar above is showing or collapsed */}
           <Link
             href="/"
-            className="flex-shrink-0 relative w-[82px] h-[82px] md:w-[90px] md:h-[90px] xl:w-[120px] xl:h-[120px] self-start -mt-1 xl:-top-2"
+            className="absolute top-0 left-4 sm:left-6 lg:left-8 z-10 w-[82px] h-[82px] md:w-[90px] md:h-[90px] xl:w-[120px] xl:h-[120px]"
           >
             <Image
               src="/images/cmr-logo.png"
               alt="CMR Developers"
               fill
-              className="object-contain"
+              className="object-contain object-top"
               priority
             />
           </Link>
+          {/* Spacer reserving the logo's width in the row, since the logo itself is absolutely positioned */}
+          <div className="flex-shrink-0 w-[82px] md:w-[90px] xl:w-[120px]" aria-hidden="true" />
 
           {/* Desktop Nav */}
           <nav ref={desktopNavRef} className="hidden xl:flex items-center gap-0.5 flex-1 justify-end">

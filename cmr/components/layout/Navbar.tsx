@@ -327,7 +327,7 @@ function ProjectsMenu({
                       </div>
                     </div>
 
-                    <div className="flex gap-2.5 overflow-x-auto pb-3.5 border-b border-gray-200/80 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
+                    <div className="flex flex-wrap gap-2.5 pb-3.5 border-b border-gray-200/80">
                       {activeDistrictData.subLocations.map((sl) => {
                         const isActiveSL = activeSubLocationData?.name === sl.name
                         return (

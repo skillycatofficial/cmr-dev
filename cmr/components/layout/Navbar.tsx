@@ -692,11 +692,31 @@ export default function Navbar() {
       {/* ── Header ──────────────────────────────────────────────────────── */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled 
-            ? 'bg-white shadow-md' 
+          scrolled
+            ? 'bg-white shadow-md'
             : 'bg-gradient-to-b from-black/75 via-black/35 to-transparent'
         }`}
       >
+        {/* Contact utility bar — collapses away once the page is scrolled */}
+        <div
+          className={`hidden lg:block overflow-hidden transition-all duration-300 border-b ${
+            scrolled ? 'max-h-0 opacity-0 border-transparent' : 'max-h-10 opacity-100 border-white/10'
+          }`}
+        >
+          <div className="px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-end gap-6 font-body text-[12.5px] text-white/85">
+            <a href="mailto:admin@cmrdevelopers.com" className="flex items-center gap-1.5 hover:text-brand-gold transition-colors">
+              <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              admin@cmrdevelopers.com
+            </a>
+            <span className="w-px h-3.5 bg-white/20" />
+            <a href="tel:+919206838383" className="hover:text-brand-gold transition-colors">+91 9206 838 383</a>
+            <span className="text-white/30">|</span>
+            <a href="tel:+919744475555" className="hover:text-brand-gold transition-colors">+91 9744 475 555</a>
+          </div>
+        </div>
+
         <div className="px-4 sm:px-6 lg:px-8 h-16 md:h-20 xl:h-[102px] flex items-center justify-between gap-4">
 
           {/* Logo */}

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getPageMetadata } from '@/lib/wordpress'
 
 const defaultMetadata: Metadata = {
@@ -133,6 +134,100 @@ export default function AboutUsPage() {
       <section className="bg-[#fcfbf9] py-16 md:py-24">
         <div className="px-section max-w-5xl mx-auto">
           <div className="space-y-16">
+
+            {/* A Message From Our Managing Director — photo uses the site's own
+                offset gold-frame treatment (see Philosophy.tsx), not a template
+                "quote card". Box matches the photo's native ~2:3 ratio so it
+                shows at its original proportions with no forced crop/zoom. */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 md:gap-12 items-start">
+              <div className="relative w-full max-w-[240px] mx-auto md:mx-0 group">
+                <div className="absolute inset-0 border border-brand-gold/40 rounded-2xl translate-x-4 translate-y-4 transition-transform duration-700 group-hover:translate-x-3 group-hover:translate-y-3" />
+                <div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl shadow-xl border border-brand-gray/20">
+                  <Image
+                    src="/images/team/md-restin-joseph.png"
+                    alt="Restin Joseph — Managing Director, CMR Developers"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+              </div>
+
+              <div className="font-body text-brand-charcoal/70 text-body leading-relaxed font-light">
+                <h2 className="font-display font-bold text-brand-charcoal text-2xl md:text-3xl leading-tight mb-5">
+                  Message from the Managing Director
+                </h2>
+                <p>
+                  At CMR Developers, we believe a home is more than just a place to live—it is a space where dreams become memories and families grow together. Since our journey began, our commitment has been to create quality homes with thoughtful design, trusted craftsmanship, and lasting value. With every project, we strive to earn the trust of our customers and turn their vision of a beautiful home into reality.
+                </p>
+                <div className="pt-5">
+                  <div className="font-display font-bold text-brand-charcoal text-base">
+                    Restin Joseph
+                  </div>
+                  <div className="font-body text-brand-gold text-[12px] font-semibold uppercase tracking-wider">
+                    Managing Director, CMR Developers
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr className="border-brand-gray/30" />
+
+            {/* Our Commitment — carried over from the original CMR site */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start">
+              <div>
+                <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-2 block">
+                  Our Commitment
+                </span>
+                <h2 className="font-display font-bold text-brand-charcoal text-2xl md:text-3xl leading-tight mb-8">
+                  Built on Ethical Foundations
+                </h2>
+
+                <a
+                  href="/images/certificates/iso-9001-2015.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative block w-full max-w-[160px] group"
+                >
+                  <div className="absolute inset-0 border border-brand-gold/40 rounded-xl translate-x-3 translate-y-3 transition-transform duration-700 group-hover:translate-x-2 group-hover:translate-y-2" />
+                  <div className="relative aspect-[621/877] w-full overflow-hidden rounded-xl shadow-lg border border-brand-gray/20">
+                    <Image
+                      src="/images/certificates/iso-9001-2015.png"
+                      alt="ISO 9001:2015 Certificate — CMR Builders and Developers"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="font-body text-brand-charcoal/50 text-[11px] mt-3 tracking-wide">
+                    ISO 9001:2015 Certified — view certificate
+                  </div>
+                </a>
+              </div>
+              <div>
+                <p className="font-body text-brand-charcoal/70 text-body leading-relaxed font-light mb-8">
+                  CMR Developers set out to become the largest professional villa builder in the region, built on ethical foundations and time-tested credibility — pioneering gated villa living at a time when the market knew only standalone homes on agricultural plots, with a lasting commitment to value for money across every villa and apartment we deliver.
+                </p>
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <div className="font-display font-bold text-brand-charcoal text-sm tracking-wider uppercase mb-1">Never Compromise</div>
+                    <p className="font-body text-brand-charcoal/50 text-xs leading-relaxed">On quality, at any stage of construction</p>
+                  </div>
+                  <div>
+                    <div className="font-display font-bold text-brand-charcoal text-sm tracking-wider uppercase mb-1">ISO Certified</div>
+                    <p className="font-body text-brand-charcoal/50 text-xs leading-relaxed">Processes independently verified and certified</p>
+                  </div>
+                  <div>
+                    <div className="font-display font-bold text-brand-charcoal text-sm tracking-wider uppercase mb-1">Environmentally Mindful</div>
+                    <p className="font-body text-brand-charcoal/50 text-xs leading-relaxed">Sustainable practices built into every project</p>
+                  </div>
+                  <div>
+                    <div className="font-display font-bold text-brand-charcoal text-sm tracking-wider uppercase mb-1">Quality, Always</div>
+                    <p className="font-body text-brand-charcoal/50 text-xs leading-relaxed">Our operating principle in whatever we do</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr className="border-brand-gray/30" />
 
             {/* Our Story — How It All Began */}
             <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start">

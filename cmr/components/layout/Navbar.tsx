@@ -765,6 +765,13 @@ export default function Navbar() {
                       {link.label}
                       <ChevronDown className="opacity-60" />
                     </button>
+                  ) : link.label === 'Contact Us' ? (
+                    <Link
+                      href={link.href}
+                      className="ml-2 px-5 py-2.5 rounded-lg bg-brand-gold hover:bg-brand-ivory text-brand-charcoal font-body text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-300 whitespace-nowrap"
+                    >
+                      {link.label}
+                    </Link>
                   ) : (
                     <Link href={link.href} className={linkClassName}>
                       {link.label}
@@ -792,20 +799,6 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Search — desktop only */}
-            <button
-              aria-label="Search"
-              className={`hidden xl:flex w-9 h-9 items-center justify-center transition-colors ${
-                scrolled
-                  ? 'text-brand-charcoal/60 hover:text-brand-green'
-                  : 'text-white/90 hover:text-white'
-              }`}
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
-              </svg>
-            </button>
-
             {/* Hamburger — mobile/tablet */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}

@@ -768,7 +768,7 @@ export default function Navbar() {
                   ) : link.label === 'Contact Us' ? (
                     <Link
                       href={link.href}
-                      className="ml-2 px-5 py-2.5 rounded-lg bg-brand-gold hover:bg-brand-ivory text-brand-charcoal font-body text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-300 whitespace-nowrap"
+                      className="ml-2 px-5 py-2.5 rounded-lg bg-brand-gold hover:bg-brand-ivory text-brand-charcoal font-body text-[13px] font-bold uppercase transition-colors duration-300 whitespace-nowrap"
                     >
                       {link.label}
                     </Link>

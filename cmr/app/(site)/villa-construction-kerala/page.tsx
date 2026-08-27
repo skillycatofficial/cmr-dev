@@ -72,32 +72,32 @@ export default function ServicesPage() {
     {
       num: '01',
       title: 'Site Assessment & Consultation',
-      desc: 'Our team evaluates each plot for orientation, Vastu alignment and connectivity before finalising it for a CMR villa project.',
+      desc: 'Before any commitment is made, CMR\'s team carries out a thorough evaluation of the plot — assessing its orientation, its alignment with Vastu principles, and its connectivity to surrounding infrastructure. Only once a site passes this evaluation does it move forward as a CMR villa project.',
     },
     {
       num: '02',
       title: 'Architect Design & Vastu Planning',
-      desc: 'Our certified architects design your home from scratch, incorporating Vastu principles from Day 1 — not retrofitted later. Floor plans, elevations and 3D renders provided before any construction begins.',
+      desc: 'CMR\'s certified in-house architects design each home from a blank page, weaving Vastu principles into the layout from day one rather than retrofitting them later. Clients receive complete floor plans, elevation drawings and 3D renders before a single brick is laid.',
     },
     {
       num: '03',
       title: 'Regulatory & Statutory Approvals',
-      desc: 'CMR handles all permit applications, municipality or panchayat sanctions, and statutory registrations for applicable projects. You receive certified approval copies at every stage.',
+      desc: 'CMR takes full ownership of the paperwork burden — securing permits, obtaining municipal or panchayat sanctions, and completing statutory registrations wherever applicable. Homeowners are kept in the loop with certified copies of every approval as it comes through.',
     },
     {
       num: '04',
       title: 'Construction by CMR\'s In-House Team',
-      desc: 'Our own trained workforce builds your villa using premium materials — AAC blocks, branded cement, ISI-marked steel, and quality-tested tiles. Progress photos and updates shared monthly.',
+      desc: 'Construction is carried out entirely by CMR\'s own trained workforce, using premium-grade materials throughout — AAC blocks, branded cement, ISI-marked steel, and rigorously quality-tested tiling. Clients receive monthly progress photos and status updates, keeping them connected to the build even from a distance.',
     },
     {
       num: '05',
       title: 'Quality Inspection & Finishing',
-      desc: 'Every CMR villa undergoes a multi-point quality inspection before finishing work begins. Electrical, plumbing, waterproofing, tiling and paintwork are all executed to a defined CMR standard checklist.',
+      desc: 'Before any finishing work begins, every villa is put through a comprehensive, multi-point quality inspection. Electrical wiring, plumbing, waterproofing, tiling and paintwork are each carried out against a defined internal CMR quality standard.',
     },
     {
       num: '06',
       title: 'Handover & After-Service',
-      desc: 'We hand over your villa clean, complete, and ready to move in. Our relationship does not end at handover — CMR provides a post-completion service period for any snag rectification.',
+      desc: 'Villas are handed over spotless, complete and genuinely move-in ready. CMR\'s involvement doesn\'t stop at the handover ceremony — a dedicated post-completion service window is provided to address any snags or finishing issues that may surface after move-in.',
     },
   ]
 
@@ -123,7 +123,7 @@ export default function ServicesPage() {
             Custom Villa Construction in Kerala — From Design to Delivery | CMR Developers
           </h1>
           <p className="font-body text-brand-ivory/70 text-body leading-relaxed font-light max-w-3xl">
-            At CMR Developers, villa construction is not a service we offer — it is the only thing we do, and we have done it 600+ times.
+            For CMR Developers, villa construction isn&apos;t a line item on a services list — it is the singular focus of the business, refined across more than 600 homes built to date.
           </p>
         </div>
       </section>
@@ -135,16 +135,16 @@ export default function ServicesPage() {
             {/* Left Narrative */}
             <div className="text-left font-body text-brand-charcoal/70 text-body space-y-6 leading-relaxed font-light">
               <h2 className="font-display font-bold text-brand-charcoal text-2xl md:text-3xl leading-tight">
-                Kerala&apos;s Most Experienced Villa Construction Company
+                Kerala&apos;s Most Trusted Name in Villa Construction
               </h2>
               <p>
-                Every CMR villa is built entirely by our in-house team of trained engineers, masons, carpenters and finishing specialists. No sub-contractors. No middlemen. No shortcuts.
+                Each villa CMR builds is constructed by its own permanent team of engineers, masons, carpenters and finishing specialists — never outsourced, never subcontracted, and never handed off to unknown third-party labour.
               </p>
               <p>
-                From the initial land assessment and architect consultation to the final key handover, every stage is managed, monitored and delivered by CMR&apos;s own professionals — the same team responsible for on-time delivery across all 17+ of our completed projects.
+                That commitment runs from the very first site visit and architectural consultation right through to the day the keys are placed in the homeowner&apos;s hands. Every stage sits under the direct supervision of CMR&apos;s own professionals — the same in-house team behind the on-time completion of all 17+ CMR project developments to date.
               </p>
               <p>
-                Whether you are joining one of our gated community projects or building a custom villa on your own plot, CMR brings the same level of commitment, quality and transparency to every square foot we build.
+                Whether a client is purchasing a home within one of CMR&apos;s gated community developments or commissioning a fully custom villa on privately owned land, the same standard of craftsmanship, transparency and accountability applies to every square foot built.
               </p>
             </div>
 
@@ -155,19 +155,19 @@ export default function ServicesPage() {
               </h3>
               <ul className="space-y-3 font-body text-[13px] text-brand-charcoal/60">
                 <li className="flex items-center gap-2">
-                  <span className="text-brand-green">✓</span> In-House Trained Workforce
+                  <span className="text-brand-green">✓</span> Permanent, Professionally Trained In-House Workforce
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-brand-green">✓</span> Zero Sub-Contracting
+                  <span className="text-brand-green">✓</span> Absolute Zero Sub-Contracting
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-brand-green">✓</span> Vastu-Compliant by Design
+                  <span className="text-brand-green">✓</span> Vastu-Compliant Design Built In From the Ground Up
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-brand-green">✓</span> Branded, Quality Materials
+                  <span className="text-brand-green">✓</span> Only Branded, Quality-Tested Materials
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-brand-green">✓</span> 100% On-Time Turnkey Delivery
+                  <span className="text-brand-green">✓</span> 100% On-Time, Fully Turnkey Handovers
                 </li>
               </ul>
             </div>
@@ -221,16 +221,16 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         <div className="px-section relative z-10">
           <h3 className="font-display font-bold text-brand-ivory text-2xl md:text-3xl mb-4">
-            Have a plot or looking to build?
+            Ready to Build With CMR?
           </h3>
           <p className="font-body text-brand-ivory/60 text-sm mb-8 max-w-lg mx-auto font-light">
-            Contact our in-house engineering and architecture team for a free site assessment and Vastu alignment check.
+            Clients who already own a plot — or who are still exploring where to build — can reach out to CMR&apos;s in-house engineering and architecture team for a complimentary site assessment and Vastu alignment review.
           </p>
           <Link
             href="/contact-us"
             className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
           >
-            Request Free Consultation
+            Request a Free Consultation
           </Link>
         </div>
       </section>

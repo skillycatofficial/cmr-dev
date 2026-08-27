@@ -55,7 +55,7 @@ const nriSchema = {
           'name': 'Can NRIs own property in Kerala?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Yes. Non-Resident Indians (NRIs) and Persons of Indian Origin (PIOs) are fully eligible to purchase residential property in India, including Kerala, under FEMA regulations. CMR\'s legal team will guide you through all compliance requirements.'
+            'text': 'Yes. Non-Resident Indians and Persons of Indian Origin are fully entitled to purchase residential property anywhere in India, including Kerala, under FEMA regulations. CMR\'s legal team supports buyers through every compliance requirement involved.'
           }
         },
         {
@@ -63,15 +63,15 @@ const nriSchema = {
           'name': 'Can I get a home loan as an NRI buyer?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Yes. All major banks including SBI, HDFC, Axis Bank, Federal Bank and South Indian Bank offer NRI home loans for CMR projects. Loan amounts up to 80% of property value are available subject to eligibility.'
+            'text': 'Yes. Leading banks — including SBI, HDFC, Axis Bank, Federal Bank and South Indian Bank — extend home loans to NRI buyers for CMR projects, with financing available up to 80% of the property\'s value, subject to individual eligibility.'
           }
         },
         {
           '@type': 'Question',
-          'name': 'Do I need to visit Kerala to complete the purchase?',
+          'name': 'Do I need to travel to Kerala to complete the purchase?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Not necessarily. With a valid Power of Attorney executed from your country of residence, the entire purchase can be completed by your authorised representative in Kerala. CMR has facilitated numerous 100% remote purchases.'
+            'text': 'Not necessarily. With a valid Power of Attorney executed in your country of residence, your authorised representative can complete the entire purchase on your behalf in Kerala. CMR has successfully facilitated numerous fully remote transactions of this kind.'
           }
         }
       ]
@@ -84,52 +84,52 @@ export default function NriInvestmentPage() {
     {
       step: 'Step 1',
       title: 'Virtual Site Tour',
-      desc: 'Book a live video walkthrough with our sales team at a time that suits your time zone — Gulf, UK or USA. See the project, the location and the amenities in real time without a single flight.',
+      desc: 'A live video walkthrough is scheduled at a time that works with your time zone — whether you\'re in the Gulf, the UK or the USA — giving you a real-time look at the project, its location and its amenities without leaving home.',
     },
     {
       step: 'Step 2',
       title: 'Select Your Unit',
-      desc: 'Choose your preferred villa unit, BHK configuration, plot size and orientation. Our team will send you a detailed cost sheet, floor plan and specification list within 24 hours.',
+      desc: 'Once you\'ve chosen your preferred villa unit, BHK configuration, plot size and orientation, our team sends across a detailed cost sheet, floor plan and specification list within 24 hours.',
     },
     {
       step: 'Step 3',
       title: 'Book & Pay the Token',
-      desc: 'Pay a refundable booking token through your NRE account to secure your preferred unit. CMR provides a signed booking confirmation receipt immediately.',
+      desc: 'A refundable booking token, payable through your NRE account, secures your chosen unit. CMR issues a signed booking confirmation receipt immediately, giving you documented proof of your reservation.',
     },
     {
       step: 'Step 4',
       title: 'Legal Documentation & POA',
-      desc: 'Our legal team guides you through the sale agreement, statutory documentation and — if required — helps you execute a Power of Attorney from your country of residence.',
+      desc: 'CMR\'s legal team walks you through the sale agreement and all statutory documentation, and — where required — helps you execute a Power of Attorney from wherever you currently reside.',
     },
     {
       step: 'Step 5',
       title: 'Stage-wise Payments',
-      desc: 'CMR follows a transparent stage-wise payment schedule linked to construction milestones. You pay as we build — not upfront. All stage completions are documented with photos and reports.',
+      desc: 'Payments follow a transparent, milestone-linked schedule tied directly to construction progress — meaning you pay as the villa is built, never upfront in full. Every stage of completion is backed by photographic and written documentation.',
     },
     {
       step: 'Step 6',
       title: 'Construction Updates',
-      desc: 'Receive monthly WhatsApp video updates, construction progress photos and milestone reports directly from our site team. You see exactly what is being built, week by week.',
+      desc: 'You\'ll receive monthly video updates over WhatsApp, along with construction photos and milestone reports sent straight from the site team — giving you visibility into exactly what\'s being built, week after week.',
     },
     {
       step: 'Step 7',
       title: 'Handover',
-      desc: 'When your villa is complete, CMR hands over the keys at a ceremony in Kannur. If you cannot travel, we arrange full documentation and keys handover to your authorised representative.',
+      desc: 'Once construction is complete, CMR hosts a formal key handover ceremony in Kannur. If travel isn\'t possible, the entire documentation and key handover process can instead be arranged through your authorised representative.',
     },
   ]
 
   const faqs = [
     {
       q: 'Can NRIs own property in Kerala?',
-      a: 'Yes. Non-Resident Indians (NRIs) and Persons of Indian Origin (PIOs) are fully eligible to purchase residential property in India, including Kerala, under FEMA regulations. CMR\'s legal team will guide you through all compliance requirements.',
+      a: 'Yes. Non-Resident Indians and Persons of Indian Origin are fully entitled to purchase residential property anywhere in India, including Kerala, under FEMA regulations. CMR\'s legal team supports buyers through every compliance requirement involved.',
     },
     {
       q: 'Can I get a home loan as an NRI buyer?',
-      a: 'Yes. All major banks including SBI, HDFC, Axis Bank, Federal Bank and South Indian Bank offer NRI home loans for CMR projects. Loan amounts up to 80% of property value are available subject to eligibility.',
+      a: 'Yes. Leading banks — including SBI, HDFC, Axis Bank, Federal Bank and South Indian Bank — extend home loans to NRI buyers for CMR projects, with financing available up to 80% of the property\'s value, subject to individual eligibility.',
     },
     {
-      q: 'Do I need to visit Kerala to complete the purchase?',
-      a: 'Not necessarily. With a valid Power of Attorney executed from your country of residence, the entire purchase can be completed by your authorised representative in Kerala. CMR has facilitated numerous 100% remote purchases.',
+      q: 'Do I need to travel to Kerala to complete the purchase?',
+      a: 'Not necessarily. With a valid Power of Attorney executed in your country of residence, your authorised representative can complete the entire purchase on your behalf in Kerala. CMR has successfully facilitated numerous fully remote transactions of this kind.',
     },
   ]
 
@@ -158,7 +158,7 @@ export default function NriInvestmentPage() {
             &ldquo;You&apos;ve Built a Life Abroad. Now Build a Home in Kerala.&rdquo;
           </p>
           <p className="font-body text-brand-ivory/70 text-body leading-relaxed font-light max-w-3xl">
-            CMR Developers has helped hundreds of NRI families from the Gulf, UK and USA buy their dream Kerala home with complete transparency and zero hassle.
+            For thousands of NRI families, owning a home back in Kerala is a deeply personal milestone. CMR Developers has spent over a decade turning that milestone into a straightforward, stress-free reality — guiding hundreds of families across the Gulf, the UK and the USA through the purchase of their dream Kerala villa with complete transparency and none of the usual hassle.
           </p>
         </div>
       </section>
@@ -170,16 +170,16 @@ export default function NriInvestmentPage() {
             {/* Left Narrative */}
             <div className="text-left font-body text-brand-charcoal/70 text-body space-y-6 leading-relaxed font-light">
               <h2 className="font-display font-bold text-brand-charcoal text-2xl md:text-3xl leading-tight">
-                Kerala&apos;s Most NRI-Friendly Villa Developer
+                The Villa Developer Kerala&apos;s NRIs Trust Most
               </h2>
               <p>
-                Over 40% of CMR Developers&apos; villa buyers are NRI families — Keralites living in the UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman, the United Kingdom, Canada and the United States. They chose CMR not because we were the cheapest option, but because we were the most transparent one.
+                More than 40% of CMR Developers&apos; villa buyers today are NRI families — Malayalis living and working across the UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman, the United Kingdom, Canada and the United States. They didn&apos;t choose CMR for having the lowest price on the market. They chose CMR because, among the options available to them, it was the most transparent.
               </p>
               <p>
-                In 14 years of selling homes to buyers thousands of miles away, CMR has perfected a process that makes the entire purchase journey — from first enquiry to final handover — completely manageable from abroad. Virtual site tours. WhatsApp-based progress updates. POA assistance. Stage-wise bank transfers. NRE/FCNR account guidance.
+                Across 14 years of selling homes to buyers living thousands of miles away, CMR has refined a purchase journey that can be managed entirely from abroad — from the very first enquiry through to the final handover. That includes live virtual site tours, regular WhatsApp progress updates, Power of Attorney assistance, stage-linked bank transfers, and hands-on guidance around NRE and FCNR account requirements.
               </p>
               <p>
-                Hundreds of CMR villa owners today live in Dubai, Sharjah, Abu Dhabi, Riyadh, London, and Toronto. They chose CMR because we made the process of buying a home in Kerala from abroad genuinely simple. Our NRI buyers consistently tell us one thing: <em className="text-brand-gold font-medium">&ldquo;I wish I had done this sooner.&rdquo;</em>
+                Today, hundreds of CMR villa owners call cities like Dubai, Sharjah, Abu Dhabi, Riyadh, London and Toronto home — proof that CMR has made buying property in Kerala from overseas a genuinely manageable process. The feedback the team hears most often from NRI clients says it all: <em className="text-brand-gold font-medium">&ldquo;I wish I had done this sooner.&rdquo;</em>
               </p>
             </div>
 
@@ -189,7 +189,7 @@ export default function NriInvestmentPage() {
                 Dedicated NRI Desk
               </h3>
               <p className="font-body text-xs text-brand-charcoal/65 mb-6 leading-relaxed">
-                Available during Gulf, UK and USA business hours. We speak your language: Malayalam and English. No jargon, just honest answers.
+                Operates specifically around Gulf, UK and USA business hours, so distance never becomes a barrier to getting a straight answer. Conversations happen in both Malayalam and English — no jargon, no run-around.
               </p>
               <a
                 href="https://wa.me/919206838383"
@@ -279,14 +279,24 @@ export default function NriInvestmentPage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         <div className="px-section relative z-10">
           <h3 className="font-display font-bold text-brand-ivory text-2xl md:text-3xl mb-8">
-            Schedule a virtual site tour today
+            A virtual site tour is the simplest way to begin
           </h3>
-          <Link
-            href="/contact-us"
-            className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
-          >
-            Enquire Now &rarr;
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/contact-us"
+              className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Enquire Now &rarr;
+            </Link>
+            <a
+              href="https://wa.me/919206838383"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-12 py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Talk on WhatsApp &rarr;
+            </a>
+          </div>
         </div>
       </section>
     </>

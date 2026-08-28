@@ -39,7 +39,7 @@ export default function MdMessageSection() {
               {/* Main Photo Container */}
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-md border border-black/5 bg-[#E8DDD4] aspect-[4/5]">
                 <Image
-                  src="/images/restin-joseph-md.png"
+                  src="/images/teams/md-restin-joseph.png"
                   alt="Restin Joseph - Managing Director, CMR Developers"
                   fill
                   className="object-cover object-top"

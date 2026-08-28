@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPageMetadata } from '@/lib/wordpress'
 import MdMessageSection from '@/components/about/MdMessageSection'
+import EthicalFoundationsSection from '@/components/about/EthicalFoundationsSection'
 
 const defaultMetadata: Metadata = {
   title: 'About CMR Developers | Villa Builders Since 2012 — Taliparamba, Kannur Kerala',
@@ -132,6 +133,9 @@ export default function AboutUsPage() {
 
       {/* ── Message from the Managing Director ──────────── */}
       <MdMessageSection />
+
+      {/* ── Our Commitment: Built on Ethical Foundations ── */}
+      <EthicalFoundationsSection />
 
       {/* ── Editorial Narrative ──────────────────────────── */}
       <section className="bg-[#fcfbf9] py-16 md:py-24">

@@ -60,7 +60,7 @@ const jsonLd = {
         '@type': 'ContactPoint',
         'telephone': '+91-9206838383',
         'contactType': 'sales',
-        'email': 'admin@cmrdevelopers.com',
+        'email': 'info@cmrdevelopers.com',
         'areaServed': 'IN',
         'availableLanguage': ['en', 'ml']
       },
@@ -86,7 +86,7 @@ const jsonLd = {
       'name': 'CMR Developers',
       'image': 'https://www.cmrdevelopers.com/images/extracted/cmr-interior-living.jpg',
       'telephone': '+91-9206838383',
-      'email': 'admin@cmrdevelopers.com',
+      'email': 'info@cmrdevelopers.com',
       'priceRange': '$$$',
       'paymentAccepted': 'Cash, Cheque, Bank Transfer',
       'sameAs': [

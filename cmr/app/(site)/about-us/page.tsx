@@ -64,7 +64,7 @@ const aboutSchema = {
         '@type': 'ContactPoint',
         'telephone': '+91-9206838383',
         'contactType': 'sales',
-        'email': 'admin@cmrdevelopers.com',
+        'email': 'info@cmrdevelopers.com',
         'areaServed': 'IN',
         'availableLanguage': ['en', 'ml']
       },

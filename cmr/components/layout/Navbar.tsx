@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { getAllProjects } from '@/lib/wordpress'
 import { decodeHtml } from '@/lib/utils'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -701,7 +700,8 @@ export default function Navbar() {
 
   useEffect(() => {
     let active = true
-    getAllProjects()
+    fetch('/api/projects')
+      .then((res) => res.json())
       .then((data) => {
         if (!active) return
         if (data?.length > 0) {

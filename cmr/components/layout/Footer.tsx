@@ -4,7 +4,6 @@ import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getAllProjects } from '@/lib/wordpress'
 import { resolveDistrict } from '@/lib/utils'
 
 const projectLinks = [
@@ -139,7 +138,8 @@ export default function Footer() {
   // Fetch live villa counts + district from WordPress and match them to each project by slug
   useEffect(() => {
     let active = true
-    getAllProjects()
+    fetch('/api/projects')
+      .then((res) => res.json())
       .then((data) => {
         if (!active || !Array.isArray(data)) return
         const info: Record<string, FooterProjectInfo> = {}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendMail, renderBrandedEmail, renderAcknowledgementEmail, formatReplyTo } from '@/lib/mail'
+import { verifyRecaptcha } from '@/lib/recaptcha-verify'
 
 /**
  * POST /api/careers
@@ -123,6 +124,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { success: false, error: 'Missing or invalid required fields' },
       { status: 422 }
+    )
+  }
+
+  if (!(await verifyRecaptcha(form.get('recaptchaToken'), 'careers'))) {
+    return NextResponse.json(
+      { success: false, error: 'Spam check failed. Please try again.' },
+      { status: 403 }
     )
   }
 

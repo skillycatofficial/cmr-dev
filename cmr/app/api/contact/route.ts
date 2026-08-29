@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendMail, renderBrandedEmail, renderAcknowledgementEmail, formatReplyTo } from '@/lib/mail'
+import { verifyRecaptcha } from '@/lib/recaptcha-verify'
 
 /**
  * POST /api/contact
@@ -25,6 +26,7 @@ interface ContactPayload {
   phone: string
   message: string
   buyerType: 'Local' | 'NRI'
+  recaptchaToken?: string
 }
 
 function isValidPayload(body: unknown): body is ContactPayload {
@@ -102,6 +104,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { success: false, error: 'Missing or invalid required fields' },
       { status: 422 }
+    )
+  }
+
+  if (!(await verifyRecaptcha(body.recaptchaToken, 'contact'))) {
+    return NextResponse.json(
+      { success: false, error: 'Spam check failed. Please try again.' },
+      { status: 403 }
     )
   }
 

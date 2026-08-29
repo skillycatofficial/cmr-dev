@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendMail, renderBrandedEmail, renderAcknowledgementEmail, formatReplyTo } from '@/lib/mail'
+import { verifyRecaptcha } from '@/lib/recaptcha-verify'
 
 /**
  * POST /api/enquiry
@@ -13,6 +14,7 @@ interface EnquiryPayload {
   message: string
   projectName: string
   projectLocation: string
+  recaptchaToken?: string
 }
 
 function isValidPayload(body: unknown): body is EnquiryPayload {
@@ -38,6 +40,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { success: false, error: 'Missing or invalid required fields' },
       { status: 422 }
+    )
+  }
+
+  if (!(await verifyRecaptcha(body.recaptchaToken, 'enquiry'))) {
+    return NextResponse.json(
+      { success: false, error: 'Spam check failed. Please try again.' },
+      { status: 403 }
     )
   }
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { getRecaptchaToken } from '@/lib/recaptcha'
 
 interface EnquireFormProps {
   projectName: string
@@ -24,10 +25,11 @@ export default function EnquireForm({ projectName, projectLocation }: EnquireFor
     setError(null)
 
     try {
+      const recaptchaToken = await getRecaptchaToken('enquiry')
       const res = await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formState, projectName, projectLocation }),
+        body: JSON.stringify({ ...formState, projectName, projectLocation, recaptchaToken }),
       })
 
       if (!res.ok) {

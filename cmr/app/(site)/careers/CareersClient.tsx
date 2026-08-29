@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getRecaptchaToken } from '@/lib/recaptcha'
 
 const MAX_RESUME_BYTES = 5 * 1024 * 1024 // 5MB
 const ALLOWED_RESUME_TYPES = new Set([
@@ -123,6 +124,8 @@ export default function CareersClient({ initialJobs }: { initialJobs?: Job[] }) 
       payload.append('email', formData.email)
       payload.append('message', formData.message)
       payload.append('resume', resumeFile)
+      const recaptchaToken = await getRecaptchaToken('careers')
+      if (recaptchaToken) payload.append('recaptchaToken', recaptchaToken)
 
       const res = await fetch('/api/careers', {
         method: 'POST',

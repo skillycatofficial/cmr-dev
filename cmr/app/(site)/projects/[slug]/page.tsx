@@ -170,7 +170,7 @@ export default async function ProjectDetailPage(
     'name': `CMR Developers - ${project.name}`,
     'description': `${project.name} project site.`,
     'telephone': '+91-9206838383',
-    'email': 'admin@cmrdevelopers.com',
+    'email': 'info@cmrdevelopers.com',
     'address': {
       '@type': 'PostalAddress',
       'streetAddress': project.address || `${project.location}, Kerala`,
@@ -633,7 +633,7 @@ export default async function ProjectDetailPage(
                 [
                   {
                     q: `What is the RERA status of ${project.name}?`,
-                    a: `CMR Developers is committed to full regulatory compliance. For the current RERA registration status of ${project.name}, please contact our team directly at +91 9206 838 383 or admin@cmrdevelopers.com. We will share all legal approvals, land titles, and clearances at any stage of your enquiry.`
+                    a: `CMR Developers is committed to full regulatory compliance. For the current RERA registration status of ${project.name}, please contact our team directly at +91 9206 838 383 or info@cmrdevelopers.com. We will share all legal approvals, land titles, and clearances at any stage of your enquiry.`
                   },
                   {
                     q: 'Can NRI buyers purchase a villa here?',

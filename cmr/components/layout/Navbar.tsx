@@ -757,11 +757,11 @@ export default function Navbar() {
             }`}
         >
           <div className="px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-end gap-6 font-body text-[12.5px] text-white/85">
-            <a href="mailto:admin@cmrdevelopers.com" className="flex items-center gap-1.5 hover:text-brand-gold transition-colors">
+            <a href="mailto:info@cmrdevelopers.com" className="flex items-center gap-1.5 hover:text-brand-gold transition-colors">
               <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              admin@cmrdevelopers.com
+              info@cmrdevelopers.com
             </a>
             <span className="w-px h-3.5 bg-white/20" />
             <a href="tel:+919206838383" className="hover:text-brand-gold transition-colors">+91 9206 838 383</a>
@@ -1004,14 +1004,14 @@ export default function Navbar() {
                   +91 9206 838 383
                 </a>
                 <a
-                  href="mailto:admin@cmrdevelopers.com"
+                  href="mailto:info@cmrdevelopers.com"
                   className="flex items-center gap-2 text-brand-ivory/70 text-sm hover:text-brand-gold transition-colors"
                 >
                   <svg className="w-4 h-4 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" strokeLinecap="round" strokeLinejoin="round" />
                     <polyline points="22,6 12,13 2,6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  admin@cmrdevelopers.com
+                  info@cmrdevelopers.com
                 </a>
               </div>
             </motion.aside>

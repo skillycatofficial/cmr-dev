@@ -132,7 +132,7 @@ export default function ContactUsPage() {
                     <h4 className="font-display font-bold text-brand-charcoal text-[15px] uppercase tracking-wider mb-2">Direct Contact</h4>
                     <p className="font-body text-brand-charcoal/70 text-body leading-relaxed">
                       Phone: <a href="tel:+919206838383" className="text-brand-green hover:text-brand-gold transition-colors font-display font-bold text-lg">+91 9206 838 383</a> | <a href="tel:+919744475555" className="text-brand-green hover:text-brand-gold transition-colors font-display font-bold text-lg">+91 9744 475 555</a><br />
-                      Email: <a href="mailto:admin@cmrdevelopers.com" className="hover:text-brand-green transition-colors font-medium">admin@cmrdevelopers.com</a>
+                      Email: <a href="mailto:info@cmrdevelopers.com" className="hover:text-brand-green transition-colors font-medium">info@cmrdevelopers.com</a>
                     </p>
                   </div>
                 </div>

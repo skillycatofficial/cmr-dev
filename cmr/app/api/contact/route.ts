@@ -11,7 +11,7 @@ import { sendMail, renderBrandedEmail, renderAcknowledgementEmail, formatReplyTo
  *  3. Log to console (development fallback — data is never silently lost)
  *
  * Environment variables (add to .env.local or Vercel settings):
- *  CONTACT_EMAIL_TO       — where to send enquiries (e.g. admin@cmrdevelopers.com)
+ *  CONTACT_EMAIL_TO       — where to send enquiries (e.g. info@cmrdevelopers.com)
  *  SMTP_HOST              — SMTP host (e.g. smtp.gmail.com)
  *  SMTP_PORT              — SMTP port (default 587)
  *  SMTP_USER              — SMTP username

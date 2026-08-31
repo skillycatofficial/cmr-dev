@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
@@ -92,30 +92,30 @@ function groupProjectsByDistrict(projects: Project[]): District[] {
 // ─── Nav links ────────────────────────────────────────────────────────────────
 const primaryNavLinks = [
   { label: 'Projects', href: '/projects', hasProjects: true },
-  { label: 'Villa Customisation', href: '/villa-construction-kerala' },
-  { label: 'NRI Investment', href: '/nri-investment-kerala' },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Videos', href: '/videos' },
+  { label: 'Careers', href: '/careers' },
   { label: 'About Us', href: '/about-us' },
   { label: 'Gallery', href: '/gallery' },
 ]
 
 const moreNavLinks = [
-  { label: 'Testimonials', href: '/testimonials', desc: 'Client experiences & reviews' },
-  { label: 'Videos', href: '/videos', desc: 'Cinematic project tours' },
+  { label: 'Villa Customisation', href: '/villa-construction-kerala', desc: 'Tailored luxury villa design & build' },
+  { label: 'NRI Investment', href: '/nri-investment-kerala', desc: 'End-to-end guidance for NRI buyers' },
   { label: 'Blog', href: '/blog', desc: 'Architecture insights & updates' },
-  { label: 'Careers', href: '/careers', desc: 'Join our growing team' },
 ]
 
 const mobileNavLinks = [
   { label: 'Home', href: '/' },
   { label: 'Projects', href: '/projects', hasProjects: true },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Videos', href: '/videos' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Villa Customisation', href: '/villa-construction-kerala' },
   { label: 'NRI Investment', href: '/nri-investment-kerala' },
   { label: 'About Us', href: '/about-us' },
   { label: 'Gallery', href: '/gallery' },
-  { label: 'Testimonials', href: '/testimonials' },
-  { label: 'Videos', href: '/videos' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Careers', href: '/careers' },
   { label: 'Contact Us', href: '/contact-us' },
 ]
 
@@ -131,14 +131,6 @@ function ChevronDown({ className = '' }: { className?: string }) {
   return (
     <svg className={`w-3 h-3 flex-shrink-0 ${className}`} viewBox="0 0 12 12" fill="none">
       <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  )
-}
-function MapPinIcon({ className = 'w-3.5 h-3.5 flex-shrink-0' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-      <circle cx="12" cy="10" r="3" />
     </svg>
   )
 }
@@ -180,335 +172,63 @@ function MoreMenu({ onClose }: { onClose?: () => void }) {
   )
 }
 
-// ─── Desktop: Luxury Projects Mega Menu ──────────────────────────────────────
+// ─── Desktop: Projects Dropdown Menu (Normal Vertical List) ─────────────────
 function ProjectsMenu({
   districts,
-  loading,
   onClose,
-  onMouseEnter,
-  onMouseLeave,
 }: {
   districts: District[]
-  scrolled: boolean
-  loading: boolean
+  scrolled?: boolean
+  loading?: boolean
   onClose?: () => void
   onMouseEnter?: () => void
   onMouseLeave?: () => void
 }) {
-  const [activeDistrict, setActiveDistrict] = useState<string | null>(districts[0]?.name || null)
-  const [activeSubLocation, setActiveSubLocation] = useState<string | null>(districts[0]?.subLocations[0]?.name || null)
-
-  const districtTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const activeDistrictData = districts.find(d => d.name === activeDistrict) || districts[0]
-
-  useEffect(() => {
-    if (districts.length > 0) {
-      if (!activeDistrict) {
-        setActiveDistrict(districts[0].name)
-      }
-      if (!activeSubLocation && districts[0]?.subLocations.length > 0) {
-        setActiveSubLocation(districts[0].subLocations[0].name)
-      }
-    }
-  }, [districts, activeDistrict, activeSubLocation])
-
-  const handleDistrictEnter = (name: string) => {
-    if (districtTimeoutRef.current) clearTimeout(districtTimeoutRef.current)
-    districtTimeoutRef.current = setTimeout(() => {
-      setActiveDistrict(name)
-      const dist = districts.find(d => d.name === name)
-      if (dist && dist.subLocations.length > 0) {
-        setActiveSubLocation(dist.subLocations[0].name)
-      } else {
-        setActiveSubLocation(null)
-      }
-    }, 60)
-  }
-
-  useEffect(() => {
-    return () => {
-      if (districtTimeoutRef.current) clearTimeout(districtTimeoutRef.current)
-    }
-  }, [])
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && onClose) onClose()
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onClose])
-
-  const getDistrictProjectCount = (d: District) => {
-    return d.subLocations.reduce((acc, sl) => acc + sl.projects.length, 0)
-  }
-
-  const activeSubLocationData = useMemo(() => {
-    if (!activeDistrictData) return null
-    return activeDistrictData.subLocations.find(sl => sl.name === activeSubLocation) || activeDistrictData.subLocations[0] || null
-  }, [activeDistrictData, activeSubLocation])
-
-  const displayedProjects = activeSubLocationData?.projects || []
+  const locationList = districts.length > 0
+    ? districts.map(d => ({ label: d.name, href: `/projects?location=${encodeURIComponent(d.name)}` }))
+    : [
+        { label: 'Kannur', href: '/projects?location=Kannur' },
+        { label: 'Ernakulam (Kochi)', href: '/projects?location=Ernakulam' },
+        { label: 'Kottayam', href: '/projects?location=Kottayam' },
+        { label: 'Kozhikode', href: '/projects?location=Kozhikode' },
+        { label: 'Thrissur', href: '/projects?location=Thrissur' },
+      ]
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 12 }}
-      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      className="fixed inset-x-0 top-[64px] md:top-[80px] xl:top-[102px] max-h-[calc(85vh-80px)] xl:max-h-[580px] z-50 flex shadow-[0_30px_70px_-15px_rgba(0,0,0,0.22)] border-t-4 border-t-brand-gold"
+      initial={{ opacity: 0, y: 10, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 10, scale: 0.96 }}
+      transition={{ duration: 0.18, ease: 'easeOut' }}
+      className="absolute top-full left-0 mt-3 w-64 bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden z-50 p-2.5 text-left"
     >
-      <div className="bg-[#F7F4EE] border-b-2 border-brand-gold/30 flex flex-col w-full h-full overflow-hidden rounded-b-2xl shadow-2xl">
-        {loading ? (
-          <div className="flex-1 flex flex-col items-center justify-center py-20 gap-3">
-            <div className="w-7 h-7 border-2 border-brand-gold/30 border-t-brand-gold rounded-full animate-spin" />
-            <p className="text-[13px] text-[#0F2F2B]/70 font-body">Loading developments…</p>
-          </div>
-        ) : districts.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center py-20 gap-4">
-            <p className="text-[14px] text-[#0F2F2B]/70 font-body">Unable to load developments right now.</p>
-            <Link
-              href="/projects"
-              onClick={onClose}
-              className="px-6 py-2.5 rounded-full text-[12px] font-bold tracking-widest uppercase bg-brand-green text-white hover:bg-brand-gold transition-colors"
-            >
-              View All Projects
-            </Link>
-          </div>
-        ) : (
-          <>
-            {/* Top Bar – District Tabs (Exact Reference Styling) */}
-            <div className="bg-[#F7F4EE] border-b border-[#E2D8C0] flex items-stretch justify-between h-[52px] xl:h-[56px] flex-shrink-0">
-              <div className="flex items-stretch overflow-x-auto scrollbar-none">
-                {districts.map((d) => {
-                  const count = getDistrictProjectCount(d)
-                  const isActive = activeDistrict === d.name
-                  return (
-                    <button
-                      key={d.name}
-                      type="button"
-                      onMouseEnter={() => handleDistrictEnter(d.name)}
-                      onClick={() => handleDistrictEnter(d.name)}
-                      className={`relative h-full flex-shrink-0 px-7 font-display text-[13px] font-black tracking-widest uppercase transition-all duration-200 border-r border-[#E2D8C0]/80 flex items-center gap-3 ${
-                        isActive
-                          ? 'bg-[#F7F4EE] text-[#0F2F2B] font-black'
-                          : 'bg-[#F7F4EE] text-[#0F2F2B]/70 hover:text-[#0F2F2B] hover:bg-[#FAF6F0]'
-                      }`}
-                    >
-                      <span>{d.name}</span>
-                      <span
-                        className={`text-[10.5px] px-2 py-0.5 rounded-md font-black transition-colors ${
-                          isActive
-                            ? 'bg-[#E2D8C0] text-[#0F2F2B]'
-                            : 'bg-[#E8DFC8]/70 text-[#0F2F2B]/70'
-                        }`}
-                      >
-                        {count}
-                      </span>
-                      {/* Active gold underline bar directly matching reference */}
-                      {isActive && (
-                        <div className="absolute bottom-0 inset-x-5 h-[3.5px] bg-[#C4A968] rounded-full" />
-                      )}
-                    </button>
-                  )
-                })}
-              </div>
-
-              {onClose && (
-                <div className="flex items-center px-5 border-l border-[#E2D8C0]/80 bg-[#F7F4EE]">
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    className="flex items-center gap-1.5 text-[11px] font-bold text-gray-600 hover:text-[#0F2F2B] px-3 py-1.5 rounded-lg bg-[#EFE9DC] hover:bg-[#E5DDCB] transition-all uppercase tracking-wider border border-[#DED7C5]"
-                    title="Close menu (Esc)"
-                  >
-                    <span>Close</span>
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Main Content Body */}
-            <div className="flex-1 flex overflow-hidden">
-              {/* Left Sidebar – Locations List (Exact Warm Tan Reference Theme) */}
-              <div className="w-[240px] xl:w-[260px] bg-[#EFE9DC] text-[#0F2F2B] border-r border-[#E0D7C5] p-5 flex flex-col justify-between flex-shrink-0 overflow-y-auto">
-                <div>
-                  <div className="px-2 pb-4 text-[10px] font-black tracking-[0.2em] uppercase text-[#B59855] flex items-center justify-between">
-                    <span>LOCATIONS IN {activeDistrictData?.name}</span>
-                  </div>
-                  <div className="space-y-1.5">
-                    {activeDistrictData?.subLocations.map((sl) => {
-                      const isActiveSL = (activeSubLocationData?.name || activeSubLocation) === sl.name
-                      return (
-                        <button
-                          key={sl.name}
-                          type="button"
-                          onClick={() => setActiveSubLocation(sl.name)}
-                          className={`w-full group flex items-center justify-between px-3.5 py-3 rounded-xl cursor-pointer transition-all duration-200 text-[12px] font-bold tracking-wider uppercase text-left ${
-                            isActiveSL
-                              ? 'bg-[#DDD5C4] text-[#0F2F2B] font-black shadow-xs'
-                              : 'text-[#0F2F2B]/75 hover:text-[#0F2F2B] hover:bg-[#E5DDCB] border border-transparent'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <MapPinIcon className={`w-3.5 h-3.5 transition-colors ${isActiveSL ? 'text-[#0F2F2B]' : 'text-[#0F2F2B]/60 group-hover:text-[#0F2F2B]'}`} />
-                            <span>{sl.name}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span
-                              className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors ${
-                                isActiveSL
-                                  ? 'bg-black/10 text-[#0F2F2B] font-black'
-                                  : 'bg-[#DDD5C4]/70 text-[#0F2F2B]/80 group-hover:bg-[#D5CCBA] group-hover:text-[#0F2F2B]'
-                              }`}
-                            >
-                              {sl.projects.length}
-                            </span>
-                            <ChevronRight
-                              className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                                isActiveSL
-                                  ? 'translate-x-0.5 text-[#0F2F2B] opacity-100'
-                                  : 'opacity-40 text-[#0F2F2B]/60 group-hover:opacity-100 group-hover:text-[#0F2F2B]'
-                              }`}
-                            />
-                          </div>
-                        </button>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[#DED7C5] mt-4">
-                  <Link
-                    href="/projects"
-                    onClick={onClose}
-                    className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[12px] font-bold tracking-widest uppercase transition-all duration-200 text-[#B59855] hover:text-[#0F2F2B] hover:bg-[#E5DDCB] border border-[#B59855]/30 shadow-sm"
-                  >
-                    <span>View All Projects</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Area – Developments Grid (Warm Ivory Theme) */}
-              <div className="flex-1 flex flex-col p-6 xl:p-7 overflow-y-auto bg-[#F7F4EE] text-[#0F2F2B]">
-                {activeDistrictData && (
-                  <div className="flex flex-col min-h-full justify-between">
-                    <div>
-                      {/* Top Header */}
-                      <div className="pb-3 border-b border-[#E2D8C0] mb-4 flex items-center justify-between text-[10.5px] font-black tracking-[0.2em] uppercase text-[#0F2F2B]/70">
-                        <span>
-                          {activeSubLocationData?.name
-                            ? `Developments in ${activeSubLocationData.name}, ${activeDistrictData.name}`
-                            : `Developments in ${activeDistrictData.name}`}
-                        </span>
-                        <span className="text-[11px] font-bold text-[#B59855]">
-                          Showing {displayedProjects.length} active developments
-                        </span>
-                      </div>
-
-                      {/* Developments Grid – Immediately under top header */}
-                      {displayedProjects.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                          {displayedProjects.map((p) => (
-                            <Link
-                              key={p.slug}
-                              href={`/projects/${p.slug}`}
-                              onClick={onClose}
-                              className="group/item relative h-[155px] xl:h-[165px] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between p-3.5 bg-black"
-                            >
-                              {/* Full Image Background with Zoom Scale */}
-                              <Image
-                                src={p.heroImage || '/images/extracted/cmr-villa-exterior.jpg'}
-                                alt={p.name}
-                                fill
-                                className="object-cover group-hover/item:scale-110 transition-transform duration-500"
-                              />
-                              {/* Dark Gradient Overlay for High Visibility Text */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 group-hover/item:from-black/95 transition-colors" />
-
-                              {/* Top Badges */}
-                              <div className="relative z-10 flex items-center justify-between gap-2">
-                                {p.status ? (
-                                  <span
-                                    className={`text-[9px] font-black tracking-wider uppercase px-2 py-0.5 rounded-md shadow-md ${p.status === 'On Going' || p.status === 'Ongoing'
-                                        ? 'bg-brand-gold text-brand-charcoal'
-                                        : p.status === 'Just Launched'
-                                          ? 'bg-emerald-600 text-white'
-                                          : 'bg-black/80 text-white'
-                                      }`}
-                                  >
-                                    {p.status === 'On Going' ? 'Ongoing' : p.status}
-                                  </span>
-                                ) : <div />}
-
-                                {p.bhk && (
-                                  <span className="text-[9.5px] font-bold text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/20">
-                                    {p.bhk}
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Bottom Overlaid Text & Pricing */}
-                              <div className="relative z-10 mt-auto">
-                                <h4 className="font-display text-[15px] font-bold text-white group-hover/item:text-brand-gold transition-colors leading-tight truncate drop-shadow-sm">
-                                  {p.name}
-                                </h4>
-
-                                {p.sub_location && (
-                                  <p className="text-[11px] text-white/80 font-medium mt-0.5 flex items-center gap-1">
-                                    <MapPinIcon className="w-3 h-3 text-brand-gold" />
-                                    <span>{p.sub_location}</span>
-                                  </p>
-                                )}
-
-                                <div className="mt-2 pt-1.5 border-t border-white/20 flex items-center justify-between">
-                                  <span className="text-[13px] font-extrabold text-brand-gold font-display drop-shadow-sm">
-                                    {p.price || '₹55 Lakhs Onwards'}
-                                  </span>
-                                  <span className="text-[10.5px] font-bold text-white/80 group-hover/item:text-white transition-colors flex items-center gap-0.5">
-                                    <span>View</span>
-                                    <ChevronRight className="w-3 h-3 text-brand-gold" />
-                                  </span>
-                                </div>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-[13px] text-gray-500 py-12 text-center bg-[#EFE9DC]/60 rounded-2xl border border-dashed border-[#B59855]/30">
-                          No developments currently listed in this location.
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Bottom Footer Bar */}
-                    <div className="pt-4 mt-6 border-t border-[#E2D8C0] flex items-center justify-between text-[12px] text-[#0F2F2B]/70 flex-shrink-0">
-                      <span>
-                        Showing {displayedProjects.length} active developments
-                        {activeSubLocation ? ` in ${activeSubLocation}` : ` in ${activeDistrictData.name}`}
-                      </span>
-                      <Link
-                        href="/projects"
-                        onClick={onClose}
-                        className="text-[#B59855] font-bold hover:underline flex items-center gap-1 text-[12.5px]"
-                      >
-                        <span>Explore Full Portfolio</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </>
-        )}
+      <div className="px-3.5 py-2 border-b border-gray-100 mb-1">
+        <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
+          EXPLORE LOCATIONS
+        </span>
+      </div>
+      <div className="space-y-0.5">
+        {locationList.map((item) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            onClick={onClose}
+            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-brand-green/5 text-[14px] font-medium text-brand-charcoal hover:text-brand-green transition-colors group"
+          >
+            <span>{item.label}</span>
+            <ChevronRight className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-green" />
+          </Link>
+        ))}
+      </div>
+      <div className="pt-2 border-t border-gray-100 mt-1">
+        <Link
+          href="/projects"
+          onClick={onClose}
+          className="flex items-center justify-between px-3.5 py-2 rounded-xl text-[12.5px] font-bold text-brand-gold hover:text-brand-green hover:bg-brand-gold/10 transition-colors uppercase tracking-wider"
+        >
+          <span>View All Projects</span>
+          <ChevronRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
     </motion.div>
   )

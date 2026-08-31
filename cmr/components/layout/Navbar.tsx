@@ -269,7 +269,7 @@ const DEFAULT_DISTRICTS: District[] = [
   },
 ]
 
-// ─── Desktop: 3-Column Cascading Menu with Ultra-Smooth Reveal ──────────────
+// ─── Desktop: Projects Dropdown Menu (Smooth Row-Anchored Flyout Panels) ───
 function ProjectsMenu({
   districts,
   onClose,
@@ -288,17 +288,19 @@ function ProjectsMenu({
   const [activeDistrictName, setActiveDistrictName] = useState<string | null>(null)
   const [activeSubLocationName, setActiveSubLocationName] = useState<string | null>(null)
 
-  const activeDistrict = activeDistrictName
-    ? activeDistrictsList.find(d => d.name === activeDistrictName) || null
-    : null
+  const activeDistrictIndex = activeDistrictsList.findIndex(d => d.name === activeDistrictName)
+  const activeDistrict = activeDistrictName && activeDistrictIndex >= 0 ? activeDistrictsList[activeDistrictIndex] : null
 
-  const activeSubLocation = activeDistrict && activeSubLocationName
-    ? activeDistrict.subLocations.find(sl => sl.name === activeSubLocationName) || null
+  const activeSubLocationIndex = activeDistrict
+    ? activeDistrict.subLocations.findIndex(sl => sl.name === activeSubLocationName)
+    : -1
+  const activeSubLocation = activeDistrict && activeSubLocationIndex >= 0
+    ? activeDistrict.subLocations[activeSubLocationIndex]
     : null
 
   const handleDistrictHover = (name: string) => {
     setActiveDistrictName(name)
-    setActiveSubLocationName(null) // No sub-location active by default when district is hovered!
+    setActiveSubLocationName(null)
   }
 
   return (
@@ -306,19 +308,14 @@ function ProjectsMenu({
       initial={{ opacity: 0, y: 10, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.96 }}
-      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.18, ease: 'easeOut' }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="absolute top-full left-0 mt-3 flex items-stretch bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden z-50 p-2.5 text-left divide-x divide-gray-100"
+      className="absolute top-full left-0 mt-3 z-50 text-left"
     >
-      {/* ── Level 1: Districts Column ── */}
-      <div className="w-[190px] pr-2.5 flex flex-col justify-between flex-shrink-0">
-        <div>
-          <div className="px-3 py-2 border-b border-gray-100 mb-1">
-            <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
-              DISTRICTS
-            </span>
-          </div>
+      <div className="relative">
+        {/* ── Level 1 Card: Districts ── */}
+        <div className="w-[180px] bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] p-2 z-50">
           <div className="space-y-0.5">
             {activeDistrictsList.map((d) => {
               const isActive = activeDistrictName === d.name
@@ -328,145 +325,88 @@ function ProjectsMenu({
                   type="button"
                   onMouseEnter={() => handleDistrictHover(d.name)}
                   onClick={() => handleDistrictHover(d.name)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-200 text-left ${
-                    isActive
-                      ? 'bg-brand-green/10 text-brand-green font-bold shadow-xs'
-                      : 'text-brand-charcoal hover:bg-gray-50 hover:text-brand-green'
-                  }`}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-medium transition-colors duration-150 text-left ${isActive
+                    ? 'text-brand-green font-bold bg-brand-green/5'
+                    : 'text-brand-charcoal hover:text-brand-green hover:bg-gray-50'
+                    }`}
                 >
                   <span>{d.name}</span>
-                  <ChevronRight className={`w-3.5 h-3.5 transition-all duration-200 ${isActive ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
+                  <ChevronRight className={`w-3.5 h-3.5 transition-all duration-150 ${isActive ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
                 </button>
               )
             })}
           </div>
         </div>
 
-        <div className="pt-2 border-t border-gray-100 mt-2">
-          <Link
-            href="/projects"
-            onClick={onClose}
-            className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-gold hover:text-brand-green hover:bg-brand-gold/10 transition-colors uppercase tracking-wider text-center"
-          >
-            All Projects
-          </Link>
-        </div>
-      </div>
-
-      {/* ── Level 2: Sub-Locations Column ── */}
-      <AnimatePresence mode="wait">
-        {activeDistrict && (
-          <motion.div
-            key={activeDistrict.name}
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: 215 }}
-            exit={{ opacity: 0, width: 0 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-shrink-0 overflow-hidden"
-          >
-            <div className="w-[215px] px-2.5 flex flex-col justify-between h-full">
-              <div>
-                <div className="px-3 py-2 border-b border-gray-100 mb-1">
-                  <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold truncate block">
-                    LOCATIONS IN {activeDistrict.name}
-                  </span>
-                </div>
-                <div
-                  className="space-y-0.5 max-h-[310px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                >
-                  {activeDistrict.subLocations.map((sl) => {
-                    const isActiveSL = activeSubLocationName === sl.name
-                    return (
-                      <button
-                        key={sl.name}
-                        type="button"
-                        onMouseEnter={() => setActiveSubLocationName(sl.name)}
-                        onClick={() => setActiveSubLocationName(sl.name)}
-                        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 text-left ${
-                          isActiveSL
-                            ? 'bg-brand-green/10 text-brand-green font-bold shadow-xs'
-                            : 'text-brand-charcoal hover:bg-gray-50 hover:text-brand-green'
+        {/* ── Level 2 Flyout Card: Sub-Locations (Anchored flush at hovered district row with zero gap) ── */}
+        <AnimatePresence>
+          {activeDistrict && activeDistrictIndex >= 0 && (
+            <motion.div
+              key={activeDistrict.name}
+              initial={{ opacity: 0, x: -4 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -4 }}
+              transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              style={{ top: `${8 + activeDistrictIndex * 42}px` }}
+              className="absolute left-full -ml-px w-[190px] bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] p-2 z-40"
+            >
+              <div className="space-y-0.5">
+                {activeDistrict.subLocations.map((sl) => {
+                  const isActiveSL = activeSubLocationName === sl.name
+                  return (
+                    <button
+                      key={sl.name}
+                      type="button"
+                      onMouseEnter={() => setActiveSubLocationName(sl.name)}
+                      onClick={() => setActiveSubLocationName(sl.name)}
+                      className={`w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-[13px] font-medium transition-colors duration-150 text-left ${isActiveSL
+                        ? 'text-brand-green font-bold bg-brand-green/10'
+                        : 'text-brand-charcoal hover:text-brand-green hover:bg-gray-50'
                         }`}
-                      >
-                        <span className="truncate">{sl.name}</span>
-                        <ChevronRight className={`w-3.5 h-3.5 transition-all duration-200 ${isActiveSL ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="pt-2 border-t border-gray-100 mt-2">
-                <Link
-                  href={`/projects?location=${encodeURIComponent(activeDistrict.name)}`}
-                  onClick={onClose}
-                  className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-green hover:bg-brand-green/5 transition-colors uppercase tracking-wider text-center truncate"
-                >
-                  All {activeDistrict.name} Projects
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ── Level 3: Villa Projects Column ── */}
-      <AnimatePresence mode="wait">
-        {activeSubLocation && (
-          <motion.div
-            key={activeSubLocation.name}
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: 245 }}
-            exit={{ opacity: 0, width: 0 }}
-            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-shrink-0 overflow-hidden"
-          >
-            <div className="w-[245px] pl-2.5 flex flex-col justify-between h-full">
-              <div>
-                <div className="px-3 py-2 border-b border-gray-100 mb-1">
-                  <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold truncate block">
-                    VILLAS IN {activeSubLocation.name}
-                  </span>
-                </div>
-                <motion.div
-                  initial={{ opacity: 0, x: 6 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.18, ease: 'easeOut' }}
-                  className="space-y-0.5 max-h-[310px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                >
-                  {activeSubLocation.projects.map((p) => (
-                    <Link
-                      key={p.slug || p.name}
-                      href={`/projects/${p.slug}`}
-                      onClick={onClose}
-                      className="flex items-center justify-between px-3 py-2.5 rounded-xl text-[13px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-brand-green/5 transition-all duration-200 group/villa"
                     >
-                      <span className="truncate group-hover/villa:translate-x-0.5 transition-transform duration-200">{p.name}</span>
-                      {p.status && (
-                        <span className="text-[9.5px] font-extrabold px-2 py-0.5 rounded-md bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5 shadow-xs">
-                          {p.status}
-                        </span>
-                      )}
-                    </Link>
-                  ))}
-                </motion.div>
+                      <span className="truncate">{sl.name}</span>
+                      <ChevronRight className={`w-3.5 h-3.5 transition-all duration-150 ${isActiveSL ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
+                    </button>
+                  )
+                })}
               </div>
 
-              <div className="pt-2 border-t border-gray-100 mt-2">
-                <Link
-                  href={`/projects?location=${encodeURIComponent(activeSubLocation.name)}`}
-                  onClick={onClose}
-                  className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-green hover:bg-brand-green/5 transition-colors uppercase tracking-wider text-center truncate"
-                >
-                  Explore Location
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {/* ── Level 3 Flyout Card: Villa Projects (Anchored flush at hovered sub-location row with zero gap) ── */}
+              <AnimatePresence>
+                {activeSubLocation && activeSubLocationIndex >= 0 && (
+                  <motion.div
+                    key={activeSubLocation.name}
+                    initial={{ opacity: 0, x: -4 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -4 }}
+                    transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ top: `${8 + activeSubLocationIndex * 34}px` }}
+                    className="absolute left-full -ml-px w-[210px] bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] p-2 z-30"
+                  >
+                    <div className="space-y-0.5">
+                      {activeSubLocation.projects.map((p) => (
+                        <Link
+                          key={p.slug || p.name}
+                          href={`/projects/${p.slug}`}
+                          onClick={onClose}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl text-[13px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-gray-50 transition-colors duration-150 group/villa"
+                        >
+                          <span className="truncate group-hover/villa:translate-x-0.5 transition-transform duration-150">{p.name}</span>
+                          {p.status && (
+                            <span className="text-[9.5px] font-extrabold px-2 py-0.5 rounded-md bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5 shadow-xs">
+                              {p.status}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.div>
   )
 }
@@ -585,8 +525,8 @@ function MobileProjectsAccordion({
                                   </div>
                                   {p.status && (
                                     <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold tracking-wider uppercase whitespace-nowrap flex-shrink-0 ${p.status === 'On Going'
-                                        ? 'bg-brand-gold/15 text-brand-gold border border-brand-gold/20'
-                                        : 'bg-white/10 text-white/50'
+                                      ? 'bg-brand-gold/15 text-brand-gold border border-brand-gold/20'
+                                      : 'bg-white/10 text-white/50'
                                       }`}>
                                       {p.status}
                                     </span>
@@ -704,8 +644,8 @@ export default function Navbar() {
       {/* ── Header ──────────────────────────────────────────────────────── */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-            ? 'bg-white shadow-md'
-            : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent'
+          ? 'bg-white shadow-md'
+          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent'
           }`}
       >
         {/* Contact utility bar */}
@@ -749,10 +689,10 @@ export default function Navbar() {
             {primaryNavLinks.map((link) => {
               const ddOpen = activeDD === link.label
               const linkClassName = `flex items-center gap-1.5 px-3.5 py-2 font-body text-[14px] font-medium whitespace-nowrap transition-all duration-200 rounded-lg ${ddOpen
-                  ? scrolled ? 'text-brand-green bg-brand-green/5' : 'text-brand-gold bg-white/10'
-                  : scrolled
-                    ? 'text-brand-charcoal/90 hover:text-brand-green hover:bg-black/5'
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                ? scrolled ? 'text-brand-green bg-brand-green/5' : 'text-brand-gold bg-white/10'
+                : scrolled
+                  ? 'text-brand-charcoal/90 hover:text-brand-green hover:bg-black/5'
+                  : 'text-white/90 hover:text-white hover:bg-white/10'
                 }`
 
               return (
@@ -807,10 +747,10 @@ export default function Navbar() {
                 aria-expanded={activeDD === 'More'}
                 onClick={() => setActiveDD(activeDD === 'More' ? null : 'More')}
                 className={`flex items-center gap-1.5 px-3.5 py-2 font-body text-[14px] font-medium whitespace-nowrap transition-all duration-200 rounded-lg ${activeDD === 'More'
-                    ? scrolled ? 'text-brand-green bg-brand-green/5' : 'text-brand-gold bg-white/10'
-                    : scrolled
-                      ? 'text-brand-charcoal/90 hover:text-brand-green hover:bg-black/5'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                  ? scrolled ? 'text-brand-green bg-brand-green/5' : 'text-brand-gold bg-white/10'
+                  : scrolled
+                    ? 'text-brand-charcoal/90 hover:text-brand-green hover:bg-black/5'
+                    : 'text-white/90 hover:text-white hover:bg-white/10'
                   }`}
               >
                 <span>More</span>

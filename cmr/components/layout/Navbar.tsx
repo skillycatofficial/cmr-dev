@@ -371,7 +371,10 @@ function ProjectsMenu({
                     LOCATIONS IN {activeDistrict.name}
                   </span>
                 </div>
-                <div className="space-y-0.5 max-h-[310px] overflow-y-auto scrollbar-none">
+                <div
+                  className="space-y-0.5 max-h-[310px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
                   {activeDistrict.subLocations.map((sl) => {
                     const isActiveSL = activeSubLocationName === sl.name
                     return (
@@ -430,7 +433,8 @@ function ProjectsMenu({
                   initial={{ opacity: 0, x: 6 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.18, ease: 'easeOut' }}
-                  className="space-y-0.5 max-h-[310px] overflow-y-auto scrollbar-none"
+                  className="space-y-0.5 max-h-[310px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                   {activeSubLocation.projects.map((p) => (
                     <Link

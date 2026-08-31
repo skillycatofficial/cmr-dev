@@ -172,10 +172,54 @@ function MoreMenu({ onClose }: { onClose?: () => void }) {
   )
 }
 
-// ─── Desktop: Projects Dropdown Menu (Normal Vertical List) ─────────────────
+// ─── Default District Fallbacks ───────────────────────────────────────────────
+const DEFAULT_DISTRICTS: District[] = [
+  {
+    name: 'Kannur',
+    subLocations: [
+      { name: 'Kadachira', projects: [] },
+      { name: 'Karuvanchal', projects: [] },
+      { name: 'Taliparamba', projects: [] },
+      { name: 'Chala Town', projects: [] },
+    ],
+  },
+  {
+    name: 'Ernakulam',
+    subLocations: [
+      { name: 'Angamaly', projects: [] },
+      { name: 'Mulanthuruthy', projects: [] },
+      { name: 'Perumbavoor', projects: [] },
+    ],
+  },
+  {
+    name: 'Kottayam',
+    subLocations: [
+      { name: 'Changanassery', projects: [] },
+      { name: 'Kanjirappally', projects: [] },
+    ],
+  },
+  {
+    name: 'Kozhikode',
+    subLocations: [
+      { name: 'Calicut City', projects: [] },
+      { name: 'Feroke', projects: [] },
+    ],
+  },
+  {
+    name: 'Thrissur',
+    subLocations: [
+      { name: 'Thrissur Town', projects: [] },
+      { name: 'Guruvayur', projects: [] },
+    ],
+  },
+]
+
+// ─── Desktop: Projects Dropdown Menu (Districts + Right-Side Sub-Locations) ─
 function ProjectsMenu({
   districts,
   onClose,
+  onMouseEnter,
+  onMouseLeave,
 }: {
   districts: District[]
   scrolled?: boolean
@@ -184,15 +228,11 @@ function ProjectsMenu({
   onMouseEnter?: () => void
   onMouseLeave?: () => void
 }) {
-  const locationList = districts.length > 0
-    ? districts.map(d => ({ label: d.name, href: `/projects?location=${encodeURIComponent(d.name)}` }))
-    : [
-        { label: 'Kannur', href: '/projects?location=Kannur' },
-        { label: 'Ernakulam (Kochi)', href: '/projects?location=Ernakulam' },
-        { label: 'Kottayam', href: '/projects?location=Kottayam' },
-        { label: 'Kozhikode', href: '/projects?location=Kozhikode' },
-        { label: 'Thrissur', href: '/projects?location=Thrissur' },
-      ]
+  const activeDistrictsList = districts.length > 0 ? districts : DEFAULT_DISTRICTS
+
+  const [activeDistrictName, setActiveDistrictName] = useState<string>(activeDistrictsList[0]?.name || 'Kannur')
+
+  const currentDistrict = activeDistrictsList.find(d => d.name === activeDistrictName) || activeDistrictsList[0]
 
   return (
     <motion.div
@@ -200,35 +240,85 @@ function ProjectsMenu({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.96 }}
       transition={{ duration: 0.18, ease: 'easeOut' }}
-      className="absolute top-full left-0 mt-3 w-64 bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden z-50 p-2.5 text-left"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="absolute top-full left-0 mt-3 flex bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden z-50 p-2.5 text-left min-w-[480px]"
     >
-      <div className="px-3.5 py-2 border-b border-gray-100 mb-1">
-        <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
-          EXPLORE LOCATIONS
-        </span>
-      </div>
-      <div className="space-y-0.5">
-        {locationList.map((item) => (
+      {/* ── Left Column: Districts List ── */}
+      <div className="w-[210px] pr-2.5 border-r border-gray-100 flex flex-col justify-between">
+        <div>
+          <div className="px-3 py-2 border-b border-gray-100 mb-1">
+            <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
+              DISTRICTS
+            </span>
+          </div>
+          <div className="space-y-0.5">
+            {activeDistrictsList.map((d) => {
+              const isActive = activeDistrictName === d.name
+              return (
+                <button
+                  key={d.name}
+                  type="button"
+                  onMouseEnter={() => setActiveDistrictName(d.name)}
+                  onClick={() => setActiveDistrictName(d.name)}
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-[13.5px] font-medium transition-colors text-left ${
+                    isActive
+                      ? 'bg-brand-green/10 text-brand-green font-bold'
+                      : 'text-brand-charcoal hover:bg-gray-50 hover:text-brand-green'
+                  }`}
+                >
+                  <span>{d.name}</span>
+                  <ChevronRight className={`w-3.5 h-3.5 transition-transform ${isActive ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="pt-2 border-t border-gray-100 mt-2">
           <Link
-            key={item.label}
-            href={item.href}
+            href="/projects"
             onClick={onClose}
-            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-brand-green/5 text-[14px] font-medium text-brand-charcoal hover:text-brand-green transition-colors group"
+            className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-gold hover:text-brand-green hover:bg-brand-gold/10 transition-colors uppercase tracking-wider text-center"
           >
-            <span>{item.label}</span>
-            <ChevronRight className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-green" />
+            All Projects
           </Link>
-        ))}
+        </div>
       </div>
-      <div className="pt-2 border-t border-gray-100 mt-1">
-        <Link
-          href="/projects"
-          onClick={onClose}
-          className="flex items-center justify-between px-3.5 py-2 rounded-xl text-[12.5px] font-bold text-brand-gold hover:text-brand-green hover:bg-brand-gold/10 transition-colors uppercase tracking-wider"
-        >
-          <span>View All Projects</span>
-          <ChevronRight className="w-3.5 h-3.5" />
-        </Link>
+
+      {/* ── Right Column: Sub-locations in Selected District ── */}
+      <div className="w-[250px] pl-3 flex flex-col justify-between">
+        <div>
+          <div className="px-3 py-2 border-b border-gray-100 mb-1">
+            <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
+              LOCATIONS IN {currentDistrict?.name}
+            </span>
+          </div>
+          <div className="space-y-0.5">
+            {currentDistrict?.subLocations.map((sl) => (
+              <Link
+                key={sl.name}
+                href={`/projects?location=${encodeURIComponent(sl.name)}`}
+                onClick={onClose}
+                className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-brand-green/5 text-[13.5px] font-medium text-brand-charcoal hover:text-brand-green transition-colors group"
+              >
+                <span>{sl.name}</span>
+                <ChevronRight className="w-3.5 h-3.5 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-green" />
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="pt-2 border-t border-gray-100 mt-2">
+          <Link
+            href={`/projects?location=${encodeURIComponent(currentDistrict?.name || '')}`}
+            onClick={onClose}
+            className="flex items-center justify-between px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-green hover:bg-brand-green/5 transition-colors uppercase tracking-wider"
+          >
+            <span>All {currentDistrict?.name} Projects</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
     </motion.div>
   )

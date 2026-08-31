@@ -178,21 +178,39 @@ const DEFAULT_DISTRICTS: District[] = [
     name: 'Kannur',
     subLocations: [
       {
-        name: 'Pariyaram',
+        name: 'Nadal',
         projects: [
-          { name: 'Aiza Golden Hills', slug: 'aiza-golden-hills', status: 'New', price: '₹55 Lakhs' },
-        ],
-      },
-      {
-        name: 'Chala Town',
-        projects: [
-          { name: 'CMR Villa Chala', slug: 'cmr-villa-chala', status: 'Ongoing', price: '₹58 Lakhs' },
+          { name: 'CMR Villa Nadal', slug: 'cmr-villa-nadal', status: 'Ongoing', price: '₹55 Lakhs' },
         ],
       },
       {
         name: 'Kadachira',
         projects: [
           { name: 'Alvina Harmony', slug: 'alvina-harmony', status: 'Ongoing', price: '₹55 Lakhs' },
+        ],
+      },
+      {
+        name: 'Chala',
+        projects: [
+          { name: 'CMR Villa Chala', slug: 'cmr-villa-chala', status: 'Ongoing', price: '₹58 Lakhs' },
+        ],
+      },
+      {
+        name: 'Vayattuparamba',
+        projects: [
+          { name: 'CMR Vayattuparamba', slug: 'cmr-vayattuparamba', status: 'Ongoing', price: '₹49 Lakhs' },
+        ],
+      },
+      {
+        name: 'Pilathara',
+        projects: [
+          { name: 'Aiza Golden Hills', slug: 'aiza-golden-hills', status: 'Ongoing', price: '₹55 Lakhs' },
+        ],
+      },
+      {
+        name: 'Kanhirangad',
+        projects: [
+          { name: 'CMR Kanhirangad Villas', slug: 'cmr-kanhirangad', status: 'Just Launched', price: '₹50 Lakhs' },
         ],
       },
       {
@@ -205,41 +223,6 @@ const DEFAULT_DISTRICTS: District[] = [
         name: 'Taliparamba',
         projects: [
           { name: 'Aina Harmony', slug: 'aina-harmony', status: 'Completed', price: '₹62 Lakhs' },
-        ],
-      },
-      {
-        name: 'Mulakuvalli',
-        projects: [
-          { name: 'CMR Mulakuvalli Villas', slug: 'cmr-mulakuvalli', status: 'Ongoing', price: '₹52 Lakhs' },
-        ],
-      },
-      {
-        name: 'Kavumkudi',
-        projects: [
-          { name: 'CMR Kavumkudi Estate', slug: 'cmr-kavumkudi', status: 'Just Launched', price: '₹50 Lakhs' },
-        ],
-      },
-      {
-        name: 'Vayattuparamba',
-        projects: [
-          { name: 'CMR Vayattuparamba', slug: 'cmr-vayattuparamba', status: 'Ongoing', price: '₹49 Lakhs' },
-        ],
-      },
-    ],
-  },
-  {
-    name: 'Kottayam',
-    subLocations: [
-      {
-        name: 'Changanassery',
-        projects: [
-          { name: 'CMR Villa Changanassery', slug: 'cmr-villa-changanassery', status: 'Ongoing', price: '₹54 Lakhs' },
-        ],
-      },
-      {
-        name: 'Kanjirappally',
-        projects: [
-          { name: 'CMR Villa Kanjirappally', slug: 'cmr-villa-kanjirappally', status: 'Just Launched', price: '₹49 Lakhs' },
         ],
       },
     ],
@@ -267,9 +250,26 @@ const DEFAULT_DISTRICTS: District[] = [
       },
     ],
   },
+  {
+    name: 'Kottayam',
+    subLocations: [
+      {
+        name: 'Changanassery',
+        projects: [
+          { name: 'CMR Villa Changanassery', slug: 'cmr-villa-changanassery', status: 'Ongoing', price: '₹54 Lakhs' },
+        ],
+      },
+      {
+        name: 'Kanjirappally',
+        projects: [
+          { name: 'CMR Villa Kanjirappally', slug: 'cmr-villa-kanjirappally', status: 'Just Launched', price: '₹49 Lakhs' },
+        ],
+      },
+    ],
+  },
 ]
 
-// ─── Desktop: 3-Column Cascading Menu with Original White Card Design ───────
+// ─── Desktop: 3-Column Cascading Menu with Ultra-Smooth Reveal ──────────────
 function ProjectsMenu({
   districts,
   onClose,
@@ -285,7 +285,6 @@ function ProjectsMenu({
 }) {
   const activeDistrictsList = districts.length > 0 ? districts : DEFAULT_DISTRICTS
 
-  // Nothing is active by default — Level 2 & 3 appear smoothly on hover!
   const [activeDistrictName, setActiveDistrictName] = useState<string | null>(null)
   const [activeSubLocationName, setActiveSubLocationName] = useState<string | null>(null)
 
@@ -299,7 +298,7 @@ function ProjectsMenu({
 
   const handleDistrictHover = (name: string) => {
     setActiveDistrictName(name)
-    setActiveSubLocationName(null)
+    setActiveSubLocationName(null) // No sub-location active by default when district is hovered!
   }
 
   return (
@@ -307,13 +306,13 @@ function ProjectsMenu({
       initial={{ opacity: 0, y: 10, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.96 }}
-      transition={{ duration: 0.18, ease: 'easeOut' }}
+      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className="absolute top-full left-0 mt-3 flex items-stretch bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden z-50 p-2.5 text-left divide-x divide-gray-100"
     >
-      {/* ── Level 1: Districts Column (Always visible) ── */}
-      <div className="w-[190px] pr-2.5 flex flex-col justify-between">
+      {/* ── Level 1: Districts Column ── */}
+      <div className="w-[190px] pr-2.5 flex flex-col justify-between flex-shrink-0">
         <div>
           <div className="px-3 py-2 border-b border-gray-100 mb-1">
             <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
@@ -329,14 +328,14 @@ function ProjectsMenu({
                   type="button"
                   onMouseEnter={() => handleDistrictHover(d.name)}
                   onClick={() => handleDistrictHover(d.name)}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-[13.5px] font-medium transition-colors text-left ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-200 text-left ${
                     isActive
-                      ? 'bg-brand-green/10 text-brand-green font-bold'
+                      ? 'bg-brand-green/10 text-brand-green font-bold shadow-xs'
                       : 'text-brand-charcoal hover:bg-gray-50 hover:text-brand-green'
                   }`}
                 >
                   <span>{d.name}</span>
-                  <ChevronRight className={`w-3.5 h-3.5 transition-transform ${isActive ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
+                  <ChevronRight className={`w-3.5 h-3.5 transition-all duration-200 ${isActive ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
                 </button>
               )
             })}
@@ -354,103 +353,112 @@ function ProjectsMenu({
         </div>
       </div>
 
-      {/* ── Level 2: Sub-Locations Column (Appears on district hover) ── */}
-      <AnimatePresence>
+      {/* ── Level 2: Sub-Locations Column ── */}
+      <AnimatePresence mode="wait">
         {activeDistrict && (
           <motion.div
             key={activeDistrict.name}
             initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: '210px' }}
+            animate={{ opacity: 1, width: 215 }}
             exit={{ opacity: 0, width: 0 }}
-            transition={{ duration: 0.15 }}
-            className="pl-2.5 pr-2.5 flex flex-col justify-between overflow-hidden"
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-shrink-0 overflow-hidden"
           >
-            <div>
-              <div className="px-3 py-2 border-b border-gray-100 mb-1">
-                <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold truncate block">
-                  LOCATIONS IN {activeDistrict.name}
-                </span>
+            <div className="w-[215px] px-2.5 flex flex-col justify-between h-full">
+              <div>
+                <div className="px-3 py-2 border-b border-gray-100 mb-1">
+                  <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold truncate block">
+                    LOCATIONS IN {activeDistrict.name}
+                  </span>
+                </div>
+                <div className="space-y-0.5 max-h-[310px] overflow-y-auto scrollbar-none">
+                  {activeDistrict.subLocations.map((sl) => {
+                    const isActiveSL = activeSubLocationName === sl.name
+                    return (
+                      <button
+                        key={sl.name}
+                        type="button"
+                        onMouseEnter={() => setActiveSubLocationName(sl.name)}
+                        onClick={() => setActiveSubLocationName(sl.name)}
+                        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 text-left ${
+                          isActiveSL
+                            ? 'bg-brand-green/10 text-brand-green font-bold shadow-xs'
+                            : 'text-brand-charcoal hover:bg-gray-50 hover:text-brand-green'
+                        }`}
+                      >
+                        <span className="truncate">{sl.name}</span>
+                        <ChevronRight className={`w-3.5 h-3.5 transition-all duration-200 ${isActiveSL ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
+                      </button>
+                    )
+                  })}
+                </div>
               </div>
-              <div className="space-y-0.5 max-h-[310px] overflow-y-auto pr-0.5">
-                {activeDistrict.subLocations.map((sl) => {
-                  const isActiveSL = activeSubLocationName === sl.name
-                  return (
-                    <button
-                      key={sl.name}
-                      type="button"
-                      onMouseEnter={() => setActiveSubLocationName(sl.name)}
-                      onClick={() => setActiveSubLocationName(sl.name)}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-[13px] font-medium transition-colors text-left ${
-                        isActiveSL
-                          ? 'bg-brand-green/10 text-brand-green font-bold'
-                          : 'text-brand-charcoal hover:bg-gray-50 hover:text-brand-green'
-                      }`}
-                    >
-                      <span className="truncate">{sl.name}</span>
-                      <ChevronRight className={`w-3.5 h-3.5 transition-transform ${isActiveSL ? 'text-brand-green opacity-100 translate-x-0.5' : 'text-gray-400 opacity-40'}`} />
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
 
-            <div className="pt-2 border-t border-gray-100 mt-2">
-              <Link
-                href={`/projects?location=${encodeURIComponent(activeDistrict.name)}`}
-                onClick={onClose}
-                className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-green hover:bg-brand-green/5 transition-colors uppercase tracking-wider text-center truncate"
-              >
-                All {activeDistrict.name} Projects
-              </Link>
+              <div className="pt-2 border-t border-gray-100 mt-2">
+                <Link
+                  href={`/projects?location=${encodeURIComponent(activeDistrict.name)}`}
+                  onClick={onClose}
+                  className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-green hover:bg-brand-green/5 transition-colors uppercase tracking-wider text-center truncate"
+                >
+                  All {activeDistrict.name} Projects
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── Level 3: Villa Projects Column (Appears on location hover) ── */}
-      <AnimatePresence>
+      {/* ── Level 3: Villa Projects Column ── */}
+      <AnimatePresence mode="wait">
         {activeSubLocation && (
           <motion.div
             key={activeSubLocation.name}
             initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: '230px' }}
+            animate={{ opacity: 1, width: 245 }}
             exit={{ opacity: 0, width: 0 }}
-            transition={{ duration: 0.15 }}
-            className="pl-2.5 flex flex-col justify-between overflow-hidden"
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-shrink-0 overflow-hidden"
           >
-            <div>
-              <div className="px-3 py-2 border-b border-gray-100 mb-1">
-                <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold truncate block">
-                  VILLAS IN {activeSubLocation.name}
-                </span>
+            <div className="w-[245px] pl-2.5 flex flex-col justify-between h-full">
+              <div>
+                <div className="px-3 py-2 border-b border-gray-100 mb-1">
+                  <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold truncate block">
+                    VILLAS IN {activeSubLocation.name}
+                  </span>
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, x: 6 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                  className="space-y-0.5 max-h-[310px] overflow-y-auto scrollbar-none"
+                >
+                  {activeSubLocation.projects.map((p) => (
+                    <Link
+                      key={p.slug || p.name}
+                      href={`/projects/${p.slug}`}
+                      onClick={onClose}
+                      className="flex items-center justify-between px-3 py-2.5 rounded-xl text-[13px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-brand-green/5 transition-all duration-200 group/villa"
+                    >
+                      <span className="truncate group-hover/villa:translate-x-0.5 transition-transform duration-200">{p.name}</span>
+                      {p.status && (
+                        <span className="text-[9.5px] font-extrabold px-2 py-0.5 rounded-md bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5 shadow-xs">
+                          {p.status}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </motion.div>
               </div>
-              <div className="space-y-0.5 max-h-[310px] overflow-y-auto pr-0.5">
-                {activeSubLocation.projects.map((p) => (
-                  <Link
-                    key={p.slug || p.name}
-                    href={`/projects/${p.slug}`}
-                    onClick={onClose}
-                    className="flex items-center justify-between px-3 py-2 rounded-xl text-[13px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-brand-green/5 transition-colors group/villa"
-                  >
-                    <span className="truncate">{p.name}</span>
-                    {p.status && (
-                      <span className="text-[9.5px] font-bold px-1.5 py-0.5 rounded bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5">
-                        {p.status}
-                      </span>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </div>
 
-            <div className="pt-2 border-t border-gray-100 mt-2">
-              <Link
-                href={`/projects?location=${encodeURIComponent(activeSubLocation.name)}`}
-                onClick={onClose}
-                className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-green hover:bg-brand-green/5 transition-colors uppercase tracking-wider text-center truncate"
-              >
-                Explore Location
-              </Link>
+              <div className="pt-2 border-t border-gray-100 mt-2">
+                <Link
+                  href={`/projects?location=${encodeURIComponent(activeSubLocation.name)}`}
+                  onClick={onClose}
+                  className="block px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-brand-green hover:bg-brand-green/5 transition-colors uppercase tracking-wider text-center truncate"
+                >
+                  Explore Location
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}

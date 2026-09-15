@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, DM_Sans } from 'next/font/google'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google'
 import './globals.css'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -66,8 +66,8 @@ export default function RootLayout({
       <body className={`${plusJakartaSans.variable} ${dmSans.variable} antialiased`}>
         {children}
       </body>
-      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      {process.env.NEXT_PUBLIC_GTM_ID && (
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
       )}
     </html>
   )

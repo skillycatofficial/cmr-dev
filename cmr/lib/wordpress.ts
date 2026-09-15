@@ -1,6 +1,27 @@
 import type { Metadata } from 'next';
+import { decode } from 'he';
 
 const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://test.local';
+
+// WordPress returns title/excerpt/etc. HTML-entity-encoded (e.g. "&#8217;")
+// since its own REST API assumes the consumer renders them as HTML. We render
+// most fields as plain text via JSX, so decode entities everywhere except
+// `content`, which is injected as raw HTML via dangerouslySetInnerHTML and is
+// already valid markup as-is.
+function decodeEntitiesDeep<T>(value: T, key?: string): T {
+  if (typeof value === 'string') {
+    return (key === 'content' ? value : decode(value)) as T;
+  }
+  if (Array.isArray(value)) {
+    return value.map((item) => decodeEntitiesDeep(item)) as T;
+  }
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, decodeEntitiesDeep(v, k)])
+    ) as T;
+  }
+  return value;
+}
 
 export async function fetchAPI(endpoint: string) {
   const url = `${WORDPRESS_URL}${endpoint}`;
@@ -29,7 +50,7 @@ export async function fetchAPI(endpoint: string) {
     throw new Error(`WordPress API returned error status: ${res.status}`);
   }
 
-  return res.json();
+  return decodeEntitiesDeep(await res.json());
 }
 
 export async function getHeroSlides() {

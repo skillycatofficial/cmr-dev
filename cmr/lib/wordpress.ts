@@ -156,7 +156,9 @@ export async function getPageMetadata(slug: string, defaults: Metadata): Promise
   const merged: Metadata = { ...defaults };
 
   if (title && title.trim()) {
-    merged.title = title;
+    // `absolute` bypasses the root layout's title template ('%s | CMR Developers') —
+    // WordPress-authored titles are already complete and shouldn't get the suffix appended again.
+    merged.title = { absolute: title };
     if (merged.openGraph) merged.openGraph.title = title;
     if (merged.twitter) merged.twitter.title = title;
   }

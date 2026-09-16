@@ -25,3 +25,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Standalone campaign landing page, hosted separately from this application
+aina-harmony-landing/

@@ -50,16 +50,18 @@ function isValidPayload(body: unknown): body is EnquiryPayload {
   )
 }
 
-// Campaign landing pages that need their leads CC'd to an extra inbox,
-// keyed by the exact `Origin` header they send.
-const CAMPAIGN_CC: Record<string, string> = {
-  'https://campaign.cmrdevelopers.com': 'ashjp84@gmail.com',
+// Standalone campaign landing pages that POST here directly, keyed by the
+// exact `Origin` header they send. `label` distinguishes these leads from
+// regular project-page enquiries in the admin notification email, and `cc`
+// (optional) routes a copy to an extra inbox.
+const CAMPAIGN_SOURCES: Record<string, { label: string; cc?: string }> = {
+  'https://campaign.cmrdevelopers.com': { label: 'Aina Harmony Campaign Page', cc: 'ashjp84@gmail.com' },
 }
 
 export async function POST(req: NextRequest) {
   const headers = corsHeaders(req)
   const origin = req.headers.get('origin')
-  const campaignCc = origin ? CAMPAIGN_CC[origin] : undefined
+  const campaignSource = origin ? CAMPAIGN_SOURCES[origin] : undefined
 
   let body: unknown
   try {
@@ -84,20 +86,24 @@ export async function POST(req: NextRequest) {
 
   const sent = await sendMail({
     replyTo: formatReplyTo(body.name, body.email),
-    cc: campaignCc,
-    subject: `[CMR Project Enquiry] ${body.projectName} — ${body.name}`,
+    cc: campaignSource?.cc,
+    subject: campaignSource
+      ? `[CMR Campaign Lead] ${body.projectName} — ${body.name}`
+      : `[CMR Project Enquiry] ${body.projectName} — ${body.name}`,
     text: [
+      campaignSource ? `Source: ${campaignSource.label}` : null,
       `Project: ${body.projectName} (${body.projectLocation})`,
       `Name: ${body.name}`,
       `Email: ${body.email}`,
       `Phone: ${body.phone}`,
       '',
       `Message:\n${body.message || '(none)'}`,
-    ].join('\n'),
+    ].filter((line) => line !== null).join('\n'),
     html: renderBrandedEmail({
-      eyebrow: 'Project Enquiry',
+      eyebrow: campaignSource ? 'Campaign Lead' : 'Project Enquiry',
       heading: body.projectName,
       rows: [
+        ...(campaignSource ? [{ label: 'Source', value: campaignSource.label }] : []),
         { label: 'Project', value: `${body.projectName} — ${body.projectLocation}` },
         { label: 'Name', value: body.name },
         { label: 'Email', value: body.email, href: `mailto:${body.email}` },

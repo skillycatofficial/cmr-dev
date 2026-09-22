@@ -154,7 +154,7 @@ export default function NriInvestmentPage() {
           >
             NRI? Build Your Kerala Home from Anywhere in the World — CMR Developers
           </h1>
-          <p className="font-display italic text-brand-gold text-lg md:text-xl font-light mb-6">
+          <p className="font-display italic text-brand-gold text-lg font-light mb-6">
             &ldquo;You&apos;ve Built a Life Abroad. Now Build a Home in Kerala.&rdquo;
           </p>
           <p className="font-body text-brand-ivory/70 text-body leading-relaxed font-light max-w-3xl">

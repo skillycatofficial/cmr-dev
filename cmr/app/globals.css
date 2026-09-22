@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Blog Content Styling (.blog-prose) ─────────────────── */
 .blog-prose {
   font-family: var(--font-body);
-  font-size: 1.1875rem; /* ~19-20px body text for premium readability */
+  font-size: 18px; /* paragraph text capped at 18px site-wide */
   line-height: 1.85;
   color: #2D3748; /* Soft readable charcoal */
 }
@@ -134,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* First paragraph style */
 .blog-prose > p:first-of-type {
-  font-size: 1.25rem;
+  font-size: 18px;
   line-height: 1.8;
   color: var(--color-green);
   font-weight: 400;

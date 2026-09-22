@@ -381,7 +381,7 @@ function ProjectsMenu({
                     exit={{ opacity: 0, x: -4 }}
                     transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
                     style={{ top: `${8 + activeSubLocationIndex * 34}px` }}
-                    className="absolute left-full -ml-px w-[210px] bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] p-2 z-30"
+                    className="absolute left-full -ml-px w-[280px] bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] p-2 z-30"
                   >
                     <div className="space-y-0.5">
                       {activeSubLocation.projects.map((p) => (
@@ -389,11 +389,11 @@ function ProjectsMenu({
                           key={p.slug || p.name}
                           href={`/projects/${p.slug}`}
                           onClick={onClose}
-                          className="flex items-center justify-between px-3 py-2 rounded-xl text-[14px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-gray-50 transition-colors duration-150 group/villa"
+                          className="flex items-start justify-between gap-2 px-3 py-2 rounded-xl text-[14px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-gray-50 transition-colors duration-150 group/villa"
                         >
-                          <span className="truncate group-hover/villa:translate-x-0.5 transition-transform duration-150">{p.name}</span>
+                          <span className="group-hover/villa:translate-x-0.5 transition-transform duration-150">{p.name}</span>
                           {p.status && (
-                            <span className="text-[10.5px] font-extrabold px-2 py-0.5 rounded-md bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5 shadow-xs">
+                            <span className="text-[10.5px] font-extrabold px-2 py-0.5 rounded-md bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5 mt-0.5 shadow-xs">
                               {p.status}
                             </span>
                           )}
@@ -644,7 +644,7 @@ export default function Navbar() {
       {/* ── Header ──────────────────────────────────────────────────────── */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_25px_rgba(0,0,0,0.08)] border-b border-gray-100'
+          ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_25px_rgba(0,0,0,0.08)]'
           : 'bg-gradient-to-b from-black/85 via-black/45 to-transparent'
           }`}
       >
@@ -716,8 +716,8 @@ export default function Navbar() {
           <Link
             href="/"
             className={`absolute top-0 left-4 sm:left-6 lg:left-8 z-10 transition-all duration-300 ${scrolled
-              ? 'w-[75px] h-[75px] md:w-[86px] md:h-[86px] xl:w-[102px] xl:h-[102px] drop-shadow-md'
-              : 'w-[82px] h-[82px] md:w-[92px] md:h-[92px] xl:w-[115px] xl:h-[115px]'
+              ? 'w-[75px] h-[75px] md:w-[86px] md:h-[86px] xl:w-[122px] xl:h-[122px] drop-shadow-md'
+              : 'w-[82px] h-[82px] md:w-[92px] md:h-[92px] xl:w-[125px] xl:h-[125px]'
               }`}
           >
             <Image

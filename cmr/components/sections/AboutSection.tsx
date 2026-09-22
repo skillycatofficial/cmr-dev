@@ -35,7 +35,7 @@ export default function AboutSection() {
             <div className="w-full h-[1px] bg-gray-200 mb-8" />
 
             {/* Body paragraphs */}
-            <div className="space-y-6 font-body text-[#4a4a4a] text-[18px] md:text-[20px] leading-[1.8] max-w-[95%] mb-12 flex-grow">
+            <div className="space-y-6 font-body text-[#4a4a4a] text-[18px] leading-[1.8] max-w-[95%] mb-12 flex-grow">
               <p>
                 CMR has completed 600+ luxury villas in and around Taliparamba, Karuvanchal in Kannur district, Changanassery in Kottayam district and Angamaly, Mulanthuruthy in Ernakulam district. With elegant Vastu-compliant designs, top-quality construction, and personalised customer service, CMR has become the preferred home builder for middle-income families.
               </p>

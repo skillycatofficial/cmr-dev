@@ -64,7 +64,7 @@ export default function MdMessageSection() {
             </h2>
 
             {/* Message Body Paragraph */}
-            <p className="font-body text-brand-charcoal/75 text-[17.5px] md:text-[19px] leading-relaxed font-normal">
+            <p className="font-body text-brand-charcoal/75 text-[17.5px] md:text-[18px] leading-relaxed font-normal">
               At CMR Developers, we believe a home is more than just a place to live—it is a space where dreams become memories and families grow together. Since our journey began, our commitment has been to create quality homes with thoughtful design, trusted craftsmanship, and lasting value. With every project, we strive to earn the trust of our customers and turn their vision of a beautiful home into reality.
             </p>
 

@@ -29,17 +29,17 @@ const config: Config = {
          *   Section h2 → ~36-42px  |  Card h3 → 20-22px
          */
 
-        // ── Hero display (74px) — only for main hero heading ───────────────
-        'display':    ['74px',    { lineHeight: '0.95', letterSpacing: '-0.025em' }],
+        // ── Hero display (72px) — only for main hero heading ───────────────
+        'display':    ['72px',    { lineHeight: '0.95', letterSpacing: '-0.025em' }],
 
-        // ── Section headings (38px) — "FEATURED PROJECTS", "TALES OF TRUST"
-        'section':    ['38px',    { lineHeight: '1.08', letterSpacing: '-0.015em' }],
+        // ── Section headings (36px) — "FEATURED PROJECTS", "TALES OF TRUST"
+        'section':    ['36px',    { lineHeight: '1.05', letterSpacing: '-0.015em' }],
 
         // ── Card / content headings (23.5px) — project names, blog titles
         'heading':    ['23.5px',  { lineHeight: '1.3',  letterSpacing: '-0.01em'  }],
 
-        // ── Section paragraph text (21px) ──────────────────────────────────
-        'body':       ['21px',    { lineHeight: '1.75' }],
+        // ── Section paragraph text (18px max) ────────────────────────────────
+        'body':       ['18px',    { lineHeight: '1.75' }],
 
         // ── Navigation & UI elements (17px) ────────────────────────────────
         'ui':         ['17px',    { lineHeight: '1.5'  }],

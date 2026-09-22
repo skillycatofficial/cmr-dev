@@ -80,7 +80,7 @@ export default function EthicalFoundationsSection() {
 
           {/* ── Right Column: Description & 2x2 Highlights Grid ── */}
           <div className="lg:col-span-7 space-y-10 text-left pt-2">
-            <p className="font-body text-brand-charcoal/75 text-[17.5px] sm:text-[19px] md:text-[20.5px] leading-relaxed font-normal">
+            <p className="font-body text-brand-charcoal/75 text-[17.5px] sm:text-[18px] leading-relaxed font-normal">
               CMR Developers set out to become the largest professional villa builder in the region, built on ethical foundations and time-tested credibility &mdash; pioneering gated villa living at a time when the market knew only standalone homes on agricultural plots, with a lasting commitment to value for money across every villa and apartment we deliver.
             </p>
 

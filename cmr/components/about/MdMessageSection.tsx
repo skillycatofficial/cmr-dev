@@ -64,7 +64,7 @@ export default function MdMessageSection() {
             </h2>
 
             {/* Message Body Paragraph */}
-            <p className="font-body text-brand-charcoal/75 text-base md:text-[17px] leading-relaxed font-normal">
+            <p className="font-body text-brand-charcoal/75 text-[17.5px] md:text-[19px] leading-relaxed font-normal">
               At CMR Developers, we believe a home is more than just a place to live—it is a space where dreams become memories and families grow together. Since our journey began, our commitment has been to create quality homes with thoughtful design, trusted craftsmanship, and lasting value. With every project, we strive to earn the trust of our customers and turn their vision of a beautiful home into reality.
             </p>
 
@@ -73,7 +73,7 @@ export default function MdMessageSection() {
               <h3 className="font-display font-bold text-brand-charcoal text-lg sm:text-xl leading-tight">
                 Restin Joseph
               </h3>
-              <p className="font-body text-brand-gold text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase mt-1">
+              <p className="font-body text-brand-gold text-[12.5px] sm:text-[13.5px] font-bold tracking-[0.2em] uppercase mt-1">
                 MANAGING DIRECTOR, CMR DEVELOPERS
               </p>
             </div>

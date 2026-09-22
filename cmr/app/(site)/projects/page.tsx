@@ -188,7 +188,7 @@ export default async function ProjectsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] gap-12 lg:gap-16 items-center">
             {/* Left Column: Title & Paragraph Content */}
             <div className="text-left">
-              <span className="font-body text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase mb-4 block">
+              <span className="font-body text-brand-gold text-[12.5px] font-bold tracking-[0.3em] uppercase mb-4 block">
                 Our Portfolio
               </span>
               <h1
@@ -206,19 +206,19 @@ export default async function ProjectsPage() {
             <div className="grid grid-cols-2 gap-4 bg-white/5 backdrop-blur-md p-6 md:p-8 border border-white/10 rounded-2xl shadow-2xl">
               <div className="text-center p-4 border-r border-b border-white/10">
                 <div className="font-display font-bold text-brand-gold text-3xl md:text-4xl mb-1.5">600+</div>
-                <div className="font-body text-[10px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Villas Delivered</div>
+                <div className="font-body text-[11.5px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Villas Delivered</div>
               </div>
               <div className="text-center p-4 border-b border-white/10">
                 <div className="font-display font-bold text-brand-gold text-3xl md:text-4xl mb-1.5">14+</div>
-                <div className="font-body text-[10px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Years of Trust</div>
+                <div className="font-body text-[11.5px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Years of Trust</div>
               </div>
               <div className="text-center p-4 border-r border-white/10">
                 <div className="font-display font-bold text-brand-gold text-3xl md:text-4xl mb-1.5">3</div>
-                <div className="font-body text-[10px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Districts Covered</div>
+                <div className="font-body text-[11.5px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Districts Covered</div>
               </div>
               <div className="text-center p-4">
                 <div className="font-display font-bold text-brand-gold text-3xl md:text-4xl mb-1.5">100%</div>
-                <div className="font-body text-[10px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Bank Approved</div>
+                <div className="font-body text-[11.5px] uppercase tracking-widest text-brand-ivory/60 font-semibold">Bank Approved</div>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@ export default async function ProjectsPage() {
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
             {/* Left Column: Title Block */}
             <div className="space-y-4 lg:sticky lg:top-32">
-              <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase block">
+              <span className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.25em] uppercase block">
                 Investment Guide
               </span>
               <h2 className="font-display font-bold text-brand-charcoal text-3xl md:text-4xl leading-tight tracking-tight">
@@ -246,7 +246,7 @@ export default async function ProjectsPage() {
 
             {/* Right Columns (Span 2): Editorial Copy & Inline CTA */}
             <div className="lg:col-span-2 space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 font-body text-brand-charcoal/70 text-[15px] leading-relaxed font-light">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 font-body text-brand-charcoal/70 text-[17px] leading-relaxed font-light">
                 <div className="space-y-6">
                   <p>
                     CMR Developers has established itself as the most trusted villa builder in Kannur district — and is rapidly building the same reputation in Ernakulam and Kottayam. Our villa projects are built in carefully selected locations: close enough to town centres for daily convenience, yet far enough to offer the greenery, quiet and community feel that a real home deserves.
@@ -263,7 +263,7 @@ export default async function ProjectsPage() {
                   <div className="pt-6 border-t border-brand-gray/20">
                     <Link
                       href="/contact-us"
-                      className="group inline-flex items-center gap-2 text-brand-green hover:text-brand-gold font-body text-[12px] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
+                      className="group inline-flex items-center gap-2 text-brand-green hover:text-brand-gold font-body text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
                     >
                       <span>Schedule a Free Site Visit</span>
                       <svg 

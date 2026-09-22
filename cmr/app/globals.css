@@ -37,15 +37,15 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  font-size: 16px; /* Canonical base — Tailwind rem tokens reference this */
+  font-size: 17px; /* Canonical base — elevated slightly for enhanced readability */
 }
 
 body {
   background-color: #fff;
   color: var(--color-charcoal);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1.5rem;
   }
   .section-label span {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Blog Content Styling (.blog-prose) ─────────────────── */
 .blog-prose {
   font-family: var(--font-body);
-  font-size: 1.125rem; /* 18px body text for premium readability */
+  font-size: 1.1875rem; /* ~19-20px body text for premium readability */
   line-height: 1.85;
   color: #2D3748; /* Soft readable charcoal */
 }

@@ -60,7 +60,7 @@ export default function Philosophy() {
           >
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-[1px] bg-brand-gold/50"></div>
-              <p className="font-body font-bold text-brand-gold text-[11px] tracking-[0.3em] uppercase">
+              <p className="font-body font-bold text-brand-gold text-[12.5px] tracking-[0.3em] uppercase">
                 OUR PHILOSOPHY
               </p>
             </div>
@@ -74,7 +74,7 @@ export default function Philosophy() {
               Living.
             </h2>
 
-            <p className="font-body text-gray-400 text-[16px] leading-relaxed max-w-lg mb-14 font-light">
+            <p className="font-body text-gray-400 text-[18px] leading-relaxed max-w-lg mb-14 font-light">
               Every CMR project begins with a story. Not just how a building
               looks, but how it feels to walk through its halls at dawn, or how the
               golden light dances across the floor at dusk.
@@ -97,10 +97,10 @@ export default function Philosophy() {
                     {pillar.icon}
                   </div>
                   <div className="relative z-10">
-                    <div className="font-display font-medium text-white text-[17px] mb-2 tracking-wide group-hover:text-brand-gold transition-colors duration-300">
+                    <div className="font-display font-medium text-white text-[18.5px] mb-2 tracking-wide group-hover:text-brand-gold transition-colors duration-300">
                       {pillar.title}
                     </div>
-                    <div className="font-body text-gray-300/80 text-[14px] leading-relaxed font-light">
+                    <div className="font-body text-gray-300/80 text-[15.5px] leading-relaxed font-light">
                       {pillar.desc}
                     </div>
                   </div>

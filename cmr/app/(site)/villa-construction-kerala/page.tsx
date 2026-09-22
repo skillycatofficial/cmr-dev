@@ -153,7 +153,7 @@ export default function ServicesPage() {
               <h3 className="font-display font-bold text-brand-charcoal text-[18px] mb-4">
                 Construction Promise
               </h3>
-              <ul className="space-y-3 font-body text-[13px] text-brand-charcoal/60">
+              <ul className="space-y-3 font-body text-[14.5px] text-brand-charcoal/60">
                 <li className="flex items-center gap-2">
                   <span className="text-brand-green">✓</span> Permanent, Professionally Trained In-House Workforce
                 </li>
@@ -180,13 +180,13 @@ export default function ServicesPage() {
         <div className="px-section">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-2 block">
+              <span className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.25em] uppercase mb-2 block">
                 Work Flow
               </span>
               <h2 className="font-display font-bold text-brand-charcoal text-3xl">
                 Our 6-Step Construction Process
               </h2>
-              <p className="font-body text-brand-charcoal/50 text-sm mt-3 max-w-md mx-auto">
+              <p className="font-body text-brand-charcoal/50 text-[15px] mt-3 max-w-md mx-auto">
                 How we manage your project transparently from the initial consultation to handing over the keys.
               </p>
             </div>
@@ -205,7 +205,7 @@ export default function ServicesPage() {
                     <h3 className="font-display font-bold text-brand-charcoal text-lg mb-2">
                       {step.title}
                     </h3>
-                    <p className="font-body text-brand-charcoal/65 text-sm leading-relaxed font-light">
+                    <p className="font-body text-brand-charcoal/65 text-[15.5px] leading-relaxed font-light">
                       {step.desc}
                     </p>
                   </div>
@@ -223,12 +223,12 @@ export default function ServicesPage() {
           <h3 className="font-display font-bold text-brand-ivory text-2xl md:text-3xl mb-4">
             Ready to Build With CMR?
           </h3>
-          <p className="font-body text-brand-ivory/60 text-sm mb-8 max-w-lg mx-auto font-light">
+          <p className="font-body text-brand-ivory/60 text-[15px] mb-8 max-w-lg mx-auto font-light">
             Clients who already own a plot — or who are still exploring where to build — can reach out to CMR&apos;s in-house engineering and architecture team for a complimentary site assessment and Vastu alignment review.
           </p>
           <Link
             href="/contact-us"
-            className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[13px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
           >
             Request a Free Consultation
           </Link>

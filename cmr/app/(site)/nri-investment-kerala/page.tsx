@@ -145,7 +145,7 @@ export default function NriInvestmentPage() {
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="px-section relative z-10 text-left max-w-5xl">
-          <span className="font-body text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase mb-4 block">
+          <span className="font-body text-brand-gold text-[12.5px] font-bold tracking-[0.3em] uppercase mb-4 block">
             NRI Services
           </span>
           <h1
@@ -188,7 +188,7 @@ export default function NriInvestmentPage() {
               <h3 className="font-display font-bold text-brand-charcoal text-[18px] mb-3">
                 Dedicated NRI Desk
               </h3>
-              <p className="font-body text-xs text-brand-charcoal/65 mb-6 leading-relaxed">
+              <p className="font-body text-[14px] text-brand-charcoal/65 mb-6 leading-relaxed">
                 Operates specifically around Gulf, UK and USA business hours, so distance never becomes a barrier to getting a straight answer. Conversations happen in both Malayalam and English — no jargon, no run-around.
               </p>
               <a
@@ -209,13 +209,13 @@ export default function NriInvestmentPage() {
         <div className="px-section">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-2 block">
+              <span className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.25em] uppercase mb-2 block">
                 How It Works
               </span>
               <h2 className="font-display font-bold text-brand-charcoal text-3xl">
                 The 7-Step Remote Buying Process
               </h2>
-              <p className="font-body text-brand-charcoal/50 text-sm mt-3 max-w-md mx-auto">
+              <p className="font-body text-brand-charcoal/50 text-[15px] mt-3 max-w-md mx-auto">
                 Step-by-step guidance on how to secure, buy, and monitor your villa construction without leaving your country of residence.
               </p>
             </div>
@@ -229,7 +229,7 @@ export default function NriInvestmentPage() {
                   <h3 className="font-display font-bold text-brand-charcoal text-[17px] mb-3">
                     {step.title}
                   </h3>
-                  <p className="font-body text-brand-charcoal/60 text-[13px] leading-relaxed font-light mt-auto">
+                  <p className="font-body text-brand-charcoal/60 text-[15px] leading-relaxed font-light mt-auto">
                     {step.desc}
                   </p>
                 </div>
@@ -244,7 +244,7 @@ export default function NriInvestmentPage() {
         <div className="px-section">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-              <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-2 block">
+              <span className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.25em] uppercase mb-2 block">
                 Your Questions Answered
               </span>
               <h2 className="font-display font-bold text-brand-charcoal text-3xl">
@@ -264,7 +264,7 @@ export default function NriInvestmentPage() {
                       ▼
                     </span>
                   </summary>
-                  <div className="mt-4 font-body text-brand-charcoal/65 text-sm leading-relaxed font-light border-t border-brand-gray/30 pt-4">
+                  <div className="mt-4 font-body text-brand-charcoal/65 text-[15.5px] leading-relaxed font-light border-t border-brand-gray/30 pt-4">
                     {faq.a}
                   </div>
                 </details>
@@ -284,7 +284,7 @@ export default function NriInvestmentPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact-us"
-              className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+              className="inline-block px-12 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green hover:text-brand-green font-body text-[13px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
             >
               Enquire Now &rarr;
             </Link>
@@ -292,7 +292,7 @@ export default function NriInvestmentPage() {
               href="https://wa.me/919206838383"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-12 py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+              className="inline-block px-12 py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white font-body text-[13px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
             >
               Talk on WhatsApp &rarr;
             </a>

@@ -80,7 +80,7 @@ export default function EthicalFoundationsSection() {
 
           {/* ── Right Column: Description & 2x2 Highlights Grid ── */}
           <div className="lg:col-span-7 space-y-10 text-left pt-2">
-            <p className="font-body text-brand-charcoal/75 text-base sm:text-lg md:text-[19px] leading-relaxed font-normal">
+            <p className="font-body text-brand-charcoal/75 text-[17.5px] sm:text-[19px] md:text-[20.5px] leading-relaxed font-normal">
               CMR Developers set out to become the largest professional villa builder in the region, built on ethical foundations and time-tested credibility &mdash; pioneering gated villa living at a time when the market knew only standalone homes on agricultural plots, with a lasting commitment to value for money across every villa and apartment we deliver.
             </p>
 
@@ -88,10 +88,10 @@ export default function EthicalFoundationsSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4 border-t border-brand-gray/20">
               {commitments.map((item) => (
                 <div key={item.title} className="space-y-1.5">
-                  <h3 className="font-display font-bold text-brand-charcoal text-base sm:text-[17px] tracking-wide uppercase">
+                  <h3 className="font-display font-bold text-brand-charcoal text-[17px] sm:text-[18px] tracking-wide uppercase">
                     {item.title}
                   </h3>
-                  <p className="font-body text-brand-charcoal/60 text-xs sm:text-sm font-light leading-relaxed">
+                  <p className="font-body text-brand-charcoal/60 text-[13.5px] sm:text-[15px] font-light leading-relaxed">
                     {item.description}
                   </p>
                 </div>

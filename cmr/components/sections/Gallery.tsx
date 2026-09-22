@@ -65,7 +65,7 @@ export default function Gallery({
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7 }}
           >
-            <p className="font-body text-brand-charcoal/50 text-[10px] tracking-[0.25em] uppercase mb-4">{eyebrow}</p>
+            <p className="font-body text-brand-charcoal/50 text-[11.5px] tracking-[0.25em] uppercase mb-4">{eyebrow}</p>
             <h2 className="font-display font-medium text-brand-charcoal text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
               {title}
             </h2>
@@ -83,7 +83,7 @@ export default function Gallery({
               <button
                 key={cat.key}
                 onClick={() => setActive(cat.key)}
-                className={`font-body text-[10px] md:text-[11px] tracking-[0.15em] uppercase transition-colors duration-200 ${
+                className={`font-body text-[12px] md:text-[13px] tracking-[0.15em] uppercase transition-colors duration-200 ${
                   active === cat.key
                     ? 'text-brand-charcoal font-semibold border-b border-brand-charcoal pb-1'
                     : 'text-brand-charcoal/50 hover:text-brand-charcoal'
@@ -116,7 +116,7 @@ export default function Gallery({
                 />
                 
                 {/* Red Label Badge */}
-                <div className="absolute top-4 right-4 bg-[#8C2020] text-white px-3 py-1 font-body text-[10px] font-semibold tracking-wider z-10 shadow-sm">
+                <div className="absolute top-4 right-4 bg-[#8C2020] text-white px-3 py-1 font-body text-[11px] font-semibold tracking-wider z-10 shadow-sm">
                   {item.code}
                 </div>
                 

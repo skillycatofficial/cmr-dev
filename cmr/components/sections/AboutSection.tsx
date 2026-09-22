@@ -35,7 +35,7 @@ export default function AboutSection() {
             <div className="w-full h-[1px] bg-gray-200 mb-8" />
 
             {/* Body paragraphs */}
-            <div className="space-y-6 font-body text-[#4a4a4a] text-[16px] md:text-[18px] leading-[1.8] max-w-[95%] mb-12 flex-grow">
+            <div className="space-y-6 font-body text-[#4a4a4a] text-[18px] md:text-[20px] leading-[1.8] max-w-[95%] mb-12 flex-grow">
               <p>
                 CMR has completed 600+ luxury villas in and around Taliparamba, Karuvanchal in Kannur district, Changanassery in Kottayam district and Angamaly, Mulanthuruthy in Ernakulam district. With elegant Vastu-compliant designs, top-quality construction, and personalised customer service, CMR has become the preferred home builder for middle-income families.
               </p>
@@ -46,7 +46,7 @@ export default function AboutSection() {
 
             {/* CTA */}
             <div className="mt-auto pt-8">
-              <Link href="/about-us" className="inline-flex items-center gap-4 font-body text-[#333333] text-[15px] font-semibold tracking-wide hover:text-brand-green transition-colors duration-200 group">
+              <Link href="/about-us" className="inline-flex items-center gap-4 font-body text-[#333333] text-[16.5px] font-semibold tracking-wide hover:text-brand-green transition-colors duration-200 group">
                 Know More About CMR 
                 <span className="text-xl leading-none -mt-1 group-hover:translate-x-1 transition-transform">{'>'}</span>
               </Link>
@@ -61,7 +61,7 @@ export default function AboutSection() {
             transition={{ duration: 0.9, delay: 0.15 }}
           >
             {/* Column label */}
-            <p className="font-body text-[#666666] text-[14px] font-medium tracking-wide mb-6">
+            <p className="font-body text-[#666666] text-[15.5px] font-medium tracking-wide mb-6">
               What Makes Us Unique
             </p>
             <div className="w-full h-[1px] bg-gray-200 mb-2" />
@@ -86,7 +86,7 @@ export default function AboutSection() {
                 </div>
                 <div>
                   {/* Stat label */}
-                  <div className="font-body text-[#4a4a4a] text-[13px] md:text-[14px] tracking-[0.05em] uppercase leading-relaxed max-w-[280px]">
+                  <div className="font-body text-[#4a4a4a] text-[14px] md:text-[15.5px] tracking-[0.05em] uppercase leading-relaxed max-w-[280px]">
                     {stat.label}
                   </div>
                 </div>

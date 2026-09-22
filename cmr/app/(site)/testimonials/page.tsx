@@ -129,7 +129,7 @@ export default function TestimonialsPage() {
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="px-section relative z-10 text-left max-w-5xl">
-          <span className="font-body text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase mb-4 block">
+          <span className="font-body text-brand-gold text-[12.5px] font-bold tracking-[0.3em] uppercase mb-4 block">
             Reviews
           </span>
           <h1
@@ -169,7 +169,7 @@ export default function TestimonialsPage() {
                 <span className="font-serif text-brand-gold/25 text-5xl leading-none select-none -mt-4 block mb-2">&ldquo;</span>
 
                 {/* Quote Text */}
-                <p className="font-body text-brand-charcoal/80 text-[15px] leading-relaxed font-light mb-6 flex-grow italic">
+                <p className="font-body text-brand-charcoal/80 text-[17px] leading-relaxed font-light mb-6 flex-grow italic">
                   {item.quote}
                 </p>
 
@@ -178,10 +178,10 @@ export default function TestimonialsPage() {
                   <h4 className="font-display font-bold text-brand-charcoal text-md">
                     {item.author}
                   </h4>
-                  <p className="font-body text-[12px] text-brand-gold font-semibold uppercase tracking-wider mt-0.5">
+                  <p className="font-body text-[13px] text-brand-gold font-semibold uppercase tracking-wider mt-0.5">
                     {item.details}
                   </p>
-                  <p className="font-body text-[11px] text-brand-charcoal/40 mt-1">
+                  <p className="font-body text-[12px] text-brand-charcoal/40 mt-1">
                     Bought: <span className="font-medium text-brand-charcoal/60">{item.project}</span>
                   </p>
                 </div>
@@ -198,12 +198,12 @@ export default function TestimonialsPage() {
           <h3 className="font-display font-bold text-brand-ivory text-2xl md:text-3xl mb-4">
             Become a part of our growing family
           </h3>
-          <p className="font-body text-brand-ivory/60 text-sm mb-8 max-w-lg mx-auto font-light">
+          <p className="font-body text-brand-ivory/60 text-[15px] mb-8 max-w-lg mx-auto font-light">
             Contact us today to explore our upcoming gated villa communities across Kerala.
           </p>
           <Link
             href="/contact-us"
-            className="inline-block px-10 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green font-body text-[12px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-block px-10 py-4 bg-brand-gold hover:bg-brand-ivory text-brand-green font-body text-[13px] font-bold tracking-[0.25em] uppercase shadow-lg rounded-lg transform hover:-translate-y-0.5 transition-all duration-300"
           >
             Contact Our Team &rarr;
           </Link>

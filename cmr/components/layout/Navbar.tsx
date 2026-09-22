@@ -122,15 +122,15 @@ const mobileNavLinks = [
 // ─── Helper Icons ──────────────────────────────────────────────────────────────
 function ChevronRight({ className = '' }: { className?: string }) {
   return (
-    <svg className={`w-3 h-3 flex-shrink-0 ${className}`} viewBox="0 0 12 12" fill="none">
-      <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg className={`w-3.5 h-3.5 flex-shrink-0 ${className}`} viewBox="0 0 12 12" fill="none">
+      <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 function ChevronDown({ className = '' }: { className?: string }) {
   return (
-    <svg className={`w-3 h-3 flex-shrink-0 ${className}`} viewBox="0 0 12 12" fill="none">
-      <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className={`w-3.5 h-3.5 flex-shrink-0 ${className}`} viewBox="0 0 12 12" fill="none">
+      <path d="M2.5 4.5l3.5 3.5 3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -146,7 +146,7 @@ function MoreMenu({ onClose }: { onClose?: () => void }) {
       className="absolute top-full right-0 mt-3 w-72 bg-white border border-gray-200/90 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden z-50 p-2.5"
     >
       <div className="px-3 py-2 border-b border-gray-100 mb-1">
-        <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
+        <span className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-brand-gold">
           EXPLORE MORE
         </span>
       </div>
@@ -158,11 +158,11 @@ function MoreMenu({ onClose }: { onClose?: () => void }) {
             onClick={onClose}
             className="flex flex-col px-3.5 py-2.5 rounded-xl hover:bg-brand-green/5 transition-colors group"
           >
-            <div className="flex items-center justify-between text-[13.5px] font-bold text-brand-charcoal group-hover:text-brand-green transition-colors">
+            <div className="flex items-center justify-between text-[14.5px] font-bold text-brand-charcoal group-hover:text-brand-green transition-colors">
               <span>{item.label}</span>
               <ChevronRight className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-green" />
             </div>
-            <span className="text-[11px] text-gray-500 group-hover:text-gray-700 transition-colors font-body mt-0.5">
+            <span className="text-[12px] text-gray-500 group-hover:text-gray-700 transition-colors font-body mt-0.5">
               {item.desc}
             </span>
           </Link>
@@ -325,8 +325,8 @@ function ProjectsMenu({
                   type="button"
                   onMouseEnter={() => handleDistrictHover(d.name)}
                   onClick={() => handleDistrictHover(d.name)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-medium transition-colors duration-150 text-left ${isActive
-                    ? 'text-brand-green font-bold bg-brand-green/5'
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[14.5px] font-bold transition-colors duration-150 text-left ${isActive
+                    ? 'text-brand-green bg-brand-green/5'
                     : 'text-brand-charcoal hover:text-brand-green hover:bg-gray-50'
                     }`}
                 >
@@ -359,8 +359,8 @@ function ProjectsMenu({
                       type="button"
                       onMouseEnter={() => setActiveSubLocationName(sl.name)}
                       onClick={() => setActiveSubLocationName(sl.name)}
-                      className={`w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-[13px] font-medium transition-colors duration-150 text-left ${isActiveSL
-                        ? 'text-brand-green font-bold bg-brand-green/10'
+                      className={`w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-[14px] font-bold transition-colors duration-150 text-left ${isActiveSL
+                        ? 'text-brand-green bg-brand-green/10'
                         : 'text-brand-charcoal hover:text-brand-green hover:bg-gray-50'
                         }`}
                     >
@@ -389,11 +389,11 @@ function ProjectsMenu({
                           key={p.slug || p.name}
                           href={`/projects/${p.slug}`}
                           onClick={onClose}
-                          className="flex items-center justify-between px-3 py-2 rounded-xl text-[13px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-gray-50 transition-colors duration-150 group/villa"
+                          className="flex items-center justify-between px-3 py-2 rounded-xl text-[14px] font-bold text-brand-charcoal hover:text-brand-green hover:bg-gray-50 transition-colors duration-150 group/villa"
                         >
                           <span className="truncate group-hover/villa:translate-x-0.5 transition-transform duration-150">{p.name}</span>
                           {p.status && (
-                            <span className="text-[9.5px] font-extrabold px-2 py-0.5 rounded-md bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5 shadow-xs">
+                            <span className="text-[10.5px] font-extrabold px-2 py-0.5 rounded-md bg-brand-gold/15 text-brand-gold whitespace-nowrap ml-1.5 shadow-xs">
                               {p.status}
                             </span>
                           )}
@@ -587,13 +587,13 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    if (menuOpen || activeDD === 'Projects') {
+    if (menuOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
     }
     return () => { document.body.style.overflow = '' }
-  }, [menuOpen, activeDD])
+  }, [menuOpen])
 
   useEffect(() => {
     let active = true
@@ -644,35 +644,81 @@ export default function Navbar() {
       {/* ── Header ──────────────────────────────────────────────────────── */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? 'bg-white shadow-md'
-          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent'
+          ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_25px_rgba(0,0,0,0.08)] border-b border-gray-100'
+          : 'bg-gradient-to-b from-black/85 via-black/45 to-transparent'
           }`}
       >
-        {/* Contact utility bar */}
+        {/* Contact utility bar (Always visible in sticky and normal view) */}
         <div
-          className={`hidden lg:block overflow-hidden transition-all duration-300 border-b ${scrolled ? 'max-h-0 opacity-0 border-transparent' : 'max-h-10 opacity-100 border-white/10'
+          className={`transition-colors duration-300 border-b ${scrolled
+            ? 'bg-[#F8F9FA]/95 border-gray-200/80 text-brand-charcoal'
+            : 'bg-black/35 border-white/15 text-white/95 backdrop-blur-xs'
             }`}
         >
-          <div className="px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-end gap-6 font-body text-[12.5px] text-white/85">
-            <a href="mailto:info@cmrdevelopers.com" className="flex items-center gap-1.5 hover:text-brand-gold transition-colors">
-              <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              info@cmrdevelopers.com
-            </a>
-            <span className="w-px h-3.5 bg-white/20" />
-            <a href="tel:+919206838383" className="hover:text-brand-gold transition-colors">+91 9206 838 383</a>
-            <span className="text-white/30">|</span>
-            <a href="tel:+919744475555" className="hover:text-brand-gold transition-colors">+91 9744 475 555</a>
+          <div className="px-4 sm:px-6 lg:px-8 h-8 md:h-9 flex items-center justify-end gap-4 font-body text-[13.5px]">
+            {/* Right contact details (Email + Numbers) */}
+            <div className="flex items-center gap-3 sm:gap-5">
+              {/* Email */}
+              <a
+                href="mailto:info@cmrdevelopers.com"
+                className={`hidden sm:flex items-center gap-1.5 font-bold tracking-wide transition-colors ${scrolled
+                  ? 'text-brand-charcoal hover:text-brand-green'
+                  : 'text-white/90 hover:text-brand-gold'
+                  }`}
+              >
+                <svg className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>info@cmrdevelopers.com</span>
+              </a>
+
+              <span className={`w-px h-3.5 hidden sm:block ${scrolled ? 'bg-gray-300' : 'bg-white/25'}`} />
+
+              {/* Contact Numbers with Phone Icon */}
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <svg className={`w-3.5 h-3.5 flex-shrink-0 ${scrolled ? 'text-brand-green' : 'text-brand-gold'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span className={`text-[11px] font-black uppercase tracking-widest hidden xl:inline ${scrolled ? 'text-brand-gold' : 'text-brand-gold'}`}>
+                  Call:
+                </span>
+                <a
+                  href="tel:+919206838383"
+                  className={`font-black text-[13.5px] sm:text-[14px] tracking-tight whitespace-nowrap transition-colors ${scrolled
+                    ? 'text-brand-green hover:text-brand-gold'
+                    : 'text-white hover:text-brand-gold'
+                    }`}
+                >
+                  +91 9206 838 383
+                </a>
+                <span className={`text-[12px] ${scrolled ? 'text-gray-300' : 'text-white/30'}`}>|</span>
+                <a
+                  href="tel:+919744475555"
+                  className={`font-black text-[13.5px] sm:text-[14px] tracking-tight whitespace-nowrap transition-colors ${scrolled
+                    ? 'text-brand-green hover:text-brand-gold'
+                    : 'text-white hover:text-brand-gold'
+                    }`}
+                >
+                  +91 9744 475 555
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="px-4 sm:px-6 lg:px-8 h-16 md:h-20 xl:h-[96px] flex items-center justify-between gap-4">
+        {/* Main Nav Row */}
+        <div className={`px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 transition-all duration-300 ${scrolled
+          ? 'h-14 md:h-16 xl:h-[76px]'
+          : 'h-16 md:h-20 xl:h-[88px]'
+          }`}>
 
           {/* Logo */}
           <Link
             href="/"
-            className="absolute top-0 left-4 sm:left-6 lg:left-8 z-10 w-[82px] h-[82px] md:w-[90px] md:h-[90px] xl:w-[115px] xl:h-[115px]"
+            className={`absolute top-0 left-4 sm:left-6 lg:left-8 z-10 transition-all duration-300 ${scrolled
+              ? 'w-[75px] h-[75px] md:w-[86px] md:h-[86px] xl:w-[102px] xl:h-[102px] drop-shadow-md'
+              : 'w-[82px] h-[82px] md:w-[92px] md:h-[92px] xl:w-[115px] xl:h-[115px]'
+              }`}
           >
             <Image
               src="/images/cmr-logo.png"
@@ -682,17 +728,23 @@ export default function Navbar() {
               priority
             />
           </Link>
-          <div className="flex-shrink-0 w-[82px] md:w-[90px] xl:w-[115px]" aria-hidden="true" />
+          <div
+            className={`flex-shrink-0 transition-all duration-300 ${scrolled
+              ? 'w-[75px] md:w-[86px] xl:w-[102px]'
+              : 'w-[82px] md:w-[92px] xl:w-[115px]'
+              }`}
+            aria-hidden="true"
+          />
 
           {/* Desktop Nav */}
           <nav ref={desktopNavRef} className="hidden xl:flex items-center gap-1 flex-1 justify-end">
             {primaryNavLinks.map((link) => {
               const ddOpen = activeDD === link.label
-              const linkClassName = `flex items-center gap-1.5 px-3.5 py-2 font-body text-[14px] font-medium whitespace-nowrap transition-all duration-200 rounded-lg ${ddOpen
-                ? scrolled ? 'text-brand-green bg-brand-green/5' : 'text-brand-gold bg-white/10'
+              const linkClassName = `flex items-center gap-1.5 px-3.5 py-2 font-body text-[15.5px] font-bold tracking-wide whitespace-nowrap transition-all duration-200 rounded-lg ${ddOpen
+                ? scrolled ? 'text-brand-green bg-brand-green/10' : 'text-brand-gold bg-white/15'
                 : scrolled
-                  ? 'text-brand-charcoal/90 hover:text-brand-green hover:bg-black/5'
-                  : 'text-white/90 hover:text-white hover:bg-white/10'
+                  ? 'text-brand-charcoal hover:text-brand-green hover:bg-brand-green/5'
+                  : 'text-white hover:text-brand-gold hover:bg-white/10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]'
                 }`
 
               return (
@@ -710,7 +762,7 @@ export default function Navbar() {
                       className={linkClassName}
                     >
                       <span>{link.label}</span>
-                      <ChevronDown className={`opacity-60 transition-transform duration-200 ${ddOpen ? 'rotate-180 text-brand-gold' : ''}`} />
+                      <ChevronDown className={`opacity-80 transition-transform duration-200 ${ddOpen ? 'rotate-180 text-brand-gold' : ''}`} />
                     </button>
                   ) : (
                     <Link href={link.href} className={linkClassName}>
@@ -746,15 +798,15 @@ export default function Navbar() {
                 type="button"
                 aria-expanded={activeDD === 'More'}
                 onClick={() => setActiveDD(activeDD === 'More' ? null : 'More')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 font-body text-[14px] font-medium whitespace-nowrap transition-all duration-200 rounded-lg ${activeDD === 'More'
-                  ? scrolled ? 'text-brand-green bg-brand-green/5' : 'text-brand-gold bg-white/10'
+                className={`flex items-center gap-1.5 px-3.5 py-2 font-body text-[15.5px] font-bold tracking-wide whitespace-nowrap transition-all duration-200 rounded-lg ${activeDD === 'More'
+                  ? scrolled ? 'text-brand-green bg-brand-green/10' : 'text-brand-gold bg-white/15'
                   : scrolled
-                    ? 'text-brand-charcoal/90 hover:text-brand-green hover:bg-black/5'
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                    ? 'text-brand-charcoal hover:text-brand-green hover:bg-brand-green/5'
+                    : 'text-white hover:text-brand-gold hover:bg-white/10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]'
                   }`}
               >
                 <span>More</span>
-                <ChevronDown className={`opacity-60 transition-transform duration-200 ${activeDD === 'More' ? 'rotate-180 text-brand-gold' : ''}`} />
+                <ChevronDown className={`opacity-80 transition-transform duration-200 ${activeDD === 'More' ? 'rotate-180 text-brand-gold' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -765,14 +817,28 @@ export default function Navbar() {
             {/* Primary CTA Button */}
             <Link
               href="/contact-us"
-              className="ml-3 px-5 py-2.5 rounded-lg bg-brand-gold hover:bg-brand-ivory text-brand-charcoal font-body text-[12.5px] font-extrabold tracking-[0.18em] uppercase shadow-md transition-all duration-300 whitespace-nowrap hover:scale-[1.02] active:scale-[0.98]"
+              className="ml-3 px-5 py-2.5 rounded-lg bg-gradient-to-r from-brand-gold via-[#e8c66e] to-[#C59E3F] hover:from-[#dfbf5c] hover:to-[#b89230] text-brand-charcoal font-body text-[13.5px] font-black tracking-[0.16em] uppercase shadow-[0_4px_14px_rgba(212,175,55,0.35)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.5)] border border-[#b8952b]/40 transition-all duration-300 whitespace-nowrap hover:scale-[1.03] active:scale-[0.98]"
             >
               Contact Us
             </Link>
           </nav>
 
-          {/* Right actions (Mobile Hamburger) */}
-          <div className="flex items-center gap-2 flex-shrink-0 xl:hidden">
+          {/* Right actions (Mobile Hamburger + Quick Call) */}
+          <div className="flex items-center gap-2.5 flex-shrink-0 xl:hidden">
+            <a
+              href="tel:+919206838383"
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-[12px] font-extrabold tracking-wide uppercase transition-all ${scrolled
+                ? 'bg-brand-green/10 text-brand-green border border-brand-green/20'
+                : 'bg-brand-gold text-brand-charcoal shadow-sm'
+                }`}
+              aria-label="Call Direct"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>Call</span>
+            </a>
+
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="flex flex-col gap-[5px] p-2 -mr-1"
@@ -848,7 +914,7 @@ export default function Navbar() {
                       <>
                         <button
                           onClick={() => setMobileProjectsOpen(!mobileProjectsOpen)}
-                          className="w-full flex items-center justify-between py-3.5 border-b border-white/10 text-left font-display font-semibold text-[16px] text-brand-ivory hover:text-brand-gold transition-colors"
+                          className="w-full flex items-center justify-between py-3.5 border-b border-white/10 text-left font-display font-bold text-[18px] text-brand-ivory hover:text-brand-gold transition-colors"
                         >
                           <span>{link.label}</span>
                           <ChevronDown
@@ -880,7 +946,7 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         onClick={closeMenu}
-                        className={`block py-3.5 border-b border-white/10 font-display font-semibold text-[16px] transition-colors ${link.label === 'Contact Us' ? 'text-brand-gold font-bold' : 'text-brand-ivory hover:text-brand-gold'
+                        className={`block py-3.5 border-b border-white/10 font-display font-bold text-[18px] transition-colors ${link.label === 'Contact Us' ? 'text-brand-gold font-extrabold' : 'text-brand-ivory hover:text-brand-gold'
                           }`}
                       >
                         {link.label}
@@ -890,21 +956,30 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              <div className="px-5 py-4 border-t border-white/10 flex-shrink-0 space-y-2">
+              <div className="px-5 py-4 border-t border-white/10 flex-shrink-0 space-y-2.5">
                 <a
                   href="tel:+919206838383"
-                  className="flex items-center gap-2 text-brand-ivory/70 text-sm hover:text-brand-gold transition-colors"
+                  className="flex items-center gap-2.5 text-white font-bold text-[14.5px] hover:text-brand-gold transition-colors"
                 >
-                  <svg className="w-4 h-4 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="w-4 h-4 text-brand-gold flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.38 1.18 2 2 0 012.37 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.34a16 16 0 006.29 6.29l1.41-1.41a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.51v1.41z" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   +91 9206 838 383
                 </a>
                 <a
-                  href="mailto:info@cmrdevelopers.com"
-                  className="flex items-center gap-2 text-brand-ivory/70 text-sm hover:text-brand-gold transition-colors"
+                  href="tel:+919744475555"
+                  className="flex items-center gap-2.5 text-white font-bold text-[14.5px] hover:text-brand-gold transition-colors"
                 >
-                  <svg className="w-4 h-4 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="w-4 h-4 text-brand-gold flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.38 1.18 2 2 0 012.37 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.34a16 16 0 006.29 6.29l1.41-1.41a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.51v1.41z" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  +91 9744 475 555
+                </a>
+                <a
+                  href="mailto:info@cmrdevelopers.com"
+                  className="flex items-center gap-2.5 text-white/90 font-bold text-[14px] hover:text-brand-gold transition-colors"
+                >
+                  <svg className="w-4 h-4 text-brand-gold flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" strokeLinecap="round" strokeLinejoin="round" />
                     <polyline points="22,6 12,13 2,6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

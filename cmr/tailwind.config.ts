@@ -29,31 +29,29 @@ const config: Config = {
          *   Section h2 → ~36-42px  |  Card h3 → 20-22px
          */
 
-        // ── Hero display (72px) — only for main hero heading ───────────────
-        'display':    ['72px',    { lineHeight: '0.95', letterSpacing: '-0.025em' }],
+        // ── Hero display (74px) — only for main hero heading ───────────────
+        'display':    ['74px',    { lineHeight: '0.95', letterSpacing: '-0.025em' }],
 
-        // ── Section headings (36px) — "FEATURED PROJECTS", "TALES OF TRUST"
-        // Asset Homes uses ~36-40px for section titles
-        'section':    ['36px',    { lineHeight: '1.05', letterSpacing: '-0.015em' }],
+        // ── Section headings (38px) — "FEATURED PROJECTS", "TALES OF TRUST"
+        'section':    ['38px',    { lineHeight: '1.08', letterSpacing: '-0.015em' }],
 
-        // ── Card / content headings (22px) — project names, blog titles
-        // Keeps cards proportional at any column width
-        'heading':    ['22px',    { lineHeight: '1.3',  letterSpacing: '-0.01em'  }],
+        // ── Card / content headings (23.5px) — project names, blog titles
+        'heading':    ['23.5px',  { lineHeight: '1.3',  letterSpacing: '-0.01em'  }],
 
-        // ── Section paragraph text (20px) — user requirement ───────────────
-        'body':       ['20px',    { lineHeight: '1.75' }],
+        // ── Section paragraph text (21px) ──────────────────────────────────
+        'body':       ['21px',    { lineHeight: '1.75' }],
 
-        // ── Navigation & UI elements (16px) — user requirement ─────────────
-        'ui':         ['16px',    { lineHeight: '1.5'  }],
+        // ── Navigation & UI elements (17px) ────────────────────────────────
+        'ui':         ['17px',    { lineHeight: '1.5'  }],
 
-        // ── Secondary UI (14px) — dropdown items, secondary links ──────────
-        'ui-sm':      ['14px',    { lineHeight: '1.5'  }],
+        // ── Secondary UI (15px) — dropdown items, secondary links ──────────
+        'ui-sm':      ['15px',    { lineHeight: '1.5'  }],
 
-        // ── Meta / badge labels (13px) — category pills, eyebrows, CTAs ───
-        'label':      ['13px',    { lineHeight: '1.4',  letterSpacing: '0.06em'  }],
+        // ── Meta / badge labels (14px) — category pills, eyebrows, CTAs ───
+        'label':      ['14px',    { lineHeight: '1.4',  letterSpacing: '0.06em'  }],
 
-        // ── Micro text (11px) — copyright, tiny overlays ─────────────
-        'micro':      ['11px',    { lineHeight: '1.3',  letterSpacing: '0.12em'  }],
+        // ── Micro text (12px) — copyright, tiny overlays ───────────────────
+        'micro':      ['12px',    { lineHeight: '1.3',  letterSpacing: '0.12em'  }],
       },
       letterSpacing: {
         widest2: '0.25em',

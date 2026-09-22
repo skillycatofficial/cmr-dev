@@ -22,7 +22,7 @@ export default function LifecycleHighlight() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ delay: 0.2 }}
-          className="font-body text-[#4a4a4a] text-[15px] md:text-[16px] leading-[1.8] max-w-5xl space-y-4">
+          className="font-body text-[#4a4a4a] text-[17px] md:text-[18.5px] leading-[1.8] max-w-5xl space-y-4">
           <p>
             At CMR Developers, we believe a home should evolve with your family
             and aspirations. Every villa community is carefully designed to
@@ -53,13 +53,13 @@ export default function LifecycleHighlight() {
           className="grid lg:grid-cols-2">
           {/* Text Left */}
           <div className="flex flex-col justify-center px-8 py-16 md:py-24 lg:px-20 xl:px-32 bg-white">
-            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">
+            <p className="font-body text-[#888888] text-[11.5px] tracking-[0.2em] uppercase mb-4 font-semibold">
               BRAND POSITIONING
             </p>
             <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">
               More Than a Villa. A Community Designed for Life.
             </h3>
-            <p className="font-body text-[#666666] text-[14px] md:text-[15px] leading-relaxed mb-10 max-w-md">
+            <p className="font-body text-[#666666] text-[16px] md:text-[17px] leading-relaxed mb-10 max-w-md">
               Every CMR project is thoughtfully planned to create neighbourhoods
               where families can enjoy security, comfort, and meaningful
               connections. Spacious roads, landscaped surroundings, quality
@@ -98,13 +98,13 @@ export default function LifecycleHighlight() {
           </div>
           {/* Text Right */}
           <div className="flex flex-col justify-center px-8 py-16 md:py-24 lg:px-20 xl:px-32 bg-white order-1 lg:order-2">
-            <p className="font-body text-[#888888] text-[10px] tracking-[0.2em] uppercase mb-4 font-semibold">
+            <p className="font-body text-[#888888] text-[11.5px] tracking-[0.2em] uppercase mb-4 font-semibold">
               INVESTMENT SECTION
             </p>
             <h3 className="font-body font-normal text-3xl md:text-4xl text-[#2d2d2d] mb-6">
               Invest in Kerala&apos;s Fast-Growing Residential Market
             </h3>
-            <p className="font-body text-[#666666] text-[14px] md:text-[15px] leading-relaxed mb-10 max-w-md">
+            <p className="font-body text-[#666666] text-[16px] md:text-[17px] leading-relaxed mb-10 max-w-md">
               Whether you&apos;re purchasing your first home, upgrading your
               lifestyle, or investing from abroad, CMR Developers offers villas
               in carefully selected locations with strong appreciation

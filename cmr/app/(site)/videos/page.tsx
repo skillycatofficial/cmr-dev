@@ -49,7 +49,7 @@ export default async function VideosPage() {
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="px-section relative z-10 text-left max-w-5xl">
-          <span className="font-body text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase mb-4 block">
+          <span className="font-body text-brand-gold text-[12.5px] font-bold tracking-[0.3em] uppercase mb-4 block">
             Watch &amp; Explore
           </span>
           <h1
@@ -80,13 +80,13 @@ export default async function VideosPage() {
         <div className="px-section">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
             <div>
-              <p className="font-body text-brand-charcoal/50 text-[10px] tracking-[0.25em] uppercase mb-4">Full Library</p>
+              <p className="font-body text-brand-charcoal/50 text-[11.5px] tracking-[0.25em] uppercase mb-4">Full Library</p>
               <h2 className="font-display font-medium text-brand-charcoal text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
                 All Videos
               </h2>
             </div>
             {videos.length > 0 && (
-              <p className="font-body text-brand-charcoal/50 text-sm">
+              <p className="font-body text-brand-charcoal/50 text-[15px]">
                 {videos.length} video{videos.length === 1 ? '' : 's'}
               </p>
             )}

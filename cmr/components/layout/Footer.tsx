@@ -260,7 +260,7 @@ export default function Footer() {
               {projectsByDistrict.map((group) => (
                 <div key={group.district}>
                   {group.district !== UNGROUPED && (
-                    <div className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.15em] uppercase border-b border-brand-ivory/15 pb-1.5 mb-2">
+                    <div className="font-body text-brand-gold text-[12.5px] font-bold tracking-[0.15em] uppercase border-b border-brand-ivory/15 pb-1.5 mb-2">
                       {group.district}
                     </div>
                   )}

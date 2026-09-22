@@ -31,7 +31,7 @@ export default async function CareersPage() {
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="px-section relative z-10 text-left max-w-5xl">
-          <span className="font-body text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase mb-4 block">
+          <span className="font-body text-brand-gold text-[12.5px] font-bold tracking-[0.3em] uppercase mb-4 block">
             Build With Us
           </span>
           <h1
@@ -51,7 +51,7 @@ export default async function CareersPage() {
         <div className="px-section max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 items-start">
             <div>
-              <span className="font-body text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-2 block">
+              <span className="font-body text-brand-gold text-[11.5px] font-bold tracking-[0.25em] uppercase mb-2 block">
                 Our Culture
               </span>
               <h2 className="font-display font-bold text-brand-charcoal text-2xl md:text-3xl leading-tight">
@@ -85,14 +85,14 @@ export default async function CareersPage() {
           <div className="flex justify-center gap-4">
             <Link 
               href="/about-us"
-              className="text-[12px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
+              className="text-[13px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
             >
               ← Read Our Story
             </Link>
             <span className="text-brand-gray/40">|</span>
             <Link 
               href="/projects"
-              className="text-[12px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
+              className="text-[13px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
             >
               See Our Projects →
             </Link>

@@ -90,7 +90,7 @@ export default async function BlogIndexPage() {
               {/* Text side */}
               <div className="p-8 md:p-12 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3 font-body text-[11px] font-semibold tracking-wider text-brand-green uppercase">
+                  <div className="flex items-center gap-3 font-body text-[12.5px] font-semibold tracking-wider text-brand-green uppercase">
                     {featuredArticle.category && <span>{featuredArticle.category}</span>}
                     {featuredArticle.category && featuredArticle.readTime && (
                       <span className="w-1 h-1 bg-brand-gray/40 rounded-full" />
@@ -105,7 +105,7 @@ export default async function BlogIndexPage() {
                   </h2>
 
                   {featuredArticle.excerpt && (
-                    <p className="font-body text-brand-charcoal/70 text-sm leading-relaxed font-light">
+                    <p className="font-body text-brand-charcoal/70 text-[15.5px] leading-relaxed font-light">
                       {featuredArticle.excerpt}
                     </p>
                   )}
@@ -118,13 +118,13 @@ export default async function BlogIndexPage() {
                     </div>
                     <div>
                       <div className="font-display font-semibold text-brand-charcoal text-xs">{featuredArticle.author}</div>
-                      <div className="font-body text-brand-charcoal/40 text-[10px]">{featuredArticle.date}</div>
+                      <div className="font-body text-brand-charcoal/40 text-[11px]">{featuredArticle.date}</div>
                     </div>
                   </div>
 
                   <Link
                     href={`/blog/${featuredArticle.slug}`}
-                    className="font-body text-xs font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
+                    className="font-body text-[13px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
                   >
                     Read Article →
                   </Link>
@@ -165,7 +165,7 @@ export default async function BlogIndexPage() {
                         </div>
                       )}
                       {article.category && (
-                        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-2.5 py-0.5 rounded-full font-body text-[9px] font-bold tracking-wider text-brand-green uppercase shadow-sm">
+                        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-2.5 py-0.5 rounded-full font-body text-[10px] font-bold tracking-wider text-brand-green uppercase shadow-sm">
                           {article.category}
                         </div>
                       )}
@@ -173,7 +173,7 @@ export default async function BlogIndexPage() {
 
                     {/* Content */}
                     <div className="p-6 space-y-3">
-                      <div className="flex items-center gap-2 font-body text-[10px] text-brand-charcoal/40">
+                      <div className="flex items-center gap-2 font-body text-[11px] text-brand-charcoal/40">
                         <span>{article.date}</span>
                         {article.readTime && <><span>•</span><span>{article.readTime}</span></>}
                       </div>
@@ -185,7 +185,7 @@ export default async function BlogIndexPage() {
                       </h3>
 
                       {article.excerpt && (
-                        <p className="font-body text-brand-charcoal/60 text-xs leading-relaxed font-light line-clamp-3">
+                        <p className="font-body text-brand-charcoal/60 text-[13.5px] leading-relaxed font-light line-clamp-3">
                           {article.excerpt}
                         </p>
                       )}
@@ -194,12 +194,12 @@ export default async function BlogIndexPage() {
 
                   {/* Footer */}
                   <div className="p-6 pt-0 border-t border-brand-gray/10 flex items-center justify-between mt-4">
-                    <span className="font-body text-[10px] font-semibold text-brand-charcoal/50">
+                    <span className="font-body text-[11px] font-semibold text-brand-charcoal/50">
                       {article.author}
                     </span>
                     <Link
                       href={`/blog/${article.slug}`}
-                      className="font-body text-[11px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
+                      className="font-body text-[12px] font-bold tracking-wider text-brand-green hover:text-brand-gold uppercase transition-colors"
                     >
                       Read Post →
                     </Link>

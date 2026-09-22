@@ -340,7 +340,7 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
                     </div>
 
                     {project.otherAmenities && (
-                      <p className="font-body text-[11px] text-brand-charcoal/50 mb-4">
+                      <p className="font-body text-[12.5px] text-brand-charcoal/50 mb-4">
                         Amenities: {project.otherAmenities}
                       </p>
                     )}

@@ -28,7 +28,7 @@ export default function CelebratingSection() {
               <span className="block font-display font-bold text-[#B89A5D] text-4xl md:text-5xl mb-2">
                 14+
               </span>
-              <span className="block font-body text-[10px] md:text-[11px] text-white/80 tracking-[0.2em] uppercase">
+              <span className="block font-body text-[11.5px] md:text-[12.5px] text-white/80 tracking-[0.2em] uppercase">
                 YEARS OF PRECISION
               </span>
             </div>
@@ -41,14 +41,14 @@ export default function CelebratingSection() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full lg:w-2/3">
-            <p className="font-body text-brand-charcoal/50 text-[10px] tracking-[0.25em] uppercase mb-4">
+            <p className="font-body text-brand-charcoal/50 text-[11.5px] tracking-[0.25em] uppercase mb-4">
               THE MONOLITH EDGE
             </p>
             <h2 className="font-display font-medium text-brand-charcoal text-4xl md:text-5xl lg:text-6xl mb-10 leading-tight">
               CMR is celebrating!
             </h2>
 
-            <div className="space-y-6 font-body text-[14px] text-brand-charcoal/80 leading-relaxed max-w-2xl">
+            <div className="space-y-6 font-body text-[16.5px] md:text-[18px] text-brand-charcoal/80 leading-[1.8] max-w-2xl">
               <p>
                 CMR Group has officially solidified its position as the premier
                 real estate developer in Kannur, Kerala. Over a remarkable
@@ -92,7 +92,7 @@ export default function CelebratingSection() {
             </div>
 
             <div className="mt-10">
-              <button className="border border-brand-charcoal text-brand-charcoal font-body text-[11px] font-semibold tracking-[0.2em] uppercase px-10 py-4 hover:bg-brand-charcoal hover:text-white transition-colors">
+              <button className="border border-brand-charcoal text-brand-charcoal font-body text-[12.5px] font-semibold tracking-[0.2em] uppercase px-10 py-4 hover:bg-brand-charcoal hover:text-white transition-colors">
                 Explore More
               </button>
             </div>

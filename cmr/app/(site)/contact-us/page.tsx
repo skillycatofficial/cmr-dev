@@ -70,7 +70,7 @@ export default function ContactUsPage() {
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="px-section relative z-10 text-left max-w-5xl">
-          <span className="font-body text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase mb-4 block">
+          <span className="font-body text-brand-gold text-[12.5px] font-bold tracking-[0.3em] uppercase mb-4 block">
             Connect
           </span>
           <h1
@@ -114,8 +114,8 @@ export default function ContactUsPage() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-display font-bold text-brand-charcoal text-[15px] uppercase tracking-wider mb-1">Corporate Office</h4>
-                    <p className="font-body text-brand-charcoal/70 text-sm leading-relaxed">
+                    <h4 className="font-display font-bold text-brand-charcoal text-[16.5px] uppercase tracking-wider mb-1">Corporate Office</h4>
+                    <p className="font-body text-brand-charcoal/70 text-[15.5px] leading-relaxed">
                       Union Complex, 2nd Floor, South Bazar, Ward No. 46<br />
                       Near Kannur–Taliparamba Highway, Kannur – 670 001, Kerala
                     </p>
@@ -129,7 +129,7 @@ export default function ContactUsPage() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-display font-bold text-brand-charcoal text-[15px] uppercase tracking-wider mb-2">Direct Contact</h4>
+                    <h4 className="font-display font-bold text-brand-charcoal text-[16.5px] uppercase tracking-wider mb-2">Direct Contact</h4>
                     <p className="font-body text-brand-charcoal/70 text-body leading-relaxed">
                       Phone: <a href="tel:+919206838383" className="text-brand-green hover:text-brand-gold transition-colors font-display font-bold text-lg">+91 9206 838 383</a> | <a href="tel:+919744475555" className="text-brand-green hover:text-brand-gold transition-colors font-display font-bold text-lg">+91 9744 475 555</a><br />
                       Email: <a href="mailto:info@cmrdevelopers.com" className="hover:text-brand-green transition-colors font-medium">info@cmrdevelopers.com</a>
@@ -144,8 +144,8 @@ export default function ContactUsPage() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-display font-bold text-brand-charcoal text-[15px] uppercase tracking-wider mb-1">NRI Support Desk</h4>
-                    <p className="font-body text-brand-charcoal/70 text-sm leading-relaxed">
+                    <h4 className="font-display font-bold text-brand-charcoal text-[16.5px] uppercase tracking-wider mb-1">NRI Support Desk</h4>
+                    <p className="font-body text-brand-charcoal/70 text-[15.5px] leading-relaxed">
                       Phone: <a href="tel:+919206838383" className="text-brand-green hover:text-brand-gold transition-colors font-medium">+91 9206 838 383</a><br />
                       Hours: <span className="font-medium text-brand-charcoal/80">24 Hours, 7 Days a Week</span><br />
                       Dedicated coordination team for buyers in the Gulf, UK, and USA.

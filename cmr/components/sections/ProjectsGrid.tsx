@@ -119,19 +119,19 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
           className="bg-[#f4f4f4] p-4 flex flex-col md:flex-row items-center gap-4 mb-16"
         >
           <div className="flex-1 w-full">
-            <label className="block font-body text-[10px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Property Type</label>
+            <label className="block font-body text-[11.5px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Property Type</label>
             <div className="flex items-center justify-between border-b border-brand-charcoal/20 pb-2">
-              <span className="font-body text-sm text-brand-charcoal">Villa</span>
+              <span className="font-body text-[15px] text-brand-charcoal">Villa</span>
               <svg className="w-3 h-3 text-brand-charcoal/50" viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M4 6l4 4 4-4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
           </div>
           <div className="flex-1 w-full">
-            <label htmlFor="home-filter-location" className="block font-body text-[10px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Location</label>
+            <label htmlFor="home-filter-location" className="block font-body text-[11.5px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Location</label>
             <select
               id="home-filter-location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full font-body text-sm text-brand-charcoal bg-transparent border-b border-brand-charcoal/20 pb-2 outline-none cursor-pointer appearance-none"
+              className="w-full font-body text-[15px] text-brand-charcoal bg-transparent border-b border-brand-charcoal/20 pb-2 outline-none cursor-pointer appearance-none"
             >
               {locationOptions.map((loc) => (
                 <option key={loc} value={loc}>{loc}</option>
@@ -139,12 +139,12 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
             </select>
           </div>
           <div className="flex-1 w-full">
-            <label htmlFor="home-filter-status" className="block font-body text-[10px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Status</label>
+            <label htmlFor="home-filter-status" className="block font-body text-[11.5px] text-brand-charcoal/50 uppercase tracking-wider mb-1">Status</label>
             <select
               id="home-filter-status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full font-body text-sm text-brand-charcoal bg-transparent border-b border-brand-charcoal/20 pb-2 outline-none cursor-pointer appearance-none"
+              className="w-full font-body text-[15px] text-brand-charcoal bg-transparent border-b border-brand-charcoal/20 pb-2 outline-none cursor-pointer appearance-none"
             >
               {statusOptions.map((st) => (
                 <option key={st} value={st}>{st}</option>
@@ -154,7 +154,7 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
           <div className="w-full md:w-auto">
             <button
               onClick={handleSearchNow}
-              className="w-full md:w-auto bg-[#0F2F2B] text-white font-body text-[11px] font-semibold tracking-[0.1em] uppercase px-8 py-4 hover:bg-brand-gold transition-colors cursor-pointer"
+              className="w-full md:w-auto bg-[#0F2F2B] text-white font-body text-[12.5px] font-semibold tracking-[0.1em] uppercase px-8 py-4 hover:bg-brand-gold transition-colors cursor-pointer"
             >
               Search Now
             </button>
@@ -186,22 +186,22 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
                   {p.badge?.num && (
                     <div className="absolute top-0 right-0 bg-white/90 backdrop-blur-md p-3 text-center min-w-[60px]">
                       <span className="font-display text-2xl text-[#4B5E5B] block leading-none">{p.badge.num}</span>
-                      <span className="font-body text-[8px] text-brand-charcoal/60 leading-tight block mt-1 whitespace-pre-line">{p.badge.label}</span>
+                      <span className="font-body text-[9.5px] text-brand-charcoal/60 leading-tight block mt-1 whitespace-pre-line">{p.badge.label}</span>
                     </div>
                   )}
 
                   {p.status && (
-                    <div className="absolute bottom-0 left-0 bg-[#0F2F2B] text-white px-3 py-1 font-body text-[8px] tracking-[0.2em] uppercase">
+                    <div className="absolute bottom-0 left-0 bg-[#0F2F2B] text-white px-3 py-1 font-body text-[9.5px] tracking-[0.2em] uppercase">
                       {p.status}
                     </div>
                   )}
                 </div>
 
                 <div>
-                  <h3 className="font-display text-xl text-brand-charcoal mb-1">{p.name}</h3>
-                  <p className="font-body text-[10px] text-brand-charcoal/50 tracking-[0.15em] uppercase mb-3">{p.location}</p>
+                  <h3 className="font-display text-[22px] text-brand-charcoal mb-1">{p.name}</h3>
+                  <p className="font-body text-[11.5px] text-brand-charcoal/50 tracking-[0.15em] uppercase mb-3">{p.location}</p>
                   <div className="flex items-center justify-between border-t border-brand-charcoal/20 pt-3">
-                    <span className="font-body text-[13px] text-brand-charcoal font-medium">{p.price}</span>
+                    <span className="font-body text-[15px] text-brand-charcoal font-medium">{p.price}</span>
                     <span className="text-brand-charcoal/40 group-hover:text-brand-gold transition-colors">↗</span>
                   </div>
                 </div>
@@ -218,10 +218,10 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
           transition={{ duration: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link href="/contact-us" className="w-full sm:w-auto text-center bg-[#0F2F2B] text-white font-body text-[11px] font-semibold tracking-[0.2em] uppercase px-12 py-4 hover:bg-brand-gold transition-colors">
+          <Link href="/contact-us" className="w-full sm:w-auto text-center bg-[#0F2F2B] text-white font-body text-[12.5px] font-semibold tracking-[0.2em] uppercase px-12 py-4 hover:bg-brand-gold transition-colors">
             Enquire Now
           </Link>
-          <Link href="/projects" className="w-full sm:w-auto text-center border border-brand-charcoal/20 text-brand-charcoal font-body text-[11px] font-semibold tracking-[0.2em] uppercase px-12 py-4 hover:border-[#0F2F2B] transition-colors">
+          <Link href="/projects" className="w-full sm:w-auto text-center border border-brand-charcoal/20 text-brand-charcoal font-body text-[12.5px] font-semibold tracking-[0.2em] uppercase px-12 py-4 hover:border-[#0F2F2B] transition-colors">
             Explore Projects
           </Link>
         </motion.div>

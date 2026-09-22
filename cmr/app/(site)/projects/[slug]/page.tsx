@@ -73,7 +73,7 @@ export default async function ProjectDetailPage(
     heroMobileImage?: string;
     heroMobileImages?: string[];
     gallery?: string[];
-    amenities?: { icon: string; label: string }[];
+    amenities?: { icon: string; label: string; image?: string }[];
     badge?: { num: string; label: string };
     otherAmenities?: string;
     units?: string;
@@ -117,7 +117,7 @@ export default async function ProjectDetailPage(
   if (!project) notFound()
 
   const gallery: string[] = project.gallery ?? []
-  const amenities: { icon: string; label: string }[] = project.amenities ?? []
+  const amenities: { icon: string; label: string; image?: string }[] = project.amenities ?? []
   const landmarks = project.landmarks ?? []
   const paymentPlan = project.paymentPlan ?? []
   const bankPartners = project.bankPartners ?? []
@@ -415,7 +415,7 @@ export default async function ProjectDetailPage(
 
       {/* ── Amenities ───────────────────────────────────── */}
       {(() => {
-        const defaultAmenities: { icon: string; label: string }[] = [
+        const defaultAmenities: { icon: string; label: string; image?: string }[] = [
           { icon: '🏘️', label: 'Gated Community' },
           { icon: '🧱', label: 'Compound Wall' },
           { icon: '🚰', label: 'Underground Drainage' },
@@ -438,14 +438,32 @@ export default async function ProjectDetailPage(
               </h2>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {displayAmenities.map((a, i) => (
-                  <div key={i} className="flex items-center gap-3 p-4 border border-brand-gray/40 hover:border-brand-green transition-colors duration-200">
-                    {a.icon && (
-                      <span className="text-brand-gold text-heading flex-shrink-0">{a.icon}</span>
-                    )}
-                    <span className="font-body text-brand-charcoal/70 text-ui">{a.label}</span>
-                  </div>
-                ))}
+                {displayAmenities.map((a, i) =>
+                  a.image ? (
+                    <div key={i} className="border border-brand-gray/40 hover:border-brand-green transition-colors duration-200 overflow-hidden">
+                      <div className="relative w-full aspect-video">
+                        <Image
+                          src={a.image}
+                          alt={a.label}
+                          fill
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 p-4">
+                        <span className="text-brand-gold text-heading flex-shrink-0">✓</span>
+                        <span className="font-body text-brand-charcoal/70 text-ui">{a.label}</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div key={i} className="flex items-center gap-3 p-4 border border-brand-gray/40 hover:border-brand-green transition-colors duration-200">
+                      {a.icon && (
+                        <span className="text-brand-gold text-heading flex-shrink-0">{a.icon}</span>
+                      )}
+                      <span className="font-body text-brand-charcoal/70 text-ui">{a.label}</span>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </section>

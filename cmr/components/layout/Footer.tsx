@@ -221,11 +221,11 @@ export default function Footer() {
                 </svg>
                 +91 9206 838 383
               </a>
-              <a href="tel:+919744475555" className="flex items-center gap-2 font-body text-brand-ivory/55 text-ui hover:text-brand-gold transition-colors duration-200">
+              <a href="tel:+917594962161" className="flex items-center gap-2 font-body text-brand-ivory/55 text-ui hover:text-brand-gold transition-colors duration-200">
                 <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
-                +91 9744 475 555
+                +91 75949 62161
               </a>
               <a href="mailto:info@cmrdevelopers.com" className="flex items-center gap-2 font-body text-brand-ivory/55 text-ui hover:text-brand-gold transition-colors duration-200">
                 <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

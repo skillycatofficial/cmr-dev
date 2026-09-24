@@ -693,13 +693,13 @@ export default function Navbar() {
                 </a>
                 <span className={`text-[12px] ${scrolled ? 'text-gray-300' : 'text-white/30'}`}>|</span>
                 <a
-                  href="tel:+919744475555"
+                  href="tel:+917594962161"
                   className={`font-black text-[13.5px] sm:text-[14px] tracking-tight whitespace-nowrap transition-colors ${scrolled
                     ? 'text-brand-green hover:text-brand-gold'
                     : 'text-white hover:text-brand-gold'
                     }`}
                 >
-                  +91 9744 475 555
+                  +91 75949 62161
                 </a>
               </div>
             </div>
@@ -967,13 +967,13 @@ export default function Navbar() {
                   +91 9206 838 383
                 </a>
                 <a
-                  href="tel:+919744475555"
+                  href="tel:+917594962161"
                   className="flex items-center gap-2.5 text-white font-bold text-[14.5px] hover:text-brand-gold transition-colors"
                 >
                   <svg className="w-4 h-4 text-brand-gold flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.38 1.18 2 2 0 012.37 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.34a16 16 0 006.29 6.29l1.41-1.41a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.51v1.41z" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  +91 9744 475 555
+                  +91 75949 62161
                 </a>
                 <a
                   href="mailto:info@cmrdevelopers.com"

@@ -180,6 +180,7 @@ export async function POST(req: NextRequest) {
       replyContact: { name: fields.name, email: fields.email },
     }),
     attachments: [{ filename: resumeFilename, content: resumeBuffer, contentType }],
+    cc: process.env.CAREERS_EMAIL_CC,
   })
 
   if (!sent) {
